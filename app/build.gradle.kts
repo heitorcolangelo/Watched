@@ -37,6 +37,7 @@ dependencies {
     implementation(AppDependencies.kotlin)
 
     testImplementation(AppDependencies.Test.jUnit)
+    testImplementation(AppDependencies.Test.mockk)
 
     androidTestImplementation(AppDependencies.AndroidTest.jUnitExtension)
     androidTestImplementation(AppDependencies.AndroidTest.espressoCore)

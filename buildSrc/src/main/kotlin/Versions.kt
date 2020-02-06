@@ -7,8 +7,10 @@ object Versions {
     internal const val gradlePlugin = "3.5.3"
     internal const val jUnit = "4.12"
     internal const val kotlin = "1.3.61"
+    internal const val mockk = "1.9.3.kotlin12"
+    internal const val rxJava = "2.2.16"
 
-    object AndroidX {
+    internal object AndroidX {
         const val appCompat = "1.1.0"
         const val coreKtx = "1.1.0"
         const val espressoCore = "3.2.0"

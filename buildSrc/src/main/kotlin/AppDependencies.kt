@@ -1,10 +1,11 @@
 object AppDependencies {
     const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
     const val coreKtx = "androidx.core:core-ktx:${Versions.AndroidX.coreKtx}"
-    const val kotlin = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    const val kotlin = CommonDependencies.kotlin
 
     object Test {
-        const val jUnit = "junit:junit:${Versions.jUnit}"
+        const val jUnit = CommonDependencies.jUnit
+        const val mockk = CommonDependencies.mockk
     }
 
     object AndroidTest {
