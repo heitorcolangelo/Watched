@@ -1,6 +1,5 @@
 package com.heitorcolangelo.domain.repository
 
-// Example file
-interface Repository {
+interface DummyRepository {
     fun getSomeData()
 }
