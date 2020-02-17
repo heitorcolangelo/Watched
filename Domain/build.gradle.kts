@@ -5,10 +5,10 @@ plugins {
 
 dependencies {
     implementation(DomainDependencies.rxJava)
+    implementation(DomainDependencies.kotlin)
 
     testImplementation(DomainDependencies.Test.mockk)
     testImplementation(DomainDependencies.Test.jUnit)
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 java {
