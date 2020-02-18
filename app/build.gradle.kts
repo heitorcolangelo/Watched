@@ -34,6 +34,9 @@ android {
 dependencies {
     implementation(AppDependencies.appCompat)
     implementation(AppDependencies.coreKtx)
+    implementation(AppDependencies.koinAndroid)
+    implementation(AppDependencies.koinScope)
+    implementation(AppDependencies.koinViewModel)
     implementation(AppDependencies.kotlin)
 
     testImplementation(AppDependencies.Test.jUnit)
