@@ -3,6 +3,10 @@ plugins {
     id("java-library")
 }
 
+apply {
+    from("$rootDir/tools/ktlint.gradle.kts")
+}
+
 dependencies {
     implementation(DomainDependencies.rxJava)
     implementation(DomainDependencies.kotlin)

@@ -4,6 +4,10 @@ plugins {
     kotlin("android.extensions")
 }
 
+apply {
+    from("$rootDir/tools/ktlint.gradle.kts")
+}
+
 android {
     compileSdkVersion(Versions.compileSdk)
     buildToolsVersion = Versions.buildTools

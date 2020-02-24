@@ -1,6 +1,6 @@
 package com.heitorcolangelo.domain.factory
 
-import java.util.*
+import java.util.UUID
 
 interface MockFactory<T> {
     fun make(): T
