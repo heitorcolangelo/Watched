@@ -1,0 +1,27 @@
+/**
+ * It looks like there's a bug on Android Studio that prevents the successful build if this gradle
+ * file is converter to kts.
+ * I'll keep track on this, but for now this will remain as a normal .gradle file.
+ */
+buildscript {
+    repositories {
+        google()
+        jcenter()
+    }
+
+    dependencies {
+        classpath ProjectDependencies.androidGradlePlugin
+        classpath ProjectDependencies.kotlinGradlePlugin
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
