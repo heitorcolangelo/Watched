@@ -2,6 +2,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("android.extensions")
+    kotlin("kapt")
 }
 
 apply {
@@ -38,9 +39,8 @@ android {
 dependencies {
     implementation(AppDependencies.appCompat)
     implementation(AppDependencies.coreKtx)
-    implementation(AppDependencies.koinAndroid)
-    implementation(AppDependencies.koinScope)
-    implementation(AppDependencies.koinViewModel)
+    implementation(AppDependencies.dagger)
+    kapt(AppDependencies.daggerCompiler)
     implementation(AppDependencies.kotlin)
 
     testImplementation(AppDependencies.Test.jUnit)

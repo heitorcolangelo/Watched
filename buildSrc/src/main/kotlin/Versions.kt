@@ -4,10 +4,10 @@ object Versions {
     const val minSdk = 21
     const val targetSdk = 29
 
+    internal const val dagger = "2.25.2"
     internal const val gradlePlugin = "3.5.3"
     internal const val jUnit = "4.12"
-    internal const val koin = "2.0.1"
-    internal const val kotlin = "1.3.61"
+    const val kotlin = "1.3.61"
     internal const val ktlint = "0.35.0"
     internal const val mockk = "1.9.3.kotlin12"
     internal const val rxJava = "2.4.0"

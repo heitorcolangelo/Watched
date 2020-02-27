@@ -1,6 +1,9 @@
+
+
 plugins {
-    id("kotlin")
     id("java-library")
+    id("kotlin")
+    kotlin("kapt") version(Versions.kotlin)
 }
 
 apply {
@@ -8,11 +11,13 @@ apply {
 }
 
 dependencies {
-    implementation(DomainDependencies.rxJava)
+    implementation(DomainDependencies.dagger)
+    kapt(DomainDependencies.daggerCompiler)
     implementation(DomainDependencies.kotlin)
+    implementation(DomainDependencies.rxJava)
 
-    testImplementation(DomainDependencies.Test.mockk)
     testImplementation(DomainDependencies.Test.jUnit)
+    testImplementation(DomainDependencies.Test.mockk)
 }
 
 java {
