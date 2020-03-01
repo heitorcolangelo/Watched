@@ -1,9 +1,21 @@
 package com.heitorcolangelo.domain.factory
 
+import com.heitorcolangelo.domain.dummy.model.DummiesDomainModel
 import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 
 object DummyFactory : MockFactory<DummyDomainModel> {
     override fun make(): DummyDomainModel {
-        return DummyDomainModel(randomUuid())
+        return DummyDomainModel(randomId())
+    }
+}
+
+object DummiesFactory : MockFactory<DummiesDomainModel> {
+    private const val DEFAULT_DUMMY_LIST_ELEMENTS = 3
+
+    override fun make(): DummiesDomainModel {
+        return DummiesDomainModel(
+            randomId(),
+            DummyFactory.makeList(DEFAULT_DUMMY_LIST_ELEMENTS)
+        )
     }
 }

@@ -3,12 +3,12 @@ package com.heitorcolangelo.domain.common.usecase
 import com.heitorcolangelo.domain.scheduler.ExecutionThreadProvider
 import io.reactivex.Completable
 
-abstract class NoArgCompletableUseCase(
+abstract class NoArgsCompletableUseCase(
     threadProvider: ExecutionThreadProvider
-) : CompletableUseCase<Nothing>(threadProvider) {
+) : CompletableUseCase<UseCaseArgs>(threadProvider) {
     protected abstract fun build(): Completable
 
-    override fun build(params: Nothing): Completable {
+    override fun build(args: UseCaseArgs): Completable {
         return build()
     }
 }

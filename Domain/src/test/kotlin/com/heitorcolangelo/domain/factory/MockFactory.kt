@@ -13,7 +13,7 @@ interface MockFactory<T> {
         }
     }
 
-    fun randomUuid(): String {
+    fun randomId(): String {
         return UUID.randomUUID().toString()
     }
 
