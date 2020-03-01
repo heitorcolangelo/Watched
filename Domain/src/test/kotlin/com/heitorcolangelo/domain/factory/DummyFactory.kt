@@ -14,7 +14,6 @@ object DummiesFactory : MockFactory<DummiesDomainModel> {
 
     override fun make(): DummiesDomainModel {
         return DummiesDomainModel(
-            randomId(),
             DummyFactory.makeList(DEFAULT_DUMMY_LIST_ELEMENTS)
         )
     }
