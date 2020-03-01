@@ -28,12 +28,16 @@ class DummyRepositoryImpl @Inject constructor(
             }
     }
 
-    private fun DummyEntityModelMapper.mapToDummiesDomainModel(dummies: List<DummyEntity>): DummiesDomainModel {
+    private fun DummyEntityModelMapper.mapToDummiesDomainModel(
+        dummies: List<DummyEntity>
+    ): DummiesDomainModel {
         val dummiesDomainModel = dummies.map(::mapToDomainModel)
         return DummiesDomainModel(dummiesDomainModel)
     }
 
-    private fun DummyDataStoreProvider.saveLocallyAndReturn(dummies: List<DummyEntity>): Observable<List<DummyEntity>> {
+    private fun DummyDataStoreProvider.saveLocallyAndReturn(
+        dummies: List<DummyEntity>
+    ): Observable<List<DummyEntity>> {
         return getLocalDataStore().saveDummies(dummies).andThen(Observable.just(dummies))
     }
 }
