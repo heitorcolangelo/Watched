@@ -1,5 +1,6 @@
 package com.heitorcolangelo.data.dummy.store
 
+import com.heitorcolangelo.data.common.store.LocalDataStore
 import com.heitorcolangelo.data.dummy.entity.DummyEntity
 import com.heitorcolangelo.data.dummy.source.DummyLocalData
 import io.reactivex.Completable
@@ -8,7 +9,7 @@ import javax.inject.Inject
 
 class DummyLocalDataStore @Inject constructor(
     private val localData: DummyLocalData
-) : DummyDataStore {
+) : DummyDataStore, LocalDataStore {
     override fun clearDummies(): Completable {
         return localData.clear()
     }
@@ -20,5 +21,9 @@ class DummyLocalDataStore @Inject constructor(
     override fun saveDummies(dummies: List<DummyEntity>): Completable {
         return localData.saveDummies(dummies)
             .andThen(localData.setLastCacheTime(System.currentTimeMillis()))
+    }
+
+    override fun isDataValid(): Observable<Boolean> {
+        return localData.isCacheValid()
     }
 }

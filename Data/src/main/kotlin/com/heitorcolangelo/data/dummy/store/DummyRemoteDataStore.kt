@@ -1,5 +1,6 @@
 package com.heitorcolangelo.data.dummy.store
 
+import com.heitorcolangelo.data.common.store.RemoteDataStore
 import com.heitorcolangelo.data.dummy.entity.DummyEntity
 import com.heitorcolangelo.data.dummy.source.DummyRemoteData
 import io.reactivex.Completable
@@ -8,7 +9,7 @@ import javax.inject.Inject
 
 class DummyRemoteDataStore @Inject constructor(
     private val remoteData: DummyRemoteData
-) : DummyDataStore {
+) : DummyDataStore, RemoteDataStore {
     override fun clearDummies(): Completable {
         throw UnsupportedOperationException("Clear is not supported by remote data source.")
     }

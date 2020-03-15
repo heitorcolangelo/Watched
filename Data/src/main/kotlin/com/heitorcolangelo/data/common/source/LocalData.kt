@@ -1,7 +1,9 @@
 package com.heitorcolangelo.data.common.source
 
 import io.reactivex.Completable
+import io.reactivex.Observable
 import io.reactivex.Single
+import io.reactivex.functions.BiFunction
 
 interface LocalData {
     fun clear(): Completable
@@ -11,4 +13,19 @@ interface LocalData {
     fun isCacheExpired(): Single<Boolean>
 
     fun isDataCached(): Single<Boolean>
+
+    fun isCacheValid(): Observable<Boolean> {
+        return Observable.zip(
+            isDataCached().toObservable(),
+            isCacheExpired().toObservable(),
+            BiFunction<Boolean, Boolean, Pair<Boolean, Boolean>> { isDataCached, isCacheExpired ->
+                Pair(
+                    isDataCached,
+                    isCacheExpired
+                )
+            }
+        ).map {
+            !it.first && it.second
+        }
+    }
 }
