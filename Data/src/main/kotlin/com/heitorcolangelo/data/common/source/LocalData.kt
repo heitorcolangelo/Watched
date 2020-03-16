@@ -25,7 +25,7 @@ interface LocalData {
                 )
             }
         ).map {
-            !it.first && it.second
+            it.first && !it.second
         }
     }
 }
