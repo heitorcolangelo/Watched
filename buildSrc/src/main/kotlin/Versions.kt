@@ -14,11 +14,14 @@ object Versions {
     internal const val okHttp = "4.4.0"
     internal const val retrofit = "2.7.2"
     internal const val rxJava = "2.4.0"
+    internal const val supportTestRule = "1.0.2"
+    internal const val supportTestRunner = "1.0.2"
 
     internal object AndroidX {
         const val appCompat = "1.1.0"
         const val coreKtx = "1.1.0"
         const val espressoCore = "3.2.0"
         const val jUnitExtension = "1.1.1"
+        const val room = "2.2.4"
     }
 }

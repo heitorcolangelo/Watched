@@ -13,7 +13,7 @@ object DataRemoteDependencies {
     const val rxJava = CommonDependencies.rxJava
 
     object Test {
-        const val jUnit = CommonDependencies.jUnit
-        const val mockk = CommonDependencies.mockk
+        const val jUnit = CommonDependencies.Test.jUnit
+        const val mockk = CommonDependencies.Test.mockk
     }
 }
