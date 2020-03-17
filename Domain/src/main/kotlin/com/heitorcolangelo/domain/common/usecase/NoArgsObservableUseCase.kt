@@ -1,7 +1,7 @@
 package com.heitorcolangelo.domain.common.usecase
 
 import com.heitorcolangelo.domain.common.model.DomainModel
-import com.heitorcolangelo.domain.scheduler.ExecutionThreadProvider
+import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
 import io.reactivex.Observable
 
 abstract class NoArgsObservableUseCase<Model : DomainModel>(

@@ -1,6 +1,6 @@
 package com.heitorcolangelo.domain.common.usecase
 
-import com.heitorcolangelo.domain.scheduler.ExecutionThreadProvider
+import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
 import io.reactivex.Completable
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableCompletableObserver

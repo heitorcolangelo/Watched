@@ -1,4 +1,4 @@
-package com.heitorcolangelo.domain.scheduler
+package com.heitorcolangelo.domain.common.scheduler
 
 import io.reactivex.Scheduler
 

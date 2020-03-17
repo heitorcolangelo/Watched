@@ -2,7 +2,7 @@ package com.heitorcolangelo.domain.dummy.usecase
 
 import com.heitorcolangelo.domain.dummy.repository.DummyRepository
 import com.heitorcolangelo.domain.factory.DummiesFactory
-import com.heitorcolangelo.domain.scheduler.ExecutionThreadProvider
+import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
