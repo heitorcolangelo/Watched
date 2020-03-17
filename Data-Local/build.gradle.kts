@@ -41,7 +41,7 @@ dependencies {
     implementation(project(DataLocalDependencies.data))
     implementation(DataLocalDependencies.kotlin)
     implementation(DataLocalDependencies.kotlinReflect)
-    implementation(DataLocalDependencies.roomCompiler)
+    kapt(DataLocalDependencies.roomCompiler)
     implementation(DataLocalDependencies.roomRuntime)
     implementation(DataLocalDependencies.roomRxJava)
     implementation(DataLocalDependencies.rxJava)

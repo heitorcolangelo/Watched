@@ -8,7 +8,7 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-abstract class DummyRemoteDataModule {
+class DummyRemoteDataModule {
 
     @Singleton
     @Provides
