@@ -1,8 +1,8 @@
 package com.heitorcolangelo.data.dummy
 
-import com.heitorcolangelo.data.dummy.mapper.DummiesEntityModelMapper
+import com.heitorcolangelo.data.dummy.mapper.DummiesDataDomainMapper
 import com.heitorcolangelo.data.dummy.store.DummyDataStore
-import com.heitorcolangelo.data.factory.DummyEntityFactory
+import com.heitorcolangelo.data.factory.DummyDataModelFactory
 import com.heitorcolangelo.domain.dummy.repository.DummyRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -12,7 +12,7 @@ import org.junit.Test
 
 class DummyRepositoryTest {
 
-    private val mapper: DummiesEntityModelMapper = mockk(relaxed = true)
+    private val mapper: DummiesDataDomainMapper = mockk(relaxed = true)
     private val dataStore: DummyDataStore = mockk(relaxed = true)
     private val repository: DummyRepository = DummyRepositoryImpl(mapper, dataStore)
 
@@ -26,7 +26,7 @@ class DummyRepositoryTest {
     @Test
     fun `WHEN get dummies THEN map to domain model`() {
         val dummiesCount = 3
-        val dummies = DummyEntityFactory.makeList(dummiesCount)
+        val dummies = DummyDataModelFactory.makeList(dummiesCount)
         every { dataStore.getDummies() } returns Observable.just(dummies)
 
         repository.getDummies().test()

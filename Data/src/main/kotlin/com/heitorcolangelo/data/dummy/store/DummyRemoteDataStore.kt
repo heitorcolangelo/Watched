@@ -1,7 +1,7 @@
 package com.heitorcolangelo.data.dummy.store
 
 import com.heitorcolangelo.data.common.store.RemoteDataStore
-import com.heitorcolangelo.data.dummy.entity.DummyEntity
+import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.data.dummy.source.DummyRemoteData
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -14,11 +14,11 @@ class DummyRemoteDataStore @Inject constructor(
         throw UnsupportedOperationException("Clear is not supported by remote data source.")
     }
 
-    override fun getDummies(): Observable<List<DummyEntity>> {
+    override fun getDummies(): Observable<List<DummyDataModel>> {
         return remoteData.getDummies()
     }
 
-    override fun saveDummies(dummies: List<DummyEntity>): Completable {
+    override fun saveDummies(dummies: List<DummyDataModel>): Completable {
         throw UnsupportedOperationException("Save is not supported by remote data source.")
     }
 }

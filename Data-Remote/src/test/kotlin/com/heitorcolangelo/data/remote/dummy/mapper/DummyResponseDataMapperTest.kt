@@ -4,14 +4,14 @@ import com.heitorcolangelo.data.remote.factory.DummyResponseFactory
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class DummyResponseModelMapperTest {
+class DummyResponseDataMapperTest {
 
     @Test
-    fun mapToEntity() {
+    fun mapToDataModel() {
         val responseModel = DummyResponseFactory.make()
 
-        val dummyEntity = DummyResponseModelMapper.mapToEntity(responseModel)
+        val dummyDataModel = DummyResponseDataMapper.mapToDataModel(responseModel)
 
-        assertEquals(responseModel.dummyId, dummyEntity.dummyId)
+        assertEquals(responseModel.dummyId, dummyDataModel.dummyId)
     }
 }

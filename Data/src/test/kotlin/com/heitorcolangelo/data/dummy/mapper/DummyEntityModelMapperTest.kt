@@ -1,17 +1,17 @@
 package com.heitorcolangelo.data.dummy.mapper
 
-import com.heitorcolangelo.data.dummy.entity.DummyEntity
-import com.heitorcolangelo.data.factory.DummyEntityFactory
+import com.heitorcolangelo.data.dummy.model.DummyDataModel
+import com.heitorcolangelo.data.factory.DummyDataModelFactory
 import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class DummyEntityModelMapperTest {
 
-    private val dummyId = DummyEntityFactory.randomId()
-    private val entity = DummyEntity(dummyId)
+    private val dummyId = DummyDataModelFactory.randomId()
+    private val entity = DummyDataModel(dummyId)
     private val domainModel = DummyDomainModel(dummyId)
-    private val mapper = DummyEntityModelMapper
+    private val mapper = DummyDataDomainMapper
 
     @Test
     fun mapToDomainModel() {
@@ -21,7 +21,7 @@ class DummyEntityModelMapperTest {
 
     @Test
     fun mapToEntity() {
-        val dummyEntity = mapper.mapToEntity(domainModel)
+        val dummyEntity = mapper.mapToDataModel(domainModel)
         assertEquals(dummyEntity.dummyId, dummyId)
     }
 }

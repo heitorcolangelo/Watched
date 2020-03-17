@@ -1,14 +1,14 @@
 package com.heitorcolangelo.data.dummy.store
 
 import com.heitorcolangelo.data.common.store.DataStore
-import com.heitorcolangelo.data.dummy.entity.DummyEntity
+import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import io.reactivex.Completable
 import io.reactivex.Observable
 
 interface DummyDataStore : DataStore {
     fun clearDummies(): Completable
 
-    fun getDummies(): Observable<List<DummyEntity>>
+    fun getDummies(): Observable<List<DummyDataModel>>
 
-    fun saveDummies(dummies: List<DummyEntity>): Completable
+    fun saveDummies(dummies: List<DummyDataModel>): Completable
 }

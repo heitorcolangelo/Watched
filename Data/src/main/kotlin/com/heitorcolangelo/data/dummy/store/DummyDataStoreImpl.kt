@@ -1,6 +1,6 @@
 package com.heitorcolangelo.data.dummy.store
 
-import com.heitorcolangelo.data.dummy.entity.DummyEntity
+import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import io.reactivex.Completable
 import io.reactivex.Observable
 import javax.inject.Inject
@@ -13,7 +13,7 @@ class DummyDataStoreImpl @Inject constructor(
         return localDataStore.clearDummies()
     }
 
-    override fun getDummies(): Observable<List<DummyEntity>> {
+    override fun getDummies(): Observable<List<DummyDataModel>> {
         return localDataStore.isDataValid().flatMap { isDataValid ->
             if (isDataValid) {
                 localDataStore.getDummies()
@@ -25,7 +25,7 @@ class DummyDataStoreImpl @Inject constructor(
         }
     }
 
-    override fun saveDummies(dummies: List<DummyEntity>): Completable {
+    override fun saveDummies(dummies: List<DummyDataModel>): Completable {
         return localDataStore.saveDummies(dummies)
     }
 }

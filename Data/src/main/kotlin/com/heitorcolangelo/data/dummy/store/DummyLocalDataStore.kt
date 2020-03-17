@@ -1,7 +1,7 @@
 package com.heitorcolangelo.data.dummy.store
 
 import com.heitorcolangelo.data.common.store.LocalDataStore
-import com.heitorcolangelo.data.dummy.entity.DummyEntity
+import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.data.dummy.source.DummyLocalData
 import io.reactivex.Completable
 import io.reactivex.Observable
@@ -14,11 +14,11 @@ class DummyLocalDataStore @Inject constructor(
         return localData.clear()
     }
 
-    override fun getDummies(): Observable<List<DummyEntity>> {
+    override fun getDummies(): Observable<List<DummyDataModel>> {
         return localData.getDummies()
     }
 
-    override fun saveDummies(dummies: List<DummyEntity>): Completable {
+    override fun saveDummies(dummies: List<DummyDataModel>): Completable {
         return localData.saveDummies(dummies)
             .andThen(localData.setLastCacheTime(System.currentTimeMillis()))
     }

@@ -1,6 +1,6 @@
 package com.heitorcolangelo.data.dummy.store
 
-import com.heitorcolangelo.data.dummy.entity.DummyEntity
+import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
@@ -41,7 +41,7 @@ class DummyDataStoreTest {
 
     @Test
     fun `WHEN get dummies AND local data is NOT valid THEN save remote dummies locally`() {
-        val dummies = mockk<List<DummyEntity>>()
+        val dummies = mockk<List<DummyDataModel>>()
         every { remoteDataStore.getDummies() } returns Observable.just(dummies)
         every { localDataStore.isDataValid() } returns Observable.just(false)
 
@@ -52,7 +52,7 @@ class DummyDataStoreTest {
 
     @Test
     fun `WHEN save dummies THEN save to local data store`() {
-        val dummies = mockk<List<DummyEntity>>()
+        val dummies = mockk<List<DummyDataModel>>()
 
         val testObserver = dataStore.saveDummies(dummies).test()
 

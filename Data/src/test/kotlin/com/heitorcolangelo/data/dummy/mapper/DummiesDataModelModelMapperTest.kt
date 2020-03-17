@@ -1,17 +1,17 @@
 package com.heitorcolangelo.data.dummy.mapper
 
-import com.heitorcolangelo.data.factory.DummyEntityFactory
+import com.heitorcolangelo.data.factory.DummyDataModelFactory
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class DummiesEntityModelMapperTest {
+class DummiesDataModelModelMapperTest {
 
-    private val dummyMapper: DummyEntityModelMapper = mockk(relaxed = true)
-    private val mapper = DummiesEntityModelMapper(dummyMapper)
+    private val dummyMapper: DummyDataDomainMapper = mockk(relaxed = true)
+    private val mapper = DummiesDataDomainMapper(dummyMapper)
     private val elementsCount = 3
-    private val entityList = DummyEntityFactory.makeList(elementsCount)
+    private val entityList = DummyDataModelFactory.makeList(elementsCount)
 
     @Test
     fun mapToDomainModel() {
@@ -25,9 +25,9 @@ class DummiesEntityModelMapperTest {
     fun mapToEntities() {
         val dummiesDomainModel = mapper.mapToDomainModel(entityList)
 
-        val entities = mapper.mapToEntities(dummiesDomainModel)
+        val entities = mapper.mapToDataModelList(dummiesDomainModel)
 
-        verify(exactly = elementsCount) { dummyMapper.mapToEntity(any()) }
+        verify(exactly = elementsCount) { dummyMapper.mapToDataModel(any()) }
         assertEquals(elementsCount, entities.size)
     }
 }

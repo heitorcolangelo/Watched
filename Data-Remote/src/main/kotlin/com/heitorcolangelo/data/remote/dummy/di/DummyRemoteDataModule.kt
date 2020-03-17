@@ -2,7 +2,7 @@ package com.heitorcolangelo.data.remote.dummy.di
 
 import com.heitorcolangelo.data.remote.common.api.ApiServiceFactory
 import com.heitorcolangelo.data.remote.dummy.api.DummyApiService
-import com.heitorcolangelo.data.remote.dummy.mapper.DummyResponseModelMapper
+import com.heitorcolangelo.data.remote.dummy.mapper.DummyResponseDataMapper
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -12,7 +12,7 @@ abstract class DummyRemoteDataModule {
 
     @Singleton
     @Provides
-    fun provideDummyResponseModelMapper() = DummyResponseModelMapper
+    fun provideDummyResponseDataMapper() = DummyResponseDataMapper
 
     @Singleton
     @Provides
