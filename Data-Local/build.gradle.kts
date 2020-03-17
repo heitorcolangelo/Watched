@@ -28,6 +28,18 @@ android {
         }
     }
 
+    sourceSets {
+        getByName("main") {
+            java.setSrcDirs(mutableListOf("src/main/kotlin"))
+        }
+        getByName("test") {
+            java.setSrcDirs(mutableListOf("src/test/kotlin"))
+        }
+        getByName("androidTest") {
+            java.setSrcDirs(mutableListOf("src/androidTest/kotlin"))
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8

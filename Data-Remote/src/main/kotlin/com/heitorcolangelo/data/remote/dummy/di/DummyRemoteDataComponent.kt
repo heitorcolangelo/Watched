@@ -4,7 +4,7 @@ import com.heitorcolangelo.data.remote.dummy.DummyRemoteDataImpl
 import com.heitorcolangelo.data.remote.dummy.mapper.DummiesResponseDataMapper
 import dagger.Component
 
-@Component(modules = [DummyRemoteDataModule::class])
+@Component(modules = [DummyRemoteDataModule::class, DummyRemoteDataBinder::class])
 interface DummyRemoteDataComponent {
     fun inject(remoteData: DummyRemoteDataImpl)
     fun inject(dummiesMapper: DummiesResponseDataMapper)
