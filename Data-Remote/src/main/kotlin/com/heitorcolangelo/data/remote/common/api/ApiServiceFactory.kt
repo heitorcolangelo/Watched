@@ -1,0 +1,27 @@
+package com.heitorcolangelo.data.remote.common.api
+
+import javax.inject.Inject
+import javax.inject.Singleton
+import okhttp3.OkHttpClient
+import retrofit2.CallAdapter
+import retrofit2.Converter
+import retrofit2.Retrofit
+
+@Singleton
+class ApiServiceFactory @Inject constructor(
+    private val okHttpClient: OkHttpClient,
+    private val converterFactory: Converter.Factory,
+    private val callAdapterFactory: CallAdapter.Factory
+) {
+    fun <ApiService> initService(serviceClass: Class<ApiService>, baseUrl: String): ApiService {
+        synchronized(this) {
+            return Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(converterFactory)
+                .addCallAdapterFactory(callAdapterFactory)
+                .client(okHttpClient)
+                .build()
+                .create(serviceClass)
+        }
+    }
+}

@@ -1,2 +1,2 @@
-include("app", "Domain", "Data")
+include("app", "Domain", "Data", ":Data-Remote")
 rootProject.name = "Skeleton"

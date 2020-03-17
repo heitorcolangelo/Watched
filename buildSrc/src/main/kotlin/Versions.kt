@@ -10,6 +10,9 @@ object Versions {
     const val kotlin = "1.3.61"
     internal const val ktlint = "0.35.0"
     internal const val mockk = "1.9.3.kotlin12"
+    internal const val moshi = "1.9.2"
+    internal const val okHttp = "4.4.0"
+    internal const val retrofit = "2.7.2"
     internal const val rxJava = "2.4.0"
 
     internal object AndroidX {
