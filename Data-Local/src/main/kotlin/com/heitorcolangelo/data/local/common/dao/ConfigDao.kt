@@ -15,5 +15,4 @@ interface ConfigDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveConfig(config: ConfigEntity)
-
 }

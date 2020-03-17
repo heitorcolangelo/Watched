@@ -9,7 +9,7 @@ data class ConfigEntity(
     @PrimaryKey override val id: String,
     @ColumnInfo(name = COLUMN_LAST_CACHE_TIME)
     val lastCacheTime: Long
-): BaseEntity(id) {
+) : BaseEntity(id) {
     companion object {
         const val TABLE_NAME = "config"
         const val COLUMN_LAST_CACHE_TIME = "last_cache_time"

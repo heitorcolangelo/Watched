@@ -1,8 +1,8 @@
 package com.heitorcolangelo.data.remote.dummy.mapper
 
 import com.heitorcolangelo.data.dummy.model.DummyDataModel
-import com.heitorcolangelo.data.remote.common.mapper.ResponseDataMapper
 import com.heitorcolangelo.data.remote.common.mapper.ResponseDataListMapper
+import com.heitorcolangelo.data.remote.common.mapper.ResponseDataMapper
 import com.heitorcolangelo.data.remote.dummy.model.DummiesResponseModel
 import com.heitorcolangelo.data.remote.dummy.model.DummyResponseModel
 import javax.inject.Inject
