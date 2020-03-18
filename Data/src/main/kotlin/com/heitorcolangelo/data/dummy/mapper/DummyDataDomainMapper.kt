@@ -1,7 +1,7 @@
 package com.heitorcolangelo.data.dummy.mapper
 
-import com.heitorcolangelo.data.common.model.DataListDomainMapper
 import com.heitorcolangelo.data.common.model.DataDomainMapper
+import com.heitorcolangelo.data.common.model.DataListDomainMapper
 import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.domain.dummy.model.DummiesDomainModel
 import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
