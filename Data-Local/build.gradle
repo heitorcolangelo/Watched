@@ -1,0 +1,96 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+apply from: "$rootDir/tools/ktlint.gradle"
+
+android {
+    final versions = project.ext
+
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+
+        versionCode versions.appVersionCode
+        versionName versions.appVersionName
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField('String', 'SERVER_URL', '"https://dev.api.dummy.com/"')
+
+            testCoverageEnabled true
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        staging {
+            buildConfigField('String', 'SERVER_URL', '"https://staging.api.dummy.com/"')
+
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            buildConfigField('String', 'SERVER_URL', '"https://api.dummy.com/"')
+
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    testOptions {
+        execution 'ANDROIDX_TEST_ORCHESTRATOR'
+        animationsDisabled true
+
+        unitTests.includeAndroidResources true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    // Data layer
+    implementation project(":Data")
+
+    // Dagger
+    implementation "com.google.dagger:dagger:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
+
+    // Room
+    implementation "androidx.room:room-runtime:$versions.room"
+    implementation "androidx.room:room-rxjava2:$versions.room"
+    kapt "androidx.room:room-compiler:$versions.room"
+
+    // RxJava
+    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
+
+    androidTestImplementation "androidx.arch.core:core-testing:$versions.archcore"
+    androidTestImplementation "androidx.arch.core:core-runtime:$versions.archcore"
+    androidTestImplementation "androidx.test:core:$versions.testcore"
+    androidTestImplementation "androidx.test:runner:$versions.testcore"
+    androidTestImplementation "androidx.test:rules:$versions.testcore"
+    androidTestImplementation "androidx.test.ext:junit:$versions.junitextension"
+
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "io.mockk:mockk:$versions.mockk"
+}
