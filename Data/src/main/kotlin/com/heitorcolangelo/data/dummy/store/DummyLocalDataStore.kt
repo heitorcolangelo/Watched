@@ -24,6 +24,6 @@ class DummyLocalDataStore @Inject constructor(
     }
 
     override fun isDataValid(): Observable<Boolean> {
-        return localData.isCacheValid()
+        return localData.isCacheValid(System.currentTimeMillis())
     }
 }

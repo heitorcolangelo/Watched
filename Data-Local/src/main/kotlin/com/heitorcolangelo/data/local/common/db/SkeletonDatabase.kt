@@ -5,8 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.heitorcolangelo.data.local.common.constants.DbConstants
-import com.heitorcolangelo.data.local.common.dao.ConfigDao
-import com.heitorcolangelo.data.local.common.entity.ConfigEntity
+import com.heitorcolangelo.data.local.config.dao.ConfigDao
+import com.heitorcolangelo.data.local.config.entity.ConfigEntity
 import com.heitorcolangelo.data.local.dummy.dao.DummyDao
 import com.heitorcolangelo.data.local.dummy.entity.DummyEntity
 

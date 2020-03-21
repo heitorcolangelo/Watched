@@ -35,6 +35,6 @@ class DummyLocalDataStoreTest {
     fun `WHEN is data valid THEN is local cache valid`() {
         dataStore.isDataValid()
 
-        verify { localData.isCacheValid() }
+        verify { localData.isCacheValid(any()) }
     }
 }

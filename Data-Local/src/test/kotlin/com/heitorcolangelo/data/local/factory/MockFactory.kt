@@ -1,6 +1,7 @@
 package com.heitorcolangelo.data.local.factory
 
 import java.util.UUID
+import java.util.concurrent.ThreadLocalRandom
 
 interface MockFactory<T> {
     fun make(): T
@@ -19,5 +20,13 @@ interface MockFactory<T> {
 
     fun randomBoolean(): Boolean {
         return Math.random() < 0.5
+    }
+
+    fun randomLong(): Long {
+        return randomInt().toLong()
+    }
+
+    fun randomInt(): Int {
+        return ThreadLocalRandom.current().nextInt(0, 1000 + 1)
     }
 }

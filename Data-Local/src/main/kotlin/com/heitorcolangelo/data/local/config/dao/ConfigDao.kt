@@ -1,10 +1,10 @@
-package com.heitorcolangelo.data.local.common.dao
+package com.heitorcolangelo.data.local.config.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.heitorcolangelo.data.local.common.entity.ConfigEntity
+import com.heitorcolangelo.data.local.config.entity.ConfigEntity
 import io.reactivex.Flowable
 
 @Dao

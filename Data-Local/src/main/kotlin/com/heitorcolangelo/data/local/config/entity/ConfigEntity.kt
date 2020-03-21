@@ -1,8 +1,10 @@
-package com.heitorcolangelo.data.local.common.entity
+package com.heitorcolangelo.data.local.config.entity
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.heitorcolangelo.data.local.common.entity.BaseEntity
+import com.heitorcolangelo.data.local.common.entity.NO_ID
 
 @Entity(tableName = ConfigEntity.TABLE_NAME)
 data class ConfigEntity(
@@ -14,6 +16,10 @@ data class ConfigEntity(
         const val TABLE_NAME = "config"
         const val COLUMN_LAST_CACHE_TIME = "last_cache_time"
 
-        fun getDefault() = ConfigEntity(NO_ID, 0L)
+        fun getDefault() =
+            ConfigEntity(
+                NO_ID,
+                0L
+            )
     }
 }

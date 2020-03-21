@@ -84,13 +84,13 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
 
-    androidTestImplementation "androidx.arch.core:core-testing:$versions.archcore"
-    androidTestImplementation "androidx.arch.core:core-runtime:$versions.archcore"
-    androidTestImplementation "androidx.test:core:$versions.testcore"
-    androidTestImplementation "androidx.test:runner:$versions.testcore"
-    androidTestImplementation "androidx.test:rules:$versions.testcore"
-    androidTestImplementation "androidx.test.ext:junit:$versions.junitextension"
-
+    testImplementation "androidx.arch.core:core-testing:$versions.archcore"
+    testImplementation "androidx.arch.core:core-runtime:$versions.archcore"
+    testImplementation "androidx.test:core:$versions.testcore"
+    testImplementation "androidx.test:runner:$versions.testcore"
+    testImplementation "androidx.test:rules:$versions.testcore"
+    testImplementation "androidx.test.ext:junit:$versions.junitextension"
     testImplementation "junit:junit:$versions.junit"
     testImplementation "io.mockk:mockk:$versions.mockk"
+    testImplementation "org.robolectric:robolectric:$versions.robolectric"
 }
