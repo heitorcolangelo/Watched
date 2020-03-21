@@ -44,6 +44,5 @@ class DummyDaoTest : BaseDaoTest() {
 
         testSubscriber = dao.getDummies().test()
         testSubscriber.assertValue(emptyList())
-
     }
 }
