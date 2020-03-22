@@ -1,18 +1,15 @@
 package com.heitorcolangelo.data.local.config.dao
 
-import com.heitorcolangelo.data.local.common.BaseDaoTest
+import com.heitorcolangelo.data.local.common.DaoTest
 import com.heitorcolangelo.data.local.factory.ConfigEntityFactory
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
-class ConfigDaoTest : BaseDaoTest() {
+class ConfigDaoTest : DaoTest() {
 
     private val dao: ConfigDao = database.getConfigDao()
 
     @Test
-    fun `WHEN get config THEN return config`() {
+    fun whenGetConfig_thenReturnConfig() {
         val config = ConfigEntityFactory.make()
         dao.saveConfig(config)
 
@@ -21,7 +18,7 @@ class ConfigDaoTest : BaseDaoTest() {
     }
 
     @Test
-    fun `WHEN save config THEN save config`() {
+    fun whenSaveConfig_thenSaveConfig() {
         val config = ConfigEntityFactory.make()
         dao.saveConfig(config)
 

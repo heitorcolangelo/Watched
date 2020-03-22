@@ -21,7 +21,7 @@ abstract class DaoTest {
         .build()
 
     @After
-    fun closeDb() {
+    fun tearDown() {
         database.close()
     }
 }

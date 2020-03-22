@@ -15,6 +15,8 @@ android {
 
         versionCode versions.appVersionCode
         versionName versions.appVersionName
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -46,12 +48,17 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        test {
+            java.srcDirs += 'src/test/kotlin'
+            java.srcDirs += 'src/commonTest/kotlin'
+        }
+        androidTest {
+            java.srcDirs += 'src/androidTest/kotlin'
+            java.srcDirs += 'src/commonTest/kotlin'
+        }
     }
 
     testOptions {
-        execution 'ANDROIDX_TEST_ORCHESTRATOR'
         animationsDisabled true
 
         unitTests.includeAndroidResources true
@@ -84,13 +91,14 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
 
-    testImplementation "androidx.arch.core:core-testing:$versions.archcore"
-    testImplementation "androidx.arch.core:core-runtime:$versions.archcore"
-    testImplementation "androidx.test:core:$versions.testcore"
-    testImplementation "androidx.test:runner:$versions.testcore"
-    testImplementation "androidx.test:rules:$versions.testcore"
-    testImplementation "androidx.test.ext:junit:$versions.junitextension"
+    androidTestImplementation "androidx.test:core:$versions.testcore"
+    androidTestImplementation "androidx.arch.core:core-testing:$versions.testarchcore"
+    //Suppressing this warning because 2.1.0 conflicts with room-rxjava2 versions.
+    //noinspection GradleDependency
+    androidTestImplementation "androidx.arch.core:core-runtime:$versions.testarchcore"
+    androidTestImplementation "androidx.test:runner:$versions.testcore"
+    androidTestImplementation "androidx.test:rules:$versions.testcore"
+
     testImplementation "junit:junit:$versions.junit"
     testImplementation "io.mockk:mockk:$versions.mockk"
-    testImplementation "org.robolectric:robolectric:$versions.robolectric"
 }

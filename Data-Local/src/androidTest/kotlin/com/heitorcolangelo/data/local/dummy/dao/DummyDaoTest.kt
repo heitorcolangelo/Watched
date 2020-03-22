@@ -1,18 +1,15 @@
 package com.heitorcolangelo.data.local.dummy.dao
 
-import com.heitorcolangelo.data.local.common.BaseDaoTest
+import com.heitorcolangelo.data.local.common.DaoTest
 import com.heitorcolangelo.data.local.factory.DummyEntityFactory
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 
-@RunWith(RobolectricTestRunner::class)
-class DummyDaoTest : BaseDaoTest() {
+class DummyDaoTest : DaoTest() {
 
     private val dao: DummyDao = database.getDummyDao()
 
     @Test
-    fun `WHEN get dummies THEN return list of dummies`() {
+    fun whenGetDummies_thenReturnListOfDummies() {
         val dummyList = DummyEntityFactory.makeList(3)
 
         dao.saveDummies(dummyList)
@@ -22,7 +19,7 @@ class DummyDaoTest : BaseDaoTest() {
     }
 
     @Test
-    fun `WHEN save dummies THEN save dummies`() {
+    fun whenSaveDummies_thenSaveDummies() {
         val dummyList = DummyEntityFactory.makeList(3)
 
         dao.saveDummies(dummyList)
@@ -32,7 +29,7 @@ class DummyDaoTest : BaseDaoTest() {
     }
 
     @Test
-    fun `WHEN clear dummies THEN clear all dummies`() {
+    fun whenClearDummies_thenClearAllDummies() {
         val dummyList = DummyEntityFactory.makeList(3)
 
         dao.saveDummies(dummyList)
