@@ -62,9 +62,12 @@ android {
 }
 
 dependencies {
+    // Domain layer
+    implementation project(":Domain")
+
     // AndroidX
-    implementation "androidx.appcompat:appcompat:$versions.appcompat"
-    implementation "androidx.core:core-ktx:$versions.ktx"
+    implementation "androidx.appcompat:appcompat:$ax_versions.foundation_appcompat"
+    implementation "androidx.core:core-ktx:$ax_versions.foundation_ktx_core"
 
     // Dagger
     implementation "com.google.dagger:dagger:$versions.dagger"
@@ -77,10 +80,10 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
 
-    androidTestImplementation "androidx.test:core:$versions.testcore"
-    androidTestImplementation "androidx.test:runner:$versions.testcore"
-    androidTestImplementation "androidx.test:rules:$versions.testcore"
-    androidTestImplementation "androidx.test.ext:junit:$versions.junitextension"
+    androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
+    androidTestImplementation "androidx.test:runner:$ax_versions.foundation_test_runner"
+    androidTestImplementation "androidx.test:rules:$ax_versions.foundation_test_rules"
+    androidTestImplementation "androidx.test.ext:junit:$ax_versions.foundation_test_ext_junit"
 
     testImplementation "junit:junit:$versions.junit"
     testImplementation "io.mockk:mockk:$versions.mockk"

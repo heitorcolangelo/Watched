@@ -84,20 +84,20 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 
     // Room
-    implementation "androidx.room:room-runtime:$versions.room"
-    implementation "androidx.room:room-rxjava2:$versions.room"
-    kapt "androidx.room:room-compiler:$versions.room"
+    implementation "androidx.room:room-runtime:$ax_versions.arch_lifecycle"
+    implementation "androidx.room:room-rxjava2:$ax_versions.arch_lifecycle"
+    kapt "androidx.room:room-compiler:$ax_versions.arch_lifecycle"
 
     // RxJava
     implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
 
-    androidTestImplementation "androidx.test:core:$versions.testcore"
-    androidTestImplementation "androidx.arch.core:core-testing:$versions.testarchcore"
+    androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
+    androidTestImplementation "androidx.arch.core:core-testing:$ax_versions.arch_core_testing"
     //Suppressing this warning because 2.1.0 conflicts with room-rxjava2 versions.
     //noinspection GradleDependency
-    androidTestImplementation "androidx.arch.core:core-runtime:$versions.testarchcore"
-    androidTestImplementation "androidx.test:runner:$versions.testcore"
-    androidTestImplementation "androidx.test:rules:$versions.testcore"
+    androidTestImplementation "androidx.arch.core:core-runtime:$ax_versions.arch_core_testing"
+    androidTestImplementation "androidx.test:runner:$ax_versions.foundation_test_runner"
+    androidTestImplementation "androidx.test:rules:$ax_versions.foundation_test_rules"
 
     testImplementation "junit:junit:$versions.junit"
     testImplementation "io.mockk:mockk:$versions.mockk"
