@@ -2,25 +2,18 @@ package com.heitorcolangelo.domain.common.usecase
 
 import com.heitorcolangelo.domain.common.model.DomainModel
 import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
-import io.reactivex.Observable
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.observers.DisposableObserver
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.observers.DisposableObserver
 
 abstract class ObservableUseCase<Model : DomainModel, Args : UseCaseArgs>(
     private val threadProvider: ExecutionThreadProvider
-) {
-    private val disposables = CompositeDisposable()
+) : DisposableUseCase() {
+    abstract fun build(args: Args): Observable<Model>
 
-    protected abstract fun build(args: Args): Observable<Model>
-
-    open fun execute(observer: DisposableObserver<Model>, args: Args) {
+    fun execute(args: Args, observer: DisposableObserver<Model>) {
         val observable = this.build(args)
             .subscribeOn(threadProvider.io())
             .observeOn(threadProvider.ui())
         disposables.add(observable.subscribeWith(observer))
-    }
-
-    fun dispose() {
-        if (!disposables.isDisposed) disposables.dispose()
     }
 }

@@ -1,6 +1,6 @@
 package com.heitorcolangelo.domain.common.scheduler
 
-import io.reactivex.Scheduler
+import io.reactivex.rxjava3.core.Scheduler
 
 interface ExecutionThreadProvider {
     fun io(): Scheduler
