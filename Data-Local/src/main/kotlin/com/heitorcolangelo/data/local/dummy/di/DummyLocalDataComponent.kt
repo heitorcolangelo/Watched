@@ -1,9 +1,11 @@
 package com.heitorcolangelo.data.local.dummy.di
 
-import com.heitorcolangelo.data.local.dummy.DummyLocalDataImpl
-import dagger.Component
+import dagger.Subcomponent
 
-@Component(modules = [DummyLocalDataModule::class, DummyLocalDataBinder::class])
+@Subcomponent(modules = [DummyLocalDataModule::class])
 interface DummyLocalDataComponent {
-    fun inject(localDataImpl: DummyLocalDataImpl)
+    @Subcomponent.Builder
+    interface Builder {
+        fun build(): DummyLocalDataComponent
+    }
 }

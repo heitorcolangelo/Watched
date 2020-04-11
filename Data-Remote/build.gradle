@@ -12,6 +12,8 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
 
     // Kotlin
+    // Ignoring bug warning (https://stackoverflow.com/a/49956210/3279958)
+    //noinspection DifferentStdlibGradleVersion
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 
@@ -28,7 +30,7 @@ dependencies {
     implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
+    implementation "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"
 
     testImplementation "junit:junit:$versions.junit"
     testImplementation "io.mockk:mockk:$versions.mockk"

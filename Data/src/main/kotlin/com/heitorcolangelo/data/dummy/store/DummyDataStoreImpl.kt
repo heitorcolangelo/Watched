@@ -1,8 +1,8 @@
 package com.heitorcolangelo.data.dummy.store
 
 import com.heitorcolangelo.data.dummy.model.DummyDataModel
-import io.reactivex.Completable
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 class DummyDataStoreImpl @Inject constructor(

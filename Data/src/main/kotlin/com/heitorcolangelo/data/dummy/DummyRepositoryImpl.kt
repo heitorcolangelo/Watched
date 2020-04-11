@@ -4,7 +4,7 @@ import com.heitorcolangelo.data.dummy.mapper.DummiesDataDomainMapper
 import com.heitorcolangelo.data.dummy.store.DummyDataStore
 import com.heitorcolangelo.domain.dummy.model.DummiesDomainModel
 import com.heitorcolangelo.domain.dummy.repository.DummyRepository
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 class DummyRepositoryImpl @Inject constructor(

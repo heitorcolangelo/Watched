@@ -4,7 +4,7 @@ import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 import org.junit.Test
 
 class DummyDataStoreTest {

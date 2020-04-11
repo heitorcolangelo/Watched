@@ -7,7 +7,6 @@ import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
 
-@Singleton
 class ApiServiceFactory @Inject constructor(
     private val okHttpClient: OkHttpClient,
     private val converterFactory: Converter.Factory,

@@ -89,7 +89,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$ax_versions.arch_lifecycle"
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
+    implementation "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"
+    implementation "com.github.akarnokd:rxjava3-bridge:$versions.rxjava"
 
     androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
     androidTestImplementation "androidx.arch.core:core-testing:$ax_versions.arch_core_testing"

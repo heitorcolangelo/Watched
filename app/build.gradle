@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
 
 apply from: "$rootDir/tools/ktlint.gradle"
 
@@ -14,11 +15,10 @@ android {
 
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
         versionCode versions.appVersionCode
         versionName versions.appVersionName
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -54,37 +54,52 @@ android {
         unitTests.includeAndroidResources true
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    dynamicFeatures = [":dummy"]
 }
 
 dependencies {
-    // Domain layer
-    implementation project(":Domain")
+    api project(":Domain")
+    api project(":Data")
+    implementation project(":Data-Local")
+    implementation project(":Data-Remote")
 
     // AndroidX
-    implementation "androidx.appcompat:appcompat:$ax_versions.foundation_appcompat"
-    implementation "androidx.core:core-ktx:$ax_versions.foundation_ktx_core"
+    api "androidx.fragment:fragment-ktx:$ax_versions.foundation_ktx_fragment"
+    api "androidx.appcompat:appcompat:$ax_versions.foundation_appcompat"
+    api "androidx.constraintlayout:constraintlayout:$ax_versions.ui_constraintlayout"
+    api "androidx.core:core-ktx:$ax_versions.foundation_ktx_core"
+    api "androidx.lifecycle:lifecycle-extensions:$ax_versions.foundation_ktx_lifecycle"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$ax_versions.foundation_ktx_lifecycle"
 
     // Dagger
-    implementation "com.google.dagger:dagger:$versions.dagger"
+    api "com.google.dagger:dagger:$versions.dagger"
+    api "com.google.dagger:dagger-android:$versions.dagger"
+    api "com.google.dagger:dagger-android-support:$versions.dagger"
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
-    implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    api "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 
     // RxJava
-    implementation "io.reactivex.rxjava2:rxkotlin:$versions.rxjava"
+    api "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"
+    api "io.reactivex.rxjava3:rxandroid:$versions.rxjava"
 
-    androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
-    androidTestImplementation "androidx.test:runner:$ax_versions.foundation_test_runner"
-    androidTestImplementation "androidx.test:rules:$ax_versions.foundation_test_rules"
-    androidTestImplementation "androidx.test.ext:junit:$ax_versions.foundation_test_ext_junit"
+    androidTestApi "androidx.test:core:$ax_versions.foundation_test_core"
+    androidTestApi "androidx.test:runner:$ax_versions.foundation_test_runner"
+    androidTestApi "androidx.test:rules:$ax_versions.foundation_test_rules"
+    androidTestApi "androidx.test.ext:junit:$ax_versions.foundation_test_ext_junit"
 
-    testImplementation "junit:junit:$versions.junit"
-    testImplementation "io.mockk:mockk:$versions.mockk"
+    testApi "junit:junit:$versions.junit"
+    testApi "io.mockk:mockk:$versions.mockk"
 }

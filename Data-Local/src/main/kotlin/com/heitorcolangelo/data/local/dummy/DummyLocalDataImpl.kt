@@ -7,9 +7,10 @@ import com.heitorcolangelo.data.local.config.dao.ConfigDao
 import com.heitorcolangelo.data.local.config.entity.ConfigEntity
 import com.heitorcolangelo.data.local.dummy.dao.DummyDao
 import com.heitorcolangelo.data.local.dummy.mapper.DummyEntityDataMapper
-import io.reactivex.Completable
-import io.reactivex.Observable
-import io.reactivex.Single
+import hu.akarnokd.rxjava3.bridge.RxJavaBridge
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class DummyLocalDataImpl @Inject constructor(
@@ -26,7 +27,8 @@ class DummyLocalDataImpl @Inject constructor(
     }
 
     override fun getDummies(): Observable<List<DummyDataModel>> {
-        return dummyDao.getDummies().toObservable().map { it.map(mapper::mapToDataModel) }
+        val dummies = RxJavaBridge.toV3Flowable(dummyDao.getDummies())
+        return dummies.toObservable().map { it.map(mapper::mapToDataModel) }
     }
 
     override fun clear(): Completable {
@@ -47,7 +49,8 @@ class DummyLocalDataImpl @Inject constructor(
     override fun isCacheExpired(currentTime: Long): Single<Boolean> {
         val expirationTime = (36 * 100 * 1000).toLong()
 
-        return configDao.getConfig()
+        val config = RxJavaBridge.toV3Flowable(configDao.getConfig())
+        return config
             .single(ConfigEntity.getDefault())
             .map {
                 currentTime - it.lastCacheTime >= expirationTime
@@ -55,6 +58,7 @@ class DummyLocalDataImpl @Inject constructor(
     }
 
     override fun isDataCached(): Single<Boolean> {
-        return dummyDao.getDummies().isEmpty.map { !it }
+        val dummies = RxJavaBridge.toV3Flowable(dummyDao.getDummies())
+        return dummies.isEmpty.map { !it }
     }
 }
