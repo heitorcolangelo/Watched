@@ -6,9 +6,8 @@ import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.domain.dummy.model.DummiesDomainModel
 import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import javax.inject.Inject
-import javax.inject.Singleton
 
-object DummyDataDomainMapper : DataDomainMapper<DummyDataModel, DummyDomainModel> {
+class DummyDataDomainMapper @Inject constructor(): DataDomainMapper<DummyDataModel, DummyDomainModel> {
     override fun mapToDomainModel(dataModel: DummyDataModel): DummyDomainModel {
         return DummyDomainModel(dataModel.dummyId)
     }
@@ -18,7 +17,6 @@ object DummyDataDomainMapper : DataDomainMapper<DummyDataModel, DummyDomainModel
     }
 }
 
-@Singleton
 class DummiesDataDomainMapper @Inject constructor(
     private val dummyMapper: DummyDataDomainMapper
 ) : DataListDomainMapper<DummyDataModel, DummiesDomainModel> {

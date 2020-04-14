@@ -21,8 +21,6 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField('String', 'SERVER_URL', '"https://dev.api.dummy.com/"')
-
             testCoverageEnabled true
             minifyEnabled false
             debuggable true
@@ -30,16 +28,12 @@ android {
         }
 
         staging {
-            buildConfigField('String', 'SERVER_URL', '"https://staging.api.dummy.com/"')
-
             minifyEnabled false
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         release {
-            buildConfigField('String', 'SERVER_URL', '"https://api.dummy.com/"')
-
             minifyEnabled true
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -84,7 +78,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
 
     // Room
-    implementation "androidx.room:room-runtime:$ax_versions.arch_lifecycle"
+    api "androidx.room:room-runtime:$ax_versions.arch_lifecycle"
     implementation "androidx.room:room-rxjava2:$ax_versions.arch_lifecycle"
     kapt "androidx.room:room-compiler:$ax_versions.arch_lifecycle"
 

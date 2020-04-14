@@ -12,4 +12,7 @@ interface DummyApiService {
 
     @GET("/dummies")
     fun getDummies(): Observable<DummiesResponseModel>
+
+    @GET("/dummies")
+    fun getDummies2(): Observable<DummiesResponseModel>
 }

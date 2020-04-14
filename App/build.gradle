@@ -69,8 +69,8 @@ android {
 dependencies {
     api project(":Domain")
     api project(":Data")
-    implementation project(":Data-Local")
-    implementation project(":Data-Remote")
+    api project(":Data-Local")
+    api project(":Data-Remote")
 
     // AndroidX
     api "androidx.fragment:fragment-ktx:$ax_versions.foundation_ktx_fragment"

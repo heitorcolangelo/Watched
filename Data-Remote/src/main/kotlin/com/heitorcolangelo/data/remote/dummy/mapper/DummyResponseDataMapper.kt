@@ -6,15 +6,14 @@ import com.heitorcolangelo.data.remote.common.mapper.ResponseDataMapper
 import com.heitorcolangelo.data.remote.dummy.model.DummiesResponseModel
 import com.heitorcolangelo.data.remote.dummy.model.DummyResponseModel
 import javax.inject.Inject
-import javax.inject.Singleton
 
-object DummyResponseDataMapper : ResponseDataMapper<DummyResponseModel, DummyDataModel> {
+class DummyResponseDataMapper @Inject constructor() :
+    ResponseDataMapper<DummyResponseModel, DummyDataModel> {
     override fun mapToDataModel(response: DummyResponseModel): DummyDataModel {
         return DummyDataModel(response.dummyId)
     }
 }
 
-@Singleton
 class DummiesResponseDataMapper @Inject constructor(
     private val mapper: DummyResponseDataMapper
 ) : ResponseDataListMapper<DummiesResponseModel, DummyDataModel> {

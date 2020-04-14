@@ -1,1 +1,1 @@
-include "app", "Domain", "Data", ":Data-Remote", ":Data-Local", "dummy"
+include "App", "Domain", "Data", "Data-Remote", "Data-Local", "dummy"

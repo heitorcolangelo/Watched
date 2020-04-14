@@ -3,8 +3,9 @@ package com.heitorcolangelo.data.local.dummy.mapper
 import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.data.local.common.mapper.EntityDataMapper
 import com.heitorcolangelo.data.local.dummy.entity.DummyEntity
+import javax.inject.Inject
 
-object DummyEntityDataMapper : EntityDataMapper<DummyEntity, DummyDataModel> {
+class DummyEntityDataMapper @Inject constructor() : EntityDataMapper<DummyEntity, DummyDataModel> {
     override fun mapToDataModel(entity: DummyEntity): DummyDataModel {
         return DummyDataModel(entity.id)
     }
