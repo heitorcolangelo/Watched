@@ -12,7 +12,7 @@ import com.heitorcolangelo.presentation.common.BaseViewModel
 import io.reactivex.rxjava3.observers.DisposableObserver
 import javax.inject.Inject
 
-class DummyViewModel(
+class DummyViewModel constructor(
     private val mapper: DummyDomainUiMapper,
     private val useCase: GetDummiesUseCase
 ) : BaseViewModel(useCase) {

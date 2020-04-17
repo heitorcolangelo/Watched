@@ -46,6 +46,6 @@ android {
 dependencies {
     implementation project(':App')
 
-    implementation "com.google.dagger:dagger:$versions.dagger"
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
 }

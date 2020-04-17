@@ -4,6 +4,7 @@ import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.data.dummy.source.DummyRemoteData
 import com.heitorcolangelo.data.remote.common.api.ApiServiceFactory
 import com.heitorcolangelo.data.remote.common.mapper.ResponseDataMapper
+import com.heitorcolangelo.data.remote.di.RemoteDataModule
 import com.heitorcolangelo.data.remote.dummy.DummyRemoteDataImpl
 import com.heitorcolangelo.data.remote.dummy.api.DummyApiService
 import com.heitorcolangelo.data.remote.dummy.mapper.DummyResponseDataMapper
@@ -12,7 +13,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
-@Module
+@Module(includes = [RemoteDataModule::class])
 abstract class DummyRemoteDataModule {
 
     @Module

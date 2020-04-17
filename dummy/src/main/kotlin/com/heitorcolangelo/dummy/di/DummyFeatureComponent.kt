@@ -1,11 +1,7 @@
 package com.heitorcolangelo.dummy.di
 
 import com.heitorcolangelo.data.dummy.di.DummyDataModule
-import com.heitorcolangelo.data.local.config.di.ConfigModule
-import com.heitorcolangelo.data.local.di.LocalDataModule
 import com.heitorcolangelo.data.local.dummy.di.DummyLocalDataModule
-import com.heitorcolangelo.data.remote.di.OkHttpModule
-import com.heitorcolangelo.data.remote.di.RetrofitModule
 import com.heitorcolangelo.data.remote.dummy.di.DummyRemoteDataModule
 import com.heitorcolangelo.dummy.ui.DummyFragment
 import com.heitorcolangelo.presentation.common.di.FeatureScope
@@ -17,10 +13,6 @@ import dagger.Component
 @Component(
     modules = [
         ApplicationModule::class,
-        ConfigModule::class,
-        LocalDataModule::class,
-        OkHttpModule::class,
-        RetrofitModule::class,
         DummyFeatureModule::class,
         DummyDataModule::class,
         DummyLocalDataModule::class,
