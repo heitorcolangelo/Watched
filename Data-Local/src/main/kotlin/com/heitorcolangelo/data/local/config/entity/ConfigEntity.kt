@@ -16,10 +16,6 @@ data class ConfigEntity(
         const val TABLE_NAME = "config"
         const val COLUMN_LAST_CACHE_TIME = "last_cache_time"
 
-        fun getDefault() =
-            ConfigEntity(
-                NO_ID,
-                0L
-            )
+        fun getDefault() = ConfigEntity(NO_ID, 0L)
     }
 }

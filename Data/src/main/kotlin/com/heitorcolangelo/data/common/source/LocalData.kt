@@ -10,14 +10,14 @@ interface LocalData {
 
     fun setLastCacheTime(lastCacheTime: Long): Completable
 
-    fun isCacheExpired(currentTime: Long): Single<Boolean>
+    fun isCacheExpired(currentTime: Long): Observable<Boolean>
 
     fun isDataCached(): Single<Boolean>
 
     fun isCacheValid(currentTime: Long): Observable<Boolean> {
         return Observable.zip(
             isDataCached().toObservable(),
-            isCacheExpired(currentTime).toObservable(),
+            isCacheExpired(currentTime),
             BiFunction<Boolean, Boolean, Pair<Boolean, Boolean>> { isDataCached, isCacheExpired ->
                 Pair(
                     isDataCached,

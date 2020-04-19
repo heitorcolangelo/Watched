@@ -1,5 +1,6 @@
 package com.heitorcolangelo.dummy.di
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import com.heitorcolangelo.dummy.domain.GetDummiesUseCase
@@ -14,6 +15,8 @@ import dagger.Provides
 
 @Module
 abstract class DummyFeatureModule {
+    @Binds
+    abstract fun bindDummyDataFragment(fragment: DummyFragment): Fragment
 
     @Binds
     abstract fun bindDummyDomainUiMapper(mapper: DummyDomainUiMapper): DomainUiMapper<DummyDomainModel, DummyUiModel>

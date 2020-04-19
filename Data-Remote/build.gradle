@@ -19,6 +19,7 @@ dependencies {
 
     // Moshi
     implementation "com.squareup.moshi:moshi-kotlin:$versions.moshi"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$versions.moshi"
 
     // OkHttp
     implementation "com.squareup.okhttp3:okhttp:$versions.okhttp"
@@ -26,8 +27,8 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
+    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
     api "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
 
     // RxJava
     implementation "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"

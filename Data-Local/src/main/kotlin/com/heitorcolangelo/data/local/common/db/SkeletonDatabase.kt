@@ -1,6 +1,6 @@
 package com.heitorcolangelo.data.local.common.db
 
-import android.content.Context
+import android.app.Application
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
@@ -25,14 +25,14 @@ abstract class SkeletonDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: SkeletonDatabase? = null
 
-        fun getDatabase(context: Context): SkeletonDatabase {
+        fun getDatabase(application: Application): SkeletonDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
             }
             synchronized(this) {
                 val instance = Room.databaseBuilder(
-                    context.applicationContext,
+                    application.applicationContext,
                     SkeletonDatabase::class.java,
                     DbConstants.DB_NAME
                 ).build()

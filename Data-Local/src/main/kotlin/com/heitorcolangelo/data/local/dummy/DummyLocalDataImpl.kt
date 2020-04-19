@@ -46,19 +46,17 @@ class DummyLocalDataImpl @Inject constructor(
         }
     }
 
-    override fun isCacheExpired(currentTime: Long): Single<Boolean> {
-        val expirationTime = (36 * 100 * 1000).toLong()
-
-        val config = RxJavaBridge.toV3Flowable(configDao.getConfig())
-        return config
-            .single(ConfigEntity.getDefault())
+    override fun isCacheExpired(currentTime: Long): Observable<Boolean> {
+        return RxJavaBridge.toV3Flowable(configDao.getConfig())
+            .onErrorReturn { ConfigEntity.getDefault() }
             .map {
+                val expirationTime = (36 * 100 * 1000).toLong()
                 currentTime - it.lastCacheTime >= expirationTime
-            }
+            }.toObservable()
     }
 
     override fun isDataCached(): Single<Boolean> {
-        val dummies = RxJavaBridge.toV3Flowable(dummyDao.getDummies())
-        return dummies.isEmpty.map { !it }
+        val dummies = RxJavaBridge.toV3Flowable(dummyDao.getDummies()).first(listOf())
+        return dummies.map { it.isNotEmpty() }
     }
 }

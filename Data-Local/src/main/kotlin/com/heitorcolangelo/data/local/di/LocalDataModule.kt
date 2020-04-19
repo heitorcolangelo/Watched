@@ -1,16 +1,16 @@
 package com.heitorcolangelo.data.local.di
 
-import android.content.Context
+import android.app.Application
 import com.heitorcolangelo.data.local.common.db.SkeletonDatabase
 import com.heitorcolangelo.data.local.config.dao.ConfigDao
 import dagger.Module
 import dagger.Provides
 
 @Module
-internal class LocalDataModule {
+class LocalDataModule(private val application: Application) {
     @Provides
-    fun provideSkeletonDatabase(context: Context): SkeletonDatabase {
-        return SkeletonDatabase.getDatabase(context)
+    fun provideSkeletonDatabase(): SkeletonDatabase {
+        return SkeletonDatabase.getDatabase(application)
     }
 
     @Provides

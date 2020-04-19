@@ -31,12 +31,6 @@ class DummyFragment : Fragment() {
 
         inject()
         viewModel
-
-        // Attempt to invoke virtual method 'android.content.Context android.content.Context.getApplicationContext()' on a null object reference
-        // Falta descobrir o motivo de não estar conseguindo achar o application mas a injeção no fragment aparentemente funciona.
-        // Acho que talvez eu tenha que fazer um inject() to application component.
-        // Continuar se baseando pelo app plaid.
-        // Tentar remover dagger-android, acredito que não está sendo necessário
     }
 
 }

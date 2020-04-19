@@ -4,7 +4,6 @@ import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.data.dummy.source.DummyLocalData
 import com.heitorcolangelo.data.local.common.db.SkeletonDatabase
 import com.heitorcolangelo.data.local.common.mapper.EntityDataMapper
-import com.heitorcolangelo.data.local.di.LocalDataModule
 import com.heitorcolangelo.data.local.dummy.DummyLocalDataImpl
 import com.heitorcolangelo.data.local.dummy.dao.DummyDao
 import com.heitorcolangelo.data.local.dummy.entity.DummyEntity
@@ -13,7 +12,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [LocalDataModule::class])
+@Module
 abstract class DummyLocalDataModule {
 
     @Binds

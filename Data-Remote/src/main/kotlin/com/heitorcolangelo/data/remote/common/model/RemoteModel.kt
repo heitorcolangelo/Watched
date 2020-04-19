@@ -1,6 +1,8 @@
 package com.heitorcolangelo.data.remote.common.model
 
-const val NO_ID = "NO_ID"
-
-open class ResponseModel(val id: String = NO_ID)
-open class RequestModel(val id: String = NO_ID)
+/**
+ * Empty interfaces just to enforce type usage, they can be extended later on or turned into
+ * abstracted classes if necessary.
+ */
+interface ResponseModel
+interface RequestModel
