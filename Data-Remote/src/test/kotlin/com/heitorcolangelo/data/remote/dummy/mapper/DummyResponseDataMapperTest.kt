@@ -10,7 +10,7 @@ class DummyResponseDataMapperTest {
     fun mapToDataModel() {
         val responseModel = DummyResponseFactory.make()
 
-        val dummyDataModel = DummyResponseDataMapper.mapToDataModel(responseModel)
+        val dummyDataModel = DummyResponseDataMapper().mapToDataModel(responseModel)
 
         assertEquals(responseModel.dummyId, dummyDataModel.dummyId)
     }

@@ -12,7 +12,7 @@ class DummyDaoTest : DaoTest() {
     fun whenGetDummies_thenReturnListOfDummies() {
         val dummyList = DummyEntityFactory.makeList(3)
 
-        dao.saveDummies(dummyList)
+        dao.saveDummies(dummyList).test()
 
         val testSubscriber = dao.getDummies().test()
         testSubscriber.assertValue(dummyList)
@@ -22,7 +22,7 @@ class DummyDaoTest : DaoTest() {
     fun whenSaveDummies_thenSaveDummies() {
         val dummyList = DummyEntityFactory.makeList(3)
 
-        dao.saveDummies(dummyList)
+        dao.saveDummies(dummyList).test()
 
         val testSubscriber = dao.getDummies().test()
         testSubscriber.assertValue(dummyList)
@@ -32,12 +32,12 @@ class DummyDaoTest : DaoTest() {
     fun whenClearDummies_thenClearAllDummies() {
         val dummyList = DummyEntityFactory.makeList(3)
 
-        dao.saveDummies(dummyList)
+        dao.saveDummies(dummyList).test()
 
         var testSubscriber = dao.getDummies().test()
         testSubscriber.assertValue(dummyList)
 
-        dao.clearDummies()
+        dao.clearDummies().test()
 
         testSubscriber = dao.getDummies().test()
         testSubscriber.assertValue(emptyList())

@@ -11,7 +11,7 @@ class DummyEntityModelMapperTest {
     private val dummyId = DummyDataModelFactory.randomId()
     private val entity = DummyDataModel(dummyId)
     private val domainModel = DummyDomainModel(dummyId)
-    private val mapper = DummyDataDomainMapper
+    private val mapper = DummyDataDomainMapper()
 
     @Test
     fun mapToDomainModel() {

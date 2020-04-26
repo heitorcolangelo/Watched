@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.heitorcolangelo.data.local.dummy.entity.DummyEntity
+import io.reactivex.Completable
 import io.reactivex.Flowable
 
 @Dao
@@ -14,8 +15,9 @@ interface DummyDao {
     fun getDummies(): Flowable<List<DummyEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveDummies(dummyList: List<DummyEntity>)
+    fun saveDummies(dummyList: List<DummyEntity>): Completable
 
     @Query("DELETE FROM ${DummyEntity.TABLE_NAME}")
-    fun clearDummies()
+    fun clearDummies(): Completable
+
 }

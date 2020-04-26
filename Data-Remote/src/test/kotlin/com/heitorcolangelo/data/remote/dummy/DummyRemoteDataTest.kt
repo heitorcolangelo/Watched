@@ -2,7 +2,7 @@ package com.heitorcolangelo.data.remote.dummy
 
 import com.heitorcolangelo.data.dummy.source.DummyRemoteData
 import com.heitorcolangelo.data.remote.dummy.api.DummyApiService
-import com.heitorcolangelo.data.remote.dummy.mapper.DummiesResponseDataMapper
+import com.heitorcolangelo.data.remote.dummy.mapper.DummyResponseDataListMapper
 import com.heitorcolangelo.data.remote.factory.DummiesResponseFactory
 import io.mockk.every
 import io.mockk.mockk
@@ -13,8 +13,8 @@ import org.junit.Test
 class DummyRemoteDataTest {
 
     private val dummyApi: DummyApiService = mockk(relaxed = true)
-    private val mapper: DummiesResponseDataMapper = mockk(relaxed = true)
-    private val remoteData: DummyRemoteData = DummyRemoteDataImpl(dummyApi, mapper)
+    private val listMapper: DummyResponseDataListMapper = mockk(relaxed = true)
+    private val remoteData: DummyRemoteData = DummyRemoteDataImpl(dummyApi, listMapper)
 
     @Test
     fun `WHEN get dummies THEN get dummies from api`() {
@@ -32,7 +32,7 @@ class DummyRemoteDataTest {
         remoteData.getDummies().test()
 
         verify {
-            mapper.mapToDataModelList(any())
+            listMapper.mapToDataModelList(any())
         }
     }
 }

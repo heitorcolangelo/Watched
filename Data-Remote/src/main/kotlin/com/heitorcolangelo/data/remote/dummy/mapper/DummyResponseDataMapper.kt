@@ -14,7 +14,7 @@ class DummyResponseDataMapper @Inject constructor() :
     }
 }
 
-class DummiesResponseDataMapper @Inject constructor(
+class DummyResponseDataListMapper @Inject constructor(
     private val mapper: DummyResponseDataMapper
 ) : ResponseDataListMapper<DummiesResponseModel, DummyDataModel> {
     override fun mapToDataModelList(response: DummiesResponseModel): List<DummyDataModel> {

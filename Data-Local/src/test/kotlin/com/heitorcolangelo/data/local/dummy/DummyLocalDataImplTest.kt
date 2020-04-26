@@ -4,7 +4,6 @@ import com.heitorcolangelo.data.dummy.source.DummyLocalData
 import com.heitorcolangelo.data.local.config.dao.ConfigDao
 import com.heitorcolangelo.data.local.dummy.dao.DummyDao
 import com.heitorcolangelo.data.local.dummy.mapper.DummyEntityDataMapper
-import com.heitorcolangelo.data.local.factory.ConfigEntityFactory
 import com.heitorcolangelo.data.local.factory.DummyEntityFactory
 import io.mockk.every
 import io.mockk.mockk
@@ -12,12 +11,12 @@ import io.mockk.verify
 import io.reactivex.Flowable
 import org.junit.Test
 
-class DummyLocalDataTest {
+class DummyLocalDataImplTest {
     private val dummyDao: DummyDao = mockk(relaxed = true)
     private val configDao: ConfigDao = mockk(relaxed = true)
     private val mapper: DummyEntityDataMapper = mockk(relaxed = true)
 
-    private val localData: DummyLocalData = DummyLocalDataImpl(dummyDao, configDao, mapper)
+    private val localData: DummyLocalData = DummyLocalDataImpl(dummyDao, mapper, configDao)
 
     @Test
     fun `WHEN save dummies THEN save list to dao`() {
@@ -57,31 +56,6 @@ class DummyLocalDataTest {
         localData.clear().test()
 
         verify { dummyDao.clearDummies() }
-    }
-
-    @Test
-    fun `WHEN set last cache time THEN save to config dao`() {
-        localData.setLastCacheTime(1L).test()
-
-        verify { configDao.saveConfig(any()) }
-    }
-
-    @Test
-    fun `WHEN is cache expired THEN get config dao`() {
-        localData.isCacheExpired(1L).test()
-
-        verify { configDao.getConfig() }
-    }
-
-    @Test
-    fun `WHEN last cached time is older than one hour THEN cache is expired`() {
-        val now = System.currentTimeMillis()
-        val oneHour = (36 * 100 * 1000).toLong()
-        val configEntity = ConfigEntityFactory.make().copy(lastCacheTime = now - oneHour)
-        every { configDao.getConfig() } returns Flowable.just(configEntity)
-
-        val testObserver = localData.isCacheExpired(now).test()
-        testObserver.assertValue(true)
     }
 
     @Test

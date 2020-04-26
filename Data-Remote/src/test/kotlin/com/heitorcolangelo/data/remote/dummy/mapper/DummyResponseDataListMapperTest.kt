@@ -4,10 +4,10 @@ import com.heitorcolangelo.data.remote.factory.DummiesResponseFactory
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class DummiesResponseDataMapperTest {
+class DummyResponseDataListMapperTest {
 
-    private val dummyMapper = DummyResponseDataMapper
-    private val mapper = DummiesResponseDataMapper(dummyMapper)
+    private val dummyMapper = DummyResponseDataMapper()
+    private val mapper = DummyResponseDataListMapper(dummyMapper)
 
     @Test
     fun mapToDataModelList() {

@@ -8,7 +8,7 @@ import org.junit.Test
 
 class DummyEntityDataMapperTest {
 
-    private val mapper = DummyEntityDataMapper
+    private val mapper = DummyEntityDataMapper()
 
     @Test
     fun mapToDataModel() {

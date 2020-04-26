@@ -8,7 +8,7 @@ import dagger.Binds
 import dagger.Module
 
 @Module
-abstract class ApplicationBindingModule {
+abstract class ApplicationModule {
 
     @Binds
     abstract fun bindApplicationThreadProvider(provider: ApplicationThreadProvider): ExecutionThreadProvider

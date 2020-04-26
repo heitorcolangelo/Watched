@@ -44,12 +44,6 @@ class RemoteDataModule(private val configuration: BuildConfiguration) {
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        val logging = HttpLoggingInterceptor()
-        logging.level = if (configuration.isDebug()) {
-            HttpLoggingInterceptor.Level.BODY
-        } else {
-            HttpLoggingInterceptor.Level.NONE
-        }
-        return logging
+        return OkHttpClientFactory.getLoggingInterceptor(configuration)
     }
 }

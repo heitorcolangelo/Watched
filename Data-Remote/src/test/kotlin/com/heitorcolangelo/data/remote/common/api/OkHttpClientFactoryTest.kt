@@ -1,5 +1,6 @@
 package com.heitorcolangelo.data.remote.common.api
 
+import com.heitorcolangelo.data.remote.common.BuildConfiguration
 import okhttp3.Interceptor
 import okhttp3.Request
 import okhttp3.Response
@@ -21,14 +22,14 @@ class OkHttpClientFactoryTest {
 
     @Test
     fun `WHEN is debug mode THEN level should be BODY`() {
-        val interceptor = OkHttpClientFactory.getLoggingInterceptor(true)
+        val interceptor = OkHttpClientFactory.getLoggingInterceptor(TestBuildConfiguration(true))
 
         assertTrue(interceptor.level == HttpLoggingInterceptor.Level.BODY)
     }
 
     @Test
     fun `WHEN is NOT debug mode THEN level should be NONE`() {
-        val interceptor = OkHttpClientFactory.getLoggingInterceptor(false)
+        val interceptor = OkHttpClientFactory.getLoggingInterceptor(TestBuildConfiguration(false))
 
         assertTrue(interceptor.level == HttpLoggingInterceptor.Level.NONE)
     }
@@ -44,6 +45,12 @@ class OkHttpClientFactoryTest {
     private class TestInterceptor : Interceptor {
         override fun intercept(chain: Interceptor.Chain): Response {
             return chain.proceed(Request.Builder().build())
+        }
+    }
+
+    private class TestBuildConfiguration(private val isDebug: Boolean) : BuildConfiguration {
+        override fun isDebug(): Boolean {
+            return isDebug
         }
     }
 }

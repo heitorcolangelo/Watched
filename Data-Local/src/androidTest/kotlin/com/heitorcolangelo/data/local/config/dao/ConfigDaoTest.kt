@@ -11,18 +11,18 @@ class ConfigDaoTest : DaoTest() {
     @Test
     fun whenGetConfig_thenReturnConfig() {
         val config = ConfigEntityFactory.make()
-        dao.saveConfig(config)
+        dao.saveConfig(config).test()
 
-        val testSubscriber = dao.getConfig().test()
-        testSubscriber.assertValue(config)
+        val testSubscriber = dao.getConfig(config.id).test()
+        testSubscriber.assertValue(listOf(config))
     }
 
     @Test
     fun whenSaveConfig_thenSaveConfig() {
         val config = ConfigEntityFactory.make()
-        dao.saveConfig(config)
+        dao.saveConfig(config).test()
 
-        val testSubscriber = dao.getConfig().test()
-        testSubscriber.assertValue(config)
+        val testSubscriber = dao.getConfig(config.id).test()
+        testSubscriber.assertValue(listOf(config))
     }
 }
