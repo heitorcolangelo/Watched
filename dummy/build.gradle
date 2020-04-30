@@ -48,4 +48,12 @@ dependencies {
 
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+
+    androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
+    androidTestImplementation "androidx.test:runner:$ax_versions.foundation_test_runner"
+    androidTestImplementation "androidx.test:rules:$ax_versions.foundation_test_rules"
+    androidTestImplementation "androidx.test.ext:junit:$ax_versions.foundation_test_ext_junit"
+
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "io.mockk:mockk:$versions.mockk"
 }

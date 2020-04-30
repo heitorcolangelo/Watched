@@ -1,9 +1,9 @@
 package com.heitorcolangelo.presentation.launcher
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.heitorcolangelo.skeleton.R
+import com.heitorcolangelo.R
+import com.heitorcolangelo.presentation.common.ActivityIntentProvider
 
 class MainActivity : AppCompatActivity() {
 
@@ -11,11 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val intent = Intent(Intent.ACTION_VIEW).setClassName(
-            "com.heitorcolangelo.skeleton",
-            "com.heitorcolangelo.dummy.ui.DummyActivity"
-        )
+        val intent = ActivityIntentProvider.Dummy.intentTo()
         startActivity(intent)
     }
 }
-

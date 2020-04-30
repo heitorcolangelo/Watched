@@ -20,7 +20,8 @@ class DummyFragment : Fragment() {
     lateinit var viewModel: DummyViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.dummy_fragment, container, false)
@@ -32,5 +33,4 @@ class DummyFragment : Fragment() {
         inject()
         viewModel
     }
-
 }

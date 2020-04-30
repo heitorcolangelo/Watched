@@ -3,7 +3,7 @@ package com.heitorcolangelo.presentation.di
 import dagger.Component
 import javax.inject.Singleton
 
-@Component(modules = [ApplicationModule::class])
+@Component()
 @Singleton
 interface ApplicationComponent {
     @Component.Builder

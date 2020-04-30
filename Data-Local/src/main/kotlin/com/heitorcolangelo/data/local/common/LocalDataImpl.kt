@@ -31,5 +31,4 @@ abstract class LocalDataImpl(
     override fun clear(): Completable {
         return RxJavaBridge.toV3Completable(configDao.deleteConfig(dataConfigId))
     }
-
 }
