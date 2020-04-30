@@ -19,5 +19,4 @@ interface DummyDao {
 
     @Query("DELETE FROM ${DummyEntity.TABLE_NAME}")
     fun clearDummies(): Completable
-
 }

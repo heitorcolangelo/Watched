@@ -7,7 +7,7 @@ import com.heitorcolangelo.domain.dummy.model.DummiesDomainModel
 import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import javax.inject.Inject
 
-class DummyDataDomainMapper @Inject constructor(): DataDomainMapper<DummyDataModel, DummyDomainModel> {
+class DummyDataDomainMapper @Inject constructor() : DataDomainMapper<DummyDataModel, DummyDomainModel> {
     override fun mapToDomainModel(dataModel: DummyDataModel): DummyDomainModel {
         return DummyDomainModel(dataModel.dummyId)
     }

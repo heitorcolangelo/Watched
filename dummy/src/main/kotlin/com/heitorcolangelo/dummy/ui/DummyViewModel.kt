@@ -53,5 +53,4 @@ class DummyViewModel constructor(
             return DummyViewModel(mapper, useCase) as T
         }
     }
-
 }
