@@ -2,9 +2,6 @@ package com.heitorcolangelo.presentation.common
 
 import android.content.Intent
 
-/**
- * Not really sure about the naming of this object. =/
- */
 object ActivityIntentProvider {
 
     private const val PACKAGE_NAME = "com.heitorcolangelo"
