@@ -2,7 +2,7 @@ package com.heitorcolangelo.dummy.di
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.heitorcolangelo.data.local.di.LocalDataModule
+import com.heitorcolangelo.data.local.dummy.di.DummyLocalDataModule
 import com.heitorcolangelo.data.remote.di.RemoteDataModule
 import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import com.heitorcolangelo.dummy.domain.GetDummiesUseCase
@@ -16,8 +16,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [LocalDataModule::class, RemoteDataModule::class, ApplicationModule::class])
-abstract class DummyFeatureModule {
+@Module(includes = [DummyLocalDataModule::class, RemoteDataModule::class])
+abstract class DummyFeatureModule: ApplicationModule() {
     @Binds
     abstract fun bindDummyDataFragment(fragment: DummyFragment): Fragment
 
