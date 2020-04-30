@@ -16,7 +16,7 @@ object ActivityIntentProvider {
          */
         val className: String
 
-        fun intentTo(): Intent {
+        fun getIntent(): Intent {
             return Intent(Intent.ACTION_VIEW).setClassName(PACKAGE_NAME, className)
         }
     }
