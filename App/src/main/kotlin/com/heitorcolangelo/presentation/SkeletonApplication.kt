@@ -8,7 +8,6 @@ import com.heitorcolangelo.presentation.di.DaggerApplicationComponent
 
 class SkeletonApplication : Application() {
     companion object {
-        @JvmStatic
         fun applicationComponent(context: Context): ApplicationComponent {
             return (context.applicationContext as SkeletonApplication).applicationComponent
         }

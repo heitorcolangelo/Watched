@@ -1,9 +1,7 @@
 package com.heitorcolangelo.dummy.di
 
-import com.heitorcolangelo.data.dummy.di.DummyDataModule
 import com.heitorcolangelo.data.local.di.LocalDataModule
 import com.heitorcolangelo.data.remote.di.RemoteDataModule
-import com.heitorcolangelo.data.remote.dummy.di.DummyRemoteDataModule
 import com.heitorcolangelo.dummy.ui.DummyFragment
 import com.heitorcolangelo.presentation.common.di.FeatureScope
 import com.heitorcolangelo.presentation.common.di.FragmentComponent
@@ -12,11 +10,7 @@ import dagger.BindsInstance
 import dagger.Component
 
 @Component(
-    modules = [
-        DummyFeatureModule::class,
-        DummyDataModule::class,
-        DummyRemoteDataModule::class
-    ],
+    modules = [DummyFeatureModule::class],
     dependencies = [ApplicationComponent::class]
 )
 @FeatureScope
