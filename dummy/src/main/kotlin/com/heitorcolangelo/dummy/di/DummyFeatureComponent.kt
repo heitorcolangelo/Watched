@@ -9,17 +9,13 @@ import com.heitorcolangelo.dummy.ui.DummyFragment
 import com.heitorcolangelo.presentation.common.di.FeatureScope
 import com.heitorcolangelo.presentation.common.di.FragmentComponent
 import com.heitorcolangelo.presentation.di.ApplicationComponent
-import com.heitorcolangelo.presentation.di.ApplicationModule
 import dagger.BindsInstance
 import dagger.Component
 
 @Component(
     modules = [
-        ApplicationModule::class,
         DummyFeatureModule::class,
         DummyDataModule::class,
-        LocalDataModule::class,
-        RemoteDataModule::class,
         DummyLocalDataModule::class,
         DummyRemoteDataModule::class
     ],
@@ -38,5 +34,4 @@ interface DummyFeatureComponent : FragmentComponent<DummyFragment> {
         fun localDataModule(module: LocalDataModule): Builder
         fun remoteDataModule(module: RemoteDataModule): Builder
     }
-
 }
