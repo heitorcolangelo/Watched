@@ -1,4 +1,4 @@
-package com.heitorcolangelo.presentation.common
+package com.heitorcolangelo.presentation.common.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.heitorcolangelo.domain.common.usecase.DisposableUseCase

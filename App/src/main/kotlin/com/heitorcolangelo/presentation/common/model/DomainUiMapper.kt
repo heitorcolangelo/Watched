@@ -1,4 +1,4 @@
-package com.heitorcolangelo.presentation.common
+package com.heitorcolangelo.presentation.common.model
 
 import com.heitorcolangelo.domain.common.model.DomainModel
 

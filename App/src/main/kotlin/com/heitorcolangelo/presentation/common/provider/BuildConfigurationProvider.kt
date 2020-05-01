@@ -1,4 +1,4 @@
-package com.heitorcolangelo.presentation.common
+package com.heitorcolangelo.presentation.common.provider
 
 import com.heitorcolangelo.BuildConfig
 import com.heitorcolangelo.data.remote.common.BuildConfiguration
