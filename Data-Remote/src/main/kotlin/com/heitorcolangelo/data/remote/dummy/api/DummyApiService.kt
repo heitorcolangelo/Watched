@@ -7,9 +7,9 @@ import retrofit2.http.GET
 
 interface DummyApiService {
     companion object {
-        const val BASE_URL = "${ApiService.BASE_URL}/dummy/"
+        const val BASE_URL = "${ApiService.BASE_URL}movie/"
     }
 
-    @GET("/dummies")
+    @GET("popular")
     fun getDummies(): Observable<DummiesResponseModel>
 }
