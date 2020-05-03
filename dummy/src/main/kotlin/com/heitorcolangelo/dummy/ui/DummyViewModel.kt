@@ -8,7 +8,7 @@ import com.heitorcolangelo.domain.dummy.model.DummiesDomainModel
 import com.heitorcolangelo.dummy.domain.GetDummiesUseCase
 import com.heitorcolangelo.dummy.model.DummyDomainUiMapper
 import com.heitorcolangelo.dummy.model.DummyUiModel
-import com.heitorcolangelo.presentation.common.BaseViewModel
+import com.heitorcolangelo.presentation.common.viewmodel.BaseViewModel
 import io.reactivex.rxjava3.observers.DisposableObserver
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.heitorcolangelo.presentation.common
+package com.heitorcolangelo.presentation.common.provider
 
 import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

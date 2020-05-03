@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.heitorcolangelo.dummy.R
+import com.heitorcolangelo.dummy.databinding.FragmentDummyBinding
 import com.heitorcolangelo.dummy.di.inject
 import javax.inject.Inject
 
@@ -18,13 +18,15 @@ class DummyFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: DummyViewModel
+    private lateinit var binding: FragmentDummyBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.dummy_fragment, container, false)
+        binding = FragmentDummyBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onAttach(context: Context) {

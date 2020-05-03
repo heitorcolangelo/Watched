@@ -11,7 +11,7 @@ import com.heitorcolangelo.dummy.model.DummyDomainUiMapper
 import com.heitorcolangelo.dummy.model.DummyUiModel
 import com.heitorcolangelo.dummy.ui.DummyFragment
 import com.heitorcolangelo.dummy.ui.DummyViewModel
-import com.heitorcolangelo.presentation.common.DomainUiMapper
+import com.heitorcolangelo.presentation.common.model.DomainUiMapper
 import com.heitorcolangelo.presentation.di.ApplicationModule
 import dagger.Binds
 import dagger.Module

@@ -1,4 +1,4 @@
-package com.heitorcolangelo.presentation.common
+package com.heitorcolangelo.presentation.common.provider
 
 import android.content.Intent
 
@@ -21,7 +21,8 @@ object ActivityIntentProvider {
         }
     }
 
-    object Dummy : AccessibleActivity {
+    object Dummy :
+        AccessibleActivity {
         override val className = "$PACKAGE_NAME.dummy.ui.DummyActivity"
     }
 }

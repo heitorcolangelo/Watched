@@ -2,8 +2,8 @@ package com.heitorcolangelo.presentation.di
 
 import com.heitorcolangelo.data.remote.common.BuildConfiguration
 import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
-import com.heitorcolangelo.presentation.common.ApplicationThreadProvider
-import com.heitorcolangelo.presentation.common.BuildConfigurationProvider
+import com.heitorcolangelo.presentation.common.provider.ApplicationThreadProvider
+import com.heitorcolangelo.presentation.common.provider.BuildConfigurationProvider
 import dagger.Binds
 import dagger.Module
 

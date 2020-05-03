@@ -1,4 +1,4 @@
-package com.heitorcolangelo.presentation.common
+package com.heitorcolangelo.presentation.common.model
 
 internal const val NO_ID = "NO_ID"
 
