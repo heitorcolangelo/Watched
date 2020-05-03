@@ -21,23 +21,33 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    def keys = new Properties()
+    file("$rootDir/App/key.properties").withInputStream {
+        stream -> keys.load(stream)
+    }
+
+    def apiKey = "\"" + keys.API_KEY + "\""
+
     buildTypes {
         debug {
             minifyEnabled false
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_KEY', apiKey
         }
 
         staging {
             minifyEnabled false
             debuggable true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_KEY', apiKey
         }
 
         release {
             minifyEnabled true
             debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_KEY', apiKey
         }
     }
 

@@ -1,6 +1,7 @@
 package com.heitorcolangelo.data.remote.di
 
 import com.heitorcolangelo.data.remote.common.BuildConfiguration
+import com.heitorcolangelo.data.remote.common.api.AuthInterceptor
 import com.heitorcolangelo.data.remote.common.api.OkHttpClientFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
@@ -19,9 +20,10 @@ class RemoteDataModule(private val configuration: BuildConfiguration) {
     @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
+        authInterceptor: AuthInterceptor,
         cache: Cache
     ): OkHttpClient {
-        return OkHttpClientFactory.getClient(listOf(loggingInterceptor), cache)
+        return OkHttpClientFactory.getClient(listOf(loggingInterceptor, authInterceptor), cache)
     }
 
     @Provides
@@ -45,5 +47,10 @@ class RemoteDataModule(private val configuration: BuildConfiguration) {
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         return OkHttpClientFactory.getLoggingInterceptor(configuration)
+    }
+
+    @Provides
+    fun provideAuthInterceptor(): AuthInterceptor {
+        return AuthInterceptor(configuration.apiKey())
     }
 }
