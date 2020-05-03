@@ -17,5 +17,4 @@ class AuthInterceptor(private val apiKey: String) : Interceptor {
     companion object {
         private const val API_KEY = "api_key"
     }
-
 }
