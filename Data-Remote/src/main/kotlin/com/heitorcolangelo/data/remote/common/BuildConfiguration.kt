@@ -7,4 +7,5 @@ package com.heitorcolangelo.data.remote.common
  */
 interface BuildConfiguration {
     fun isDebug(): Boolean
+    fun apiKey(): String
 }
