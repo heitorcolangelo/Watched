@@ -1,0 +1,133 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+apply from: "$rootDir/tools/ktlint.gradle"
+
+android {
+    final versions = project.ext
+
+    compileSdkVersion versions.compileSdk
+
+    defaultConfig {
+        applicationId = "com.heitorcolangelo"
+
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.appVersionCode
+        versionName versions.appVersionName
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    def keys = new Properties()
+    file("$rootDir/App/key.properties").withInputStream {
+        stream -> keys.load(stream)
+    }
+
+    def apiKey = "\"" + keys.API_KEY + "\""
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_KEY', apiKey
+        }
+
+        staging {
+            minifyEnabled false
+            debuggable true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_KEY', apiKey
+        }
+
+        release {
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_KEY', apiKey
+        }
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        test.java.srcDirs += 'src/test/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    testOptions {
+        animationsDisabled true
+
+        unitTests.includeAndroidResources true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    viewBinding {
+        enabled = true
+    }
+
+    dynamicFeatures = [":dummy"]
+}
+
+dependencies {
+    api project(":Domain")
+    api project(":Data")
+    api project(":Data-Local")
+    api project(":Data-Remote")
+
+    // AndroidX
+    api "androidx.fragment:fragment-ktx:$ax_versions.foundation_ktx_fragment"
+    api "androidx.appcompat:appcompat:$ax_versions.foundation_appcompat"
+    api "androidx.constraintlayout:constraintlayout:$ax_versions.ui_constraintlayout"
+    api "androidx.core:core-ktx:$ax_versions.foundation_ktx_core"
+    api "androidx.lifecycle:lifecycle-extensions:$ax_versions.foundation_ktx_lifecycle"
+    api "androidx.lifecycle:lifecycle-viewmodel-ktx:$ax_versions.foundation_ktx_lifecycle"
+    api "androidx.recyclerview:recyclerview:$ax_versions.ui_recyclerview"
+
+    // Dagger
+    api "com.google.dagger:dagger:$versions.dagger"
+    api "com.google.dagger:dagger-android:$versions.dagger"
+    api "com.google.dagger:dagger-android-support:$versions.dagger"
+    kapt "com.google.dagger:dagger-compiler:$versions.dagger"
+    kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+
+    // Fresco
+    implementation "com.facebook.fresco:fresco:$versions.fresco"
+
+    // Kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
+    api "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
+
+    // Material Design
+    api "com.google.android.material:material:$versions.material"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:$ax_versions.arch_navigation"
+    implementation "androidx.navigation:navigation-ui-ktx:$ax_versions.arch_navigation"
+    implementation "androidx.navigation:navigation-dynamic-features-fragment:$ax_versions.arch_navigation"
+
+    // RxJava
+    api "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"
+    api "io.reactivex.rxjava3:rxandroid:$versions.rxjava"
+
+    // State machine
+    api "br.com.arch.toolkit:statemachine:$versions.statemachine"
+
+    androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
+    androidTestImplementation "androidx.test:runner:$ax_versions.foundation_test_runner"
+    androidTestImplementation "androidx.test:rules:$ax_versions.foundation_test_rules"
+    androidTestImplementation "androidx.test.ext:junit:$ax_versions.foundation_test_ext_junit"
+
+    testImplementation "junit:junit:$versions.junit"
+    testImplementation "io.mockk:mockk:$versions.mockk"
+}
