@@ -9,13 +9,13 @@ import org.junit.Test
 class DummyDataDomainMapperTest {
 
     private val dummyId = DummyDataModelFactory.randomId()
-    private val entity = DummyDataModel(dummyId)
+    private val dataModel = DummyDataModel(dummyId)
     private val domainModel = DummyDomainModel(dummyId)
     private val mapper = DummyDataDomainMapper()
 
     @Test
     fun mapToDomainModel() {
-        val dummyDomainModel = mapper.mapToDomainModel(entity)
+        val dummyDomainModel = mapper.mapToDomainModel(dataModel)
         assertEquals(dummyDomainModel.dummyId, dummyId)
     }
 

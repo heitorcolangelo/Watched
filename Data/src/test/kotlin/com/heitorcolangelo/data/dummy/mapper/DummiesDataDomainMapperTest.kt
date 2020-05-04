@@ -11,11 +11,11 @@ class DummiesDataDomainMapperTest {
     private val dummyMapper: DummyDataDomainMapper = mockk(relaxed = true)
     private val mapper = DummiesDataDomainMapper(dummyMapper)
     private val elementsCount = 3
-    private val entityList = DummyDataModelFactory.makeList(elementsCount)
+    private val dataModelList = DummyDataModelFactory.makeList(elementsCount)
 
     @Test
     fun mapToDomainModel() {
-        val dummiesDomainModel = mapper.mapToDomainModel(entityList)
+        val dummiesDomainModel = mapper.mapToDomainModel(dataModelList)
 
         verify(exactly = elementsCount) { dummyMapper.mapToDomainModel(any()) }
         assertEquals(elementsCount, dummiesDomainModel.dummyList.size)
@@ -23,11 +23,11 @@ class DummiesDataDomainMapperTest {
 
     @Test
     fun mapToEntities() {
-        val dummiesDomainModel = mapper.mapToDomainModel(entityList)
+        val dummiesDomainModel = mapper.mapToDomainModel(dataModelList)
 
-        val entities = mapper.mapToDataModelList(dummiesDomainModel)
+        val dataModelList = mapper.mapToDataModelList(dummiesDomainModel)
 
         verify(exactly = elementsCount) { dummyMapper.mapToDataModel(any()) }
-        assertEquals(elementsCount, entities.size)
+        assertEquals(elementsCount, dataModelList.size)
     }
 }
