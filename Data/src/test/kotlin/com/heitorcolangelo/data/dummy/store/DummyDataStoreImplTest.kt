@@ -7,7 +7,7 @@ import io.mockk.verify
 import io.reactivex.rxjava3.core.Observable
 import org.junit.Test
 
-class DummyDataStoreTest {
+class DummyDataStoreImplTest {
 
     private val localDataStore: DummyLocalDataStore = mockk(relaxed = true)
     private val remoteDataStore: DummyRemoteDataStore = mockk(relaxed = true)
