@@ -20,7 +20,7 @@ class DummyDataDomainMapperTest {
     }
 
     @Test
-    fun mapToEntity() {
+    fun mapToDataModel() {
         val dummyEntity = mapper.mapToDataModel(domainModel)
         assertEquals(dummyEntity.dummyId, dummyId)
     }

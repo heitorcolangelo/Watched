@@ -22,7 +22,7 @@ class DummiesDataDomainMapperTest {
     }
 
     @Test
-    fun mapToEntities() {
+    fun mapToDataModelList() {
         val dummiesDomainModel = mapper.mapToDomainModel(dataModelList)
 
         val dataModelList = mapper.mapToDataModelList(dummiesDomainModel)
