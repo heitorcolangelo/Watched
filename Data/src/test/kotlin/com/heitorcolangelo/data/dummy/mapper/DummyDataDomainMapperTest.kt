@@ -6,7 +6,7 @@ import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class DummyEntityModelMapperTest {
+class DummyDataDomainMapperTest {
 
     private val dummyId = DummyDataModelFactory.randomId()
     private val entity = DummyDataModel(dummyId)
