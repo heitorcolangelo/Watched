@@ -6,21 +6,21 @@ import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class DummyEntityModelMapperTest {
+class DummyDataDomainMapperTest {
 
     private val dummyId = DummyDataModelFactory.randomId()
-    private val entity = DummyDataModel(dummyId)
+    private val dataModel = DummyDataModel(dummyId)
     private val domainModel = DummyDomainModel(dummyId)
     private val mapper = DummyDataDomainMapper()
 
     @Test
     fun mapToDomainModel() {
-        val dummyDomainModel = mapper.mapToDomainModel(entity)
+        val dummyDomainModel = mapper.mapToDomainModel(dataModel)
         assertEquals(dummyDomainModel.dummyId, dummyId)
     }
 
     @Test
-    fun mapToEntity() {
+    fun mapToDataModel() {
         val dummyEntity = mapper.mapToDataModel(domainModel)
         assertEquals(dummyEntity.dummyId, dummyId)
     }

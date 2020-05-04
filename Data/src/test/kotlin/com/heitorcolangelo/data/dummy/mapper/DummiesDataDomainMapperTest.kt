@@ -6,7 +6,7 @@ import io.mockk.verify
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class DummiesDataModelModelMapperTest {
+class DummiesDataDomainMapperTest {
 
     private val dummyMapper: DummyDataDomainMapper = mockk(relaxed = true)
     private val mapper = DummiesDataDomainMapper(dummyMapper)
@@ -22,7 +22,7 @@ class DummiesDataModelModelMapperTest {
     }
 
     @Test
-    fun mapToEntities() {
+    fun mapToDataModelList() {
         val dummiesDomainModel = mapper.mapToDomainModel(entityList)
 
         val entities = mapper.mapToDataModelList(dummiesDomainModel)

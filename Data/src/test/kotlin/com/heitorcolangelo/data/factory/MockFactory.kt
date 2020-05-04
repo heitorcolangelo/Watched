@@ -1,6 +1,6 @@
 package com.heitorcolangelo.data.factory
 
-import java.util.UUID
+import java.util.*
 
 interface MockFactory<T> {
     fun make(): T
@@ -14,6 +14,10 @@ interface MockFactory<T> {
     }
 
     fun randomId(): String {
+        return UUID.randomUUID().toString()
+    }
+
+    fun randomString(): String {
         return UUID.randomUUID().toString()
     }
 
