@@ -1,5 +1,6 @@
 package com.heitorcolangelo.data.factory
 
+import java.util.Date
 import java.util.UUID
 
 interface MockFactory<T> {
@@ -19,6 +20,14 @@ interface MockFactory<T> {
 
     fun randomString(): String {
         return UUID.randomUUID().toString()
+    }
+
+    fun randomFloat(): Float {
+        return Math.random().toFloat()
+    }
+
+    fun randomDate(): Date {
+        return Date()
     }
 
     fun randomBoolean(): Boolean {

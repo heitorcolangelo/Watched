@@ -1,8 +1,10 @@
 package com.heitorcolangelo.data.dummy
 
-import com.heitorcolangelo.data.dummy.mapper.DummiesDataDomainMapper
+import com.heitorcolangelo.data.common.mapper.PageDataDomainMapper
+import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.data.dummy.store.DummyDataStore
 import com.heitorcolangelo.data.factory.DummyDataModelFactory
+import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import com.heitorcolangelo.domain.dummy.repository.DummyRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -12,7 +14,8 @@ import org.junit.Test
 
 class DummyRepositoryTest {
 
-    private val mapper: DummiesDataDomainMapper = mockk(relaxed = true)
+    private val mapper: PageDataDomainMapper<DummyDataModel, DummyDomainModel> =
+        mockk(relaxed = true)
     private val dataStore: DummyDataStore = mockk(relaxed = true)
     private val repository: DummyRepository = DummyRepositoryImpl(mapper, dataStore)
 
@@ -31,6 +34,6 @@ class DummyRepositoryTest {
 
         repository.getDummies().test()
 
-        verify { mapper.mapToDomainModel(dummies) }
+        verify { mapper.mapToPageDomainModel(any()) }
     }
 }

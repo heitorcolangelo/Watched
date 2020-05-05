@@ -1,4 +1,4 @@
-package com.heitorcolangelo.data.remote.common.mapper
+package com.heitorcolangelo.data.remote.common.mapper.request
 
 import com.heitorcolangelo.data.common.model.DataModel
 import com.heitorcolangelo.data.remote.common.model.RequestModel
