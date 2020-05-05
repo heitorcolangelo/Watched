@@ -76,7 +76,9 @@ android {
         enabled = true
     }
 
-    dynamicFeatures = [":dummy"]
+    dynamicFeatures = [":dummy", ":movie"]
+
+
 }
 
 dependencies {
