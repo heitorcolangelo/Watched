@@ -1,5 +1,6 @@
 package com.heitorcolangelo.data.movie.store
 
+import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.common.store.LocalDataStore
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.source.MovieLocalData
@@ -11,8 +12,10 @@ class MovieLocalDataStore @Inject constructor(
     private val localData: MovieLocalData
 ) : MovieDataStore, LocalDataStore {
 
-    override fun getMovies(): Observable<List<MovieDataModel>> {
-        return localData.getMovies()
+    override fun getMovies(): Observable<PageDataModel<MovieDataModel>> {
+        return localData.getMovies().map {
+            PageDataModel(items = it)
+        }
     }
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {

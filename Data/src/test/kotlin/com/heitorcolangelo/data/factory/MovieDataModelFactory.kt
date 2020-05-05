@@ -10,9 +10,9 @@ object MovieDataModelFactory : MockFactory<MovieDataModel> {
             overview = randomString(),
             backdropPath = randomString(),
             posterPath = randomString(),
-            voteAverage = randomString(),
-            popularity = randomString(),
-            releaseDate = randomString()
+            voteAverage = randomFloat(),
+            popularity = randomFloat(),
+            releaseDate = randomDate()
         )
     }
 }

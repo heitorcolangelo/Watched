@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.heitorcolangelo.domain.dummy.model.DummiesDomainModel
+import com.heitorcolangelo.domain.common.model.PageDomainModel
+import com.heitorcolangelo.domain.dummy.model.DummyDomainModel
 import com.heitorcolangelo.dummy.domain.GetDummiesUseCase
 import com.heitorcolangelo.dummy.model.DummyDomainUiMapper
 import com.heitorcolangelo.dummy.model.DummyUiModel
@@ -30,12 +31,12 @@ class DummyViewModel constructor(
     inner class DummiesObserver(
         private val dummiesLiveData: MutableLiveData<List<DummyUiModel>>,
         private val mapper: DummyDomainUiMapper
-    ) : DisposableObserver<DummiesDomainModel>() {
+    ) : DisposableObserver<PageDomainModel<DummyDomainModel>>() {
         override fun onComplete() {
         }
 
-        override fun onNext(dummies: DummiesDomainModel) {
-            val dummiesUiModel = dummies.dummyList.map(mapper::mapToUiModel)
+        override fun onNext(dummyPage: PageDomainModel<DummyDomainModel>) {
+            val dummiesUiModel = dummyPage.items.map(mapper::mapToUiModel)
             dummiesLiveData.postValue(dummiesUiModel)
         }
 

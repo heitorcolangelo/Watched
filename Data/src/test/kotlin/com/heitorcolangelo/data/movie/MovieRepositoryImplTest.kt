@@ -1,8 +1,10 @@
 package com.heitorcolangelo.data.movie
 
-import com.heitorcolangelo.data.movie.mapper.PagedMovieDataDomainMapper
+import com.heitorcolangelo.data.common.mapper.PageDataDomainMapper
+import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.store.MovieDataStore
+import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.domain.movie.model.MoviesSortOption
 import io.mockk.every
 import io.mockk.mockk
@@ -11,7 +13,8 @@ import io.reactivex.rxjava3.core.Observable
 import org.junit.Test
 
 class MovieRepositoryImplTest {
-    private val mapper: PagedMovieDataDomainMapper = mockk(relaxed = true)
+    private val mapper: PageDataDomainMapper<MovieDataModel, MovieDomainModel> =
+        mockk(relaxed = true)
     private val dataStore: MovieDataStore = mockk(relaxed = true)
 
     private val repo = MovieRepositoryImpl(mapper, dataStore)
@@ -25,11 +28,12 @@ class MovieRepositoryImplTest {
 
     @Test
     fun `WHEN data store returns THEN map to domain model`() {
-        val dataMovies = listOf<MovieDataModel>()
-        every { dataStore.getMovies() } returns Observable.just(dataMovies)
+        val movies = listOf<MovieDataModel>()
+        val moviePage = PageDataModel(movies)
+        every { dataStore.getMovies() } returns Observable.just(moviePage)
 
         repo.getMovies(MoviesSortOption.MostRecent).test()
 
-        verify { mapper.mapToDomainModel(dataMovies) }
+        verify { mapper.mapToPageDomainModel(moviePage) }
     }
 }

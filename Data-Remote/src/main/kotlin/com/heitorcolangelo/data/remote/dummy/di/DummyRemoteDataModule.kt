@@ -3,7 +3,7 @@ package com.heitorcolangelo.data.remote.dummy.di
 import com.heitorcolangelo.data.dummy.model.DummyDataModel
 import com.heitorcolangelo.data.dummy.source.DummyRemoteData
 import com.heitorcolangelo.data.remote.common.api.ApiServiceFactory
-import com.heitorcolangelo.data.remote.common.mapper.ResponseDataMapper
+import com.heitorcolangelo.data.remote.common.mapper.response.ResponseDataMapper
 import com.heitorcolangelo.data.remote.di.RemoteDataModule
 import com.heitorcolangelo.data.remote.dummy.DummyRemoteDataImpl
 import com.heitorcolangelo.data.remote.dummy.api.DummyApiService

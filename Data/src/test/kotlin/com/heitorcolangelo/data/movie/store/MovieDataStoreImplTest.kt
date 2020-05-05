@@ -33,7 +33,7 @@ class MovieDataStoreImplTest {
     @Test
     fun `WHEN get movies from remote data store THEN save movies`() {
         every { localDataStore.isDataValid() } returns Observable.just(false)
-        every { remoteDataStore.getMovies() } returns Observable.just(listOf())
+        every { remoteDataStore.getMovies() } returns Observable.just(mockk(relaxed = true))
 
         dataStore.getMovies().test()
 
