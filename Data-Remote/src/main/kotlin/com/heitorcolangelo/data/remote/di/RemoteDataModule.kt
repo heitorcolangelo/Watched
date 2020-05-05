@@ -9,14 +9,14 @@ import com.squareup.moshi.adapters.Rfc3339DateJsonAdapter
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import java.io.File
+import java.util.Date
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.io.File
-import java.util.Date
 
 @Module
 class RemoteDataModule(private val configuration: BuildConfiguration) {
