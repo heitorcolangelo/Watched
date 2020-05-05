@@ -1,8 +1,9 @@
 package com.heitorcolangelo.domain.dummy.usecase
 
+import com.heitorcolangelo.domain.common.model.PageDomainModel
 import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
 import com.heitorcolangelo.domain.dummy.repository.DummyRepository
-import com.heitorcolangelo.domain.factory.DummiesFactory
+import com.heitorcolangelo.domain.factory.DummyFactory
 import com.heitorcolangelo.dummy.domain.GetDummiesUseCase
 import io.mockk.every
 import io.mockk.mockk
@@ -18,12 +19,12 @@ class GetDummiesUseCaseTest {
 
     @Test
     fun `WHEN build THEN return repository dummies`() {
-        val dummies = DummiesFactory.make()
-        every { repository.getDummies() } returns Observable.just(dummies)
+        val dummyPage = PageDomainModel(items = DummyFactory.makeList(3))
+        every { repository.getDummies() } returns Observable.just(dummyPage)
 
         val testObservable = useCase.build().test()
 
-        testObservable.assertValue(dummies)
+        testObservable.assertValue(dummyPage)
         verify { repository.getDummies() }
     }
 }
