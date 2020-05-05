@@ -2,15 +2,15 @@ package com.heitorcolangelo.dummy.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.heitorcolangelo.dummy.R
 import com.heitorcolangelo.dummy.databinding.FragmentDummyBinding
 import com.heitorcolangelo.dummy.di.inject
+import com.heitorcolangelo.presentation.common.view.binding.viewBinding
 import javax.inject.Inject
 
-class DummyFragment : Fragment() {
+class DummyFragment : Fragment(R.layout.fragment_dummy) {
 
     companion object {
         fun newInstance() = DummyFragment()
@@ -18,15 +18,11 @@ class DummyFragment : Fragment() {
 
     @Inject
     lateinit var viewModel: DummyViewModel
-    private lateinit var binding: FragmentDummyBinding
+    private val binding: FragmentDummyBinding by viewBinding()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentDummyBinding.inflate(inflater, container, false)
-        return binding.root
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding
     }
 
     override fun onAttach(context: Context) {
