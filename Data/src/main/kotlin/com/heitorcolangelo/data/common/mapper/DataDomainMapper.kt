@@ -7,4 +7,3 @@ interface DataDomainMapper<Data : DataModel, Domain : DomainModel> {
     fun mapToDomainModel(dataModel: Data): Domain
     fun mapToDataModel(domainModel: Domain): Data
 }
-

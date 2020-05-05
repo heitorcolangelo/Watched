@@ -8,8 +8,3 @@ import com.squareup.moshi.JsonClass
 data class DummyResponseModel(
     @field:Json(name = "id") val dummyId: String
 ) : ResponseModel
-
-@JsonClass(generateAdapter = true)
-data class DummiesResponseModel(
-    @field:Json(name = "values") val dummies: List<DummyResponseModel>
-) : ResponseModel

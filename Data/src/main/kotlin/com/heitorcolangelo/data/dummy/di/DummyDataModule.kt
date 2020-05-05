@@ -1,6 +1,5 @@
 package com.heitorcolangelo.data.dummy.di
 
-import com.heitorcolangelo.data.common.mapper.DataDomainMapper
 import com.heitorcolangelo.data.common.mapper.PageDataDomainMapper
 import com.heitorcolangelo.data.common.mapper.PageDataDomainMapperImpl
 import com.heitorcolangelo.data.dummy.DummyRepositoryImpl
@@ -22,9 +21,6 @@ abstract class DummyDataModule {
 
     @Binds
     abstract fun bindDummyRepository(impl: DummyRepositoryImpl): DummyRepository
-
-    @Binds
-    abstract fun bindDummyDataDomainMapper(impl: DummyDataDomainMapper): DataDomainMapper<DummyDataModel, DummyDomainModel>
 
     @Module
     companion object {
