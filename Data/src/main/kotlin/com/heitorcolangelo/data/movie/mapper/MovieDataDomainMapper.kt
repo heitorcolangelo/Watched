@@ -5,8 +5,7 @@ import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import javax.inject.Inject
 
-class MovieDataDomainMapper @Inject constructor(
-) : DataDomainMapper<MovieDataModel, MovieDomainModel> {
+class MovieDataDomainMapper @Inject constructor() : DataDomainMapper<MovieDataModel, MovieDomainModel> {
     override fun mapToDomainModel(dataModel: MovieDataModel): MovieDomainModel {
         return with(dataModel) {
             MovieDomainModel(
