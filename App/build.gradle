@@ -80,8 +80,7 @@ android {
         enabled = true
     }
 
-    dynamicFeatures = [":dummy", ":movie"]
-
+    dynamicFeatures = [":movie"]
 
 }
 
