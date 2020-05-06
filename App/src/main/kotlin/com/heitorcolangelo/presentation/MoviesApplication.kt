@@ -7,10 +7,10 @@ import com.heitorcolangelo.presentation.common.activity.BaseActivity
 import com.heitorcolangelo.presentation.di.ApplicationComponent
 import com.heitorcolangelo.presentation.di.DaggerApplicationComponent
 
-class SkeletonApplication : Application() {
+class MoviesApplication : Application() {
     companion object {
         fun applicationComponent(context: Context): ApplicationComponent {
-            return (context.applicationContext as SkeletonApplication).applicationComponent
+            return (context.applicationContext as MoviesApplication).applicationComponent
         }
     }
 
@@ -19,5 +19,5 @@ class SkeletonApplication : Application() {
     }
 }
 
-fun Fragment.applicationComponent() = SkeletonApplication.applicationComponent(requireContext())
-fun BaseActivity.applicationComponent() = SkeletonApplication.applicationComponent(this)
+fun Fragment.applicationComponent() = MoviesApplication.applicationComponent(requireContext())
+fun BaseActivity.applicationComponent() = MoviesApplication.applicationComponent(this)

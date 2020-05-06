@@ -20,6 +20,7 @@ class MovieLocalDataStore @Inject constructor(
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {
         return localData.saveMovies(movies)
+            .andThen(localData.setLastCacheTime(System.currentTimeMillis()))
     }
 
     override fun isDataValid(): Observable<Boolean> {

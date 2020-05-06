@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="com.heitorcolangelo.presentation.SkeletonApplication"
+        android:name="com.heitorcolangelo.presentation.MoviesApplication"
         tools:ignore="AllowBackup">
         <activity android:name="com.heitorcolangelo.presentation.launcher.MainActivity">
             <intent-filter>

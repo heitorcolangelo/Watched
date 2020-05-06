@@ -1,7 +1,6 @@
 package com.heitorcolangelo.domain.movie.model
 
 import com.heitorcolangelo.domain.common.model.DomainModel
-import java.util.Date
 
 data class MovieDomainModel(
     private val movieId: String,
@@ -11,5 +10,5 @@ data class MovieDomainModel(
     val posterPath: String,
     val voteAverage: Float,
     val popularity: Float,
-    val releaseDate: Date
+    val releaseDate: String
 ) : DomainModel(movieId)

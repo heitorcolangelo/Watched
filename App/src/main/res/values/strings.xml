@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Skeleton</string>
+    <string name="app_name">Movies</string>
     <string name="title_dummy">Dummy Module</string>
     <string name="title_movie">Movie</string>
 </resources>

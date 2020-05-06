@@ -2,7 +2,7 @@ package com.heitorcolangelo.movie.di
 
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.heitorcolangelo.data.local.di.LocalDataModule
+import com.heitorcolangelo.data.local.movie.di.MovieLocalDataModule
 import com.heitorcolangelo.data.movie.di.MovieDataModule
 import com.heitorcolangelo.data.remote.movie.di.MovieRemoteDataModule
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
@@ -20,7 +20,7 @@ import dagger.Provides
 @Module(
     includes = [
         MovieDataModule::class,
-        LocalDataModule::class,
+        MovieLocalDataModule::class,
         MovieRemoteDataModule::class
     ]
 )

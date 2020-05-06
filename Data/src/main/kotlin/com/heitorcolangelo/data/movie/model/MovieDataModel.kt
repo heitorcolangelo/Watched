@@ -1,7 +1,6 @@
 package com.heitorcolangelo.data.movie.model
 
 import com.heitorcolangelo.data.common.model.DataModel
-import java.util.Date
 
 data class MovieDataModel(
     private val movieId: String,
@@ -11,5 +10,5 @@ data class MovieDataModel(
     val posterPath: String,
     val voteAverage: Float,
     val popularity: Float,
-    val releaseDate: Date
+    val releaseDate: String
 ) : DataModel(movieId)

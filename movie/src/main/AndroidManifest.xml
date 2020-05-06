@@ -13,7 +13,7 @@
     </dist:module>
 
     <application
-        android:name="com.heitorcolangelo.presentation.SkeletonApplication"
+        android:name="com.heitorcolangelo.presentation.MoviesApplication"
         android:allowBackup="true"
         tools:ignore="AllowBackup,MissingApplicationIcon">
 

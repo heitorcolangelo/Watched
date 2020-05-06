@@ -3,7 +3,6 @@ package com.heitorcolangelo.data.remote.movie.model
 import com.heitorcolangelo.data.remote.common.model.ResponseModel
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
-import java.util.Date
 
 @JsonClass(generateAdapter = true)
 data class MovieResponseModel(
@@ -22,5 +21,5 @@ data class MovieResponseModel(
     @Json(name = "popularity")
     val popularity: Float?,
     @Json(name = "release_date")
-    val releaseDate: Date?
+    val releaseDate: String?
 ) : ResponseModel

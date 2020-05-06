@@ -9,23 +9,27 @@ import com.heitorcolangelo.data.local.config.dao.ConfigDao
 import com.heitorcolangelo.data.local.config.entity.ConfigEntity
 import com.heitorcolangelo.data.local.dummy.dao.DummyDao
 import com.heitorcolangelo.data.local.dummy.entity.DummyEntity
+import com.heitorcolangelo.data.local.movie.dao.MovieDao
+import com.heitorcolangelo.data.local.movie.entity.MovieEntity
 
 @Database(
-    entities = [DummyEntity::class, ConfigEntity::class],
+    entities = [DummyEntity::class, MovieEntity::class, ConfigEntity::class],
     version = DbConstants.VERSION,
     exportSchema = false
 )
-abstract class SkeletonDatabase : RoomDatabase() {
+abstract class MoviesDatabase : RoomDatabase() {
 
     abstract fun getDummyDao(): DummyDao
 
     abstract fun getConfigDao(): ConfigDao
 
+    abstract fun getMovieDao(): MovieDao
+
     companion object {
         @Volatile
-        private var INSTANCE: SkeletonDatabase? = null
+        private var INSTANCE: MoviesDatabase? = null
 
-        fun getDatabase(application: Application): SkeletonDatabase {
+        fun getDatabase(application: Application): MoviesDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -33,7 +37,7 @@ abstract class SkeletonDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     application.applicationContext,
-                    SkeletonDatabase::class.java,
+                    MoviesDatabase::class.java,
                     DbConstants.DB_NAME
                 ).build()
                 INSTANCE = instance
