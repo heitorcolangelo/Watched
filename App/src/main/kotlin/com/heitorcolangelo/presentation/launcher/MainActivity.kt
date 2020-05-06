@@ -9,7 +9,7 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val intent = ActivityIntentProvider.Dummy.getIntent()
+        val intent = ActivityIntentProvider.Movie.getIntent()
         startActivity(intent)
     }
 }

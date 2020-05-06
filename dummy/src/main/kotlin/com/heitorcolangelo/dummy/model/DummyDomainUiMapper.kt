@@ -9,8 +9,4 @@ class DummyDomainUiMapper @Inject constructor() :
     override fun mapToUiModel(domainModel: DummyDomainModel): DummyUiModel {
         return DummyUiModel(domainModel.dummyId)
     }
-
-    override fun mapToDomainModel(uiModel: DummyUiModel): DummyDomainModel {
-        return DummyDomainModel(uiModel.dummyId)
-    }
 }

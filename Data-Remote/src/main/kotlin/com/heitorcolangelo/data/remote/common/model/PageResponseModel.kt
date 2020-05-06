@@ -1,8 +1,10 @@
 package com.heitorcolangelo.data.remote.common.model
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
-class PageResponseModel<Response : ResponseModel>(
+@JsonClass(generateAdapter = true)
+data class PageResponseModel<Response : ResponseModel>(
     @Json(name = "results") val results: List<Response> = listOf(),
     @Json(name = "page") val page: Int = 0,
     @Json(name = "total_pages") val totalPages: Int = 0,

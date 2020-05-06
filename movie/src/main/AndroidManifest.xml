@@ -1,13 +1,25 @@
-<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.heitorcolangelo.movie">
 
     <dist:module
         dist:instant="false"
         dist:title="@string/title_movie">
         <dist:delivery>
-            <dist:install-time />
+            <dist:on-demand />
         </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>
+
+    <application
+        android:name="com.heitorcolangelo.presentation.SkeletonApplication"
+        android:allowBackup="true"
+        tools:ignore="AllowBackup,MissingApplicationIcon">
+
+        <activity
+            android:name="com.heitorcolangelo.movie.ui.MovieActivity"
+            android:exported="false" />
+    </application>
 </manifest>
 

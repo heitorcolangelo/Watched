@@ -6,8 +6,9 @@ import com.heitorcolangelo.data.movie.source.MovieRemoteData
 import com.heitorcolangelo.data.remote.movie.api.MovieApiService
 import com.heitorcolangelo.data.remote.movie.mapper.MoviePageResponseDataMapper
 import io.reactivex.rxjava3.core.Observable
+import javax.inject.Inject
 
-class MovieRemoteDataImpl(
+class MovieRemoteDataImpl @Inject constructor(
     private val mapper: MoviePageResponseDataMapper,
     private val api: MovieApiService
 ) : MovieRemoteData {

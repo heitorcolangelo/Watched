@@ -21,8 +21,11 @@ object ActivityIntentProvider {
         }
     }
 
-    object Dummy :
-        AccessibleActivity {
+    object Dummy : AccessibleActivity {
         override val className = "$PACKAGE_NAME.dummy.ui.DummyActivity"
+    }
+
+    object Movie : AccessibleActivity {
+        override val className = "$PACKAGE_NAME.movie.ui.MovieActivity"
     }
 }

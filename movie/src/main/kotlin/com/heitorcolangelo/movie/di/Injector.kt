@@ -1,0 +1,15 @@
+package com.heitorcolangelo.movie.di
+
+import com.heitorcolangelo.data.local.di.LocalDataModule
+import com.heitorcolangelo.data.remote.di.RemoteDataModule
+import com.heitorcolangelo.movie.ui.MovieListFragment
+import com.heitorcolangelo.presentation.common.provider.BuildConfigurationProvider
+
+internal fun MovieListFragment.inject() {
+    DaggerMovieFeatureComponent.builder()
+        .localDataModule(LocalDataModule(this.requireActivity().application))
+        .remoteDataModule(RemoteDataModule(BuildConfigurationProvider()))
+        .fragment(this)
+        .build()
+        .inject(this)
+}

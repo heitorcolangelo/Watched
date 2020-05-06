@@ -2,8 +2,10 @@ package com.heitorcolangelo.data.remote.movie.model
 
 import com.heitorcolangelo.data.remote.common.model.ResponseModel
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 import java.util.Date
 
+@JsonClass(generateAdapter = true)
 data class MovieResponseModel(
     @Json(name = "id")
     val id: Long?,
