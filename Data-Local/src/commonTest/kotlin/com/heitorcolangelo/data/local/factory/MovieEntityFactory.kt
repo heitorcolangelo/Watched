@@ -1,6 +1,7 @@
 package com.heitorcolangelo.data.local.factory
 
 import com.heitorcolangelo.data.local.movie.entity.MovieEntity
+import com.heitorcolangelo.test.common.MockFactory
 
 object MovieEntityFactory : MockFactory<MovieEntity> {
     override fun make(): MovieEntity {

@@ -1,2 +1,1 @@
-include "App", "Domain", "Data", "Data-Remote", "Data-Local"
-include ':movie'
+include "App", "Domain", "Data", "Data-Remote", "Data-Local", "Test-Common", "movie"

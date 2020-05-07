@@ -3,6 +3,9 @@ buildscript {
         google()
         jcenter()
     }
+    ext {
+        kotlin_version = '1.3.72'
+    }
 
     ext.ax_versions = [
             'arch_lifecycle'           : '2.2.5',

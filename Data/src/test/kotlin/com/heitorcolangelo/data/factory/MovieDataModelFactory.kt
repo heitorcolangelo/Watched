@@ -1,6 +1,7 @@
 package com.heitorcolangelo.data.factory
 
 import com.heitorcolangelo.data.movie.model.MovieDataModel
+import com.heitorcolangelo.test.common.MockFactory
 
 object MovieDataModelFactory : MockFactory<MovieDataModel> {
     override fun make(): MovieDataModel {

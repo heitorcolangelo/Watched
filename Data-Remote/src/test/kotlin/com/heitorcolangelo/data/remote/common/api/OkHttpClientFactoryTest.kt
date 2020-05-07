@@ -52,5 +52,13 @@ class OkHttpClientFactoryTest {
         override fun isDebug(): Boolean {
             return isDebug
         }
+
+        override fun apiKey(): String {
+            return "API_KEY"
+        }
+
+        override fun imageBaseUrl(): String {
+            return "IMAGE_URL"
+        }
     }
 }

@@ -34,6 +34,7 @@ dependencies {
     // RxJava
     implementation "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"
 
+    testImplementation project(":Test-Common")
     testImplementation "junit:junit:$versions.junit"
     testImplementation "io.mockk:mockk:$versions.mockk"
 }

@@ -1,4 +1,4 @@
-package com.heitorcolangelo.data.remote.factory
+package com.heitorcolangelo.test.common
 
 import java.util.UUID
 
@@ -13,11 +13,25 @@ interface MockFactory<T> {
         }
     }
 
-    fun randomId(): String {
+    fun randomId() = randomString()
+
+    fun randomString(): String {
         return UUID.randomUUID().toString()
+    }
+
+    fun randomFloat(): Float {
+        return Math.random().toFloat()
+    }
+
+    fun randomInt(): Int {
+        return Math.random().toInt()
     }
 
     fun randomBoolean(): Boolean {
         return Math.random() < 0.5
+    }
+
+    fun randomLong(): Long {
+        return Math.random().toLong()
     }
 }
