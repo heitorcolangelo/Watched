@@ -15,7 +15,7 @@ interface MovieDao {
     fun getMovies(): Flowable<List<MovieEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveMovies(dummyList: List<MovieEntity>): Completable
+    fun saveMovies(movieList: List<MovieEntity>): Completable
 
     @Query("DELETE FROM ${MovieEntity.TABLE_NAME}")
     fun clearMovies(): Completable

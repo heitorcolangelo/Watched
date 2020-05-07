@@ -7,19 +7,15 @@ import androidx.room.RoomDatabase
 import com.heitorcolangelo.data.local.common.constants.DbConstants
 import com.heitorcolangelo.data.local.config.dao.ConfigDao
 import com.heitorcolangelo.data.local.config.entity.ConfigEntity
-import com.heitorcolangelo.data.local.dummy.dao.DummyDao
-import com.heitorcolangelo.data.local.dummy.entity.DummyEntity
 import com.heitorcolangelo.data.local.movie.dao.MovieDao
 import com.heitorcolangelo.data.local.movie.entity.MovieEntity
 
 @Database(
-    entities = [DummyEntity::class, MovieEntity::class, ConfigEntity::class],
+    entities = [MovieEntity::class, ConfigEntity::class],
     version = DbConstants.VERSION,
     exportSchema = false
 )
 abstract class MoviesDatabase : RoomDatabase() {
-
-    abstract fun getDummyDao(): DummyDao
 
     abstract fun getConfigDao(): ConfigDao
 
