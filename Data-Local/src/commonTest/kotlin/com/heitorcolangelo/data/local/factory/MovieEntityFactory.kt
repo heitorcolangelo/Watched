@@ -1,11 +1,11 @@
-package com.heitorcolangelo.data.factory
+package com.heitorcolangelo.data.local.factory
 
-import com.heitorcolangelo.data.movie.model.MovieDataModel
+import com.heitorcolangelo.data.local.movie.entity.MovieEntity
 
-object MovieDataModelFactory : MockFactory<MovieDataModel> {
-    override fun make(): MovieDataModel {
-        return MovieDataModel(
-            movieId = randomId(),
+object MovieEntityFactory : MockFactory<MovieEntity> {
+    override fun make(): MovieEntity {
+        return MovieEntity(
+            id = randomId(),
             title = randomString(),
             overview = randomString(),
             backdropPath = randomString(),

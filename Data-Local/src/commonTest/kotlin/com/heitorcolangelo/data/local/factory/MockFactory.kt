@@ -18,6 +18,12 @@ interface MockFactory<T> {
         return UUID.randomUUID().toString()
     }
 
+    fun randomString() = randomId()
+
+    fun randomFloat(): Float {
+        return Math.random().toFloat()
+    }
+
     fun randomBoolean(): Boolean {
         return Math.random() < 0.5
     }

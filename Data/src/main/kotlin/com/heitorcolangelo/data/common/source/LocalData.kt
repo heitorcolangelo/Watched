@@ -8,7 +8,8 @@ import io.reactivex.rxjava3.functions.BiFunction
 interface LocalData {
 
     companion object {
-        const val cacheExpirationTime = (36 * 100 * 1000).toLong()
+        private const val ONE_HOUR_IN_MILLI = (36 * 100 * 1000).toLong()
+        const val cacheExpirationTime = ONE_HOUR_IN_MILLI
     }
 
     val dataConfigId: String
