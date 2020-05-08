@@ -12,6 +12,7 @@ import org.junit.Before
 import org.junit.Test
 
 class MovieListViewModelTest {
+
     private val mapper: MovieItemDomainUiMapper = mockk(relaxed = true)
     private val useCase: GetPopularMoviesUseCase = mockk(relaxed = true)
 
@@ -27,7 +28,7 @@ class MovieListViewModelTest {
 
     @Test
     fun `WHEN observer calls onNext THEN map to uiModel`() {
-        val liveDataMock = mockk< MutableLiveData<List<MovieItemUiModel>>>(relaxed = true)
+        val liveDataMock = mockk<MutableLiveData<List<MovieItemUiModel>>>(relaxed = true)
         val observer = MovieListViewModel.PopularMoviesObserver(liveDataMock, mapper)
         val domainModelList = MovieDomainModelFactory.makeList(3)
         val moviePage = PageDomainModel(items = domainModelList)
@@ -36,5 +37,4 @@ class MovieListViewModelTest {
 
         verify(exactly = 3) { mapper.mapToUiModel(any()) }
     }
-
 }
