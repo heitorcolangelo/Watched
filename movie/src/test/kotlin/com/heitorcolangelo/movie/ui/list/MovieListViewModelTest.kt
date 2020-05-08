@@ -9,8 +9,10 @@ import com.heitorcolangelo.movie.model.MovieItemUiModel
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Before
+import org.junit.Ignore
 import org.junit.Test
 
+@Ignore("https://github.com/android/app-bundle-samples/issues/11")
 class MovieListViewModelTest {
 
     private val mapper: MovieItemDomainUiMapper = mockk(relaxed = true)
