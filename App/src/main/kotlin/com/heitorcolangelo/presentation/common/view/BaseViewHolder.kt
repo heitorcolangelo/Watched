@@ -8,5 +8,5 @@ import kotlinx.android.extensions.LayoutContainer
 abstract class BaseViewHolder<Model : UiModel>(
     override val containerView: View
 ) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-    abstract fun bind(model: UiModel)
+    abstract fun bind(model: Model)
 }

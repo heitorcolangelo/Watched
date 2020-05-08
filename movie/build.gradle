@@ -50,8 +50,12 @@ android {
 dependencies {
     implementation project(':App')
 
+    // Dagger
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
+
+    // Glide
+    kapt "com.github.bumptech.glide:compiler:$versions.glide"
 
     androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
     androidTestImplementation "androidx.test:runner:$ax_versions.foundation_test_runner"

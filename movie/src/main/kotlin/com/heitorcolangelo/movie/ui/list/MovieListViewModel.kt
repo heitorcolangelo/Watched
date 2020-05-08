@@ -1,6 +1,5 @@
-package com.heitorcolangelo.movie.ui
+package com.heitorcolangelo.movie.ui.list
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,11 +30,9 @@ class MovieListViewModel(
         private val mapper: MovieItemDomainUiMapper
     ) : DisposableObserver<PageDomainModel<MovieDomainModel>>() {
         override fun onComplete() {
-            Log.e("TAG", "onComplete")
         }
 
         override fun onNext(popularMoviesPage: PageDomainModel<MovieDomainModel>) {
-            Log.e("TAG", "onNext")
             val moviesUiModel = popularMoviesPage.items.map(mapper::mapToUiModel)
             moviesLiveData.postValue(moviesUiModel)
         }

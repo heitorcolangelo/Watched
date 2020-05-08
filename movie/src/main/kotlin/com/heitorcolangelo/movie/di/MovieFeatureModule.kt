@@ -9,8 +9,8 @@ import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
 import com.heitorcolangelo.movie.mapper.MovieItemDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieItemUiModel
-import com.heitorcolangelo.movie.ui.MovieListFragment
-import com.heitorcolangelo.movie.ui.MovieListViewModel
+import com.heitorcolangelo.movie.ui.list.MovieListFragment
+import com.heitorcolangelo.movie.ui.list.MovieListViewModel
 import com.heitorcolangelo.presentation.common.model.DomainUiMapper
 import com.heitorcolangelo.presentation.di.ApplicationModule
 import dagger.Binds
