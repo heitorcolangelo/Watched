@@ -141,6 +141,13 @@ dependencies {
     androidTestImplementation "androidx.test:rules:$ax_versions.foundation_test_rules"
     androidTestImplementation "androidx.test.ext:junit:$ax_versions.foundation_test_ext_junit"
 
+    testImplementation project(":Test-Common")
     testImplementation "junit:junit:$versions.junit"
     testImplementation "io.mockk:mockk:$versions.mockk"
 }
+
+configurations {
+    appTestDependencies.extendsFrom testImplementation
+    appAndroidTestDependencies.extendsFrom androidTestImplementation
+}
+

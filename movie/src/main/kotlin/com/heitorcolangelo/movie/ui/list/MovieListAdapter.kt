@@ -18,7 +18,7 @@ class MovieListAdapter(
     }
 
     override fun getItemCount(): Int {
-        return 20
+        return items.size
     }
 
     override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
