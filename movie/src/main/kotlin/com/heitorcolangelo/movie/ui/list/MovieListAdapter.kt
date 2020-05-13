@@ -2,15 +2,15 @@ package com.heitorcolangelo.movie.ui.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.heitorcolangelo.movie.databinding.ListItemMovieBinding
 import com.heitorcolangelo.movie.model.MovieItemUiModel
+import com.heitorcolangelo.presentation.common.view.BaseAdapter
 import com.heitorcolangelo.presentation.common.view.BaseViewHolder
 
 class MovieListAdapter(
     private val items: List<MovieItemUiModel>
-) : RecyclerView.Adapter<MovieItemViewHolder>() {
+) : BaseAdapter<MovieItemUiModel, MovieItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding = ListItemMovieBinding.inflate(layoutInflater, parent, false)
@@ -22,7 +22,15 @@ class MovieListAdapter(
     }
 
     override fun onBindViewHolder(holder: MovieItemViewHolder, position: Int) {
-        holder.bind(items[position])
+        val uiModel = items[position]
+        holder.bind(uiModel)
+        holder.containerView.setOnClickListener {
+            itemClickListener?.invoke(uiModel)
+        }
+    }
+
+    override fun onItemClicked(listener: (model: MovieItemUiModel) -> Unit) {
+        itemClickListener = listener
     }
 }
 

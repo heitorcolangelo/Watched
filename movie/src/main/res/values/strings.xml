@@ -1,0 +1,4 @@
+<resources>
+    <string name="movie_details_overview">Overview</string>
+    <string name="movie_details_release_date">Release date: %1$s</string>
+</resources>

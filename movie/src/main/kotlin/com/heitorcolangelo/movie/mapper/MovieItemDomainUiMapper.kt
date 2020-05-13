@@ -4,20 +4,19 @@ import com.heitorcolangelo.data.remote.common.BuildConfiguration
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.model.MovieItemUiModel
 import com.heitorcolangelo.presentation.common.model.DomainUiMapper
-import com.heitorcolangelo.presentation.common.model.PosterUiModel
+import com.heitorcolangelo.presentation.common.model.MediaImageUiModel
 import javax.inject.Inject
 
 class MovieItemDomainUiMapper @Inject constructor(
-    private val buildConfiguration: BuildConfiguration
+    private val buildConfig: BuildConfiguration
 ) : DomainUiMapper<MovieDomainModel, MovieItemUiModel> {
     override fun mapToUiModel(domainModel: MovieDomainModel): MovieItemUiModel {
-        return MovieItemUiModel(
-            id = domainModel.id,
-            title = domainModel.title,
-            poster = PosterUiModel.SmallPosterUiModel(
-                buildConfiguration.imageBaseUrl(),
-                domainModel.posterPath
+        return with(domainModel) {
+            MovieItemUiModel(
+                id = id,
+                title = title,
+                poster = MediaImageUiModel.Small(buildConfig.imageBaseUrl(), posterPath)
             )
-        )
+        }
     }
 }

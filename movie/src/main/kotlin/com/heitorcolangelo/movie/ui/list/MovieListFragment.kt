@@ -12,6 +12,8 @@ import com.heitorcolangelo.movie.R
 import com.heitorcolangelo.movie.databinding.FragmentMovieListBinding
 import com.heitorcolangelo.movie.di.inject
 import com.heitorcolangelo.movie.model.MovieItemUiModel
+import com.heitorcolangelo.movie.ui.MovieActivity
+import com.heitorcolangelo.movie.ui.detail.MovieDetailsFragment
 import com.heitorcolangelo.presentation.common.view.binding.viewBinding
 import javax.inject.Inject
 
@@ -41,10 +43,26 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
 
         inject()
         viewModel.movies.observe(this, Observer { onMovies(it) })
+        viewModel.navigation.observe(this, Observer { onNavigation(it) })
+    }
+
+    private fun onNavigation(navigation: MovieListViewModel.Navigation) {
+        when (navigation) {
+            is MovieListViewModel.Navigation.MovieDetails -> {
+                val detailsFragment = MovieDetailsFragment.newInstance(navigation.movieId)
+                with(requireActivity() as MovieActivity) {
+                    supportFragmentManager.beginTransaction()
+                        .replace(fragmentContainer.id, detailsFragment)
+                        .commit()
+                }
+            }
+        }
     }
 
     private fun onMovies(movies: List<MovieItemUiModel>) {
-        binding.recyclerView.adapter = MovieListAdapter(movies)
+        binding.recyclerView.adapter = MovieListAdapter(movies).also {
+            it.onItemClicked(viewModel::onItemClicked)
+        }
     }
 
     private fun setupLayoutManager(): FlexboxLayoutManager {

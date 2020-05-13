@@ -16,12 +16,18 @@ class MovieListViewModel(
     mapper: MovieItemDomainUiMapper,
     useCase: GetPopularMoviesUseCase
 ) : BaseViewModel(useCase) {
-
     private val _movies = MutableLiveData<List<MovieItemUiModel>>()
     val movies: LiveData<List<MovieItemUiModel>> = _movies
 
+    private val _navigation = MutableLiveData<Navigation>()
+    val navigation: LiveData<Navigation> = _navigation
+
     init {
         useCase.execute(PopularMoviesObserver(_movies, mapper))
+    }
+
+    fun onItemClicked(uiModel: MovieItemUiModel) {
+        _navigation.postValue(Navigation.MovieDetails(uiModel.id))
     }
 
     class PopularMoviesObserver(
@@ -48,5 +54,9 @@ class MovieListViewModel(
         override fun create(): MovieListViewModel {
             return MovieListViewModel(mapper, useCase)
         }
+    }
+
+    sealed class Navigation {
+        class MovieDetails(val movieId: String) : Navigation()
     }
 }

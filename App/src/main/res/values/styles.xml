@@ -1,8 +1,30 @@
 <resources>
 
     <style name="TextAppearance.ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">@font/open_sans_semi_bold</item>
+        <item name="android:textSize">@dimen/text_size_h2</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="TextAppearance.ToolbarTitle.CollapsingToolbar.Expanded" parent="@style/TextAppearance.ToolbarTitle">
+        <item name="android:textSize">@dimen/text_size_h1</item>
+    </style>
+
+    <style name="TextAppearance.Body.Normal" parent="@style/TextAppearance.MaterialComponents.Body2">
         <item name="android:fontFamily">@font/open_sans</item>
-        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.Body.Subtitle" parent="@style/TextAppearance.MaterialComponents.Subtitle2">
+        <item name="android:fontFamily">@font/open_sans_semi_bold</item>
+    </style>
+
+    <style name="AppTheme.CollapsingToolbar">
+        <item name="collapsedTitleTextAppearance">@style/TextAppearance.ToolbarTitle</item>
+        <item name="contentScrim">?attr/colorPrimary</item>
+        <item name="expandedTitleMarginStart">@dimen/margin_1x</item>
+        <item name="expandedTitleTextAppearance">
+            @style/TextAppearance.ToolbarTitle.CollapsingToolbar.Expanded
+        </item>
     </style>
 
 </resources>
