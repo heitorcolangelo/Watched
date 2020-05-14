@@ -19,4 +19,3 @@ interface MovieListComponent : FragmentComponent<MovieListFragment> {
         fun fragment(fragment: MovieListFragment): Builder
     }
 }
-

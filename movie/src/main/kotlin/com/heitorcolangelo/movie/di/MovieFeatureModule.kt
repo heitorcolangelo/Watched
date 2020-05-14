@@ -21,8 +21,8 @@ import com.heitorcolangelo.presentation.di.ApplicationModule
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import org.threeten.bp.ZoneId
 import java.util.Locale
+import org.threeten.bp.ZoneId
 
 @Module(
     includes = [

@@ -2,7 +2,6 @@ package com.heitorcolangelo.movie.di
 
 import com.heitorcolangelo.data.local.di.LocalDataModule
 import com.heitorcolangelo.data.remote.di.RemoteDataModule
-import com.heitorcolangelo.movie.ui.MovieActivity
 import com.heitorcolangelo.movie.ui.detail.MovieDetailsFragment
 import com.heitorcolangelo.movie.ui.list.MovieListFragment
 import com.heitorcolangelo.presentation.common.provider.BuildConfigurationProvider
