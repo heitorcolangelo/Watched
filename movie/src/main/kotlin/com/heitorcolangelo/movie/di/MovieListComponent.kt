@@ -9,13 +9,14 @@ import dagger.Component
 
 @Component(modules = [MovieFeatureModule::class])
 @FeatureScope
-interface MovieFeatureComponent : FragmentComponent<MovieListFragment> {
+interface MovieListComponent : FragmentComponent<MovieListFragment> {
 
     @Component.Builder
     interface Builder : FeatureComponent.Builder<Builder> {
-        fun build(): MovieFeatureComponent
+        fun build(): MovieListComponent
 
         @BindsInstance
         fun fragment(fragment: MovieListFragment): Builder
     }
 }
+

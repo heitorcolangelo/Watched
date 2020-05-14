@@ -8,9 +8,7 @@ import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
 import com.heitorcolangelo.movie.mapper.MovieItemDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieItemUiModel
 import com.heitorcolangelo.presentation.common.viewmodel.BaseViewModel
-import com.heitorcolangelo.presentation.common.viewmodel.ViewModelFactory
 import io.reactivex.rxjava3.observers.DisposableObserver
-import javax.inject.Inject
 
 class MovieListViewModel(
     mapper: MovieItemDomainUiMapper,
@@ -44,15 +42,6 @@ class MovieListViewModel(
 
         override fun onError(e: Throwable) {
             e.printStackTrace()
-        }
-    }
-
-    class Factory @Inject constructor(
-        private val mapper: MovieItemDomainUiMapper,
-        private val useCase: GetPopularMoviesUseCase
-    ) : ViewModelFactory<MovieListViewModel> {
-        override fun create(): MovieListViewModel {
-            return MovieListViewModel(mapper, useCase)
         }
     }
 

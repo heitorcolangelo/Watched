@@ -7,7 +7,7 @@ import com.heitorcolangelo.presentation.di.common.FragmentComponent
 import dagger.BindsInstance
 import dagger.Component
 
-@Component(modules = [MovieDetailsModule::class])
+@Component(modules = [MovieFeatureModule::class])
 @FeatureScope
 interface MovieDetailsComponent : FragmentComponent<MovieDetailsFragment> {
 

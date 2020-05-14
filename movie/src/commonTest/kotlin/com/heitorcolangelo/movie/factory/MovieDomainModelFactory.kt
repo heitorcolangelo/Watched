@@ -1,5 +1,6 @@
 package com.heitorcolangelo.movie.factory
 
+import com.heitorcolangelo.domain.common.model.RawDateDomainModel
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.test.common.MockFactory
 
@@ -13,7 +14,7 @@ object MovieDomainModelFactory : MockFactory<MovieDomainModel> {
             posterPath = randomString(),
             voteAverage = randomFloat(),
             popularity = randomFloat(),
-            releaseDate = randomString()
+            releaseDate = RawDateDomainModel(randomString())
         )
     }
 }

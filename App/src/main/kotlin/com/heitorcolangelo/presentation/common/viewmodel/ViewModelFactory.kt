@@ -1,13 +1,19 @@
 package com.heitorcolangelo.presentation.common.viewmodel
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-interface ViewModelFactory<VM : BaseViewModel> : ViewModelProvider.Factory {
-    @Suppress("UNCHECKED_CAST")
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return create() as T
-    }
+object ViewModelFactory {
+    inline fun <reified T : ViewModel> make(
+        fragment: Fragment,
+        crossinline factory: () -> T
+    ): T {
+        @Suppress("UNCHECKED_CAST")
+        val vmFactory = object : ViewModelProvider.Factory {
+            override fun <U : ViewModel> create(modelClass: Class<U>): U = factory() as U
+        }
 
-    fun create(): VM
+        return ViewModelProvider(fragment, vmFactory).get(T::class.java)
+    }
 }
