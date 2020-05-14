@@ -18,13 +18,18 @@
         <item name="android:fontFamily">@font/open_sans_semi_bold</item>
     </style>
 
-    <style name="AppTheme.CollapsingToolbar">
+    <style name="AppTheme.Widget.CollapsingToolbar">
         <item name="collapsedTitleTextAppearance">@style/TextAppearance.ToolbarTitle</item>
         <item name="contentScrim">?attr/colorPrimary</item>
         <item name="expandedTitleMarginStart">@dimen/margin_1x</item>
         <item name="expandedTitleTextAppearance">
             @style/TextAppearance.ToolbarTitle.CollapsingToolbar.Expanded
         </item>
+    </style>
+
+    <style name="AppTheme.Widget.RatingBar.Indicator" parent="@style/Widget.AppCompat.RatingBar.Indicator">
+        <item name="android:progressTint">?attr/colorPrimary</item>
+        <item name="android:secondaryProgressTint">?attr/colorPrimary</item>
     </style>
 
 </resources>

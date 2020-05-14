@@ -7,13 +7,17 @@
     android:paddingStart="@dimen/margin_.5x"
     android:paddingEnd="@dimen/margin_.5x">
 
-    <androidx.appcompat.widget.AppCompatRatingBar
+    <RatingBar
         android:id="@+id/rb_rating"
-        android:layout_width="0dp"
+        style="@style/AppTheme.Widget.RatingBar.Indicator"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_1x"
+        android:layout_marginTop="@dimen/margin_.5x"
+        android:numStars="5"
+        android:rating="4"
         app:layout_constraintBottom_toTopOf="@+id/tv_overview"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -22,7 +26,7 @@
         style="@style/TextAppearance.Body.Subtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_.5x"
+        android:layout_marginTop="@dimen/margin_1x"
         android:text="@string/movie_details_overview"
         app:layout_constraintBottom_toTopOf="@id/tv_overview_content"
         app:layout_constraintEnd_toEndOf="parent"
