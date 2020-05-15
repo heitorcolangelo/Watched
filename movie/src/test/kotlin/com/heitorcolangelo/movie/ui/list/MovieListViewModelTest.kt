@@ -12,7 +12,13 @@ import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
 
-@Ignore("https://github.com/android/app-bundle-samples/issues/11")
+/**
+ * This test runs on AS but not if you use command line, so it's ignored.
+ * Related with:
+ * - https://issuetracker.google.com/issues/139441237
+ * - https://github.com/android/app-bundle-samples/issues/11
+ */
+@Ignore("Read explanation above")
 class MovieListViewModelTest {
 
     private val mapper: MovieItemDomainUiMapper = mockk(relaxed = true)
