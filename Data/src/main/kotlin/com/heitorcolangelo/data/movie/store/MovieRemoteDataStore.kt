@@ -18,4 +18,8 @@ class MovieRemoteDataStore @Inject constructor(
     override fun saveMovies(movies: List<MovieDataModel>): Completable {
         throw UnsupportedOperationException("Save is not supported by remote data source.")
     }
+
+    override fun getMovie(movieId: String): Observable<MovieDataModel> {
+        return remoteData.getMovie(movieId)
+    }
 }

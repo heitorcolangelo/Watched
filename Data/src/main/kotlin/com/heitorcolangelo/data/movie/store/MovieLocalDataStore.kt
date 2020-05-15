@@ -26,4 +26,8 @@ class MovieLocalDataStore @Inject constructor(
     override fun isDataValid(): Observable<Boolean> {
         return localData.isCacheValid(System.currentTimeMillis())
     }
+
+    override fun getMovie(movieId: String): Observable<MovieDataModel> {
+        throw UnsupportedOperationException("Get movie is not supported by local data source.")
+    }
 }

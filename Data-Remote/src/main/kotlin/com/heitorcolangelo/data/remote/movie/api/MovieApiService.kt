@@ -5,6 +5,7 @@ import com.heitorcolangelo.data.remote.common.model.PageResponseModel
 import com.heitorcolangelo.data.remote.movie.model.MovieResponseModel
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
+import retrofit2.http.Path
 
 interface MovieApiService {
     companion object {
@@ -13,4 +14,7 @@ interface MovieApiService {
 
     @GET("popular")
     fun getPopular(): Observable<PageResponseModel<MovieResponseModel>>
+
+    @GET("{movieId}")
+    fun getMovie(@Path("movieId") movieId: String): Observable<MovieResponseModel>
 }

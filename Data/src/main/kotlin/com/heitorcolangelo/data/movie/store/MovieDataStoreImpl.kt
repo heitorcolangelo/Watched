@@ -25,4 +25,8 @@ class MovieDataStoreImpl @Inject constructor(
     override fun saveMovies(movies: List<MovieDataModel>): Completable {
         return localDataStore.saveMovies(movies)
     }
+
+    override fun getMovie(movieId: String): Observable<MovieDataModel> {
+        return remoteDataStore.getMovie(movieId)
+    }
 }

@@ -7,4 +7,5 @@ import io.reactivex.rxjava3.core.Observable
 
 interface MovieRemoteData : RemoteData {
     fun getMovies(): Observable<PageDataModel<MovieDataModel>>
+    fun getMovie(movieId: String): Observable<MovieDataModel>
 }

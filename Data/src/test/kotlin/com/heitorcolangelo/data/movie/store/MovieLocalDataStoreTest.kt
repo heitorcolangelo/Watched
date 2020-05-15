@@ -36,4 +36,9 @@ class MovieLocalDataStoreTest {
 
         verify { localData.isCacheValid(any()) }
     }
+
+    @Test(expected = UnsupportedOperationException::class)
+    fun `WHEN getMovie THEN throws UnsupportedOperationException`() {
+        dataStore.getMovie("")
+    }
 }

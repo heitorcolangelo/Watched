@@ -7,4 +7,5 @@ import io.reactivex.rxjava3.core.Observable
 
 interface MovieRepository {
     fun getMovies(sortOption: MoviesSortOption): Observable<PageDomainModel<MovieDomainModel>>
+    fun getMovie(movieId: String): Observable<MovieDomainModel>
 }
