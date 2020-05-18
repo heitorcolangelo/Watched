@@ -1,9 +1,9 @@
 package com.heitorcolangelo.movie.domain
 
+import com.heitorcolangelo.common.test.TestExecutionThreadProvider
 import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
 import com.heitorcolangelo.domain.movie.model.MoviesSortOption
 import com.heitorcolangelo.domain.movie.repository.MovieRepository
-import com.heitorcolangelo.test.common.presentation.TestExecutionThreadProvider
 import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify

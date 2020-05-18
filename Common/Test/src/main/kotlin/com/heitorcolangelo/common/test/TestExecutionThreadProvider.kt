@@ -1,4 +1,4 @@
-package com.heitorcolangelo.test.common.presentation
+package com.heitorcolangelo.common.test
 
 import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
 import io.reactivex.rxjava3.core.Scheduler

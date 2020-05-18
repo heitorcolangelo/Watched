@@ -1,7 +1,7 @@
 package com.heitorcolangelo.data.remote.factory
 
+import com.heitorcolangelo.common.test.MockFactory
 import com.heitorcolangelo.data.remote.movie.model.MovieResponseModel
-import com.heitorcolangelo.test.common.MockFactory
 
 object MovieResponseModelFactory : MockFactory<MovieResponseModel> {
     override fun make(): MovieResponseModel {

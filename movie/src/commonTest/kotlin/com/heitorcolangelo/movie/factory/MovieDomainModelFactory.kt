@@ -1,8 +1,8 @@
 package com.heitorcolangelo.movie.factory
 
+import com.heitorcolangelo.common.test.MockFactory
 import com.heitorcolangelo.domain.common.model.RawDateDomainModel
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
-import com.heitorcolangelo.test.common.MockFactory
 
 object MovieDomainModelFactory : MockFactory<MovieDomainModel> {
     override fun make(): MovieDomainModel {

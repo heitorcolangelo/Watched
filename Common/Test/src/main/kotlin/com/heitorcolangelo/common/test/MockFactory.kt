@@ -1,4 +1,4 @@
-package com.heitorcolangelo.test.common
+package com.heitorcolangelo.common.test
 
 import java.util.UUID
 
