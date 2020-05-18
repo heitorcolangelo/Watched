@@ -65,7 +65,5 @@ dependencies {
 
     androidTestImplementation project(path: ':App', configuration: 'appAndroidTestDependencies')
     testImplementation project(path: ':App', configuration: 'appTestDependencies')
-    testImplementation project(':App')
-    androidTestImplementation project(':Common:Test')
-    testImplementation project(':Common:Test')
+
 }
