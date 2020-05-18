@@ -27,6 +27,14 @@ class MovieDataStoreImpl @Inject constructor(
     }
 
     override fun getMovie(movieId: String): Observable<MovieDataModel> {
-        return remoteDataStore.getMovie(movieId)
+        return localDataStore.isDataValid().flatMap { isDataValid ->
+            if (isDataValid) {
+                localDataStore.getMovie(movieId)
+            } else {
+                remoteDataStore.getMovie(movieId).flatMap {
+                    saveMovies(listOf(it)).andThen(Observable.just(it))
+                }
+            }
+        }
     }
 }

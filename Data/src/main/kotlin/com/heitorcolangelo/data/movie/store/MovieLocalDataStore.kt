@@ -28,6 +28,6 @@ class MovieLocalDataStore @Inject constructor(
     }
 
     override fun getMovie(movieId: String): Observable<MovieDataModel> {
-        throw UnsupportedOperationException("Get movie is not supported by local data source.")
+        return localData.getMovie(movieId)
     }
 }

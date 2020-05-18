@@ -32,6 +32,11 @@ class MovieLocalDataImpl @Inject constructor(
         return movies.toObservable().map { it.map(mapper::mapToDataModel) }
     }
 
+    override fun getMovie(movieId: String): Observable<MovieDataModel> {
+        val movies = RxJavaBridge.toV3Flowable(movieDao.getMovie(movieId))
+        return movies.toObservable().map(mapper::mapToDataModel)
+    }
+
     override fun clear(): Completable {
         return super.clear().andThen(
             RxJavaBridge.toV3Completable(movieDao.clearMovies())

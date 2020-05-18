@@ -12,4 +12,6 @@ interface MovieLocalData : LocalData {
     fun saveMovies(movies: List<MovieDataModel>): Completable
 
     fun getMovies(): Observable<List<MovieDataModel>>
+
+    fun getMovie(movieId: String): Observable<MovieDataModel>
 }

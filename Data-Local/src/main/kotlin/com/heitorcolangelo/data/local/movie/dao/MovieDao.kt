@@ -14,6 +14,9 @@ interface MovieDao {
     @Query("SELECT * FROM ${MovieEntity.TABLE_NAME}")
     fun getMovies(): Flowable<List<MovieEntity>>
 
+    @Query("SELECT * FROM ${MovieEntity.TABLE_NAME} WHERE id = :movieId")
+    fun getMovie(movieId: String): Flowable<MovieEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveMovies(movieList: List<MovieEntity>): Completable
 

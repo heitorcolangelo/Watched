@@ -13,5 +13,4 @@ object MovieDetailsUiModelFactory : MockFactory<MovieDetailsUiModel> {
             randomId(), randomString(), randomString(), dateUiModel, randomFloat(), imageUiModel
         )
     }
-
 }

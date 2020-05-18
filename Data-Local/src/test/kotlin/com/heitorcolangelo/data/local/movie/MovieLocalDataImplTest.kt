@@ -81,4 +81,24 @@ class MovieLocalDataImplTest {
 
         verify { movieDao.clearMovies() }
     }
+
+    @Test
+    fun `WHEN get movie THEN map to data model`() {
+        val movie = MovieEntityFactory.make()
+        val movieId = movie.id
+        every { movieDao.getMovie(movieId) } returns Flowable.just(movie)
+
+        localData.getMovie(movieId).test()
+
+        verify { mapper.mapToDataModel(movie) }
+    }
+
+    @Test
+    fun `WHEN get movie THEN get from dao`() {
+        val movieId = "movieId"
+
+        localData.getMovie(movieId).test()
+
+        verify { movieDao.getMovie(movieId) }
+    }
 }

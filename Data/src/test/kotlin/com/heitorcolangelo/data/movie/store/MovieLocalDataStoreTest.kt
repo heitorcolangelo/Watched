@@ -37,8 +37,12 @@ class MovieLocalDataStoreTest {
         verify { localData.isCacheValid(any()) }
     }
 
-    @Test(expected = UnsupportedOperationException::class)
-    fun `WHEN getMovie THEN throws UnsupportedOperationException`() {
-        dataStore.getMovie("")
+    @Test
+    fun `WHEN getMovie THEN get local movie`() {
+        val movieId = "movieId"
+
+        dataStore.getMovie(movieId).test()
+
+        verify { localData.getMovie(movieId) }
     }
 }
