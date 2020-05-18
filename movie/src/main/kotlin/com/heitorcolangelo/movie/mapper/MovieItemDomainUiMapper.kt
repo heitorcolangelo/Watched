@@ -4,7 +4,7 @@ import com.heitorcolangelo.data.remote.common.BuildConfiguration
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.model.MovieItemUiModel
 import com.heitorcolangelo.presentation.common.model.DomainUiMapper
-import com.heitorcolangelo.presentation.common.model.MediaImageUiModel
+import com.heitorcolangelo.presentation.common.model.MovieImageUiModel
 import javax.inject.Inject
 
 class MovieItemDomainUiMapper @Inject constructor(
@@ -15,7 +15,7 @@ class MovieItemDomainUiMapper @Inject constructor(
             MovieItemUiModel(
                 id = id,
                 title = title,
-                poster = MediaImageUiModel.Small(buildConfig.imageBaseUrl(), posterPath)
+                poster = MovieImageUiModel.Small(buildConfig.imageBaseUrl(), posterPath)
             )
         }
     }

@@ -5,7 +5,8 @@ import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.model.MovieDetailsUiModel
 import com.heitorcolangelo.presentation.common.mapper.MonthAndYearDateDomainUiMapper
 import com.heitorcolangelo.presentation.common.model.DomainUiMapper
-import com.heitorcolangelo.presentation.common.model.MediaImageUiModel
+import com.heitorcolangelo.presentation.common.model.MovieImageUiModel
+import com.heitorcolangelo.presentation.common.model.MovieImageUrl
 import javax.inject.Inject
 
 class MovieDetailsDomainUiMapper @Inject constructor(
@@ -20,7 +21,7 @@ class MovieDetailsDomainUiMapper @Inject constructor(
                 overview = overview,
                 releaseDate = dateMapper.mapToUiModel(releaseDate),
                 voteAverage = voteAverage,
-                backdropPath = MediaImageUiModel.Medium(buildConfig.imageBaseUrl(), backdropPath)
+                backdropPath = MovieImageUiModel.Medium(buildConfig.imageBaseUrl(), backdropPath)
             )
         }
     }

@@ -1,6 +1,6 @@
 package com.heitorcolangelo.presentation.common.model
 
-sealed class MediaImageUiModel(
+sealed class MovieImageUiModel(
     private val baseUrl: String,
     private val imagePath: String,
     private val size: SizePath
@@ -16,11 +16,11 @@ sealed class MediaImageUiModel(
     }
 
     class Small(baseUrl: String, imagePath: String) :
-        MediaImageUiModel(baseUrl, imagePath, SizePath.SMALL)
+        MovieImageUiModel(baseUrl, imagePath, SizePath.SMALL)
 
     class Medium(baseUrl: String, imagePath: String) :
-        MediaImageUiModel(baseUrl, imagePath, SizePath.MEDIUM)
+        MovieImageUiModel(baseUrl, imagePath, SizePath.MEDIUM)
 
     class Large(baseUrl: String, imagePath: String) :
-        MediaImageUiModel(baseUrl, imagePath, SizePath.LARGE)
+        MovieImageUiModel(baseUrl, imagePath, SizePath.LARGE)
 }
