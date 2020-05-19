@@ -1,7 +1,6 @@
 package com.heitorcolangelo.movie.model
 
 import com.heitorcolangelo.presentation.common.model.FormattedDateUiModel
-import com.heitorcolangelo.presentation.common.model.MovieImageUiModel
 import com.heitorcolangelo.presentation.common.model.UiModel
 
 data class MovieDetailsUiModel(
@@ -10,5 +9,5 @@ data class MovieDetailsUiModel(
     val overview: String,
     val releaseDate: FormattedDateUiModel,
     val voteAverage: Float,
-    val backdropPath: MovieImageUiModel
+    val backdropPath: String
 ) : UiModel(movieId)

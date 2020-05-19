@@ -40,7 +40,7 @@ class MovieItemViewHolder(
     override fun bind(model: MovieItemUiModel) {
         binding.tvMovieTitle.text = model.title
         Glide.with(containerView)
-            .load(model.poster.getFullUrl())
+            .load(model.posterPath)
             .into(binding.ivMoviePoster)
     }
 }

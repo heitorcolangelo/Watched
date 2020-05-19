@@ -8,9 +8,10 @@ import com.heitorcolangelo.presentation.common.model.MovieImageUiModel
 object MovieDetailsUiModelFactory : MockFactory<MovieDetailsUiModel> {
     override fun make(): MovieDetailsUiModel {
         val dateUiModel = FormattedDateUiModel(randomString())
-        val imageUiModel = MovieImageUiModel.Medium(randomString(), randomString())
+        val imageUrl = MovieImageUiModel(randomString(), randomString())
+            .getUrl(MovieImageUiModel.Size.MEDIUM)
         return MovieDetailsUiModel(
-            randomId(), randomString(), randomString(), dateUiModel, randomFloat(), imageUiModel
+            randomId(), randomString(), randomString(), dateUiModel, randomFloat(), imageUrl
         )
     }
 }

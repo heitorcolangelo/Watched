@@ -4,13 +4,18 @@ import com.heitorcolangelo.data.common.mapper.DataDomainMapper
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.domain.common.model.RawDateDomainModel
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
+import com.heitorcolangelo.domain.movie.model.MovieImageDomainModel
 import javax.inject.Inject
 
-class MovieDataDomainMapper @Inject constructor() : DataDomainMapper<MovieDataModel, MovieDomainModel> {
+class MovieDataDomainMapper @Inject constructor() :
+    DataDomainMapper<MovieDataModel, MovieDomainModel> {
     override fun mapToDomainModel(dataModel: MovieDataModel): MovieDomainModel {
         return with(dataModel) {
+            val backdrop = MovieImageDomainModel(backdropPath)
+            val poster = MovieImageDomainModel(posterPath)
+            val releaseDate = RawDateDomainModel(releaseDate)
             MovieDomainModel(
-                id, title, overview, backdropPath, posterPath, voteAverage, popularity, RawDateDomainModel(releaseDate)
+                id, title, overview, backdrop, poster, voteAverage, popularity, releaseDate
             )
         }
     }
@@ -18,7 +23,14 @@ class MovieDataDomainMapper @Inject constructor() : DataDomainMapper<MovieDataMo
     override fun mapToDataModel(domainModel: MovieDomainModel): MovieDataModel {
         return with(domainModel) {
             MovieDataModel(
-                id, title, overview, backdropPath, posterPath, voteAverage, popularity, releaseDate.rawDate
+                id,
+                title,
+                overview,
+                backdrop.path,
+                poster.path,
+                voteAverage,
+                popularity,
+                releaseDate.rawDate
             )
         }
     }

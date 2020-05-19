@@ -64,7 +64,7 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
         collapsingToolbar.title = model.title
 
         Glide.with(this@MovieDetailsFragment)
-            .load(model.backdropPath.getFullUrl())
+            .load(model.backdropPath)
             .into(ivMovieBackdrop)
 
         with(movieDetailsContent) {

@@ -7,8 +7,8 @@ data class MovieDomainModel(
     private val movieId: String,
     val title: String,
     val overview: String,
-    val backdropPath: String,
-    val posterPath: String,
+    val backdrop: MovieImageDomainModel,
+    val poster: MovieImageDomainModel,
     val voteAverage: Float,
     val popularity: Float,
     val releaseDate: RawDateDomainModel

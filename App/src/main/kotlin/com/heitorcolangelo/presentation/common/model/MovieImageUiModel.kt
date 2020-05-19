@@ -1,26 +1,14 @@
 package com.heitorcolangelo.presentation.common.model
 
-sealed class MovieImageUiModel(
+class MovieImageUiModel(
     private val baseUrl: String,
-    private val imagePath: String,
-    private val size: SizePath
+    private val imagePath: String
 ) : UiModel() {
-    enum class SizePath(val value: String) {
+    enum class Size(val value: String) {
         SMALL("w154"),
         MEDIUM("w342"),
         LARGE("w500")
     }
 
-    fun getFullUrl(): String {
-        return baseUrl + size.value + imagePath
-    }
-
-    class Small(baseUrl: String, imagePath: String) :
-        MovieImageUiModel(baseUrl, imagePath, SizePath.SMALL)
-
-    class Medium(baseUrl: String, imagePath: String) :
-        MovieImageUiModel(baseUrl, imagePath, SizePath.MEDIUM)
-
-    class Large(baseUrl: String, imagePath: String) :
-        MovieImageUiModel(baseUrl, imagePath, SizePath.LARGE)
+    fun getUrl(size: Size) = baseUrl + size.value + imagePath
 }
