@@ -6,7 +6,6 @@ import com.heitorcolangelo.movie.model.MovieDetailsUiModel
 import com.heitorcolangelo.presentation.common.mapper.MonthAndYearDateDomainUiMapper
 import com.heitorcolangelo.presentation.common.model.DomainUiMapper
 import com.heitorcolangelo.presentation.common.model.MovieImageUiModel
-import com.heitorcolangelo.presentation.common.model.MovieImageUrl
 import javax.inject.Inject
 
 class MovieDetailsDomainUiMapper @Inject constructor(
