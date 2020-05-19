@@ -16,10 +16,6 @@
         android:name="com.heitorcolangelo.presentation.MoviesApplication"
         android:allowBackup="true"
         tools:ignore="AllowBackup,MissingApplicationIcon">
-
-        <activity
-            android:name="com.heitorcolangelo.movie.ui.MovieActivity"
-            android:exported="false" />
     </application>
 </manifest>
 

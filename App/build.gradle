@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 apply from: "$rootDir/tools/ktlint.gradle"
 
@@ -122,9 +123,9 @@ dependencies {
     api "com.google.android.material:material:$versions.material"
 
     // Navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:$ax_versions.arch_navigation"
-    implementation "androidx.navigation:navigation-ui-ktx:$ax_versions.arch_navigation"
-    implementation "androidx.navigation:navigation-dynamic-features-fragment:$ax_versions.arch_navigation"
+    api "androidx.navigation:navigation-fragment-ktx:$ax_versions.arch_navigation"
+    api "androidx.navigation:navigation-ui-ktx:$ax_versions.arch_navigation"
+    api "androidx.navigation:navigation-dynamic-features-fragment:$ax_versions.arch_navigation"
 
     // RxJava
     api "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"

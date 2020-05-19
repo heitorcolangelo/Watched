@@ -8,9 +8,7 @@ import com.heitorcolangelo.movie.model.MovieItemUiModel
 import com.heitorcolangelo.presentation.common.view.BaseAdapter
 import com.heitorcolangelo.presentation.common.view.BaseViewHolder
 
-class MovieListAdapter(
-    private val items: List<MovieItemUiModel>
-) : BaseAdapter<MovieItemUiModel, MovieItemViewHolder>() {
+class MovieListAdapter : BaseAdapter<MovieItemUiModel, MovieItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val itemBinding = ListItemMovieBinding.inflate(layoutInflater, parent, false)

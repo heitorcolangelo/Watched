@@ -3,6 +3,7 @@ apply plugin: 'com.android.dynamic-feature'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 apply from: "$rootDir/tools/ktlint.gradle"
 
@@ -62,6 +63,9 @@ dependencies {
 
     // Glide
     kapt "com.github.bumptech.glide:compiler:$versions.glide"
+
+    // SwipeRefreshLayout
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:$ax_versions.ui_swiperefreshlayout"
 
     androidTestImplementation project(path: ':App', configuration: 'appAndroidTestDependencies')
     testImplementation project(path: ':App', configuration: 'appTestDependencies')

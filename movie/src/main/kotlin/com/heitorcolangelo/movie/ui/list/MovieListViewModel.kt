@@ -11,8 +11,8 @@ import com.heitorcolangelo.presentation.common.viewmodel.BaseViewModel
 import io.reactivex.rxjava3.observers.DisposableObserver
 
 class MovieListViewModel(
-    mapper: MovieItemDomainUiMapper,
-    useCase: GetPopularMoviesUseCase
+    private val mapper: MovieItemDomainUiMapper,
+    private val useCase: GetPopularMoviesUseCase
 ) : BaseViewModel(useCase) {
     private val _movies = MutableLiveData<List<MovieItemUiModel>>()
     val movies: LiveData<List<MovieItemUiModel>> = _movies
@@ -26,6 +26,10 @@ class MovieListViewModel(
 
     fun onItemClicked(uiModel: MovieItemUiModel) {
         _navigation.postValue(Navigation.MovieDetails(uiModel.id))
+    }
+
+    fun onRefresh() {
+        useCase.execute(PopularMoviesObserver(_movies, mapper))
     }
 
     class PopularMoviesObserver(

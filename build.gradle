@@ -15,7 +15,6 @@ buildscript {
             'foundation_ktx_core'      : '1.2.0',
             'foundation_ktx_fragment'  : '1.2.4',
             'foundation_ktx_lifecycle' : '2.2.0',
-            'foundation_ktx_navigation': '2.3.0-alpha04',
             'foundation_ktx_viewmodel' : '2.2.0',
             'foundation_test_core'     : '1.2.0',
             'foundation_test_espresso' : '3.2.0',
@@ -24,6 +23,7 @@ buildscript {
             'foundation_test_rules'    : '1.2.0',
             'ui_constraintlayout'      : '1.1.3',
             'ui_recyclerview'          : '1.1.0',
+            'ui_swiperefreshlayout'    : '1.0.0'
     ]
     ext.versions = [
             'dagger'      : '2.27',
@@ -47,6 +47,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$versions.gradle"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$versions.kotlin"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$ax_versions.arch_navigation"
     }
 }
 

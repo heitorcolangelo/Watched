@@ -17,6 +17,9 @@ class MovieDetailsViewModel(
     private val _movie = MutableLiveData<MovieDetailsUiModel>()
     val movie: LiveData<MovieDetailsUiModel> = _movie
 
+    private val _navigation = MutableLiveData<Navigation>()
+    val navigation: LiveData<Navigation> = _navigation
+
     private lateinit var movieId: String
 
     fun setMovieId(id: String?) {
@@ -25,6 +28,10 @@ class MovieDetailsViewModel(
 
     fun onViewReady() {
         useCase.execute(GetMovieUseCase.Arg(movieId), GetMovieObserver(_movie, mapper))
+    }
+
+    fun onBackPressed() {
+        _navigation.postValue(Navigation.Back)
     }
 
     class GetMovieObserver(
@@ -42,5 +49,9 @@ class MovieDetailsViewModel(
         override fun onError(e: Throwable) {
             e.printStackTrace()
         }
+    }
+
+    sealed class Navigation {
+        object Back : Navigation()
     }
 }

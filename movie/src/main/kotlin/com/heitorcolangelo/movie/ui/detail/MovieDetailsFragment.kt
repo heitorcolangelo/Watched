@@ -3,61 +3,47 @@ package com.heitorcolangelo.movie.ui.detail
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.heitorcolangelo.movie.R
 import com.heitorcolangelo.movie.databinding.FragmentMovieDetailsBinding
 import com.heitorcolangelo.movie.di.inject
 import com.heitorcolangelo.movie.model.MovieDetailsUiModel
-import com.heitorcolangelo.movie.ui.MovieActivity
 import com.heitorcolangelo.presentation.common.view.binding.viewBinding
 import javax.inject.Inject
 
 class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
-    companion object {
-        private const val MOVIE_ID_KEY = "MOVIE_ID_KEY"
-
-        fun newInstance(movieId: String): MovieDetailsFragment {
-            val bundle = Bundle()
-            bundle.putString(MOVIE_ID_KEY, movieId)
-            val fragment = MovieDetailsFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
-
-        private fun getMovieId(arguments: Bundle?) = arguments?.getString(MOVIE_ID_KEY)
-    }
 
     @Inject
     lateinit var viewModel: MovieDetailsViewModel
     private val binding: FragmentMovieDetailsBinding by viewBinding()
+    private val args: MovieDetailsFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with((requireActivity() as MovieActivity)) {
-            toolbar.isVisible = false
-            window.statusBarColor = ResourcesCompat.getColor(
-                resources,
-                android.R.color.transparent,
-                theme
-            )
-        }
-        binding.toolbar.setNavigationOnClickListener {
-            requireActivity().onBackPressed()
-        }
+        setupToolbar()
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
         inject()
-        val movieId = getMovieId(arguments)
-        viewModel.setMovieId(movieId)
-        viewModel.onViewReady()
-        viewModel.movie.observe(this, Observer { onMovie(it) })
+
+        with(viewModel) {
+            setMovieId(args.movieId)
+            movie.observe(this@MovieDetailsFragment, Observer { onMovie(it) })
+            navigation.observe(this@MovieDetailsFragment, Observer { onNavigation(it) })
+
+            onViewReady()
+        }
+    }
+
+    private fun onNavigation(navigation: MovieDetailsViewModel.Navigation) {
+        when (navigation) {
+            MovieDetailsViewModel.Navigation.Back -> requireActivity().onBackPressed()
+        }
     }
 
     private fun onMovie(model: MovieDetailsUiModel) = with(binding) {
@@ -73,6 +59,12 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
                 R.string.movie_details_release_date,
                 model.releaseDate.formattedDate
             )
+        }
+    }
+
+    private fun setupToolbar() {
+        binding.toolbar.setNavigationOnClickListener {
+            viewModel.onBackPressed()
         }
     }
 }
