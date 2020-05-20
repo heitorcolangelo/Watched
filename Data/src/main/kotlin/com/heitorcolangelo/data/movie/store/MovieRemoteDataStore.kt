@@ -12,7 +12,7 @@ class MovieRemoteDataStore @Inject constructor(
     private val remoteData: MovieRemoteData
 ) : MovieDataStore, RemoteDataStore {
     override fun getMovies(): Observable<PageDataModel<MovieDataModel>> {
-        return remoteData.getMovies()
+        return remoteData.getMovies(1)
     }
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {

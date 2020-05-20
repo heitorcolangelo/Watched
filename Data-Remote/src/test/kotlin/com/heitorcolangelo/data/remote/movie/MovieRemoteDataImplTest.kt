@@ -20,9 +20,18 @@ class MovieRemoteDataImplTest {
 
     @Test
     fun `WHEN get movies THEN get Popular movies`() {
-        remoteData.getMovies().test()
+        remoteData.getMovies(1).test()
 
         verify { api.getPopular() }
+    }
+
+    @Test
+    fun `WHEN get movies page THEN get Popular movies page`() {
+        val page = 2
+
+        remoteData.getMovies(page).test()
+
+        verify { api.getPopular(page) }
     }
 
     @Test
@@ -30,7 +39,7 @@ class MovieRemoteDataImplTest {
         val moviePageResponse = mockk<PageResponseModel<MovieResponseModel>>(relaxed = true)
         every { api.getPopular() } returns Observable.just(moviePageResponse)
 
-        remoteData.getMovies().test()
+        remoteData.getMovies(1).test()
 
         verify { pageMapper.mapToPageDataModel(moviePageResponse) }
     }
