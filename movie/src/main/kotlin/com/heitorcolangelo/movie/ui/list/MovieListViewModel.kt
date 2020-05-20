@@ -8,6 +8,7 @@ import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
 import com.heitorcolangelo.movie.mapper.MovieItemDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieItemUiModel
 import com.heitorcolangelo.presentation.common.viewmodel.BaseViewModel
+import com.heitorcolangelo.presentation.common.viewmodel.SingleLiveEvent
 import io.reactivex.rxjava3.observers.DisposableObserver
 
 class MovieListViewModel(
@@ -17,7 +18,7 @@ class MovieListViewModel(
     private val _movies = MutableLiveData<List<MovieItemUiModel>>()
     val movies: LiveData<List<MovieItemUiModel>> = _movies
 
-    private val _navigation = MutableLiveData<Navigation>()
+    private val _navigation = SingleLiveEvent<Navigation>()
     val navigation: LiveData<Navigation> = _navigation
 
     init {
