@@ -14,6 +14,6 @@ class GetPopularMoviesUseCase @Inject constructor(
     threadProvider: ExecutionThreadProvider
 ) : NoArgsObservableUseCase<PageDomainModel<MovieDomainModel>>(threadProvider) {
     override fun build(): Observable<PageDomainModel<MovieDomainModel>> {
-        return repository.getMovies(MoviesSortOption.Popularity)
+        return repository.getMovies(1, MoviesSortOption.Popularity)
     }
 }

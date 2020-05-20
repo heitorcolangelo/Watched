@@ -10,12 +10,12 @@ class MovieDataStoreImpl @Inject constructor(
     private val localDataStore: MovieLocalDataStore,
     private val remoteDataStore: MovieRemoteDataStore
 ) : MovieDataStore {
-    override fun getMovies(): Observable<PageDataModel<MovieDataModel>> {
+    override fun getMovies(page: Int): Observable<PageDataModel<MovieDataModel>> {
         return localDataStore.isDataValid().flatMap { isDataValid ->
             if (isDataValid) {
-                localDataStore.getMovies()
+                localDataStore.getMovies(page)
             } else {
-                remoteDataStore.getMovies().flatMap {
+                remoteDataStore.getMovies(page).flatMap {
                     saveMovies(it.items).andThen(Observable.just(it))
                 }
             }

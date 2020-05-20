@@ -22,7 +22,7 @@ class GetPopularMoviesUseCaseTest {
 
         useCase.build()
 
-        verify { repository.getMovies(capture(slot)) }
+        verify { repository.getMovies(1, capture(slot)) }
         assertTrue(slot.isCaptured)
         assertEquals(MoviesSortOption.Popularity, slot.captured)
     }
