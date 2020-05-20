@@ -27,8 +27,9 @@ class MovieLocalDataImpl @Inject constructor(
         return RxJavaBridge.toV3Completable(movieDao.saveMovies(movieEntities))
     }
 
-    override fun getMovies(): Observable<List<MovieDataModel>> {
-        val movies = RxJavaBridge.toV3Flowable(movieDao.getMovies())
+    override fun getMovies(page: Int, pageSize: Int): Observable<List<MovieDataModel>> {
+        val offset = getOffset(page, pageSize)
+        val movies = RxJavaBridge.toV3Flowable(movieDao.getPagedMovies(pageSize, offset))
         return movies.toObservable().map { it.map(mapper::mapToDataModel) }
     }
 

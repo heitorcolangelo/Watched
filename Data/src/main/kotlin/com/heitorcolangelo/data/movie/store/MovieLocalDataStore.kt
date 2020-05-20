@@ -13,8 +13,8 @@ class MovieLocalDataStore @Inject constructor(
 ) : MovieDataStore, LocalDataStore {
 
     override fun getMovies(page: Int): Observable<PageDataModel<MovieDataModel>> {
-        return localData.getMovies().map {
-            PageDataModel(items = it)
+        return localData.getMovies(page, MovieDataStore.PAGE_SIZE).map {
+            PageDataModel(page = page, items = it)
         }
     }
 

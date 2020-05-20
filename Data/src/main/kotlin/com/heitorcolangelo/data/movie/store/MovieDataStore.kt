@@ -9,6 +9,9 @@ import io.reactivex.rxjava3.core.Observable
 interface MovieDataStore : DataStore {
     fun getMovies(page: Int): Observable<PageDataModel<MovieDataModel>>
     fun saveMovies(movies: List<MovieDataModel>): Completable
-
     fun getMovie(movieId: String): Observable<MovieDataModel>
+
+    companion object {
+        internal const val PAGE_SIZE = 20
+    }
 }

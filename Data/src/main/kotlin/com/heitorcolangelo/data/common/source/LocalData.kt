@@ -33,4 +33,8 @@ interface LocalData {
             it.first && !it.second
         }
     }
+
+    fun getOffset(page: Int, pageSize: Int): Int {
+        return (page * pageSize)
+    }
 }
