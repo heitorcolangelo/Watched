@@ -15,7 +15,8 @@ class MovieRemoteDataImpl @Inject constructor(
     private val api: MovieApiService
 ) : MovieRemoteData {
     override fun getMovies(page: Int): Observable<PageDataModel<MovieDataModel>> {
-        return api.getPopular(page).map(pageMapper::mapToPageDataModel)
+        val nextPage = getNextPage(page)
+        return api.getPopular(nextPage).map(pageMapper::mapToPageDataModel)
     }
 
     override fun getMovie(movieId: String): Observable<MovieDataModel> {

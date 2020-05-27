@@ -31,7 +31,8 @@ class MovieRemoteDataImplTest {
 
         remoteData.getMovies(page).test()
 
-        verify { api.getPopular(page) }
+        val requestedPage = remoteData.getNextPage(page)
+        verify { api.getPopular(requestedPage) }
     }
 
     @Test

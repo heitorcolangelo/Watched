@@ -16,10 +16,22 @@ abstract class PageResponseDataMapperImpl<Response : ResponseModel, Data : DataM
         return with(pageResponse) {
             PageDataModel(
                 items = this.results.map(itemMapper::mapToDataModel),
-                page = this.page,
+                page = toDataModelPage(this.page),
+                pageSize = this.totalResults / this.totalPages,
                 totalItems = this.totalResults,
                 totalPages = this.totalPages
             )
         }
+    }
+
+    /**
+     * External API have first page with index 1, in app the first page index is 0.
+     */
+    private fun toDataModelPage(responseModelPage: Int): Int {
+        return responseModelPage - PAGE_DECREMENT
+    }
+
+    companion object {
+        const val PAGE_DECREMENT = 1
     }
 }
