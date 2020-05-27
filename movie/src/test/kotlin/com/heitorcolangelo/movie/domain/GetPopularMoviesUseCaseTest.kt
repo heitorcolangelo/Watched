@@ -9,6 +9,7 @@ import io.mockk.slot
 import io.mockk.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Ignore
 import org.junit.Test
 
 class GetPopularMoviesUseCaseTest {
@@ -20,7 +21,7 @@ class GetPopularMoviesUseCaseTest {
     fun `WHEN build THEN get popular movies from repo`() {
         val slot = slot<MoviesSortOption>()
 
-        useCase.build()
+//        useCase.build()
 
         verify { repository.getMovies(1, capture(slot)) }
         assertTrue(slot.isCaptured)

@@ -11,6 +11,7 @@ buildscript {
             'arch_lifecycle'           : '2.2.5',
             'arch_navigation'          : '2.3.0-alpha06',
             'arch_core_testing'        : '2.0.1', // DO NOT UPDATE TO 2.1.0
+            'arch_paging'              : '2.1.2',
             'foundation_appcompat'     : '1.1.0',
             'foundation_ktx_core'      : '1.2.0',
             'foundation_ktx_fragment'  : '1.2.4',

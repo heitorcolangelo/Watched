@@ -2,8 +2,10 @@ package com.heitorcolangelo.data.movie.store
 
 import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.movie.model.MovieDataModel
+import com.heitorcolangelo.domain.common.model.PageDomainModel
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.functions.BiFunction
 import javax.inject.Inject
 
 class MovieDataStoreImpl @Inject constructor(
@@ -11,15 +13,27 @@ class MovieDataStoreImpl @Inject constructor(
     private val remoteDataStore: MovieRemoteDataStore
 ) : MovieDataStore {
     override fun getMovies(page: Int): Observable<PageDataModel<MovieDataModel>> {
-        return localDataStore.isDataValid().flatMap { isDataValid ->
-            if (isDataValid) {
-                localDataStore.getMovies(page)
-            } else {
-                remoteDataStore.getMovies(page).flatMap {
-                    saveMovies(it.items).andThen(Observable.just(it))
+        return Observable.zip(
+            localDataStore.isDataValid(),
+            localDataStore.getMovies(page),
+            BiFunction { isDataValid: Boolean, localPage: PageDataModel<MovieDataModel> ->
+                val isPageLocallyAvailable = localPage.items.isNotEmpty()
+                when {
+                    isDataValid && isPageLocallyAvailable -> {
+                        localDataStore.getMovies(page)
+                    }
+                    isDataValid && !isPageLocallyAvailable -> {
+                        getMoviesRemote(page)
+                    }
+                    isDataValid.not() -> {
+                        getMoviesRemote(PageDomainModel.FIRST_PAGE)
+                    }
+                    else -> {
+                        getMoviesRemote(PageDomainModel.FIRST_PAGE)
+                    }
                 }
             }
-        }
+        ).flatMap { it }
     }
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {
@@ -37,4 +51,11 @@ class MovieDataStoreImpl @Inject constructor(
             }
         }
     }
+
+    private fun getMoviesRemote(page: Int): Observable<PageDataModel<MovieDataModel>> {
+        return remoteDataStore.getMovies(page).flatMap {
+            saveMovies(it.items).andThen(Observable.just(it))
+        }
+    }
+
 }
