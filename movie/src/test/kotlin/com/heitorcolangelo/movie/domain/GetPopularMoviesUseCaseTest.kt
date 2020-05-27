@@ -9,7 +9,6 @@ import io.mockk.slot
 import io.mockk.verify
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
-import org.junit.Ignore
 import org.junit.Test
 
 class GetPopularMoviesUseCaseTest {

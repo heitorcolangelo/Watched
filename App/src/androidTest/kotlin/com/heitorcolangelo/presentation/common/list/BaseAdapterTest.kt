@@ -33,5 +33,4 @@ class BaseAdapterTest {
             return itemClickListener != null
         }
     }
-
 }

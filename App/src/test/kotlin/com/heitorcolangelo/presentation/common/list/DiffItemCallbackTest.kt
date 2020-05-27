@@ -4,7 +4,8 @@ import com.heitorcolangelo.presentation.factory.TestItemUiModel
 import com.heitorcolangelo.presentation.factory.TestItemUiModelFactory
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.Assert.*
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class DiffItemCallbackTest {
@@ -26,7 +27,7 @@ class DiffItemCallbackTest {
 
     @Test
     fun `WHEN areContentsTheSame THEN call ItemUiModel method`() {
-        val oldItem : TestItemUiModel = mockk(relaxed = true)
+        val oldItem: TestItemUiModel = mockk(relaxed = true)
         val newItem = TestItemUiModelFactory.make()
         diffCallback.areContentsTheSame(oldItem, newItem)
 

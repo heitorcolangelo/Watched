@@ -13,7 +13,7 @@ import org.junit.Test
 class PagedAdapterTest {
 
     private val listener: PagedAdapter.PaginationListener = mockk(relaxed = true)
-    private val adapter= TestPagedAdapter(listener)
+    private val adapter = TestPagedAdapter(listener)
 
     @Test
     fun when_isLastItem_and_isNotLoadingPage_then_getItemViewType_requestNewPage() {

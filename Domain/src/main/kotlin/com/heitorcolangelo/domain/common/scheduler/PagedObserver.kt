@@ -4,7 +4,7 @@ import com.heitorcolangelo.domain.common.model.DomainModel
 import com.heitorcolangelo.domain.common.model.PageDomainModel
 import io.reactivex.rxjava3.observers.DisposableObserver
 
-abstract class PagedObserver<Model: DomainModel> :
+abstract class PagedObserver<Model : DomainModel> :
     DisposableObserver<PageDomainModel<Model>>() {
 
     override fun onComplete() {

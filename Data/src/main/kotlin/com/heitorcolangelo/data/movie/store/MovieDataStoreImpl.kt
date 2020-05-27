@@ -57,5 +57,4 @@ class MovieDataStoreImpl @Inject constructor(
             saveMovies(it.items).andThen(Observable.just(it))
         }
     }
-
 }
