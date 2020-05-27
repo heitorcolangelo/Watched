@@ -58,8 +58,14 @@ android {
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
-        test.java.srcDirs += 'src/test/kotlin'
-        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+        test {
+            java.srcDirs += 'src/test/kotlin'
+            java.srcDirs += 'src/commonTest/kotlin'
+        }
+        androidTest {
+            java.srcDirs += 'src/androidTest/kotlin'
+            java.srcDirs += 'src/commonTest/kotlin'
+        }
     }
 
     testOptions {
@@ -127,6 +133,10 @@ dependencies {
     api "androidx.navigation:navigation-ui-ktx:$ax_versions.arch_navigation"
     api "androidx.navigation:navigation-dynamic-features-fragment:$ax_versions.arch_navigation"
 
+    // Paging
+    api "androidx.paging:paging-runtime:$ax_versions.arch_paging"
+    api "androidx.paging:paging-rxjava2-ktx:$ax_versions.arch_paging"
+
     // RxJava
     api "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"
     api "io.reactivex.rxjava3:rxandroid:$versions.rxjava"
@@ -141,7 +151,12 @@ dependencies {
     api "com.jakewharton.timber:timber:$versions.timber"
 
     androidTestImplementation project(":Common:Test")
+    androidTestImplementation "io.mockk:mockk-android:$versions.mockk"
     androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
+    androidTestImplementation "androidx.arch.core:core-testing:$ax_versions.arch_core_testing"
+    //Suppressing this warning because 2.1.0 conflicts with room-rxjava2 versions.
+    //noinspection GradleDependency
+    androidTestImplementation "androidx.arch.core:core-runtime:$ax_versions.arch_core_testing"
     androidTestImplementation "androidx.test:runner:$ax_versions.foundation_test_runner"
     androidTestImplementation "androidx.test:rules:$ax_versions.foundation_test_rules"
     androidTestImplementation "androidx.test.ext:junit:$ax_versions.foundation_test_ext_junit"
