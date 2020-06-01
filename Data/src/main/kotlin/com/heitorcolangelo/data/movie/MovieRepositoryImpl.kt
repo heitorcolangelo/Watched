@@ -16,7 +16,7 @@ class MovieRepositoryImpl @Inject constructor(
     private val movieMapper: MovieDataDomainMapper,
     private val dataStore: MovieDataStore
 ) : MovieRepository {
-    override fun getMovies(page: Int, sortOption: MoviesSortOption): Observable<PageDomainModel<MovieDomainModel>> {
+    override fun getMovies(page: Int, sortOption: MoviesSortOption, forceRefresh: Boolean): Observable<PageDomainModel<MovieDomainModel>> {
         return dataStore.getMovies(page).map(pageMapper::mapToPageDomainModel)
     }
 

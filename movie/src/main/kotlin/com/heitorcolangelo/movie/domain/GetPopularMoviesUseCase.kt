@@ -15,6 +15,6 @@ class GetPopularMoviesUseCase @Inject constructor(
 ) : PagedUseCase<MovieDomainModel>(threadProvider) {
     override fun build(args: Args): Observable<PageDomainModel<MovieDomainModel>> {
         val nextPage = nextPage(args)
-        return repository.getMovies(nextPage, MoviesSortOption.Popularity)
+        return repository.getMovies(nextPage, MoviesSortOption.Popularity, args.forceRefresh)
     }
 }

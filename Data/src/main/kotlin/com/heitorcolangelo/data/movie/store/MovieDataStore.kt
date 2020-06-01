@@ -7,7 +7,7 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 
 interface MovieDataStore : DataStore {
-    fun getMovies(page: Int): Observable<PageDataModel<MovieDataModel>>
+    fun getMovies(page: Int, forceRefresh: Boolean = false): Observable<PageDataModel<MovieDataModel>>
     fun saveMovies(movies: List<MovieDataModel>): Completable
     fun getMovie(movieId: String): Observable<MovieDataModel>
 

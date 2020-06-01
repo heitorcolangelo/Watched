@@ -54,10 +54,6 @@ class MovieListViewModel(
         override fun onLoadPageFailure(error: Throwable) {
             error.printStackTrace()
         }
-
-        override fun invalidatePages() {
-            moviesLiveData.postValue(listOf())
-        }
     }
 
     sealed class Navigation {

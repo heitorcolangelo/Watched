@@ -22,9 +22,6 @@ abstract class PagedUseCase<Model : DomainModel>(
             .subscribeOn(threadProvider.io())
             .observeOn(threadProvider.ui())
             .doOnNext {
-                if (it.page <= currentPage) {
-                    observer.invalidatePages()
-                }
                 currentPage = it.page
             }
         disposables.add(observable.subscribeWith(observer))

@@ -10,7 +10,8 @@
         android:id="@+id/movieListFragment"
         android:name="com.heitorcolangelo.movie.ui.list.MovieListFragment"
         android:label="MovieListFragment"
-        app:moduleName="movie">
+        app:moduleName="movie"
+        tools:layout="@layout/fragment_movie_list">
         <action
             android:id="@+id/actionMovieListToMovieDetails"
             app:destination="@id/movieDetailsFragment"
@@ -29,7 +30,8 @@
         android:id="@+id/movieDetailsFragment"
         android:name="com.heitorcolangelo.movie.ui.detail.MovieDetailsFragment"
         android:label="MovieDetailsFragment"
-        app:moduleName="movie">
+        app:moduleName="movie"
+        tools:layout="@layout/fragment_movie_details">
         <argument
             android:name="movieId"
             app:nullable="false"

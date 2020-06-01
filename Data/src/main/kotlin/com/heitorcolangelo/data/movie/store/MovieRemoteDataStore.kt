@@ -11,7 +11,7 @@ import javax.inject.Inject
 class MovieRemoteDataStore @Inject constructor(
     private val remoteData: MovieRemoteData
 ) : MovieDataStore, RemoteDataStore {
-    override fun getMovies(page: Int): Observable<PageDataModel<MovieDataModel>> {
+    override fun getMovies(page: Int, forceRefresh: Boolean): Observable<PageDataModel<MovieDataModel>> {
         return remoteData.getMovies(page)
     }
 
