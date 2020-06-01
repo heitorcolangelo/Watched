@@ -13,15 +13,16 @@ import com.heitorcolangelo.movie.R
 import com.heitorcolangelo.movie.databinding.FragmentMovieListBinding
 import com.heitorcolangelo.movie.di.inject
 import com.heitorcolangelo.movie.model.MovieItemUiModel
-import com.heitorcolangelo.presentation.common.view.binding.viewBinding
+import com.heitorcolangelo.presentation.common.list.PagedAdapter
+import com.heitorcolangelo.presentation.common.viewbinding.viewBinding
 import javax.inject.Inject
 
-class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
+class MovieListFragment : Fragment(R.layout.fragment_movie_list), PagedAdapter.PaginationListener {
 
     @Inject
     lateinit var viewModel: MovieListViewModel
     private val binding: FragmentMovieListBinding by viewBinding()
-    private val adapter = MovieListAdapter()
+    private val listAdapter = MovieListAdapter(this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -35,8 +36,12 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
         super.onAttach(context)
 
         inject()
-        viewModel.movies.observe(this, Observer { onMovies(it) })
+        viewModel.pagedMoves.observe(this, Observer { onMovies(it) })
         viewModel.navigation.observe(this, Observer { onNavigation(it) })
+    }
+
+    override fun requestPage() {
+        viewModel.getNextPage()
     }
 
     private fun onNavigation(navigation: MovieListViewModel.Navigation) {
@@ -50,20 +55,22 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list) {
     }
 
     private fun onMovies(movies: List<MovieItemUiModel>) {
-        adapter.items = movies
+        listAdapter.submitList(movies.toMutableList())
     }
 
     private fun setupRecyclerView() {
-        binding.recyclerView.layoutManager = FlexboxLayoutManager(requireContext()).apply {
-            flexDirection = FlexDirection.ROW
-            justifyContent = JustifyContent.SPACE_EVENLY
+        with(binding.recyclerView) {
+            layoutManager = FlexboxLayoutManager(requireContext()).apply {
+                flexDirection = FlexDirection.ROW
+                justifyContent = JustifyContent.SPACE_EVENLY
+            }
+            setHasFixedSize(true)
+            adapter = listAdapter
         }
-        binding.recyclerView.setHasFixedSize(true)
-        binding.recyclerView.adapter = adapter
     }
 
     private fun setupAdapter() {
-        adapter.onItemClicked(viewModel::onItemClicked)
+        listAdapter.onItemClicked(viewModel::onItemClicked)
     }
 
     private fun setupRefreshView() {

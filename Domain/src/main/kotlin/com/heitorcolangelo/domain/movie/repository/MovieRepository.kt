@@ -6,6 +6,6 @@ import com.heitorcolangelo.domain.movie.model.MoviesSortOption
 import io.reactivex.rxjava3.core.Observable
 
 interface MovieRepository {
-    fun getMovies(sortOption: MoviesSortOption): Observable<PageDomainModel<MovieDomainModel>>
+    fun getMovies(page: Int, sortOption: MoviesSortOption, forceRefresh: Boolean = false): Observable<PageDomainModel<MovieDomainModel>>
     fun getMovie(movieId: String): Observable<MovieDomainModel>
 }

@@ -43,9 +43,7 @@ android {
         jvmTarget = "1.8"
     }
 
-    viewBinding {
-        enabled = true
-    }
+    buildFeatures.viewBinding = true
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

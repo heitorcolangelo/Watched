@@ -11,7 +11,7 @@ import com.heitorcolangelo.movie.R
 import com.heitorcolangelo.movie.databinding.FragmentMovieDetailsBinding
 import com.heitorcolangelo.movie.di.inject
 import com.heitorcolangelo.movie.model.MovieDetailsUiModel
-import com.heitorcolangelo.presentation.common.view.binding.viewBinding
+import com.heitorcolangelo.presentation.common.viewbinding.viewBinding
 import javax.inject.Inject
 
 class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {

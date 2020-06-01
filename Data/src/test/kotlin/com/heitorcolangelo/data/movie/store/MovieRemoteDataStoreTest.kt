@@ -14,7 +14,7 @@ class MovieRemoteDataStoreTest {
         dataStore.getMovies().test()
 
         verify {
-            remoteData.getMovies()
+            remoteData.getMovies(1)
         }
     }
 

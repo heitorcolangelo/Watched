@@ -12,9 +12,9 @@ class MovieLocalDataStore @Inject constructor(
     private val localData: MovieLocalData
 ) : MovieDataStore, LocalDataStore {
 
-    override fun getMovies(): Observable<PageDataModel<MovieDataModel>> {
-        return localData.getMovies().map {
-            PageDataModel(items = it)
+    override fun getMovies(page: Int, forceRefresh: Boolean): Observable<PageDataModel<MovieDataModel>> {
+        return localData.getMovies(page, MovieDataStore.PAGE_SIZE).map {
+            PageDataModel(page = page, pageSize = MovieDataStore.PAGE_SIZE, items = it)
         }
     }
 
@@ -29,5 +29,9 @@ class MovieLocalDataStore @Inject constructor(
 
     override fun getMovie(movieId: String): Observable<MovieDataModel> {
         return localData.getMovie(movieId)
+    }
+
+    override fun clear(): Completable {
+        return localData.clear()
     }
 }

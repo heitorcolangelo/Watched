@@ -59,18 +59,23 @@ class MovieLocalDataImplTest {
     }
 
     @Test
-    fun `WHEN get movies THEN get from dao`() {
-        localData.getMovies().test()
+    fun `WHEN get movies THEN get pagedMovies from dao`() {
+        val page = 1
+        val pageSize = 10
+        localData.getMovies(page, pageSize).test()
+        val offset = localData.getOffset(page, pageSize)
 
-        verify { movieDao.getMovies() }
+        verify { movieDao.getPagedMovies(pageSize, offset) }
     }
 
     @Test
     fun `WHEN get movies THEN map to data model`() {
         val movieList = MovieEntityFactory.makeList(3)
-        every { movieDao.getMovies() } returns Flowable.just(movieList)
+        every { movieDao.getPagedMovies(any(), any()) } returns Flowable.just(movieList)
+        val page = 1
+        val pageSize = 10
 
-        localData.getMovies().test()
+        localData.getMovies(page, pageSize).test()
 
         verify(exactly = 3) { mapper.mapToDataModel(any()) }
     }

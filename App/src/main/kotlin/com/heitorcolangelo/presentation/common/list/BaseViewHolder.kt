@@ -1,4 +1,4 @@
-package com.heitorcolangelo.presentation.common.view
+package com.heitorcolangelo.presentation.common.list
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

@@ -1,4 +1,4 @@
-package com.heitorcolangelo.presentation.common.view.binding
+package com.heitorcolangelo.presentation.common.viewbinding
 
 import android.os.Handler
 import android.os.Looper

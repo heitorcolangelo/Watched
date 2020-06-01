@@ -14,6 +14,9 @@ interface MovieDao {
     @Query("SELECT * FROM ${MovieEntity.TABLE_NAME}")
     fun getMovies(): Flowable<List<MovieEntity>>
 
+    @Query("SELECT * FROM ${MovieEntity.TABLE_NAME} LIMIT :pageSize OFFSET :offset")
+    fun getPagedMovies(pageSize: Int, offset: Int): Flowable<List<MovieEntity>>
+
     @Query("SELECT * FROM ${MovieEntity.TABLE_NAME} WHERE id = :movieId")
     fun getMovie(movieId: String): Flowable<MovieEntity>
 

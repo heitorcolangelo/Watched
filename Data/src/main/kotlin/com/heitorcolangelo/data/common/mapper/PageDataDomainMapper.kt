@@ -19,6 +19,7 @@ class PageDataDomainMapperImpl<Data : DataModel, Domain : DomainModel> @Inject c
             PageDomainModel(
                 items = items.map(itemMapper::mapToDomainModel),
                 page = page,
+                pageSize = pageSize,
                 totalPages = totalPages,
                 totalItems = totalItems
             )
@@ -30,6 +31,7 @@ class PageDataDomainMapperImpl<Data : DataModel, Domain : DomainModel> @Inject c
             PageDataModel(
                 items = items.map(itemMapper::mapToDataModel),
                 page = page,
+                pageSize = pageSize,
                 totalPages = totalPages,
                 totalItems = totalItems
             )
