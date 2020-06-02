@@ -22,12 +22,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    def keys = new Properties()
-    file("$rootDir/App/key.properties").withInputStream {
-        stream -> keys.load(stream)
+    Properties properties = new Properties()
+    def propertiesFile = project.rootProject.file('local.properties')
+    if (propertiesFile.exists()) {
+        properties.load(propertiesFile.newDataInputStream())
     }
+    def apiKey = properties.API_KEY != null ? properties.API_KEY : "null"
 
-    def apiKey = "\"" + keys.API_KEY + "\""
     def baseImageUrl = '"https://image.tmdb.org/t/p/"'
 
     buildTypes {
