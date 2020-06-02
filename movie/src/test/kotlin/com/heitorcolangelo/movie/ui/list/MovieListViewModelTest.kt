@@ -5,7 +5,9 @@ import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
 import com.heitorcolangelo.movie.factory.MovieDomainModelFactory
 import com.heitorcolangelo.movie.mapper.MovieItemDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieItemUiModel
+import com.heitorcolangelo.presentation.common.view.ViewState
 import com.heitorcolangelo.presentation.common.viewmodel.PagedLiveData
+import com.heitorcolangelo.presentation.common.viewmodel.SingleLiveEvent
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Before
@@ -37,7 +39,8 @@ class MovieListViewModelTest {
     @Test
     fun `WHEN observer calls onNext THEN map to uiModel`() {
         val liveDataMock = mockk<PagedLiveData<MovieItemUiModel>>(relaxed = true)
-        val observer = MovieListViewModel.PopularMoviesObserver(liveDataMock, mapper)
+        val viewStateMock = mockk<SingleLiveEvent<ViewState>>(relaxed = true)
+        val observer = MovieListViewModel.PopularMoviesObserver(liveDataMock, mapper, viewStateMock)
         val domainModelList = MovieDomainModelFactory.makeList(3)
         val moviePage = PageDomainModel(items = domainModelList)
 

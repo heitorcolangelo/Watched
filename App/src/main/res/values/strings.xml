@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Movies</string>
     <string name="title_movie">Movie</string>
+
+    <string name="message_loading_content_error">There was an error loading your content.</string>
+    <string name="action_try_again">Try again</string>
+    <string name="action_dismiss">Dismiss</string>
 </resources>
