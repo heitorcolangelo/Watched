@@ -151,6 +151,7 @@ dependencies {
     androidTestImplementation project(":Common:Test")
     androidTestImplementation "io.mockk:mockk-android:$versions.mockk"
     androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"
+    //noinspection GradleDependency
     androidTestImplementation "androidx.arch.core:core-testing:$ax_versions.arch_core_testing"
     //Suppressing this warning because 2.1.0 conflicts with room-rxjava2 versions.
     //noinspection GradleDependency
