@@ -6,7 +6,6 @@ import com.heitorcolangelo.domain.common.scheduler.PagedObserver
 import com.heitorcolangelo.domain.common.usecase.PagedUseCase
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
-import com.heitorcolangelo.movie.mapper.MovieItemDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieItemUiModel
 import com.heitorcolangelo.presentation.common.model.PageDomainUiMapper
 import com.heitorcolangelo.presentation.common.model.PageUiModel
