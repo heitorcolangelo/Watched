@@ -15,6 +15,7 @@ import com.heitorcolangelo.movie.databinding.FragmentMovieListBinding
 import com.heitorcolangelo.movie.di.inject
 import com.heitorcolangelo.movie.model.MovieItemUiModel
 import com.heitorcolangelo.presentation.common.list.PagedAdapter
+import com.heitorcolangelo.presentation.common.model.PageUiModel
 import com.heitorcolangelo.presentation.common.view.ViewState
 import com.heitorcolangelo.presentation.common.view.setAction
 import com.heitorcolangelo.presentation.common.viewbinding.makeSnackBar
@@ -79,8 +80,8 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list), PagedAdapter.P
         }
     }
 
-    private fun onMovies(movies: List<MovieItemUiModel>) {
-        listAdapter.submitList(movies.toMutableList())
+    private fun onMovies(newPage: PageUiModel<MovieItemUiModel>) {
+        listAdapter.submitPage(newPage)
     }
 
     private fun setupRecyclerView() {
@@ -107,6 +108,5 @@ class MovieListFragment : Fragment(R.layout.fragment_movie_list), PagedAdapter.P
     private fun setupErrorSnackBar(): Snackbar {
         return binding.makeSnackBar(R.string.message_loading_content_error, Snackbar.LENGTH_LONG)
             .setAction(R.string.action_try_again, viewModel::onTryAgain)
-            .setAction(R.string.action_dismiss, viewModel::onDismiss)
     }
 }

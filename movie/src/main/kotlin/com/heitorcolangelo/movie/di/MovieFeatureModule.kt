@@ -16,6 +16,7 @@ import com.heitorcolangelo.movie.ui.detail.MovieDetailsViewModel
 import com.heitorcolangelo.movie.ui.list.MovieListFragment
 import com.heitorcolangelo.movie.ui.list.MovieListViewModel
 import com.heitorcolangelo.presentation.common.model.DomainUiMapper
+import com.heitorcolangelo.presentation.common.model.PageDomainUiMapper
 import com.heitorcolangelo.presentation.common.viewmodel.ViewModelFactory
 import com.heitorcolangelo.presentation.di.ApplicationModule
 import dagger.Binds
@@ -44,12 +45,18 @@ abstract class MovieFeatureModule : ApplicationModule() {
     @Binds
     abstract fun bindMovieDetailsDomainUiMapper(mapper: MovieDetailsDomainUiMapper): DomainUiMapper<MovieDomainModel, MovieDetailsUiModel>
 
-    @Module
     companion object {
+        @Provides
+        fun provideMoviePageDomainUiMapper(
+            mapper: MovieItemDomainUiMapper
+        ): PageDomainUiMapper<MovieDomainModel, MovieItemUiModel> {
+            return PageDomainUiMapper(mapper)
+        }
+
         @Provides
         fun provideMovieListViewModel(
             fragment: MovieListFragment,
-            mapper: MovieItemDomainUiMapper,
+            mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel>,
             useCase: GetPopularMoviesUseCase
         ): MovieListViewModel {
             return ViewModelFactory.make(fragment) { MovieListViewModel(mapper, useCase) }

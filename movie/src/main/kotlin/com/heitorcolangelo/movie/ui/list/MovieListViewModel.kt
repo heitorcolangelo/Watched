@@ -8,17 +8,19 @@ import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
 import com.heitorcolangelo.movie.mapper.MovieItemDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieItemUiModel
+import com.heitorcolangelo.presentation.common.model.PageDomainUiMapper
+import com.heitorcolangelo.presentation.common.model.PageUiModel
 import com.heitorcolangelo.presentation.common.view.ViewState
 import com.heitorcolangelo.presentation.common.viewmodel.BaseViewModel
 import com.heitorcolangelo.presentation.common.viewmodel.PagedLiveData
 import com.heitorcolangelo.presentation.common.viewmodel.SingleLiveEvent
 
 class MovieListViewModel(
-    private val mapper: MovieItemDomainUiMapper,
+    private val mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel>,
     private val useCase: GetPopularMoviesUseCase
 ) : BaseViewModel(useCase) {
     private val _pagedMovies = PagedLiveData<MovieItemUiModel>()
-    val pagedMoves: LiveData<List<MovieItemUiModel>> = _pagedMovies
+    val pagedMoves: LiveData<PageUiModel<MovieItemUiModel>> = _pagedMovies
 
     private val _navigation = SingleLiveEvent<Navigation>()
     val navigation: LiveData<Navigation> = _navigation
@@ -40,7 +42,7 @@ class MovieListViewModel(
 
     fun onRefresh() {
         _viewState.postValue(ViewState.Loading)
-        _pagedMovies.postValue(listOf())
+        _pagedMovies.refreshList()
         useCase.execute(PagedUseCase.Args(forceRefresh = true), observer)
     }
 
@@ -49,26 +51,22 @@ class MovieListViewModel(
     }
 
     fun onTryAgain() {
-        TODO("Not yet implemented")
-    }
-
-    fun onDismiss() {
-        TODO("Not yet implemented")
+        useCase.execute(PagedUseCase.Args(), observer)
     }
 
     class PopularMoviesObserver(
         private val moviesLiveData: PagedLiveData<MovieItemUiModel>,
-        private val mapper: MovieItemDomainUiMapper,
+        private val mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel>,
         private val viewStateLiveData: SingleLiveEvent<ViewState>
     ) : PagedObserver<MovieDomainModel>() {
         override fun onLoadPageSuccess(newPage: PageDomainModel<MovieDomainModel>) {
-            val uiModels = newPage.items.map(mapper::mapToUiModel)
-            moviesLiveData.postValue(uiModels)
+            moviesLiveData.postValue(mapper.mapToUiModel(newPage))
             viewStateLiveData.postValue(ViewState.Content)
         }
 
         override fun onLoadPageFailure(error: Throwable) {
             error.printStackTrace()
+            moviesLiveData.postValue(mapper.mapToPageWithErrorUiModel(error))
             viewStateLiveData.postValue(ViewState.Error)
         }
     }
