@@ -2,6 +2,7 @@ package com.heitorcolangelo.presentation.common.list
 
 import androidx.annotation.RestrictTo
 import com.heitorcolangelo.presentation.common.model.ItemUiModel
+import com.heitorcolangelo.presentation.common.model.PageUiModel
 
 abstract class PagedAdapter<Model : ItemUiModel, ViewHolder : BaseViewHolder<Model>>(
     private val paginationListener: PaginationListener
@@ -20,9 +21,21 @@ abstract class PagedAdapter<Model : ItemUiModel, ViewHolder : BaseViewHolder<Mod
         return super.getItemViewType(position)
     }
 
-    override fun submitList(list: MutableList<Model>?) {
+    fun submitPage(page: PageUiModel<Model>) {
         isLoadingPage = false
-        super.submitList(list)
+        when {
+            page.containsError() -> {
+                // Here you can handle error inside the adapter if necessary.
+            }
+            page.items.isEmpty() -> {
+                super.submitList(null)
+            }
+            else -> {
+                val newList = currentList.toMutableList()
+                newList.addAll(page.items)
+                super.submitList(newList)
+            }
+        }
     }
 
     @RestrictTo(RestrictTo.Scope.TESTS)
