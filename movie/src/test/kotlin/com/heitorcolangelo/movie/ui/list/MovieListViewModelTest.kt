@@ -1,10 +1,11 @@
 package com.heitorcolangelo.movie.ui.list
 
 import com.heitorcolangelo.domain.common.model.PageDomainModel
+import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
 import com.heitorcolangelo.movie.factory.MovieDomainModelFactory
-import com.heitorcolangelo.movie.mapper.MovieItemDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieItemUiModel
+import com.heitorcolangelo.presentation.common.model.PageDomainUiMapper
 import com.heitorcolangelo.presentation.common.view.ViewState
 import com.heitorcolangelo.presentation.common.viewmodel.PagedLiveData
 import com.heitorcolangelo.presentation.common.viewmodel.SingleLiveEvent
@@ -23,7 +24,8 @@ import org.junit.Test
 @Ignore("Read explanation above")
 class MovieListViewModelTest {
 
-    private val mapper: MovieItemDomainUiMapper = mockk(relaxed = true)
+    private val mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel> =
+        mockk(relaxed = true)
     private val useCase: GetPopularMoviesUseCase = mockk(relaxed = true)
 
     @Before
