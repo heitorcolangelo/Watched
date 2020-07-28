@@ -1,12 +1,16 @@
 package com.heitorcolangelo.presentation.common.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.heitorcolangelo.presentation.common.model.PageUiModel
 import com.heitorcolangelo.presentation.factory.TestItemUiModel
 import com.heitorcolangelo.presentation.factory.TestItemUiModelFactory
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class PagedLiveDataTest {
 
     @Rule
@@ -19,20 +23,16 @@ class PagedLiveDataTest {
     fun when_postedValue_isNot_nullOrEmpty_then_appendValueToCurrentList() {
         val listSize = 3
         val items = TestItemUiModelFactory.makeList(listSize)
+        PageUiModel(items, null)
+        pagedLiveData.postValue(PageUiModel(items, null))
 
-        pagedLiveData.postValue(items)
-
-        assertEquals(listSize, pagedLiveData.value!!.size)
+        assertEquals(listSize, pagedLiveData.value!!.items.size)
     }
 
     @Test
-    fun when_postedValue_is_nullOrEmpty_then_postEmptyList() {
-        val listSize = 3
-        val items = TestItemUiModelFactory.makeList(listSize)
-        pagedLiveData.postValue(items)
+    fun when_refreshList_then_postEmptyList() {
+        pagedLiveData.refreshList()
 
-        pagedLiveData.postValue(null)
-
-        assertEquals(0, pagedLiveData.value!!.size)
+        assertEquals(0, pagedLiveData.value!!.items.size)
     }
 }

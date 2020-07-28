@@ -14,9 +14,9 @@ abstract class DaoTest {
     val rule = InstantTaskExecutorRule()
 
     protected val database = Room.inMemoryDatabaseBuilder(
-            ApplicationProvider.getApplicationContext(),
-            MoviesDatabase::class.java
-        )
+        ApplicationProvider.getApplicationContext(),
+        MoviesDatabase::class.java
+    )
         .allowMainThreadQueries()
         .build()
 
