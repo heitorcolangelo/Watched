@@ -9,7 +9,7 @@ import dagger.Provides
 @Module
 class LocalDataModule(private val application: Application) {
     @Provides
-    fun provideSkeletonDatabase(): MoviesDatabase {
+    fun provideMovieDatabase(): MoviesDatabase {
         return MoviesDatabase.getDatabase(application)
     }
 
