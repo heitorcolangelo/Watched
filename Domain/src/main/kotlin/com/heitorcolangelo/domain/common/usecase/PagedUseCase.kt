@@ -11,6 +11,7 @@ abstract class PagedUseCase<Model : DomainModel>(
 ) : DisposableUseCase() {
     companion object {
         const val NO_PAGE_LOADED = -1
+        const val PAGE_INCREMENT = 1
     }
 
     private var currentPage: Int = NO_PAGE_LOADED
@@ -37,7 +38,7 @@ abstract class PagedUseCase<Model : DomainModel>(
             currentPage = NO_PAGE_LOADED
         }
 
-        return currentPage + 1
+        return currentPage + PAGE_INCREMENT
     }
 
     data class Args(val forceRefresh: Boolean = false) : UseCaseArgs
