@@ -2,17 +2,18 @@ package com.heitorcolangelo.movie.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.domain.GetMovieUseCase
 import com.heitorcolangelo.movie.mapper.MovieDetailsDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieDetailsUiModel
-import com.heitorcolangelo.presentation.common.viewmodel.BaseViewModel
-import io.reactivex.rxjava3.observers.DisposableObserver
+import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel(
     private val mapper: MovieDetailsDomainUiMapper,
     private val useCase: GetMovieUseCase
-) : BaseViewModel(useCase) {
+) : ViewModel() {
 
     private val _movie = MutableLiveData<MovieDetailsUiModel>()
     val movie: LiveData<MovieDetailsUiModel> = _movie
@@ -27,28 +28,16 @@ class MovieDetailsViewModel(
     }
 
     fun onViewReady() {
-        useCase.execute(GetMovieUseCase.Arg(movieId), GetMovieObserver(_movie, mapper))
+        viewModelScope.launch {
+            val arg = GetMovieUseCase.Arg(movieId)
+            val movieDomainModel: MovieDomainModel = useCase.get(arg)
+            val movieUiModel = mapper.mapToUiModel(movieDomainModel)
+            _movie.postValue(movieUiModel)
+        }
     }
 
     fun onBackPressed() {
         _navigation.postValue(Navigation.Back)
-    }
-
-    class GetMovieObserver(
-        private val movieLiveData: MutableLiveData<MovieDetailsUiModel>,
-        private val mapper: MovieDetailsDomainUiMapper
-    ) : DisposableObserver<MovieDomainModel>() {
-        override fun onComplete() {
-        }
-
-        override fun onNext(domainModel: MovieDomainModel) {
-            val uiModel = mapper.mapToUiModel(domainModel)
-            movieLiveData.postValue(uiModel)
-        }
-
-        override fun onError(e: Throwable) {
-            e.printStackTrace()
-        }
     }
 
     sealed class Navigation {

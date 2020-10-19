@@ -4,6 +4,8 @@ apply from: "$rootDir/tools/ktlint.gradle"
 
 dependencies {
     // Kotlin
+    // Ignoring bug warning (https://stackoverflow.com/a/49956210/3279958)
+    //noinspection DifferentStdlibGradleVersion
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
     implementation "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"

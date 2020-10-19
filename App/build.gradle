@@ -123,6 +123,8 @@ dependencies {
     // Kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
     api "org.jetbrains.kotlin:kotlin-reflect:$versions.kotlin"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.coroutines"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutines"
 
     // Material Design
     api "com.google.android.material:material:$versions.material"
@@ -133,7 +135,7 @@ dependencies {
     api "androidx.navigation:navigation-dynamic-features-fragment:$ax_versions.arch_navigation"
 
     // Paging
-    api "androidx.paging:paging-runtime:$ax_versions.arch_paging"
+    api "androidx.paging:paging-runtime-ktx:$ax_versions.arch_paging"
     api "androidx.paging:paging-rxjava2-ktx:$ax_versions.arch_paging"
 
     // RxJava
@@ -162,6 +164,7 @@ dependencies {
     androidTestImplementation "androidx.test.ext:junit:$ax_versions.foundation_test_ext_junit"
 
     testImplementation project(":Common:Test")
+    testImplementation project(":Common:Test-Android")
     testImplementation "junit:junit:$versions.junit"
     testImplementation "io.mockk:mockk:$versions.mockk"
 }

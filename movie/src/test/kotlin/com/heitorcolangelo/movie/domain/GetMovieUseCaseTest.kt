@@ -1,24 +1,24 @@
 package com.heitorcolangelo.movie.domain
 
-import com.heitorcolangelo.common.test.TestExecutionThreadProvider
-import com.heitorcolangelo.domain.common.scheduler.ExecutionThreadProvider
 import com.heitorcolangelo.domain.movie.repository.MovieRepository
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class GetMovieUseCaseTest {
     private val repository: MovieRepository = mockk(relaxed = true)
-    private val threadProvider: ExecutionThreadProvider = TestExecutionThreadProvider()
-    private val useCase = GetMovieUseCase(repository, threadProvider)
+    private val useCase = GetMovieUseCase(repository)
 
     @Test
     fun `WHEN build THEN get movie from repository`() {
         val movieId = "movieId"
         val arg = GetMovieUseCase.Arg(movieId)
 
-        useCase.build(arg).test()
+        runBlocking {
+            useCase.get(arg)
+        }
 
-        verify { repository.getMovie(movieId) }
+        coVerify { repository.getMovie(movieId) }
     }
 }

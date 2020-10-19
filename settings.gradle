@@ -1,2 +1,8 @@
-include "App", "Domain", "Data", "Data-Remote", "Data-Local", "movie"
-include ':Common:Test'
+// Common
+include ':Common:Test', ':Common:Test-Android'
+
+// Core
+include 'App', 'Domain', 'Data', 'Data-Remote', 'Data-Local'
+
+// Features
+include 'movie'

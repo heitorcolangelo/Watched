@@ -14,10 +14,6 @@ dependencies {
 
     //JUnit
     implementation "junit:junit:$versions.junit"
-
-    // RxJava
-    implementation "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"
-    implementation "io.reactivex.rxjava3:rxandroid:$versions.rxjava"
 }
 
 java {

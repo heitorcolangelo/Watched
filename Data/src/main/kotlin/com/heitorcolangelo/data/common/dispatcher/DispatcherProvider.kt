@@ -1,4 +1,4 @@
-package com.heitorcolangelo.domain.common.scheduler
+package com.heitorcolangelo.data.common.dispatcher
 
 import kotlinx.coroutines.CoroutineDispatcher
 

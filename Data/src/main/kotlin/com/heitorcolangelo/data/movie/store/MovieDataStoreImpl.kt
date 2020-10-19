@@ -14,14 +14,14 @@ class MovieDataStoreImpl @Inject constructor(
     override fun getMovies(
         page: Int,
         forceRefresh: Boolean
-    ): Observable<PageDataModel<MovieDataModel>> {
+    ): PageDataModel<MovieDataModel> {
         if (forceRefresh) {
-            return localDataStore.clear().andThen(getMoviesRemote(page))
+            return localDataStore.clear().andThen(getMoviesRemote(page)).blockingFirst()
         }
 
         return Observable.zip(
             localDataStore.isDataValid(),
-            localDataStore.getMovies(page),
+            Observable.just(localDataStore.getMovies(page)),
             BiFunction { isDataValid: Boolean, localPage: PageDataModel<MovieDataModel> ->
                 val isPageLocallyAvailable = localPage.items.isNotEmpty()
                 if (isPageLocallyAvailable) {
@@ -34,28 +34,27 @@ class MovieDataStoreImpl @Inject constructor(
                     getMoviesRemote(page)
                 }
             }
-        ).flatMap { it }
+        ).flatMap { it }.blockingFirst()
     }
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {
         return localDataStore.saveMovies(movies)
     }
 
-    override fun getMovie(movieId: String): Observable<MovieDataModel> {
-        return localDataStore.isDataValid().flatMap { isDataValid ->
-            if (isDataValid) {
-                localDataStore.getMovie(movieId)
-            } else {
-                remoteDataStore.getMovie(movieId).flatMap {
-                    saveMovies(listOf(it)).andThen(Observable.just(it))
-                }
+    override fun getMovie(movieId: String): MovieDataModel {
+        val isDataValid = localDataStore.isDataValid().blockingFirst()
+        return if (isDataValid) {
+            localDataStore.getMovie(movieId)
+        } else {
+            remoteDataStore.getMovie(movieId).also {
+                saveMovies(listOf(it)).andThen(Observable.just(it))
             }
         }
     }
 
     private fun getMoviesRemote(page: Int): Observable<PageDataModel<MovieDataModel>> {
-        return remoteDataStore.getMovies(page).flatMap {
-            saveMovies(it.items).andThen(Observable.just(it))
-        }
+        val movies = remoteDataStore.getMovies(page)
+        saveMovies(movies.items)
+        return Observable.just(movies)
     }
 }
