@@ -14,7 +14,6 @@ import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -28,11 +27,12 @@ class MovieDetailsViewModelTest : ViewModelTest() {
     private val viewModel = MovieDetailsViewModel(mapper, useCase, dispatcherProvider)
 
     @Test
-    fun `WHEN view is ready THEN get movie details`() = runBlockingTest {
+    fun `WHEN view is ready THEN get movie details`() {
         val movieId = "movieId"
-        viewModel.setMovieId(movieId)
         val argSlot = slot<GetMovieUseCase.Arg>()
         coEvery { useCase.get(any()) } returns mockk(relaxed = true)
+
+        viewModel.setMovieId(movieId)
 
         coVerify {
             useCase.get(capture(argSlot))
@@ -43,11 +43,12 @@ class MovieDetailsViewModelTest : ViewModelTest() {
     }
 
     @Test
-    fun `WHEN get movie returns THEN map to UiModel`() = runBlockingTest {
+    fun `WHEN get movie returns THEN map to UiModel`() {
         val movieId = "movieId"
-        viewModel.setMovieId(movieId)
         val domainModel = MovieDomainModelFactory.make()
         coEvery { useCase.get(any()) } returns domainModel
+
+        viewModel.setMovieId(movieId)
 
         verify { mapper.mapToUiModel(domainModel) }
     }
@@ -55,10 +56,11 @@ class MovieDetailsViewModelTest : ViewModelTest() {
     @Test
     fun `WHEN get movie returns THEN post to LiveData`() {
         val movieId = "movieId"
-        viewModel.setMovieId(movieId)
         coEvery { useCase.get(any()) } returns mockk(relaxed = true)
         val uiModel = MovieDetailsUiModelFactory.make()
         every { mapper.mapToUiModel(any()) } returns uiModel
+
+        viewModel.setMovieId(movieId)
 
         assertEquals(uiModel, viewModel.movie.value)
     }
