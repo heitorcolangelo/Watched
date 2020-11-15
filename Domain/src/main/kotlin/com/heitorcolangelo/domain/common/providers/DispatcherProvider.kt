@@ -1,4 +1,4 @@
-package com.heitorcolangelo.data.common.dispatcher
+package com.heitorcolangelo.domain.common.providers
 
 import kotlinx.coroutines.CoroutineDispatcher
 

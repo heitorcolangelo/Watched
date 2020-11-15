@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.heitorcolangelo.domain.common.providers.DispatcherProvider
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.domain.GetMovieUseCase
 import com.heitorcolangelo.movie.mapper.MovieDetailsDomainUiMapper
@@ -12,35 +13,18 @@ import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel(
     private val mapper: MovieDetailsDomainUiMapper,
-    private val useCase: GetMovieUseCase
+    private val useCase: GetMovieUseCase,
+    private val dispatcherProvider: DispatcherProvider,
 ) : ViewModel() {
-
     private val _movie = MutableLiveData<MovieDetailsUiModel>()
     val movie: LiveData<MovieDetailsUiModel> = _movie
 
-    private val _navigation = MutableLiveData<Navigation>()
-    val navigation: LiveData<Navigation> = _navigation
-
-    private lateinit var movieId: String
-
-    fun setMovieId(id: String?) {
-        this.movieId = id.orEmpty()
-    }
-
-    fun onViewReady() {
-        viewModelScope.launch {
+    fun setMovieId(movieId: String) {
+        viewModelScope.launch(dispatcherProvider.io()) {
             val arg = GetMovieUseCase.Arg(movieId)
             val movieDomainModel: MovieDomainModel = useCase.get(arg)
             val movieUiModel = mapper.mapToUiModel(movieDomainModel)
             _movie.postValue(movieUiModel)
         }
-    }
-
-    fun onBackPressed() {
-        _navigation.postValue(Navigation.Back)
-    }
-
-    sealed class Navigation {
-        object Back : Navigation()
     }
 }

@@ -3,9 +3,11 @@ package com.heitorcolangelo.data.remote.movie
 import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.source.MovieRemoteData
+import com.heitorcolangelo.data.remote.common.model.PageResponseModel
 import com.heitorcolangelo.data.remote.movie.api.MovieApiService
 import com.heitorcolangelo.data.remote.movie.mapper.MoviePageResponseDataMapper
 import com.heitorcolangelo.data.remote.movie.mapper.MovieResponseDataMapper
+import com.heitorcolangelo.data.remote.movie.model.MovieResponseModel
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
@@ -14,9 +16,9 @@ class MovieRemoteDataImpl @Inject constructor(
     private val movieMapper: MovieResponseDataMapper,
     private val api: MovieApiService
 ) : MovieRemoteData {
-    override fun getMovies(page: Int): Observable<PageDataModel<MovieDataModel>> {
-        val nextPage = getNextPage(page)
-        return api.getPopular(nextPage).map(pageMapper::mapToPageDataModel)
+    override suspend fun getMovies(page: Int): PageDataModel<MovieDataModel> {
+        val popular: PageResponseModel<MovieResponseModel> = api.getPopular(page)
+        return pageMapper.mapToPageDataModel(popular)
     }
 
     override fun getMovie(movieId: String): Observable<MovieDataModel> {

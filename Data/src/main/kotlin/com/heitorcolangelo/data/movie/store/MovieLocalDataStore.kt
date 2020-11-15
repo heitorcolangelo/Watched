@@ -12,7 +12,10 @@ class MovieLocalDataStore @Inject constructor(
     private val localData: MovieLocalData
 ) : MovieDataStore, LocalDataStore {
 
-    override fun getMovies(page: Int, forceRefresh: Boolean): PageDataModel<MovieDataModel> {
+    override suspend fun getMovies(
+        page: Int,
+        forceRefresh: Boolean
+    ): PageDataModel<MovieDataModel> {
         return localData.getMovies(page, MovieDataStore.PAGE_SIZE).map {
             PageDataModel(page = page, pageSize = MovieDataStore.PAGE_SIZE, items = it)
         }.blockingFirst()

@@ -10,8 +10,11 @@ import javax.inject.Inject
 class MovieRemoteDataStore @Inject constructor(
     private val remoteData: MovieRemoteData
 ) : MovieDataStore, RemoteDataStore {
-    override fun getMovies(page: Int, forceRefresh: Boolean): PageDataModel<MovieDataModel> {
-        return remoteData.getMovies(page).blockingFirst()
+    override suspend fun getMovies(
+        page: Int,
+        forceRefresh: Boolean
+    ): PageDataModel<MovieDataModel> {
+        return remoteData.getMovies(page)
     }
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {

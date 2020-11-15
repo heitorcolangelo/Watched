@@ -3,6 +3,7 @@ package com.heitorcolangelo.presentation
 import android.app.Application
 import android.content.Context
 import androidx.fragment.app.Fragment
+import com.facebook.drawee.backends.pipeline.Fresco
 import com.heitorcolangelo.BuildConfig
 import com.heitorcolangelo.presentation.common.activity.BaseActivity
 import com.heitorcolangelo.presentation.di.ApplicationComponent
@@ -25,6 +26,7 @@ class MoviesApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         AndroidThreeTen.init(this)
+        Fresco.initialize(this)
         if (BuildConfig.DEBUG) {
             Timber.plant(DebugTree())
         }

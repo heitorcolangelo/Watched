@@ -1,5 +1,6 @@
-package com.heitorcolangelo.data.common.dispatcher
+package com.heitorcolangelo.presentation.common.provider
 
+import com.heitorcolangelo.domain.common.providers.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
 import javax.inject.Inject
 

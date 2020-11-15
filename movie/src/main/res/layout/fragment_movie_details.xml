@@ -11,6 +11,7 @@
         android:layout_height="224dp"
         android:fitsSystemWindows="true"
         android:stateListAnimator="@animator/anim_show_toolbar">
+
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar"
             style="@style/AppTheme.Widget.CollapsingToolbar"
@@ -20,7 +21,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@id/toolbar">
 
-            <ImageView
+            <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/iv_movie_backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="224dp"

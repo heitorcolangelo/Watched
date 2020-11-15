@@ -13,7 +13,7 @@
         app:moduleName="movie"
         tools:layout="@layout/fragment_movie_list">
         <action
-            android:id="@+id/actionMovieListToMovieDetails"
+            android:id="@+id/toMovieDetails"
             app:destination="@id/movieDetailsFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"

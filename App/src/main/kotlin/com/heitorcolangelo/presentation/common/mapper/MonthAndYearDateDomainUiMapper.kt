@@ -1,7 +1,6 @@
 package com.heitorcolangelo.presentation.common.mapper
 
 import com.heitorcolangelo.domain.common.model.RawDateDomainModel
-import com.heitorcolangelo.presentation.common.model.DomainUiMapper
 import com.heitorcolangelo.presentation.common.model.FormattedDateUiModel
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId

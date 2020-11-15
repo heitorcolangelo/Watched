@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import com.heitorcolangelo.data.local.movie.di.MovieLocalDataModule
 import com.heitorcolangelo.data.movie.di.MovieDataModule
 import com.heitorcolangelo.data.remote.movie.di.MovieRemoteDataModule
+import com.heitorcolangelo.domain.common.providers.DispatcherProvider
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.domain.GetMovieUseCase
 import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
@@ -15,8 +16,9 @@ import com.heitorcolangelo.movie.ui.detail.MovieDetailsFragment
 import com.heitorcolangelo.movie.ui.detail.MovieDetailsViewModel
 import com.heitorcolangelo.movie.ui.list.MovieListFragment
 import com.heitorcolangelo.movie.ui.list.MovieListViewModel
-import com.heitorcolangelo.presentation.common.model.DomainUiMapper
-import com.heitorcolangelo.presentation.common.model.PageDomainUiMapper
+import com.heitorcolangelo.presentation.common.mapper.DomainUiMapper
+import com.heitorcolangelo.presentation.common.mapper.PageDomainUiMapper
+import com.heitorcolangelo.presentation.common.mapper.PageDomainUiMapperImpl
 import com.heitorcolangelo.presentation.common.viewmodel.ViewModelFactory
 import com.heitorcolangelo.presentation.di.ApplicationModule
 import dagger.Binds
@@ -50,25 +52,39 @@ abstract class MovieFeatureModule : ApplicationModule() {
         fun provideMoviePageDomainUiMapper(
             mapper: MovieItemDomainUiMapper
         ): PageDomainUiMapper<MovieDomainModel, MovieItemUiModel> {
-            return PageDomainUiMapper(mapper)
+            return PageDomainUiMapperImpl(mapper)
         }
 
         @Provides
         fun provideMovieListViewModel(
             fragment: MovieListFragment,
             mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel>,
-            useCase: GetPopularMoviesUseCase
+            useCase: GetPopularMoviesUseCase,
+            dispatcherProvider: DispatcherProvider
         ): MovieListViewModel {
-            return ViewModelFactory.make(fragment) { MovieListViewModel(mapper, useCase) }
+            return ViewModelFactory.make(fragment) {
+                MovieListViewModel(
+                    mapper,
+                    useCase,
+                    dispatcherProvider
+                )
+            }
         }
 
         @Provides
         fun provideMovieDetailsViewModel(
             fragment: MovieDetailsFragment,
             mapper: MovieDetailsDomainUiMapper,
-            useCase: GetMovieUseCase
+            useCase: GetMovieUseCase,
+            dispatcherProvider: DispatcherProvider
         ): MovieDetailsViewModel {
-            return ViewModelFactory.make(fragment) { MovieDetailsViewModel(mapper, useCase) }
+            return ViewModelFactory.make(fragment) {
+                MovieDetailsViewModel(
+                    mapper,
+                    useCase,
+                    dispatcherProvider
+                )
+            }
         }
 
         @Provides

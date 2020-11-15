@@ -6,8 +6,4 @@ data class PageDomainModel<Model : DomainModel>(
     val pageSize: Int = 0,
     val totalPages: Int = 0,
     val totalItems: Int = 0
-) : DomainModel() {
-    companion object {
-        const val FIRST_PAGE = 0
-    }
-}
+) : DomainModel()

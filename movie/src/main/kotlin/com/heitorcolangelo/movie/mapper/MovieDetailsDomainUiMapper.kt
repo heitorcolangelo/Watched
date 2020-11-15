@@ -2,9 +2,9 @@ package com.heitorcolangelo.movie.mapper
 
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.model.MovieDetailsUiModel
+import com.heitorcolangelo.presentation.common.mapper.DomainUiMapper
 import com.heitorcolangelo.presentation.common.mapper.MonthAndYearDateDomainUiMapper
 import com.heitorcolangelo.presentation.common.mapper.MovieImageDomainUiMapper
-import com.heitorcolangelo.presentation.common.model.DomainUiMapper
 import com.heitorcolangelo.presentation.common.model.MovieImageUiModel
 import javax.inject.Inject
 
@@ -15,7 +15,7 @@ class MovieDetailsDomainUiMapper @Inject constructor(
     override fun mapToUiModel(domainModel: MovieDomainModel): MovieDetailsUiModel {
         return with(domainModel) {
             MovieDetailsUiModel(
-                movieId = id,
+                id = id,
                 title = title,
                 overview = overview,
                 releaseDate = dateMapper.mapToUiModel(releaseDate),
