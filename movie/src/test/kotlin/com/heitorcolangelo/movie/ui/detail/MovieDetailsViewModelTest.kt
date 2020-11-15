@@ -1,5 +1,6 @@
 package com.heitorcolangelo.movie.ui.detail
 
+import com.example.test.android.viewmodel.TestDispatcherProvider
 import com.example.test.android.viewmodel.ViewModelTest
 import com.heitorcolangelo.domain.common.providers.DispatcherProvider
 import com.heitorcolangelo.movie.domain.GetMovieUseCase
@@ -23,7 +24,7 @@ class MovieDetailsViewModelTest : ViewModelTest() {
 
     private val mapper: MovieDetailsDomainUiMapper = mockk(relaxed = true)
     private val useCase: GetMovieUseCase = mockk(relaxed = true)
-    private val dispatcherProvider: DispatcherProvider = mockk(relaxed = true)
+    private val dispatcherProvider: DispatcherProvider = TestDispatcherProvider
     private val viewModel = MovieDetailsViewModel(mapper, useCase, dispatcherProvider)
 
     @Test

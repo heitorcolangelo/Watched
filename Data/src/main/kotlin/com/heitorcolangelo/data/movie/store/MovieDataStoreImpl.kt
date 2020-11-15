@@ -15,26 +15,6 @@ class MovieDataStoreImpl @Inject constructor(
         forceRefresh: Boolean
     ): PageDataModel<MovieDataModel> {
         return remoteDataStore.getMovies(page)
-//        if (forceRefresh) {
-//            return localDataStore.clear().andThen(getMoviesRemote(page))
-//        }
-//
-//        return Observable.zip(
-//            localDataStore.isDataValid(),
-//            Observable.just(localDataStore.getMovies(page)),
-//            BiFunction { isDataValid: Boolean, localPage: PageDataModel<MovieDataModel> ->
-//                val isPageLocallyAvailable = localPage.items.isNotEmpty()
-//                if (isPageLocallyAvailable) {
-//                    if (isDataValid) {
-//                        Observable.just(localPage)
-//                    } else {
-//                        localDataStore.clear().andThen(getMoviesRemote(page))
-//                    }
-//                } else {
-//                    getMoviesRemote(page).
-//                }
-//            }
-//        ).flatMap { it }.blockingFirst()
     }
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {
@@ -50,11 +30,5 @@ class MovieDataStoreImpl @Inject constructor(
                 saveMovies(listOf(it)).andThen(Observable.just(it))
             }
         }
-    }
-
-    private suspend fun getMoviesRemote(page: Int): PageDataModel<MovieDataModel> {
-        val movies = remoteDataStore.getMovies(page)
-        saveMovies(movies.items)
-        return movies
     }
 }
