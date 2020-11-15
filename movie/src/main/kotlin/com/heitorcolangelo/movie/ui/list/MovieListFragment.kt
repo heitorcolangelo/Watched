@@ -48,7 +48,6 @@ class MovieListFragment :
         viewModel.viewState.observe(this, ::onViewState)
         viewModel.navigation.observe(this, ::navigateSafelyWithAnimation)
         viewModel.getMoviePage(listAdapter::submitData)
-
     }
 
     override fun bindListItem(binding: ItemMovieBinding, model: MovieItemUiModel?) {

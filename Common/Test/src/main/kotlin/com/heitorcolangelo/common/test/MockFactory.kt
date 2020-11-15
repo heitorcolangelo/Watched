@@ -1,6 +1,6 @@
 package com.heitorcolangelo.common.test
 
-import java.util.*
+import java.util.UUID
 
 interface MockFactory<T> {
     fun make(): T

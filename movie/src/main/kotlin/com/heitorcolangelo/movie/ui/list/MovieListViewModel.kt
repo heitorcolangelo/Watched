@@ -65,5 +65,4 @@ class MovieListViewModel(
         override val direction: NavDirections
             get() = MovieListFragmentDirections.toMovieDetails(movieId)
     }
-
 }

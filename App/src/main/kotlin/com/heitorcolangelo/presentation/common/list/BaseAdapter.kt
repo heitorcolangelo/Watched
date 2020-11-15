@@ -34,5 +34,3 @@ class BaseAdapter<Binding : ViewBinding, Model : ItemUiModel>(
         }
     }
 }
-
-

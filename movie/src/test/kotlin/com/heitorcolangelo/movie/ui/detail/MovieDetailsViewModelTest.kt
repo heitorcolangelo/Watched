@@ -6,7 +6,12 @@ import com.heitorcolangelo.movie.domain.GetMovieUseCase
 import com.heitorcolangelo.movie.factory.MovieDetailsUiModelFactory
 import com.heitorcolangelo.movie.factory.MovieDomainModelFactory
 import com.heitorcolangelo.movie.mapper.MovieDetailsDomainUiMapper
-import io.mockk.*
+import io.mockk.coEvery
+import io.mockk.coVerify
+import io.mockk.every
+import io.mockk.mockk
+import io.mockk.slot
+import io.mockk.verify
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -42,7 +47,6 @@ class MovieDetailsViewModelTest : ViewModelTest() {
         viewModel.setMovieId(movieId)
         val domainModel = MovieDomainModelFactory.make()
         coEvery { useCase.get(any()) } returns domainModel
-
 
         verify { mapper.mapToUiModel(domainModel) }
     }
