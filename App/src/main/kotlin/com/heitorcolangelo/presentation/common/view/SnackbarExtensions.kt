@@ -13,3 +13,11 @@ fun Snackbar.setAction(@StringRes textResId: Int, clickListener: () -> Unit): Sn
     }
     return this
 }
+
+fun Snackbar.visibility(visibility: Visibility) {
+    if (visibility is Visibility.Gone) {
+        dismiss()
+    } else {
+        show()
+    }
+}

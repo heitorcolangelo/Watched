@@ -35,7 +35,6 @@ android {
 
     testOptions {
         animationsDisabled true
-
         unitTests.includeAndroidResources true
     }
 
@@ -58,9 +57,6 @@ dependencies {
     // Dagger
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
-
-    // Glide
-    kapt "com.github.bumptech.glide:compiler:$versions.glide"
 
     // SwipeRefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$ax_versions.ui_swiperefreshlayout"

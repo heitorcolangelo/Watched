@@ -2,23 +2,23 @@ package com.heitorcolangelo.presentation.common.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.viewbinding.ViewBinding
 import com.heitorcolangelo.presentation.common.list.BaseViewHolder.Companion.viewHolderFrom
 import com.heitorcolangelo.presentation.common.model.ItemUiModel
 
-class BaseAdapter<Binding : ViewBinding, Model : ItemUiModel>(
+class BasePagingAdapter<Binding : ViewBinding, Model : ItemUiModel>(
     private val inflater: (inflater: LayoutInflater, container: ViewGroup, attach: Boolean) -> Binding,
     private val binder: Binder<Binding, Model>,
-) : ListAdapter<Model, BaseViewHolder<Binding>>(DiffItemCallback()) {
+) : PagingDataAdapter<Model, BaseViewHolder<Binding>>(DiffItemCallback()) {
 
     interface Binder<Binding : ViewBinding, Model : ItemUiModel> {
-        fun bindListItem(binding: Binding, model: Model)
+        fun bindListItem(binding: Binding, model: Model?)
     }
 
-    private var itemClickListener: ((model: Model) -> Unit)? = null
+    private var itemClickListener: ((model: Model?) -> Unit)? = null
 
-    fun onItemClicked(listener: (model: Model) -> Unit) {
+    fun onItemClicked(listener: (model: Model?) -> Unit) {
         itemClickListener = listener
     }
 
@@ -34,5 +34,3 @@ class BaseAdapter<Binding : ViewBinding, Model : ItemUiModel>(
         }
     }
 }
-
-

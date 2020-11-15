@@ -1,12 +1,11 @@
 package com.heitorcolangelo.presentation.common.mapper
 
 import com.heitorcolangelo.domain.common.model.RawDateDomainModel
-import com.heitorcolangelo.presentation.common.model.DomainUiMapper
 import com.heitorcolangelo.presentation.common.model.FormattedDateUiModel
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
-import java.util.Locale
+import java.util.*
 import javax.inject.Inject
 
 class MonthAndYearDateDomainUiMapper @Inject constructor(

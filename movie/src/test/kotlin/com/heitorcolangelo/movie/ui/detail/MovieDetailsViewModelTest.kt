@@ -1,16 +1,12 @@
 package com.heitorcolangelo.movie.ui.detail
 
 import com.example.test.android.viewmodel.ViewModelTest
+import com.heitorcolangelo.domain.common.providers.DispatcherProvider
 import com.heitorcolangelo.movie.domain.GetMovieUseCase
 import com.heitorcolangelo.movie.factory.MovieDetailsUiModelFactory
 import com.heitorcolangelo.movie.factory.MovieDomainModelFactory
 import com.heitorcolangelo.movie.mapper.MovieDetailsDomainUiMapper
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.slot
-import io.mockk.verify
+import io.mockk.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertEquals
@@ -22,7 +18,8 @@ class MovieDetailsViewModelTest : ViewModelTest() {
 
     private val mapper: MovieDetailsDomainUiMapper = mockk(relaxed = true)
     private val useCase: GetMovieUseCase = mockk(relaxed = true)
-    private val viewModel = MovieDetailsViewModel(mapper, useCase)
+    private val dispatcherProvider: DispatcherProvider = mockk(relaxed = true)
+    private val viewModel = MovieDetailsViewModel(mapper, useCase, dispatcherProvider)
 
     @Test
     fun `WHEN view is ready THEN get movie details`() = runBlockingTest {
@@ -30,8 +27,6 @@ class MovieDetailsViewModelTest : ViewModelTest() {
         viewModel.setMovieId(movieId)
         val argSlot = slot<GetMovieUseCase.Arg>()
         coEvery { useCase.get(any()) } returns mockk(relaxed = true)
-
-        viewModel.onViewReady()
 
         coVerify {
             useCase.get(capture(argSlot))
@@ -48,7 +43,6 @@ class MovieDetailsViewModelTest : ViewModelTest() {
         val domainModel = MovieDomainModelFactory.make()
         coEvery { useCase.get(any()) } returns domainModel
 
-        viewModel.onViewReady()
 
         verify { mapper.mapToUiModel(domainModel) }
     }
@@ -60,8 +54,6 @@ class MovieDetailsViewModelTest : ViewModelTest() {
         coEvery { useCase.get(any()) } returns mockk(relaxed = true)
         val uiModel = MovieDetailsUiModelFactory.make()
         every { mapper.mapToUiModel(any()) } returns uiModel
-
-        viewModel.onViewReady()
 
         assertEquals(uiModel, viewModel.movie.value)
     }

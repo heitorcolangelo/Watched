@@ -14,7 +14,7 @@ interface MovieApiService {
     }
 
     @GET("popular")
-    fun getPopular(@Query("page") page: Int = 1): Observable<PageResponseModel<MovieResponseModel>>
+    suspend fun getPopular(@Query("page") page: Int = 1): PageResponseModel<MovieResponseModel>
 
     @GET("{movieId}")
     fun getMovie(@Path("movieId") movieId: String): Observable<MovieResponseModel>

@@ -1,10 +1,15 @@
 package com.heitorcolangelo.domain.movie.repository
 
-import com.heitorcolangelo.domain.common.model.PageDomainModel
+import androidx.paging.PagingData
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.domain.movie.model.MoviesSortOption
+import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
-    suspend fun getMovies(page: Int, sortOption: MoviesSortOption, forceRefresh: Boolean = false): PageDomainModel<MovieDomainModel>
+    suspend fun getMovies(
+        sortOption: MoviesSortOption,
+        forceRefresh: Boolean = false
+    ): Flow<PagingData<MovieDomainModel>>
+
     suspend fun getMovie(movieId: String): MovieDomainModel
 }

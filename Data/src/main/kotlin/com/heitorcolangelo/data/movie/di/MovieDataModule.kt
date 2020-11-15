@@ -1,7 +1,5 @@
 package com.heitorcolangelo.data.movie.di
 
-import com.heitorcolangelo.data.common.dispatcher.CoroutineDispatcherProvider
-import com.heitorcolangelo.data.common.dispatcher.DispatcherProvider
 import com.heitorcolangelo.data.common.mapper.DataDomainMapper
 import com.heitorcolangelo.data.common.mapper.PageDataDomainMapper
 import com.heitorcolangelo.data.common.mapper.PageDataDomainMapperImpl
@@ -27,9 +25,6 @@ abstract class MovieDataModule {
 
     @Binds
     abstract fun bindMovieDataDomainMapper(impl: MovieDataDomainMapper): DataDomainMapper<MovieDataModel, MovieDomainModel>
-
-    @Binds
-    abstract fun bindDispatcherProvider(impl: CoroutineDispatcherProvider): DispatcherProvider
 
     @Module
     companion object {

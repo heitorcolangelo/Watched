@@ -1,12 +1,23 @@
 package com.heitorcolangelo.presentation.common.list
 
-import android.view.View
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.heitorcolangelo.presentation.common.model.UiModel
-import kotlinx.android.extensions.LayoutContainer
+import androidx.viewbinding.ViewBinding
 
-abstract class BaseViewHolder<Model : UiModel>(
-    override val containerView: View
-) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-    abstract fun bind(model: Model)
+open class BaseViewHolder<Binding : ViewBinding> private constructor(
+    val binding: Binding
+) : RecyclerView.ViewHolder(binding.root) {
+    constructor(
+        parent: ViewGroup,
+        creator: (inflater: LayoutInflater, root: ViewGroup, attachToRoot: Boolean) -> Binding
+    ) : this(
+        creator(LayoutInflater.from(parent.context), parent, false)
+    )
+
+    companion object {
+        fun <Binding : ViewBinding> ViewGroup.viewHolderFrom(
+            creator: (inflater: LayoutInflater, root: ViewGroup, attachToRoot: Boolean) -> Binding
+        ): BaseViewHolder<Binding> = BaseViewHolder(this, creator)
+    }
 }

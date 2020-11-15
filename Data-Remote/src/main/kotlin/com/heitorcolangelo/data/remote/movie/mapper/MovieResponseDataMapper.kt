@@ -6,7 +6,8 @@ import com.heitorcolangelo.data.remote.common.mapper.response.ResponseDataMapper
 import com.heitorcolangelo.data.remote.movie.model.MovieResponseModel
 import javax.inject.Inject
 
-class MovieResponseDataMapper @Inject constructor() : ResponseDataMapper<MovieResponseModel, MovieDataModel> {
+class MovieResponseDataMapper @Inject constructor() :
+    ResponseDataMapper<MovieResponseModel, MovieDataModel> {
     override fun mapToDataModel(response: MovieResponseModel): MovieDataModel {
         return with(response) {
             MovieDataModel(

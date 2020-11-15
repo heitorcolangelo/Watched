@@ -2,8 +2,8 @@ package com.heitorcolangelo.movie.mapper
 
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.movie.model.MovieItemUiModel
+import com.heitorcolangelo.presentation.common.mapper.DomainUiMapper
 import com.heitorcolangelo.presentation.common.mapper.MovieImageDomainUiMapper
-import com.heitorcolangelo.presentation.common.model.DomainUiMapper
 import com.heitorcolangelo.presentation.common.model.MovieImageUiModel
 import javax.inject.Inject
 
@@ -14,7 +14,6 @@ class MovieItemDomainUiMapper @Inject constructor(
         return with(domainModel) {
             MovieItemUiModel(
                 id = id,
-                title = title,
                 posterPath = imageMapper.mapToUiModel(poster).getUrl(MovieImageUiModel.Size.SMALL)
             )
         }
