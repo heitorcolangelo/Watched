@@ -13,5 +13,5 @@ interface MovieLocalData : LocalData {
 
     fun getMovies(page: Int, pageSize: Int): Observable<List<MovieDataModel>>
 
-    fun getMovie(movieId: String): Observable<MovieDataModel>
+    fun getMovie(movieId: String ): Observable<MovieDataModel>
 }
