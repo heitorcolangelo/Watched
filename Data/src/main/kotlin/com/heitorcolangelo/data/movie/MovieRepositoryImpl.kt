@@ -11,11 +11,9 @@ import com.heitorcolangelo.data.movie.store.MovieDataStore
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.domain.movie.model.MoviesSortOption
 import com.heitorcolangelo.domain.movie.repository.MovieRepository
-import kotlinx.coroutines.Dispatchers
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val pageMapper: PageDataDomainMapper<MovieDataModel, MovieDomainModel>,
@@ -34,9 +32,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovie(movieId: String): MovieDomainModel {
-        return withContext(Dispatchers.IO) {
-            val movie = dataStore.getMovie(movieId)
-            movieMapper.mapToDomainModel(movie)
-        }
+        val movie = dataStore.getMovie(movieId)
+        return movieMapper.mapToDomainModel(movie)
     }
 }
