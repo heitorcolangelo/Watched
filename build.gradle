@@ -30,7 +30,7 @@ buildscript {
             'gradle'      : '4.2.0-alpha16',
             'flexbox'     : '2.0.1',
             'junit'       : '4.13.1',
-            'kotlin'      : '1.4.10',
+            'kotlin'      : '1.4.20',
             'ktx'         : '1.2.0',
             'material'    : '1.2.1',
             'mockk'       : '1.10.0',
