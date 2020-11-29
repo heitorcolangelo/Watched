@@ -3,9 +3,7 @@ package com.heitorcolangelo.data.movie.source
 import androidx.paging.PagingSource
 import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.movie.model.MovieDataModel
-import java.io.IOException
 import javax.inject.Inject
-import javax.xml.ws.http.HTTPException
 
 private const val START_PAGE = 1
 
@@ -21,9 +19,7 @@ class MoviePagingSource @Inject constructor(
                 prevKey = if (nextPage == START_PAGE) null else nextPage - 1,
                 nextKey = if (newPage.items.isEmpty()) null else nextPage + 1
             )
-        } catch (exception: IOException) {
-            return LoadResult.Error(exception)
-        } catch (exception: HTTPException) {
+        } catch (exception: Exception) {
             return LoadResult.Error(exception)
         }
     }
