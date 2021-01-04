@@ -24,4 +24,8 @@ class MovieRemoteDataImpl @Inject constructor(
     override fun getMovie(movieId: String): Observable<MovieDataModel> {
         return api.getMovie(movieId).map(movieMapper::mapToDataModel)
     }
+
+    override suspend fun getLatestMovie(): MovieDataModel {
+        return movieMapper.mapToDataModel(api.getLatestMovie())
+    }
 }

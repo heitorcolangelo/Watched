@@ -21,9 +21,13 @@
             app:popExitAnim="@anim/slide_out_right">
             <argument
                 android:name="movieId"
-                app:nullable="false"
-                app:argType="string" />
+                app:argType="string"
+                app:nullable="false" />
         </action>
+
+        <action
+            android:id="@+id/toMovieMain"
+            app:destination="@id/movieMainFragment" />
     </fragment>
 
     <fragment
@@ -34,7 +38,15 @@
         tools:layout="@layout/fragment_movie_details">
         <argument
             android:name="movieId"
-            app:nullable="false"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="false" />
     </fragment>
+
+
+    <fragment
+        android:id="@+id/movieMainFragment"
+        android:name="com.heitorcolangelo.movie.ui.main.MovieMainFragment"
+        android:label="MovieDetailsFragment"
+        app:moduleName="movie"
+        tools:layout="@layout/fragment_movie_main" />
 </navigation>

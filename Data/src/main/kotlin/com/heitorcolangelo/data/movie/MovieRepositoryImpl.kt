@@ -12,8 +12,11 @@ import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.domain.movie.model.MoviesSortOption
 import com.heitorcolangelo.domain.movie.repository.MovieRepository
 import javax.inject.Inject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 class MovieRepositoryImpl @Inject constructor(
     private val pageMapper: PageDataDomainMapper<MovieDataModel, MovieDomainModel>,
@@ -29,6 +32,18 @@ class MovieRepositoryImpl @Inject constructor(
             config = PagingConfig(pageSize = MovieDataStore.PAGE_SIZE),
             pagingSourceFactory = { moviePagingSource }
         ).flow.map(pageMapper::mapToPageDomainModel)
+    }
+
+    override fun getMovieList(
+        sortOption: MoviesSortOption,
+        forceRefresh: Boolean
+    ): List<MovieDomainModel> {
+        return listOf()
+    }
+
+    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDomainModel {
+        val latestMovie = dataStore.getLatestMovie(forceRefresh)
+        return movieMapper.mapToDomainModel(latestMovie)
     }
 
     override suspend fun getMovie(movieId: String): MovieDomainModel {
