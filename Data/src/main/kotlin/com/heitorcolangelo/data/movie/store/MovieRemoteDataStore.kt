@@ -4,6 +4,7 @@ import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.common.store.RemoteDataStore
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.source.MovieRemoteData
+import com.heitorcolangelo.domain.movie.model.MoviesSortOption
 import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
@@ -15,6 +16,10 @@ class MovieRemoteDataStore @Inject constructor(
         forceRefresh: Boolean
     ): PageDataModel<MovieDataModel> {
         return remoteData.getMovies(page)
+    }
+
+    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel {
+        return remoteData.getLatestMovie()
     }
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {

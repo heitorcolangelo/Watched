@@ -40,7 +40,9 @@ class MovieListViewModel(
     fun onItemClicked(uiModel: MovieItemUiModel?) {
         uiModel?.let {
             val toMovieDetails = ToMovieDetails(uiModel.id)
-            _navigation.postValue(toMovieDetails)
+//            _navigation.postValue(toMovieDetails)
+            _navigation.postValue(ToMovieMain())
+
         }
     }
 
@@ -64,5 +66,10 @@ class MovieListViewModel(
     class ToMovieDetails(val movieId: String) : Navigation {
         override val direction: NavDirections
             get() = MovieListFragmentDirections.toMovieDetails(movieId)
+    }
+
+    class ToMovieMain : Navigation {
+        override val direction: NavDirections
+            get() = MovieListFragmentDirections.toMovieMain()
     }
 }

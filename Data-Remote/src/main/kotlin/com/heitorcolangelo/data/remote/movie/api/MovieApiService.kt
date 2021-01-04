@@ -18,4 +18,7 @@ interface MovieApiService {
 
     @GET("{movieId}")
     fun getMovie(@Path("movieId") movieId: String): Observable<MovieResponseModel>
+
+    @GET("latest")
+    suspend fun getLatestMovie(): MovieResponseModel
 }

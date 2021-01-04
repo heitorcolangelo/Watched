@@ -4,6 +4,7 @@ import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.common.store.LocalDataStore
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.source.MovieLocalData
+import com.heitorcolangelo.domain.movie.model.MoviesSortOption
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
@@ -19,6 +20,10 @@ class MovieLocalDataStore @Inject constructor(
         return localData.getMovies(page, MovieDataStore.PAGE_SIZE).map {
             PageDataModel(page = page, pageSize = MovieDataStore.PAGE_SIZE, items = it)
         }.blockingFirst()
+    }
+
+    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel {
+        TODO("Not yet implemented")
     }
 
     override fun saveMovies(movies: List<MovieDataModel>): Completable {

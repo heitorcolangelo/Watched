@@ -6,8 +6,10 @@ import com.heitorcolangelo.data.movie.di.MovieDataModule
 import com.heitorcolangelo.data.remote.movie.di.MovieRemoteDataModule
 import com.heitorcolangelo.domain.common.providers.DispatcherProvider
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
+import com.heitorcolangelo.movie.domain.GetLatestMovieUseCase
 import com.heitorcolangelo.movie.domain.GetMovieUseCase
 import com.heitorcolangelo.movie.domain.GetPopularMoviesUseCase
+import com.heitorcolangelo.movie.mapper.LatestMovieDomainUiMapper
 import com.heitorcolangelo.movie.mapper.MovieDetailsDomainUiMapper
 import com.heitorcolangelo.movie.mapper.MovieItemDomainUiMapper
 import com.heitorcolangelo.movie.model.MovieDetailsUiModel
@@ -16,6 +18,8 @@ import com.heitorcolangelo.movie.ui.detail.MovieDetailsFragment
 import com.heitorcolangelo.movie.ui.detail.MovieDetailsViewModel
 import com.heitorcolangelo.movie.ui.list.MovieListFragment
 import com.heitorcolangelo.movie.ui.list.MovieListViewModel
+import com.heitorcolangelo.movie.ui.main.MovieMainFragment
+import com.heitorcolangelo.movie.ui.main.MovieMainViewModel
 import com.heitorcolangelo.presentation.common.mapper.DomainUiMapper
 import com.heitorcolangelo.presentation.common.mapper.PageDomainUiMapper
 import com.heitorcolangelo.presentation.common.mapper.PageDomainUiMapperImpl
@@ -24,8 +28,8 @@ import com.heitorcolangelo.presentation.di.ApplicationModule
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import org.threeten.bp.ZoneId
 import java.util.Locale
+import org.threeten.bp.ZoneId
 
 @Module(
     includes = [
@@ -82,6 +86,22 @@ abstract class MovieFeatureModule : ApplicationModule() {
                 MovieDetailsViewModel(
                     mapper,
                     useCase,
+                    dispatcherProvider
+                )
+            }
+        }
+
+        @Provides
+        fun provideMovieMainViewModel(
+            fragment: MovieMainFragment,
+            mapper: LatestMovieDomainUiMapper,
+            useCase: GetLatestMovieUseCase,
+            dispatcherProvider: DispatcherProvider
+        ): MovieMainViewModel {
+            return ViewModelFactory.make(fragment) {
+                MovieMainViewModel(
+                    useCase,
+                    mapper,
                     dispatcherProvider
                 )
             }
