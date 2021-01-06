@@ -23,6 +23,8 @@ class LocalDataImplTest {
 
     @Test
     fun `WHEN is cache expired THEN get config dao`() {
+        coEvery { configDao.getConfig(any()) } returns listOf()
+
         runBlocking { localData.isCacheExpired(1L) }
 
         coVerify { configDao.getConfig(localData.dataConfigId) }

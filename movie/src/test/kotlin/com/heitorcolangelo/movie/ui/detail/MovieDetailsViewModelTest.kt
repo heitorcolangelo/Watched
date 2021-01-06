@@ -30,12 +30,12 @@ class MovieDetailsViewModelTest : ViewModelTest() {
     fun `WHEN view is ready THEN get movie details`() {
         val movieId = "movieId"
         val argSlot = slot<GetMovieUseCase.Arg>()
-        coEvery { useCase.get(any()) } returns mockk(relaxed = true)
+        coEvery { useCase.execute(any()) } returns mockk(relaxed = true)
 
         viewModel.setMovieId(movieId)
 
         coVerify {
-            useCase.get(capture(argSlot))
+            useCase.execute(capture(argSlot))
         }
 
         assertTrue(argSlot.isCaptured)
@@ -46,7 +46,7 @@ class MovieDetailsViewModelTest : ViewModelTest() {
     fun `WHEN get movie returns THEN map to UiModel`() {
         val movieId = "movieId"
         val domainModel = MovieDomainModelFactory.make()
-        coEvery { useCase.get(any()) } returns domainModel
+        coEvery { useCase.execute(any()) } returns domainModel
 
         viewModel.setMovieId(movieId)
 
@@ -56,7 +56,7 @@ class MovieDetailsViewModelTest : ViewModelTest() {
     @Test
     fun `WHEN get movie returns THEN post to LiveData`() {
         val movieId = "movieId"
-        coEvery { useCase.get(any()) } returns mockk(relaxed = true)
+        coEvery { useCase.execute(any()) } returns mockk(relaxed = true)
         val uiModel = MovieDetailsUiModelFactory.make()
         every { mapper.mapToUiModel(any()) } returns uiModel
 
