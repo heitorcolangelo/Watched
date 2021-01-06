@@ -22,7 +22,7 @@ class MovieDetailsViewModel(
     fun setMovieId(movieId: String) {
         viewModelScope.launch(dispatcherProvider.io()) {
             val arg = GetMovieUseCase.Arg(movieId)
-            val movieDomainModel: MovieDomainModel = useCase.get(arg)
+            val movieDomainModel: MovieDomainModel = useCase.execute(arg)
             val movieUiModel = mapper.mapToUiModel(movieDomainModel)
             _movie.postValue(movieUiModel)
         }

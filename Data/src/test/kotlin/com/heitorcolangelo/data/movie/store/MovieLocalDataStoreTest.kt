@@ -2,10 +2,10 @@ package com.heitorcolangelo.data.movie.store
 
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.source.MovieLocalData
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
-import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class MovieLocalDataStoreTest {
@@ -14,35 +14,34 @@ class MovieLocalDataStoreTest {
 
     @Test
     fun `WHEN get movies THEN get local data movies`() {
-        dataStore.getMovies().test()
+        runBlocking { dataStore.getMovies(0) }
 
-        verify { localData.getMovies() }
+        coVerify { localData.getMovies(0, 10) }
     }
 
     @Test
     fun `WHEN save movies THEN save movies to local data`() {
         val movies = listOf<MovieDataModel>()
-        dataStore.saveMovies(movies).test()
+        runBlocking { dataStore.saveMovies(movies) }
 
-        verify { localData.saveMovies(movies) }
+        coVerify { localData.saveMovies(movies) }
     }
 
     @Test
     fun `WHEN isDataValid is called THEN local data isCacheValid is called`() {
-        every { localData.isCacheValid(any()) } returns Observable.just(true)
+        coEvery { localData.isCacheValid(any()) } returns true
 
-        val testObserver = dataStore.isDataValid().test()
-        testObserver.assertValue(true)
+        runBlocking { dataStore.isDataValid() }
 
-        verify { localData.isCacheValid(any()) }
+        coVerify { localData.isCacheValid(any()) }
     }
 
     @Test
     fun `WHEN getMovie THEN get local movie`() {
         val movieId = "movieId"
 
-        dataStore.getMovie(movieId).test()
+        runBlocking { dataStore.getMovie(movieId) }
 
-        verify { localData.getMovie(movieId) }
+        coVerify { localData.getMovie(movieId) }
     }
 }

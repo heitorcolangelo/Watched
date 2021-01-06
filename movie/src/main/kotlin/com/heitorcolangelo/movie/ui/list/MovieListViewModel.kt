@@ -53,7 +53,7 @@ class MovieListViewModel(
     fun getMoviePage(action: suspend (value: PagingData<MovieItemUiModel>) -> Unit) {
         getPageJob?.cancel()
         getPageJob = viewModelScope.launch(dispatcherProvider.io()) {
-            useCase.get(PagedUseCase.Args())
+            useCase.execute(PagedUseCase.Args())
                 .map(mapper::mapToUiModel)
                 .cachedIn(viewModelScope)
                 .collect {

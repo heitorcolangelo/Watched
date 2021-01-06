@@ -6,10 +6,10 @@ import com.heitorcolangelo.data.remote.movie.api.MovieApiService
 import com.heitorcolangelo.data.remote.movie.mapper.MoviePageResponseDataMapper
 import com.heitorcolangelo.data.remote.movie.mapper.MovieResponseDataMapper
 import com.heitorcolangelo.data.remote.movie.model.MovieResponseModel
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
-import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class MovieRemoteDataImplTest {
@@ -20,48 +20,47 @@ class MovieRemoteDataImplTest {
 
     @Test
     fun `WHEN get movies THEN get Popular movies`() {
-        remoteData.getMovies(1).test()
+        runBlocking { remoteData.getMovies(1) }
 
-        verify { api.getPopular() }
+        coVerify { api.getPopular() }
     }
 
     @Test
     fun `WHEN get movies page THEN get Popular movies page`() {
         val page = 2
 
-        remoteData.getMovies(page).test()
+        runBlocking { remoteData.getMovies(page) }
 
-        val requestedPage = remoteData.getNextPage(page)
-        verify { api.getPopular(requestedPage) }
+        coVerify { api.getPopular(any()) }
     }
 
     @Test
     fun `WHEN api return movies THEN map to data model`() {
         val moviePageResponse = mockk<PageResponseModel<MovieResponseModel>>(relaxed = true)
-        every { api.getPopular() } returns Observable.just(moviePageResponse)
+        coEvery { api.getPopular() } returns moviePageResponse
 
-        remoteData.getMovies(1).test()
+        runBlocking { remoteData.getMovies(1) }
 
-        verify { pageMapper.mapToPageDataModel(moviePageResponse) }
+        coVerify { pageMapper.mapToPageDataModel(moviePageResponse) }
     }
 
     @Test
     fun `WHEN get movie THEN get movie from api`() {
         val movieId = "movieId"
 
-        remoteData.getMovie(movieId).test()
+        runBlocking { remoteData.getMovie(movieId) }
 
-        verify { api.getMovie(movieId) }
+        coVerify { api.getMovie(movieId) }
     }
 
     @Test
     fun `WHEN get movie returns THEN map to data model`() {
         val response = MovieResponseModelFactory.make()
         val movieId = response.id.toString()
-        every { api.getMovie(movieId) } returns Observable.just(response)
+        coEvery { api.getMovie(movieId) } returns response
 
-        remoteData.getMovie(movieId).test()
+        runBlocking { remoteData.getMovie(movieId) }
 
-        verify { movieMapper.mapToDataModel(response) }
+        coVerify { movieMapper.mapToDataModel(response) }
     }
 }

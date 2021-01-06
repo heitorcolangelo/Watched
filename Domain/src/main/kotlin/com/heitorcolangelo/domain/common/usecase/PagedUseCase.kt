@@ -5,7 +5,7 @@ import com.heitorcolangelo.domain.common.model.DomainModel
 import kotlinx.coroutines.flow.Flow
 
 abstract class PagedUseCase<Model : DomainModel> {
-    suspend fun get(args: Args): Flow<PagingData<Model>> {
+    suspend fun execute(args: Args): Flow<PagingData<Model>> {
         return invoke(args)
     }
 

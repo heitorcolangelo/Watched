@@ -82,12 +82,9 @@ dependencies {
 
     // Room
     api "androidx.room:room-runtime:$ax_versions.arch_lifecycle"
-    implementation "androidx.room:room-rxjava2:$ax_versions.arch_lifecycle"
+    api "androidx.room:room-ktx:$ax_versions.arch_lifecycle"
     kapt "androidx.room:room-compiler:$ax_versions.arch_lifecycle"
 
-    // RxJava
-    implementation "io.reactivex.rxjava3:rxkotlin:$versions.rxjava"
-    implementation "com.github.akarnokd:rxjava3-bridge:$versions.rxjava"
 
     androidTestImplementation project(':Common:Test')
     androidTestImplementation "androidx.test:core:$ax_versions.foundation_test_core"

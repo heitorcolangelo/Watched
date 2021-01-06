@@ -35,7 +35,7 @@ class MovieMainViewModel @Inject constructor(
         viewModelScope.launch(
             dispatcherProvider.io() + latestMovieExceptionHandler
         ) {
-            val latestMovie = latestMovieUseCase.get(GetLatestMovieUseCase.Args())
+            val latestMovie = latestMovieUseCase.execute(GetLatestMovieUseCase.Args())
             val uiModel = latestMovieMapper.mapToUiModel(latestMovie)
             _latestMovie.postValue(uiModel)
         }

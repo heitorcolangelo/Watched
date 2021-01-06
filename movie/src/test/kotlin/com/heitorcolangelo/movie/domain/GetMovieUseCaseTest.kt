@@ -16,7 +16,7 @@ class GetMovieUseCaseTest {
         val arg = GetMovieUseCase.Arg(movieId)
 
         runBlocking {
-            useCase.get(arg)
+            useCase.execute(arg)
         }
 
         coVerify { repository.getMovie(movieId) }

@@ -21,7 +21,6 @@ abstract class MovieLocalDataModule {
     @Binds
     abstract fun bindMovieEntityDataMapper(mapper: MovieEntityDataMapper): EntityDataMapper<MovieEntity, MovieDataModel>
 
-    @Module
     companion object {
         @Provides
         fun provideMovieDao(database: MoviesDatabase): MovieDao {

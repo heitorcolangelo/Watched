@@ -11,7 +11,9 @@ import dagger.Provides
 
 @Module(includes = [RemoteDataModule::class])
 abstract class MovieRemoteDataModule {
-    @Module
+    @Binds
+    abstract fun bindMovieRemoteData(impl: MovieRemoteDataImpl): MovieRemoteData
+
     companion object {
         @Provides
         fun provideMovieApiService(apiServiceFactory: ApiServiceFactory): MovieApiService {
@@ -21,7 +23,4 @@ abstract class MovieRemoteDataModule {
             )
         }
     }
-
-    @Binds
-    abstract fun bindMovieRemoteData(impl: MovieRemoteDataImpl): MovieRemoteData
 }

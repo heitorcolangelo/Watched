@@ -2,11 +2,11 @@ package com.heitorcolangelo.data.local.common
 
 import com.heitorcolangelo.data.local.config.dao.ConfigDao
 import com.heitorcolangelo.data.local.factory.ConfigEntityFactory
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
-import io.reactivex.Flowable
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class LocalDataImplTest {
@@ -16,16 +16,16 @@ class LocalDataImplTest {
 
     @Test
     fun `WHEN set last cache time THEN save to config dao`() {
-        localData.setLastCacheTime(1L).test()
+        runBlocking { localData.setLastCacheTime(1L) }
 
-        verify { configDao.saveConfig(any()) }
+        coVerify { configDao.saveConfig(any()) }
     }
 
     @Test
     fun `WHEN is cache expired THEN get config dao`() {
-        localData.isCacheExpired(1L).test()
+        runBlocking { localData.isCacheExpired(1L) }
 
-        verify { configDao.getConfig(localData.dataConfigId) }
+        coVerify { configDao.getConfig(localData.dataConfigId) }
     }
 
     @Test
@@ -33,10 +33,13 @@ class LocalDataImplTest {
         val now = System.currentTimeMillis()
         val oneHour = (36 * 100 * 1000).toLong()
         val configEntity = ConfigEntityFactory.make().copy(lastCacheTime = now - oneHour)
-        every { configDao.getConfig(any()) } returns Flowable.just(listOf(configEntity))
+        coEvery { configDao.getConfig(any()) } returns listOf(configEntity)
 
-        val testObserver = localData.isCacheExpired(now).test()
-        testObserver.assertValue(true)
+        val isExpired = runBlocking {
+            localData.isCacheExpired(now)
+        }
+
+        assertTrue(isExpired)
     }
 
     private class TestLocalData(configDao: ConfigDao, private val isDataCached: Boolean) :
@@ -44,8 +47,6 @@ class LocalDataImplTest {
         override val dataConfigId: String
             get() = TestLocalData::class.java.name
 
-        override fun isDataCached(): Single<Boolean> {
-            return Single.just(isDataCached)
-        }
+        override suspend fun isDataCached() = isDataCached
     }
 }

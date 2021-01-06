@@ -27,7 +27,7 @@ class GetPopularMoviesUseCaseTest {
         coEvery { repository.getMovies(any(), any()) } returns flowOf(page)
 
         runBlocking {
-            useCase.get(PagedUseCase.Args())
+            useCase.execute(PagedUseCase.Args())
         }
 
         coVerify { repository.getMovies(capture(slot), any()) }
