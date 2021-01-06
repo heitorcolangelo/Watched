@@ -5,10 +5,14 @@ import com.heitorcolangelo.data.local.factory.MovieEntityFactory
 import com.heitorcolangelo.data.local.movie.dao.MovieDao
 import com.heitorcolangelo.data.local.movie.mapper.MovieEntityDataMapper
 import com.heitorcolangelo.data.movie.model.MovieDataModel
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
-import io.reactivex.Flowable
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class MovieLocalDataImplTest {
@@ -20,31 +24,31 @@ class MovieLocalDataImplTest {
     @Test
     fun `WHEN dao return movies THEN data is cached`() {
         val movieList = MovieEntityFactory.makeList(3)
-        every { movieDao.getMovies() } returns Flowable.just(movieList)
+        coEvery { movieDao.getMovies() } returns movieList
 
-        val testObserver = localData.isDataCached().test()
+        val isCached = runBlocking { localData.isDataCached() }
 
-        verify { movieDao.getMovies() }
-        testObserver.assertValue(true)
+        coVerify { movieDao.getMovies() }
+        assertTrue(isCached)
     }
 
     @Test
     fun `WHEN dao DONT return movies THEN data is NOT cached`() {
-        every { movieDao.getMovies() } returns Flowable.just(emptyList())
+        coEvery { movieDao.getMovies() } returns emptyList()
 
-        val testObserver = localData.isDataCached().test()
+        val isCached = runBlocking { localData.isDataCached() }
 
-        verify { movieDao.getMovies() }
-        testObserver.assertValue(false)
+        coVerify { movieDao.getMovies() }
+        assertFalse(isCached)
     }
 
     @Test
     fun `WHEN save movies THEN map to entities`() {
         val moviesToSave = listOf(mockk<MovieDataModel>(relaxed = true))
 
-        localData.saveMovies(moviesToSave).test()
+        runBlocking { localData.saveMovies(moviesToSave) }
 
-        verify { mapper.mapToEntity(any()) }
+        coVerify { mapper.mapToEntity(any()) }
     }
 
     @Test
@@ -53,57 +57,62 @@ class MovieLocalDataImplTest {
         val movieEntity = MovieEntityFactory.make()
         every { mapper.mapToEntity(any()) } returns movieEntity
 
-        localData.saveMovies(moviesToSave).test()
+        runBlocking { localData.saveMovies(moviesToSave) }
 
-        verify { movieDao.saveMovies(listOf(movieEntity)) }
+        coVerify { movieDao.saveMovies(listOf(movieEntity)) }
     }
 
     @Test
     fun `WHEN get movies THEN get pagedMovies from dao`() {
+        val movieList = MovieEntityFactory.makeList(3)
+        coEvery { movieDao.getPagedMovies(any(), any()) } returns movieList
         val page = 1
         val pageSize = 10
-        localData.getMovies(page, pageSize).test()
+        runBlocking { localData.getMovies(page, pageSize) }
+
         val offset = localData.getOffset(page, pageSize)
 
-        verify { movieDao.getPagedMovies(pageSize, offset) }
+        coVerify { movieDao.getPagedMovies(pageSize, offset) }
     }
 
     @Test
     fun `WHEN get movies THEN map to data model`() {
         val movieList = MovieEntityFactory.makeList(3)
-        every { movieDao.getPagedMovies(any(), any()) } returns Flowable.just(movieList)
+        coEvery { movieDao.getPagedMovies(any(), any()) } returns movieList
         val page = 1
         val pageSize = 10
 
-        localData.getMovies(page, pageSize).test()
+        runBlocking { localData.getMovies(page, pageSize) }
 
         verify(exactly = 3) { mapper.mapToDataModel(any()) }
     }
 
     @Test
     fun `WHEN clear THEN clear dao`() {
-        localData.clear()
+        runBlocking { localData.clear() }
 
-        verify { movieDao.clearMovies() }
+        coVerify { movieDao.clearMovies() }
     }
 
     @Test
     fun `WHEN get movie THEN map to data model`() {
         val movie = MovieEntityFactory.make()
         val movieId = movie.id
-        every { movieDao.getMovie(movieId) } returns Flowable.just(movie)
+        coEvery { movieDao.getMovie(movieId) } returns movie
 
-        localData.getMovie(movieId).test()
+        runBlocking { localData.getMovie(movieId) }
 
-        verify { mapper.mapToDataModel(movie) }
+        coVerify { mapper.mapToDataModel(movie) }
     }
 
     @Test
     fun `WHEN get movie THEN get from dao`() {
-        val movieId = "movieId"
+        val movie = MovieEntityFactory.make()
+        val movieId = movie.id
+        coEvery { movieDao.getMovie(movieId) } returns movie
 
-        localData.getMovie(movieId).test()
+        runBlocking { localData.getMovie(movieId) }
 
-        verify { movieDao.getMovie(movieId) }
+        coVerify { movieDao.getMovie(movieId) }
     }
 }
