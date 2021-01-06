@@ -1,8 +1,8 @@
 package com.heitorcolangelo.data.common.source
 
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertFalse
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class LocalDataTest {
@@ -11,27 +11,27 @@ class LocalDataTest {
     fun `WHEN data is cached AND cache is expired THEN cache is NOT valid`() {
         val localData = TestLocalDataImpl(isDataCached = true, isCacheExpired = true)
 
-        val testObserver = localData.isCacheValid(0L).test()
+        val isValid = runBlocking { localData.isCacheValid(0L) }
 
-        testObserver.assertValue(false)
+        assertFalse(isValid)
     }
 
     @Test
     fun `WHEN data is cached AND cache is NOT expired THEN cache is valid`() {
         val localData = TestLocalDataImpl(isDataCached = true, isCacheExpired = false)
 
-        val testObserver = localData.isCacheValid(0L).test()
+        val isValid = runBlocking { localData.isCacheValid(0L) }
 
-        testObserver.assertValue(true)
+        assertTrue(isValid)
     }
 
     @Test
     fun `WHEN data is not cached THEN cache is NOT valid`() {
         val localData = TestLocalDataImpl(isDataCached = false, isCacheExpired = true)
 
-        val testObserver = localData.isCacheValid(0L).test()
+        val isValid = runBlocking { localData.isCacheValid(0L) }
 
-        testObserver.assertValue(false)
+        assertFalse(isValid)
     }
 
     private class TestLocalDataImpl(
@@ -41,11 +41,9 @@ class LocalDataTest {
         override val dataConfigId: String
             get() = TestLocalDataImpl::class.java.name
 
-        override fun clear(): Completable = Completable.complete()
-        override fun setLastCacheTime(lastCacheTime: Long): Completable = Completable.complete()
-        override fun isCacheExpired(currentTime: Long): Observable<Boolean> =
-            Observable.just(isCacheExpired)
-
-        override fun isDataCached(): Single<Boolean> = Single.just(isDataCached)
+        override suspend fun clear() {}
+        override suspend fun setLastCacheTime(lastCacheTime: Long) {}
+        override suspend fun isCacheExpired(currentTime: Long) = isCacheExpired
+        override suspend fun isDataCached() = isDataCached
     }
 }

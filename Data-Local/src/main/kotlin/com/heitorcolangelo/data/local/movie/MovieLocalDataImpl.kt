@@ -6,10 +6,6 @@ import com.heitorcolangelo.data.local.movie.dao.MovieDao
 import com.heitorcolangelo.data.local.movie.mapper.MovieEntityDataMapper
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.source.MovieLocalData
-import hu.akarnokd.rxjava3.bridge.RxJavaBridge
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class MovieLocalDataImpl @Inject constructor(
@@ -17,30 +13,28 @@ class MovieLocalDataImpl @Inject constructor(
     private val mapper: MovieEntityDataMapper,
     configDao: ConfigDao
 ) : LocalDataImpl(configDao), MovieLocalData {
-    override fun isDataCached(): Single<Boolean> {
-        return RxJavaBridge.toV3Flowable(movieDao.getMovies())
-            .map { it.isNotEmpty() }.firstOrError()
+    override suspend fun isDataCached(): Boolean {
+        return movieDao.getMovies().isNotEmpty()
     }
 
-    override fun saveMovies(movies: List<MovieDataModel>): Completable {
+    override suspend fun saveMovies(movies: List<MovieDataModel>) {
         val movieEntities = movies.map(mapper::mapToEntity)
-        return RxJavaBridge.toV3Completable(movieDao.saveMovies(movieEntities))
+        movieDao.saveMovies(movieEntities)
     }
 
-    override fun getMovies(page: Int, pageSize: Int): Observable<List<MovieDataModel>> {
+    override suspend fun getMovies(page: Int, pageSize: Int): List<MovieDataModel> {
         val offset = getOffset(page, pageSize)
-        val movies = RxJavaBridge.toV3Flowable(movieDao.getPagedMovies(pageSize, offset))
-        return movies.toObservable().map { it.map(mapper::mapToDataModel) }
+        val movies = movieDao.getPagedMovies(pageSize, offset)
+        return movies.map(mapper::mapToDataModel)
     }
 
-    override fun getMovie(movieId: String): Observable<MovieDataModel> {
-        val movies = RxJavaBridge.toV3Flowable(movieDao.getMovie(movieId))
-        return movies.toObservable().map(mapper::mapToDataModel)
+    override suspend fun getMovie(movieId: String): MovieDataModel {
+        val movie = movieDao.getMovie(movieId)
+        return mapper.mapToDataModel(movie)
     }
 
-    override fun clear(): Completable {
-        return super.clear().andThen(
-            RxJavaBridge.toV3Completable(movieDao.clearMovies())
-        )
+    override suspend fun clear() {
+        super.clear()
+        movieDao.clearMovies()
     }
 }

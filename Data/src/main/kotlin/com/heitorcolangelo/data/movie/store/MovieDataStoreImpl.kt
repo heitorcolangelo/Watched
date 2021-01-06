@@ -2,9 +2,6 @@ package com.heitorcolangelo.data.movie.store
 
 import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.movie.model.MovieDataModel
-import com.heitorcolangelo.domain.movie.model.MoviesSortOption
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 class MovieDataStoreImpl @Inject constructor(
@@ -22,17 +19,17 @@ class MovieDataStoreImpl @Inject constructor(
         return remoteDataStore.getLatestMovie(forceRefresh)
     }
 
-    override fun saveMovies(movies: List<MovieDataModel>): Completable {
+    override suspend fun saveMovies(movies: List<MovieDataModel>) {
         return localDataStore.saveMovies(movies)
     }
 
-    override fun getMovie(movieId: String): MovieDataModel {
-        val isDataValid = localDataStore.isDataValid().blockingFirst()
+    override suspend fun getMovie(movieId: String): MovieDataModel {
+        val isDataValid = localDataStore.isDataValid()
         return if (isDataValid) {
             localDataStore.getMovie(movieId)
         } else {
             remoteDataStore.getMovie(movieId).also {
-                saveMovies(listOf(it)).andThen(Observable.just(it))
+                saveMovies(listOf(it))
             }
         }
     }

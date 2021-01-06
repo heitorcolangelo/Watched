@@ -1,9 +1,9 @@
 package com.heitorcolangelo.data.movie.store
 
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
-import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class MovieDataStoreImplTest {
@@ -14,37 +14,36 @@ class MovieDataStoreImplTest {
 
     @Test
     fun `WHEN local data is valid THEN get movies from local data store`() {
-        every { localDataStore.isDataValid() } returns Observable.just(true)
+        coEvery { localDataStore.isDataValid() } returns true
 
-        dataStore.getMovies().test()
+        runBlocking { dataStore.getMovies(0) }
 
-        verify { localDataStore.getMovies() }
+        coVerify { localDataStore.getMovies(0) }
     }
 
     @Test
     fun `WHEN local data is NOT valid THEN get movies from remote data store`() {
-        every { localDataStore.isDataValid() } returns Observable.just(false)
+        coEvery { localDataStore.isDataValid() } returns false
 
-        dataStore.getMovies().test()
+        runBlocking { dataStore.getMovies(0) }
 
-        verify { remoteDataStore.getMovies() }
+        coVerify { remoteDataStore.getMovies(0) }
     }
 
     @Test
     fun `WHEN get movies from remote data store THEN save movies`() {
-        every { localDataStore.isDataValid() } returns Observable.just(false)
-        every { remoteDataStore.getMovies() } returns Observable.just(mockk(relaxed = true))
+        coEvery { localDataStore.isDataValid() } returns false
+        coEvery { remoteDataStore.getMovies(0) } returns mockk(relaxed = true)
 
-        dataStore.getMovies().test()
+        runBlocking { dataStore.getMovies(0) }
 
-        verify { localDataStore.saveMovies(any()) }
+        coVerify { localDataStore.saveMovies(any()) }
     }
 
     @Test
     fun `WHEN save movies THEN save it to local data store`() {
-        val testObservable = dataStore.saveMovies(listOf()).test()
+        runBlocking { dataStore.saveMovies(listOf()) }
 
-        testObservable.assertComplete()
-        verify { localDataStore.saveMovies(any()) }
+        coVerify { localDataStore.saveMovies(any()) }
     }
 }

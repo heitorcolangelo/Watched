@@ -8,7 +8,6 @@ import com.heitorcolangelo.data.remote.movie.api.MovieApiService
 import com.heitorcolangelo.data.remote.movie.mapper.MoviePageResponseDataMapper
 import com.heitorcolangelo.data.remote.movie.mapper.MovieResponseDataMapper
 import com.heitorcolangelo.data.remote.movie.model.MovieResponseModel
-import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 class MovieRemoteDataImpl @Inject constructor(
@@ -21,8 +20,8 @@ class MovieRemoteDataImpl @Inject constructor(
         return pageMapper.mapToPageDataModel(popular)
     }
 
-    override fun getMovie(movieId: String): Observable<MovieDataModel> {
-        return api.getMovie(movieId).map(movieMapper::mapToDataModel)
+    override suspend fun getMovie(movieId: String): MovieDataModel {
+        return movieMapper.mapToDataModel(api.getMovie(movieId))
     }
 
     override suspend fun getLatestMovie(): MovieDataModel {

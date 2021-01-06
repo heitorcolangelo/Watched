@@ -2,18 +2,19 @@ package com.heitorcolangelo.data.remote.di
 
 import com.heitorcolangelo.data.remote.common.BuildConfiguration
 import com.heitorcolangelo.data.remote.common.api.AuthInterceptor
+import com.heitorcolangelo.data.remote.common.api.LoggingInterceptorFactory
 import com.heitorcolangelo.data.remote.common.api.OkHttpClientFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
+import java.io.File
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.converter.moshi.MoshiConverterFactory
-import java.io.File
 
 @Module
 class RemoteDataModule(private val configuration: BuildConfiguration) {
@@ -46,7 +47,7 @@ class RemoteDataModule(private val configuration: BuildConfiguration) {
 
     @Provides
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
-        return OkHttpClientFactory.getLoggingInterceptor(configuration)
+        return LoggingInterceptorFactory.getLoggingInterceptor(configuration)
     }
 
     @Provides

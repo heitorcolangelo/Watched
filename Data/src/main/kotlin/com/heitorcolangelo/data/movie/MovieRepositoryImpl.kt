@@ -34,13 +34,6 @@ class MovieRepositoryImpl @Inject constructor(
         ).flow.map(pageMapper::mapToPageDomainModel)
     }
 
-    override fun getMovieList(
-        sortOption: MoviesSortOption,
-        forceRefresh: Boolean
-    ): List<MovieDomainModel> {
-        return listOf()
-    }
-
     override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDomainModel {
         val latestMovie = dataStore.getLatestMovie(forceRefresh)
         return movieMapper.mapToDomainModel(latestMovie)

@@ -4,9 +4,6 @@ import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.common.store.LocalDataStore
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.source.MovieLocalData
-import com.heitorcolangelo.domain.movie.model.MoviesSortOption
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
 import javax.inject.Inject
 
 class MovieLocalDataStore @Inject constructor(
@@ -17,29 +14,28 @@ class MovieLocalDataStore @Inject constructor(
         page: Int,
         forceRefresh: Boolean
     ): PageDataModel<MovieDataModel> {
-        return localData.getMovies(page, MovieDataStore.PAGE_SIZE).map {
-            PageDataModel(page = page, pageSize = MovieDataStore.PAGE_SIZE, items = it)
-        }.blockingFirst()
+        val movies = localData.getMovies(page, MovieDataStore.PAGE_SIZE)
+        return PageDataModel(page = page, pageSize = MovieDataStore.PAGE_SIZE, items = movies)
     }
 
     override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel {
         TODO("Not yet implemented")
     }
 
-    override fun saveMovies(movies: List<MovieDataModel>): Completable {
-        return localData.saveMovies(movies)
-            .andThen(localData.setLastCacheTime(System.currentTimeMillis()))
+    override suspend fun saveMovies(movies: List<MovieDataModel>) {
+        localData.saveMovies(movies)
+        localData.setLastCacheTime(System.currentTimeMillis())
     }
 
-    override fun isDataValid(): Observable<Boolean> {
+    override suspend fun isDataValid(): Boolean {
         return localData.isCacheValid(System.currentTimeMillis())
     }
 
-    override fun getMovie(movieId: String): MovieDataModel {
-        return localData.getMovie(movieId).blockingFirst()
+    override suspend fun getMovie(movieId: String): MovieDataModel {
+        return localData.getMovie(movieId)
     }
 
-    override fun clear(): Completable {
-        return localData.clear()
+    override suspend fun clear() {
+        localData.clear()
     }
 }

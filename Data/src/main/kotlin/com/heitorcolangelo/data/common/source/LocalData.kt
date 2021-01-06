@@ -1,10 +1,5 @@
 package com.heitorcolangelo.data.common.source
 
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.functions.BiFunction
-
 interface LocalData {
 
     companion object {
@@ -14,24 +9,16 @@ interface LocalData {
 
     val dataConfigId: String
 
-    fun clear(): Completable
+    suspend fun clear()
 
-    fun setLastCacheTime(lastCacheTime: Long): Completable
+    suspend fun setLastCacheTime(lastCacheTime: Long)
 
-    fun isCacheExpired(currentTime: Long): Observable<Boolean>
+    suspend fun isCacheExpired(currentTime: Long): Boolean
 
-    fun isDataCached(): Single<Boolean>
+    suspend fun isDataCached(): Boolean
 
-    fun isCacheValid(currentTime: Long): Observable<Boolean> {
-        return Observable.zip(
-            isDataCached().toObservable(),
-            isCacheExpired(currentTime),
-            BiFunction<Boolean, Boolean, Pair<Boolean, Boolean>> { isDataCached, isCacheExpired ->
-                Pair(isDataCached, isCacheExpired)
-            }
-        ).map {
-            it.first && !it.second
-        }
+    suspend fun isCacheValid(currentTime: Long): Boolean {
+        return isDataCached() && !isCacheExpired(currentTime)
     }
 
     fun getOffset(page: Int, pageSize: Int): Int {

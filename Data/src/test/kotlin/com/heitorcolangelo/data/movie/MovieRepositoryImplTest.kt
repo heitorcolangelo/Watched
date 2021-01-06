@@ -1,17 +1,16 @@
 package com.heitorcolangelo.data.movie
 
 import com.heitorcolangelo.data.common.mapper.PageDataDomainMapper
-import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.factory.MovieDataModelFactory
 import com.heitorcolangelo.data.movie.mapper.MovieDataDomainMapper
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.store.MovieDataStore
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import com.heitorcolangelo.domain.movie.model.MoviesSortOption
-import io.mockk.every
+import io.mockk.coEvery
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
-import io.reactivex.rxjava3.core.Observable
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class MovieRepositoryImplTest {
@@ -20,43 +19,41 @@ class MovieRepositoryImplTest {
     private val movieMapper: MovieDataDomainMapper = mockk(relaxed = true)
     private val dataStore: MovieDataStore = mockk(relaxed = true)
 
-    private val repo = MovieRepositoryImpl(pageMapper, movieMapper, dataStore)
+    private val repo = MovieRepositoryImpl(pageMapper, movieMapper, dataStore, mockk())
 
     @Test
     fun `WHEN get movies THEN get movies from data store`() {
-        repo.getMovies(MoviesSortOption.MostRecent).test()
+        runBlocking { repo.getMovies(MoviesSortOption.MostRecent) }
 
-        verify { dataStore.getMovies() }
+        coVerify { dataStore.getMovies(0) }
     }
 
     @Test
     fun `WHEN data store returns THEN map to domain model`() {
-        val movies = listOf<MovieDataModel>()
-        val moviePage = PageDataModel(movies)
-        every { dataStore.getMovies() } returns Observable.just(moviePage)
+        coEvery { dataStore.getMovies(0) } returns mockk()
 
-        repo.getMovies(MoviesSortOption.MostRecent).test()
+        runBlocking { repo.getMovies(MoviesSortOption.MostRecent) }
 
-        verify { pageMapper.mapToPageDomainModel(moviePage) }
+        coVerify { pageMapper.mapToPageDomainModel(any()) }
     }
 
     @Test
     fun `WHEN get movie THEN get movie from data store`() {
         val movieId = "movieId"
 
-        repo.getMovie(movieId).test()
+        runBlocking { repo.getMovie(movieId) }
 
-        verify { dataStore.getMovie(movieId) }
+        coVerify { dataStore.getMovie(movieId) }
     }
 
     @Test
     fun `WHEN get movie returns THEN map to domain model`() {
         val movie = MovieDataModelFactory.make()
         val movieId = movie.id
-        every { dataStore.getMovie(movieId) } returns Observable.just(movie)
+        coEvery { dataStore.getMovie(movieId) } returns movie
 
-        repo.getMovie(movieId).test()
+        runBlocking { repo.getMovie(movieId) }
 
-        verify { movieMapper.mapToDomainModel(movie) }
+        coVerify { movieMapper.mapToDomainModel(movie) }
     }
 }

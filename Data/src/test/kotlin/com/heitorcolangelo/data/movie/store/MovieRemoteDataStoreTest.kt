@@ -1,8 +1,9 @@
 package com.heitorcolangelo.data.movie.store
 
 import com.heitorcolangelo.data.movie.source.MovieRemoteData
+import io.mockk.coVerify
 import io.mockk.mockk
-import io.mockk.verify
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class MovieRemoteDataStoreTest {
@@ -11,15 +12,15 @@ class MovieRemoteDataStoreTest {
 
     @Test
     fun `WHEN get movies THEN get movies from remote data`() {
-        dataStore.getMovies().test()
+        runBlocking { dataStore.getMovies(0) }
 
-        verify {
+        coVerify {
             remoteData.getMovies(1)
         }
     }
 
     @Test(expected = UnsupportedOperationException::class)
     fun `WHEN save movies THEN throw exception`() {
-        dataStore.saveMovies(listOf()).test()
+        runBlocking { dataStore.saveMovies(listOf()) }
     }
 }

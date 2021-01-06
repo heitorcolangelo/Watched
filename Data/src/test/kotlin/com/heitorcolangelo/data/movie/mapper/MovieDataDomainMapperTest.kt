@@ -33,8 +33,8 @@ class MovieDataDomainMapperTest {
         assertEquals(dataModel.title, domainModel.title)
         assertEquals(dataModel.overview, domainModel.overview)
         assertEquals(dataModel.popularity, domainModel.popularity)
-        assertEquals(dataModel.posterPath, domainModel.posterPath)
-        assertEquals(dataModel.backdropPath, domainModel.backdropPath)
+        assertEquals(dataModel.posterPath, domainModel.poster.path)
+        assertEquals(dataModel.backdropPath, domainModel.backdrop.path)
         assertEquals(dataModel.voteAverage, domainModel.voteAverage)
         assertEquals(dataModel.releaseDate, domainModel.releaseDate)
     }

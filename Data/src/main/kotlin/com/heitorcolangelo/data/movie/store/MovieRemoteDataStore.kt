@@ -4,8 +4,6 @@ import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.common.store.RemoteDataStore
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.source.MovieRemoteData
-import com.heitorcolangelo.domain.movie.model.MoviesSortOption
-import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class MovieRemoteDataStore @Inject constructor(
@@ -22,11 +20,11 @@ class MovieRemoteDataStore @Inject constructor(
         return remoteData.getLatestMovie()
     }
 
-    override fun saveMovies(movies: List<MovieDataModel>): Completable {
+    override suspend fun saveMovies(movies: List<MovieDataModel>) {
         throw UnsupportedOperationException("Save is not supported by remote data source.")
     }
 
-    override fun getMovie(movieId: String): MovieDataModel {
-        return remoteData.getMovie(movieId).blockingFirst()
+    override suspend fun getMovie(movieId: String): MovieDataModel {
+        return remoteData.getMovie(movieId)
     }
 }
