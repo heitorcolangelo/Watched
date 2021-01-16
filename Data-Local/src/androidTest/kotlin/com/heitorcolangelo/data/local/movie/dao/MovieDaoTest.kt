@@ -1,6 +1,6 @@
 package com.heitorcolangelo.data.local.movie.dao
 
-import com.heitorcolangelo.data.common.source.LocalData
+import com.heitorcolangelo.data.common.source.LocalDataSource
 import com.heitorcolangelo.data.local.common.DaoTest
 import com.heitorcolangelo.data.local.factory.MovieEntityFactory
 import kotlinx.coroutines.runBlocking
@@ -20,7 +20,7 @@ class MovieDaoTest : DaoTest() {
 
         runBlocking { dao.saveMovies(list) }
 
-        val localData = TestLocalData()
+        val localData = TestLocalDataSource()
         val pageSize = 10
 
         val firstPageOffset = localData.getOffset(pageSize, 0)
@@ -84,7 +84,7 @@ class MovieDaoTest : DaoTest() {
         assertEquals(updatedMovie, movies[0])
     }
 
-    private class TestLocalData : LocalData {
+    private class TestLocalDataSource : LocalDataSource {
         override val dataConfigId: String
             get() = ""
 

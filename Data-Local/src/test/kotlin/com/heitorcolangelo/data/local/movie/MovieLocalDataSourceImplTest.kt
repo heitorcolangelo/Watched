@@ -15,11 +15,11 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class MovieLocalDataImplTest {
+class MovieLocalDataSourceImplTest {
     private val movieDao: MovieDao = mockk(relaxed = true)
     private val mapper: MovieEntityDataMapper = mockk(relaxed = true)
     private val configDao: ConfigDao = mockk(relaxed = true)
-    private val localData = MovieLocalDataImpl(movieDao, mapper, configDao)
+    private val localData = MovieLocalDataSourceImpl(movieDao, mapper, configDao)
 
     @Test
     fun `WHEN dao return movies THEN data is cached`() {

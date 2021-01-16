@@ -1,7 +1,7 @@
 package com.heitorcolangelo.data.movie.store
 
 import com.heitorcolangelo.data.movie.model.MovieDataModel
-import com.heitorcolangelo.data.movie.source.MovieLocalData
+import com.heitorcolangelo.data.movie.source.MovieLocalDataSource
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -9,7 +9,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class MovieLocalDataStoreTest {
-    private val localData: MovieLocalData = mockk(relaxed = true)
+    private val localData: MovieLocalDataSource = mockk(relaxed = true)
     private val dataStore = MovieLocalDataStore(localData)
 
     @Test

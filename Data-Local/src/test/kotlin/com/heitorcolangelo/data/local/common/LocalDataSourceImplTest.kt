@@ -9,10 +9,10 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class LocalDataImplTest {
+class LocalDataSourceImplTest {
 
     private val configDao: ConfigDao = mockk(relaxed = true)
-    private val localData = TestLocalData(configDao, true)
+    private val localData = TestLocalDataSource(configDao, true)
 
     @Test
     fun `WHEN set last cache time THEN save to config dao`() {
@@ -44,10 +44,10 @@ class LocalDataImplTest {
         assertTrue(isExpired)
     }
 
-    private class TestLocalData(configDao: ConfigDao, private val isDataCached: Boolean) :
-        LocalDataImpl(configDao) {
+    private class TestLocalDataSource(configDao: ConfigDao, private val isDataCached: Boolean) :
+        LocalDataSourceImpl(configDao) {
         override val dataConfigId: String
-            get() = TestLocalData::class.java.name
+            get() = TestLocalDataSource::class.java.name
 
         override suspend fun isDataCached() = isDataCached
     }

@@ -1,18 +1,18 @@
 package com.heitorcolangelo.data.local.movie
 
-import com.heitorcolangelo.data.local.common.LocalDataImpl
+import com.heitorcolangelo.data.local.common.LocalDataSourceImpl
 import com.heitorcolangelo.data.local.config.dao.ConfigDao
 import com.heitorcolangelo.data.local.movie.dao.MovieDao
 import com.heitorcolangelo.data.local.movie.mapper.MovieEntityDataMapper
 import com.heitorcolangelo.data.movie.model.MovieDataModel
-import com.heitorcolangelo.data.movie.source.MovieLocalData
+import com.heitorcolangelo.data.movie.source.MovieLocalDataSource
 import javax.inject.Inject
 
-class MovieLocalDataImpl @Inject constructor(
+class MovieLocalDataSourceImpl @Inject constructor(
     private val movieDao: MovieDao,
     private val mapper: MovieEntityDataMapper,
     configDao: ConfigDao
-) : LocalDataImpl(configDao), MovieLocalData {
+) : LocalDataSourceImpl(configDao), MovieLocalDataSource {
     override suspend fun isDataCached(): Boolean {
         return movieDao.getMovies().isNotEmpty()
     }

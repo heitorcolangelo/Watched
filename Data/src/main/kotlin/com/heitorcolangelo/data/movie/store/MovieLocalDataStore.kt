@@ -3,11 +3,11 @@ package com.heitorcolangelo.data.movie.store
 import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.common.store.LocalDataStore
 import com.heitorcolangelo.data.movie.model.MovieDataModel
-import com.heitorcolangelo.data.movie.source.MovieLocalData
+import com.heitorcolangelo.data.movie.source.MovieLocalDataSource
 import javax.inject.Inject
 
 class MovieLocalDataStore @Inject constructor(
-    private val localData: MovieLocalData
+    private val localData: MovieLocalDataSource
 ) : MovieDataStore, LocalDataStore {
 
     override suspend fun getMovies(
