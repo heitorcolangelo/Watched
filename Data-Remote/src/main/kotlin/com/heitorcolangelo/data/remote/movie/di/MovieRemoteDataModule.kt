@@ -1,9 +1,9 @@
 package com.heitorcolangelo.data.remote.movie.di
 
-import com.heitorcolangelo.data.movie.source.MovieRemoteData
+import com.heitorcolangelo.data.movie.source.MovieRemoteDataSource
 import com.heitorcolangelo.data.remote.common.api.ApiServiceFactory
 import com.heitorcolangelo.data.remote.di.RemoteDataModule
-import com.heitorcolangelo.data.remote.movie.MovieRemoteDataImpl
+import com.heitorcolangelo.data.remote.movie.MovieRemoteDataSourceImpl
 import com.heitorcolangelo.data.remote.movie.api.MovieApiService
 import dagger.Binds
 import dagger.Module
@@ -12,7 +12,7 @@ import dagger.Provides
 @Module(includes = [RemoteDataModule::class])
 abstract class MovieRemoteDataModule {
     @Binds
-    abstract fun bindMovieRemoteData(impl: MovieRemoteDataImpl): MovieRemoteData
+    abstract fun bindMovieRemoteData(impl: MovieRemoteDataSourceImpl): MovieRemoteDataSource
 
     companion object {
         @Provides
