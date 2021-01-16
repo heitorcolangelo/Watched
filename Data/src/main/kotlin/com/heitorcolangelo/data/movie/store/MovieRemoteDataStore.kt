@@ -3,11 +3,11 @@ package com.heitorcolangelo.data.movie.store
 import com.heitorcolangelo.data.common.model.PageDataModel
 import com.heitorcolangelo.data.common.store.RemoteDataStore
 import com.heitorcolangelo.data.movie.model.MovieDataModel
-import com.heitorcolangelo.data.movie.source.MovieRemoteData
+import com.heitorcolangelo.data.movie.source.MovieRemoteDataSource
 import javax.inject.Inject
 
 class MovieRemoteDataStore @Inject constructor(
-    private val remoteData: MovieRemoteData
+    private val remoteData: MovieRemoteDataSource
 ) : MovieDataStore, RemoteDataStore {
     override suspend fun getMovies(
         page: Int,

@@ -8,7 +8,7 @@ import javax.inject.Inject
 private const val START_PAGE = 1
 
 class MoviePagingSource @Inject constructor(
-    private val movieRemoteData: MovieRemoteData
+    private val movieRemoteData: MovieRemoteDataSource
 ) : PagingSource<Int, MovieDataModel>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDataModel> {
         val nextPage = params.key ?: START_PAGE

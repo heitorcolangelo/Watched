@@ -12,11 +12,11 @@ import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class MovieRemoteDataImplTest {
+class MovieRemoteDataSourceImplTest {
     private val pageMapper: MoviePageResponseDataMapper = mockk(relaxed = true)
     private val movieMapper: MovieResponseDataMapper = mockk(relaxed = true)
     private val api: MovieApiService = mockk(relaxed = true)
-    private val remoteData = MovieRemoteDataImpl(pageMapper, movieMapper, api)
+    private val remoteData = MovieRemoteDataSourceImpl(pageMapper, movieMapper, api)
 
     @Test
     fun `WHEN get movies THEN get Popular movies`() {
