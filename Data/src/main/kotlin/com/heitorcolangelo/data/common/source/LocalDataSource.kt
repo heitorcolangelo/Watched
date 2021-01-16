@@ -1,6 +1,6 @@
 package com.heitorcolangelo.data.common.source
 
-interface LocalData {
+interface LocalDataSource {
 
     companion object {
         private const val ONE_HOUR_IN_MILLI = (36 * 100 * 1000).toLong()
