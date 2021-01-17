@@ -6,7 +6,6 @@ import com.heitorcolangelo.data.movie.mapper.MovieDataDomainMapper
 import com.heitorcolangelo.data.movie.model.MovieDataModel
 import com.heitorcolangelo.data.movie.store.MovieDataStore
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
-import com.heitorcolangelo.domain.movie.model.MoviesSortOption
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
@@ -20,26 +19,30 @@ class MovieRepositoryImplTest {
     private val dataStore: MovieDataStore = mockk(relaxed = true)
 
     private val repo = MovieRepositoryImpl(pageMapper, movieMapper, dataStore, mockk())
+    private val movieId = "movieId"
 
     @Test
-    fun `WHEN get movies THEN get movies from data store`() {
-        runBlocking { repo.getMovies(MoviesSortOption.MostRecent) }
+    fun `WHEN get latest movie THEN get from data store`() {
+        coEvery { dataStore.getMovie(movieId) } returns mockk(relaxed = true)
 
-        coVerify { dataStore.getMovies(0) }
+        runBlocking { repo.getMovie(movieId) }
+
+        coVerify { dataStore.getMovie(movieId) }
     }
 
     @Test
-    fun `WHEN data store returns THEN map to domain model`() {
-        coEvery { dataStore.getMovies(0) } returns mockk()
+    fun `WHEN data store returns latest movie THEN map to domain model`() {
+        val movie = MovieDataModelFactory.make()
+        coEvery { dataStore.getLatestMovie() } returns movie
 
-        runBlocking { repo.getMovies(MoviesSortOption.MostRecent) }
+        runBlocking { repo.getLatestMovie() }
 
-        coVerify { pageMapper.mapToPageDomainModel(any()) }
+        coVerify { movieMapper.mapToDomainModel(movie) }
     }
 
     @Test
     fun `WHEN get movie THEN get movie from data store`() {
-        val movieId = "movieId"
+        coEvery { dataStore.getMovie(movieId) } returns mockk(relaxed = true)
 
         runBlocking { repo.getMovie(movieId) }
 

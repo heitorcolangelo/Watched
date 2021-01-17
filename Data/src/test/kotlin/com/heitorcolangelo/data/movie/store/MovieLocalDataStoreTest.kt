@@ -9,39 +9,45 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class MovieLocalDataStoreTest {
-    private val localData: MovieLocalDataSource = mockk(relaxed = true)
-    private val dataStore = MovieLocalDataStore(localData)
+    private val dataSource: MovieLocalDataSource = mockk(relaxed = true)
+    private val dataStore = MovieLocalDataStore(dataSource)
+    private val movieId = "movieId"
 
     @Test
-    fun `WHEN get movies THEN get local data movies`() {
-        runBlocking { dataStore.getMovies(0) }
+    fun `WHEN get movie THEN get from data source`() {
+        runBlocking { dataStore.getMovie(movieId) }
 
-        coVerify { localData.getMovies(0, 10) }
+        coVerify { dataSource.getMovie(movieId) }
     }
 
     @Test
-    fun `WHEN save movies THEN save movies to local data`() {
+    fun `WHEN save movies THEN save movies to data source`() {
         val movies = listOf<MovieDataModel>()
         runBlocking { dataStore.saveMovies(movies) }
 
-        coVerify { localData.saveMovies(movies) }
+        coVerify { dataSource.saveMovies(movies) }
     }
 
     @Test
     fun `WHEN isDataValid is called THEN local data isCacheValid is called`() {
-        coEvery { localData.isCacheValid(any()) } returns true
+        coEvery { dataSource.isCacheValid(any()) } returns true
 
         runBlocking { dataStore.isDataValid() }
 
-        coVerify { localData.isCacheValid(any()) }
+        coVerify { dataSource.isCacheValid(any()) }
     }
 
     @Test
-    fun `WHEN getMovie THEN get local movie`() {
-        val movieId = "movieId"
-
+    fun `WHEN getMovie THEN get from data source`() {
         runBlocking { dataStore.getMovie(movieId) }
 
-        coVerify { localData.getMovie(movieId) }
+        coVerify { dataSource.getMovie(movieId) }
+    }
+
+    @Test
+    fun `WHEN getLatestMovie THEN get from data source`() {
+        runBlocking { dataStore.getMovie(movieId) }
+
+        coVerify { dataSource.getMovie(movieId) }
     }
 }

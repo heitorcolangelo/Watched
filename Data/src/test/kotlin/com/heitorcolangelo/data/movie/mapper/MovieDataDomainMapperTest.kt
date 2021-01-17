@@ -2,8 +2,10 @@ package com.heitorcolangelo.data.movie.mapper
 
 import com.heitorcolangelo.data.factory.MovieDataModelFactory
 import com.heitorcolangelo.data.movie.model.MovieDataModel
+import com.heitorcolangelo.domain.common.model.RawDateDomainModel
 import com.heitorcolangelo.domain.movie.model.MovieDomainModel
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class MovieDataDomainMapperTest {
@@ -36,6 +38,7 @@ class MovieDataDomainMapperTest {
         assertEquals(dataModel.posterPath, domainModel.poster.path)
         assertEquals(dataModel.backdropPath, domainModel.backdrop.path)
         assertEquals(dataModel.voteAverage, domainModel.voteAverage)
-        assertEquals(dataModel.releaseDate, domainModel.releaseDate)
+        val releaseDate = RawDateDomainModel(dataModel.releaseDate)
+        assertTrue(releaseDate == domainModel.releaseDate)
     }
 }
