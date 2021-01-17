@@ -2,11 +2,11 @@ package com.watched.presentation.common.mapper
 
 import com.watched.domain.common.model.RawDateDomainModel
 import com.watched.presentation.common.model.FormattedDateUiModel
-import java.util.Locale
-import javax.inject.Inject
 import org.threeten.bp.LocalDate
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
+import java.util.Locale
+import javax.inject.Inject
 
 class MonthAndYearDateDomainUiMapper @Inject constructor(
     private val zoneId: ZoneId,

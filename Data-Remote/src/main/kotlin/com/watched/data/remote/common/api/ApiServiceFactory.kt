@@ -1,9 +1,9 @@
 package com.watched.data.remote.common.api
 
-import javax.inject.Inject
 import okhttp3.OkHttpClient
 import retrofit2.Converter
 import retrofit2.Retrofit
+import javax.inject.Inject
 
 class ApiServiceFactory @Inject constructor(
     private val okHttpClient: OkHttpClient,

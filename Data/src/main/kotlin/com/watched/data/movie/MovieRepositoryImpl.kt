@@ -11,9 +11,9 @@ import com.watched.data.movie.store.MovieDataStore
 import com.watched.domain.movie.model.MovieDomainModel
 import com.watched.domain.movie.model.MoviesSortOption
 import com.watched.domain.movie.repository.MovieRepository
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val pageMapper: PageDataDomainMapper<MovieDataModel, MovieDomainModel>,
