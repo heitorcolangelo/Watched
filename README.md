@@ -1,7 +1,6 @@
-![Android CI](https://github.com/heitorcolangelo/Movies/workflows/Android%20CI/badge.svg?branch=master)
+![Android CI](https://github.com/heitorcolangelo/Movies/workflows/Android%20CI/badge.svg?branch=master) [![codebeat badge](https://codebeat.co/badges/967cd1f8-0f1a-47e3-885e-3d7cf864e559)](https://codebeat.co/projects/github-com-heitorcolangelo-watched-main)
 <a href="https://ktlint.github.io/"><img src="https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg" alt="ktlint"></a>
 </p>
-[![codebeat badge](https://codebeat.co/badges/967cd1f8-0f1a-47e3-885e-3d7cf864e559)](https://codebeat.co/projects/github-com-heitorcolangelo-watched-main)
 
 # Watched 🎬
 That is a personal project. The objective is to put together some architecture ideas that I learned over time and while studying.
