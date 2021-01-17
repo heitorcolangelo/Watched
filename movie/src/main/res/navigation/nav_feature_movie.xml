@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/movieListFragment"
-        android:name="com.heitorcolangelo.movie.ui.list.MovieListFragment"
+        android:name="com.watched.movie.ui.list.MovieListFragment"
         android:label="MovieListFragment"
         app:moduleName="movie"
         tools:layout="@layout/fragment_movie_list">
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/movieDetailsFragment"
-        android:name="com.heitorcolangelo.movie.ui.detail.MovieDetailsFragment"
+        android:name="com.watched.movie.ui.detail.MovieDetailsFragment"
         android:label="MovieDetailsFragment"
         app:moduleName="movie"
         tools:layout="@layout/fragment_movie_details">
@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/movieMainFragment"
-        android:name="com.heitorcolangelo.movie.ui.main.MovieMainFragment"
+        android:name="com.watched.movie.ui.main.MovieMainFragment"
         android:label="MovieDetailsFragment"
         app:moduleName="movie"
         tools:layout="@layout/fragment_movie_main" />
