@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.heitorcolangelo.movie">
+    package="com.watched.movie">
 
     <dist:module
         dist:instant="false"
@@ -13,7 +13,7 @@
     </dist:module>
 
     <application
-        android:name="com.heitorcolangelo.presentation.MoviesApplication"
+        android:name="com.watched.presentation.MoviesApplication"
         android:allowBackup="true"
         tools:ignore="AllowBackup,MissingApplicationIcon" />
 </manifest>
