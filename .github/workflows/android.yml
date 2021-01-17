@@ -22,4 +22,4 @@ jobs:
       - name: Run Ktlint
         run: ./gradlew ktlint
       - name: Run Unit Test
-        run: ./gradlew testDebug
+        run: ./gradlew :App:testDebug :Data:test :Domain:test :Data-Remote:test :Data-Local:test :movie:testDebug
