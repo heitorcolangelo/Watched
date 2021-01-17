@@ -1,5 +1,5 @@
 ![Android CI](https://github.com/heitorcolangelo/Movies/workflows/Android%20CI/badge.svg?branch=master)
-# Watched
+# Watched 🎬
 That is a personal project. The objective is to put together some architecture ideas that I learned over time and while studying.
 
 The project is only the Android app for now.
