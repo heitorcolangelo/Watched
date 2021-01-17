@@ -9,7 +9,7 @@ In the future, it will allow you to connect with a social media account, find fr
 
 The Data is provided by [The Movies Database API](https://developers.themoviedb.org/3).
 
-# License
+## License
 
 Copyright 2020 Heitor Colangelo
 
