@@ -1,4 +1,7 @@
 ![Android CI](https://github.com/heitorcolangelo/Movies/workflows/Android%20CI/badge.svg?branch=master)
+<a href="https://ktlint.github.io/"><img src="https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg" alt="ktlint"></a>
+</p>
+
 # Watched 🎬
 That is a personal project. The objective is to put together some architecture ideas that I learned over time and while studying.
 
