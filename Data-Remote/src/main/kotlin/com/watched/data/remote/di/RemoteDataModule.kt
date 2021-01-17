@@ -7,12 +7,12 @@ import com.watched.data.remote.common.api.LoggingInterceptorFactory
 import com.watched.data.remote.common.api.OkHttpClientFactory
 import dagger.Module
 import dagger.Provides
-import java.io.File
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.converter.moshi.MoshiConverterFactory
+import java.io.File
 
 @Module
 class RemoteDataModule(private val configuration: BuildConfiguration) {

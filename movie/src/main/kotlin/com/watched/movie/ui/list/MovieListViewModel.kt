@@ -42,7 +42,6 @@ class MovieListViewModel(
             val toMovieDetails = ToMovieDetails(uiModel.id)
 //            _navigation.postValue(toMovieDetails)
             _navigation.postValue(ToMovieMain())
-
         }
     }
 
