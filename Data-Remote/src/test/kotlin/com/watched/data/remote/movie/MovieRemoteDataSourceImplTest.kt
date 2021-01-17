@@ -20,6 +20,8 @@ class MovieRemoteDataSourceImplTest {
 
     @Test
     fun `WHEN get movies THEN get Popular movies`() {
+        coEvery { api.getPopular() } returns mockk(relaxed = true)
+
         runBlocking { remoteData.getMovies(1) }
 
         coVerify { api.getPopular() }
@@ -28,6 +30,7 @@ class MovieRemoteDataSourceImplTest {
     @Test
     fun `WHEN get movies page THEN get Popular movies page`() {
         val page = 2
+        coEvery { api.getPopular(any()) } returns mockk(relaxed = true)
 
         runBlocking { remoteData.getMovies(page) }
 
@@ -47,6 +50,7 @@ class MovieRemoteDataSourceImplTest {
     @Test
     fun `WHEN get movie THEN get movie from api`() {
         val movieId = "movieId"
+        coEvery { api.getMovie(any()) } returns mockk(relaxed = true)
 
         runBlocking { remoteData.getMovie(movieId) }
 

@@ -11,7 +11,7 @@ The Data is provided by [The Movies Database API](https://developers.themoviedb.
 ## Feature - Latest movie
 **As a** user,
 **I want to** know which is the most recent movie released,
-**So I** can be up-to-date with with all releases once I open the app.
+**So I** can be up-to-date with all releases once I open the app.
 
 ## Feature - Popular movies
 **As a** user,
