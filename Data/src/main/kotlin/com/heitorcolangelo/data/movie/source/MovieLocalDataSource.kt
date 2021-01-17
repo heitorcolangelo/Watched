@@ -12,4 +12,6 @@ interface MovieLocalDataSource : LocalDataSource {
     suspend fun getMovies(page: Int, pageSize: Int): List<MovieDataModel>
 
     suspend fun getMovie(movieId: String): MovieDataModel
+
+    suspend fun getLatestMovie(): MovieDataModel?
 }

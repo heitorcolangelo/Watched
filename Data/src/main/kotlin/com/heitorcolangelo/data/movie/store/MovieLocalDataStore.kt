@@ -7,35 +7,35 @@ import com.heitorcolangelo.data.movie.source.MovieLocalDataSource
 import javax.inject.Inject
 
 class MovieLocalDataStore @Inject constructor(
-    private val localData: MovieLocalDataSource
+    private val dataSource: MovieLocalDataSource
 ) : MovieDataStore, LocalDataStore {
 
     override suspend fun getMovies(
         page: Int,
         forceRefresh: Boolean
     ): PageDataModel<MovieDataModel> {
-        val movies = localData.getMovies(page, MovieDataStore.PAGE_SIZE)
+        val movies = dataSource.getMovies(page, MovieDataStore.PAGE_SIZE)
         return PageDataModel(page = page, pageSize = MovieDataStore.PAGE_SIZE, items = movies)
     }
 
-    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel {
-        TODO("Not yet implemented")
+    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel? {
+        return dataSource.getLatestMovie()
     }
 
     override suspend fun saveMovies(movies: List<MovieDataModel>) {
-        localData.saveMovies(movies)
-        localData.setLastCacheTime(System.currentTimeMillis())
+        dataSource.saveMovies(movies)
+        dataSource.setLastCacheTime(System.currentTimeMillis())
     }
 
     override suspend fun isDataValid(): Boolean {
-        return localData.isCacheValid(System.currentTimeMillis())
+        return dataSource.isCacheValid(System.currentTimeMillis())
     }
 
     override suspend fun getMovie(movieId: String): MovieDataModel {
-        return localData.getMovie(movieId)
+        return dataSource.getMovie(movieId)
     }
 
     override suspend fun clear() {
-        localData.clear()
+        dataSource.clear()
     }
 }

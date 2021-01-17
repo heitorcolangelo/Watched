@@ -7,12 +7,10 @@ import com.heitorcolangelo.data.remote.common.api.OkHttpClientFactory
 import com.squareup.moshi.Moshi
 import dagger.Module
 import dagger.Provides
-import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import java.io.File
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -38,11 +36,6 @@ class RemoteDataModule(private val configuration: BuildConfiguration) {
         val cacheSize = 10L * 1024L * 1024L // 10 MB
         val cacheDir = File("cache/dir")
         return Cache(cacheDir, cacheSize)
-    }
-
-    @Provides
-    fun provideCallAdapterFactory(): CallAdapter.Factory {
-        return RxJava3CallAdapterFactory.create()
     }
 
     @Provides

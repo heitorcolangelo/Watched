@@ -7,17 +7,17 @@ import com.heitorcolangelo.data.movie.source.MovieRemoteDataSource
 import javax.inject.Inject
 
 class MovieRemoteDataStore @Inject constructor(
-    private val remoteData: MovieRemoteDataSource
+    private val dataSource: MovieRemoteDataSource
 ) : MovieDataStore, RemoteDataStore {
     override suspend fun getMovies(
         page: Int,
         forceRefresh: Boolean
     ): PageDataModel<MovieDataModel> {
-        return remoteData.getMovies(page)
+        return dataSource.getMovies(page)
     }
 
-    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel {
-        return remoteData.getLatestMovie()
+    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel? {
+        return dataSource.getLatestMovie()
     }
 
     override suspend fun saveMovies(movies: List<MovieDataModel>) {
@@ -25,6 +25,6 @@ class MovieRemoteDataStore @Inject constructor(
     }
 
     override suspend fun getMovie(movieId: String): MovieDataModel {
-        return remoteData.getMovie(movieId)
+        return dataSource.getMovie(movieId)
     }
 }
