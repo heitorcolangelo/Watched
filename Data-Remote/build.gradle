@@ -28,7 +28,6 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$versions.retrofit"
-    implementation "com.github.akarnokd:rxjava3-retrofit-adapter:3.0.0"
     api "com.squareup.retrofit2:converter-moshi:$versions.retrofit"
 
     testImplementation project(":Common:Test")

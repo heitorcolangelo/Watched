@@ -11,7 +11,7 @@ interface MovieRepository {
         forceRefresh: Boolean = false
     ): Flow<PagingData<MovieDomainModel>>
 
-    suspend fun getLatestMovie(forceRefresh: Boolean = false): MovieDomainModel
+    suspend fun getLatestMovie(forceRefresh: Boolean = false): MovieDomainModel?
 
     suspend fun getMovie(movieId: String): MovieDomainModel
 }

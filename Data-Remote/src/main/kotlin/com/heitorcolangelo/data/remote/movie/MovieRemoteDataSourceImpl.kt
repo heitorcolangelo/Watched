@@ -24,7 +24,7 @@ class MovieRemoteDataSourceImpl @Inject constructor(
         return movieMapper.mapToDataModel(api.getMovie(movieId))
     }
 
-    override suspend fun getLatestMovie(): MovieDataModel {
-        return movieMapper.mapToDataModel(api.getLatestMovie())
+    override suspend fun getLatestMovie(): MovieDataModel? {
+        return api.getLatestMovie()?.let { movieMapper.mapToDataModel(it) }
     }
 }

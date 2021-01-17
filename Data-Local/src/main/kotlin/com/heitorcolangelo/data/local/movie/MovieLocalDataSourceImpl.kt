@@ -33,6 +33,12 @@ class MovieLocalDataSourceImpl @Inject constructor(
         return mapper.mapToDataModel(movie)
     }
 
+    override suspend fun getLatestMovie(): MovieDataModel? {
+        return movieDao.getMovies().minByOrNull { it.releaseDate }?.let {
+            mapper.mapToDataModel(it)
+        }
+    }
+
     override suspend fun clear() {
         super.clear()
         movieDao.clearMovies()

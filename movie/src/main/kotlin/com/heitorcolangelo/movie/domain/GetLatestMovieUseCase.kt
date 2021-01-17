@@ -9,13 +9,11 @@ import javax.inject.Inject
 class GetLatestMovieUseCase @Inject constructor(
     private val repository: MovieRepository
 ) : UseCase<MovieDomainModel, GetLatestMovieUseCase.Args>() {
+
+    @Throws(NoLatestMovieException::class)
     override suspend fun invoke(args: Args): MovieDomainModel {
-        try {
-            return repository.getLatestMovie(args.forceRefresh)
-        } catch (e: Exception) {
-            e.printStackTrace()
-            throw NoLatestMovieException()
-        }
+        val latestMovie = repository.getLatestMovie(args.forceRefresh)
+        return latestMovie ?: throw NoLatestMovieException()
     }
 
     class Args(val forceRefresh: Boolean = false) : UseCaseArgs
