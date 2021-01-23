@@ -40,8 +40,4 @@ class MovieLocalDataStore @Inject constructor(
     override suspend fun clear() {
         dataSource.clear()
     }
-
-    companion object {
-        const val FIRST_PAGE_LOCAL = 0
-    }
 }

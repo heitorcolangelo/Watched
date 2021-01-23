@@ -9,9 +9,9 @@ import com.watched.movie.domain.GetLatestMovieUseCase
 import com.watched.movie.domain.GetTopXPopularMoviesUseCase
 import com.watched.movie.mapper.LatestMovieDomainUiMapper
 import com.watched.movie.model.LatestMovieUiModel
-import javax.inject.Inject
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MovieMainViewModel @Inject constructor(
     private val topXPopularMoviesUseCase: GetTopXPopularMoviesUseCase,

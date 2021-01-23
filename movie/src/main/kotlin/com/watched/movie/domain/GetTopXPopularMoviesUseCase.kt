@@ -12,7 +12,7 @@ class GetTopXPopularMoviesUseCase @Inject constructor(
 ) : NoArgUseCase<TopXMovieDomainModel>() {
     override suspend fun invoke(): TopXMovieDomainModel {
         val nextMovieIndex = Random.nextInt(RANGE_START, RANGE_END)
-        val movies = repository.getMovies(SortOptionsDomainModel.Popularity)
+        val movies = repository.getMovies(sortOption = SortOptionsDomainModel.Popularity)
 
         return TopXMovieDomainModel(nextMovieIndex, movies[nextMovieIndex])
     }

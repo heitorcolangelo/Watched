@@ -9,4 +9,9 @@ data class PageResponseModel<Response : ResponseModel>(
     @Json(name = "page") val page: Int = 0,
     @Json(name = "total_pages") val totalPages: Int = 0,
     @Json(name = "total_results") val totalResults: Int = 0
-) : ResponseModel
+) : ResponseModel {
+
+    companion object {
+        const val FIRST_PAGE = 1
+    }
+}

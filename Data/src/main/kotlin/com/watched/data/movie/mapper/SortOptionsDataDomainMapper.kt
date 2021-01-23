@@ -5,8 +5,7 @@ import com.watched.data.movie.model.SortOptionsDataModel
 import com.watched.domain.movie.model.SortOptionsDomainModel
 import javax.inject.Inject
 
-class SortOptionsDataDomainMapper @Inject constructor(
-) : DataDomainMapper<SortOptionsDataModel, SortOptionsDomainModel> {
+class SortOptionsDataDomainMapper @Inject constructor() : DataDomainMapper<SortOptionsDataModel, SortOptionsDomainModel> {
     override fun mapToDomainModel(dataModel: SortOptionsDataModel): SortOptionsDomainModel {
         return when (dataModel) {
             SortOptionsDataModel.Popularity -> SortOptionsDomainModel.Popularity

@@ -3,6 +3,7 @@ package com.watched.data.movie
 import com.watched.data.common.mapper.PageDataDomainMapper
 import com.watched.data.factory.MovieDataModelFactory
 import com.watched.data.movie.mapper.MovieDataDomainMapper
+import com.watched.data.movie.mapper.SortOptionsDataDomainMapper
 import com.watched.data.movie.model.MovieDataModel
 import com.watched.data.movie.store.MovieDataStore
 import com.watched.domain.movie.model.MovieDomainModel
@@ -17,8 +18,9 @@ class MovieRepositoryImplTest {
         mockk(relaxed = true)
     private val movieMapper: MovieDataDomainMapper = mockk(relaxed = true)
     private val dataStore: MovieDataStore = mockk(relaxed = true)
+    private val sortOptionsMapper: SortOptionsDataDomainMapper  = mockk(relaxed = true)
 
-    private val repo = MovieRepositoryImpl(pageMapper, movieMapper, dataStore, mockk())
+    private val repo = MovieRepositoryImpl(pageMapper, movieMapper, sortOptionsMapper, dataStore, mockk())
     private val movieId = "movieId"
 
     @Test

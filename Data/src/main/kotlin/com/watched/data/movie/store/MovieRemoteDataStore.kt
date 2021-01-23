@@ -30,8 +30,4 @@ class MovieRemoteDataStore @Inject constructor(
     override suspend fun getMovie(movieId: String): MovieDataModel {
         return dataSource.getMovie(movieId)
     }
-
-    companion object {
-        const val FIRST_PAGE_REMOTE = 1
-    }
 }

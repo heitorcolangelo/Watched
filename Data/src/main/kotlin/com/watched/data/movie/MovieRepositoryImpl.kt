@@ -9,13 +9,12 @@ import com.watched.data.movie.mapper.SortOptionsDataDomainMapper
 import com.watched.data.movie.model.MovieDataModel
 import com.watched.data.movie.source.MoviePagingSource
 import com.watched.data.movie.store.MovieDataStore
-import com.watched.domain.common.usecase.PagedUseCase
 import com.watched.domain.movie.model.MovieDomainModel
 import com.watched.domain.movie.model.SortOptionsDomainModel
 import com.watched.domain.movie.repository.MovieRepository
-import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val pageMapper: PageDataDomainMapper<MovieDataModel, MovieDomainModel>,
@@ -35,11 +34,12 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getMovies(
+        page: Int,
         sortOption: SortOptionsDomainModel,
         forceRefresh: Boolean
     ): List<MovieDomainModel> {
         return dataStore.getMoviePage(
-            page = PagedUseCase.FIRST_PAGE_DOMAIN,
+            page = page,
             sortOption = sortOptionsMapper.mapToDataModel(sortOption),
             forceRefresh = forceRefresh
         ).items.map(movieMapper::mapToDomainModel)
