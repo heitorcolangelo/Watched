@@ -3,6 +3,7 @@ package com.watched.data.movie.source
 import androidx.paging.PagingSource
 import com.watched.data.common.model.PageDataModel
 import com.watched.data.movie.model.MovieDataModel
+import com.watched.data.movie.model.SortOptionsDataModel
 import javax.inject.Inject
 
 private const val START_PAGE = 1
@@ -12,7 +13,7 @@ class MoviePagingSource @Inject constructor(
 ) : PagingSource<Int, MovieDataModel>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDataModel> {
         val nextPage = params.key ?: START_PAGE
-        val newPage: PageDataModel<MovieDataModel> = movieRemoteData.getMovies(nextPage)
+        val newPage: PageDataModel<MovieDataModel> = movieRemoteData.getMovies(nextPage, SortOptionsDataModel.Popularity)
         return try {
             LoadResult.Page(
                 data = newPage.items,

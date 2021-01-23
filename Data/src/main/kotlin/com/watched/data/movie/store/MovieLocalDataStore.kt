@@ -3,6 +3,7 @@ package com.watched.data.movie.store
 import com.watched.data.common.model.PageDataModel
 import com.watched.data.common.store.LocalDataStore
 import com.watched.data.movie.model.MovieDataModel
+import com.watched.data.movie.model.SortOptionsDataModel
 import com.watched.data.movie.source.MovieLocalDataSource
 import javax.inject.Inject
 
@@ -10,11 +11,12 @@ class MovieLocalDataStore @Inject constructor(
     private val dataSource: MovieLocalDataSource
 ) : MovieDataStore, LocalDataStore {
 
-    override suspend fun getMovies(
+    override suspend fun getMoviePage(
         page: Int,
+        sortOption: SortOptionsDataModel,
         forceRefresh: Boolean
     ): PageDataModel<MovieDataModel> {
-        val movies = dataSource.getMovies(page, MovieDataStore.PAGE_SIZE)
+        val movies = dataSource.getMovies(page, MovieDataStore.PAGE_SIZE, sortOption)
         return PageDataModel(page = page, pageSize = MovieDataStore.PAGE_SIZE, items = movies)
     }
 
@@ -37,5 +39,9 @@ class MovieLocalDataStore @Inject constructor(
 
     override suspend fun clear() {
         dataSource.clear()
+    }
+
+    companion object {
+        const val FIRST_PAGE_LOCAL = 0
     }
 }

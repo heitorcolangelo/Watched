@@ -6,9 +6,9 @@ import com.watched.data.movie.di.MovieDataModule
 import com.watched.data.remote.movie.di.MovieRemoteDataModule
 import com.watched.domain.common.providers.DispatcherProvider
 import com.watched.domain.movie.model.MovieDomainModel
-import com.watched.movie.domain.GetLatestMovieUseCase
 import com.watched.movie.domain.GetMovieUseCase
 import com.watched.movie.domain.GetPopularMoviesUseCase
+import com.watched.movie.domain.GetTopXPopularMoviesUseCase
 import com.watched.movie.mapper.LatestMovieDomainUiMapper
 import com.watched.movie.mapper.MovieDetailsDomainUiMapper
 import com.watched.movie.mapper.MovieItemDomainUiMapper
@@ -28,8 +28,8 @@ import com.watched.presentation.di.ApplicationModule
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import org.threeten.bp.ZoneId
 import java.util.Locale
+import org.threeten.bp.ZoneId
 
 @Module(
     includes = [
@@ -95,7 +95,7 @@ abstract class MovieFeatureModule : ApplicationModule() {
         fun provideMovieMainViewModel(
             fragment: MovieMainFragment,
             mapper: LatestMovieDomainUiMapper,
-            useCase: GetLatestMovieUseCase,
+            useCase: GetTopXPopularMoviesUseCase,
             dispatcherProvider: DispatcherProvider
         ): MovieMainViewModel {
             return ViewModelFactory.make(fragment) {

@@ -2,7 +2,7 @@ package com.watched.movie.domain
 
 import androidx.paging.PagingData
 import com.watched.domain.common.usecase.PagedUseCase
-import com.watched.domain.movie.model.MoviesSortOption
+import com.watched.domain.movie.model.SortOptionsDomainModel
 import com.watched.domain.movie.repository.MovieRepository
 import com.watched.movie.factory.MovieDomainModelFactory
 import io.mockk.coEvery
@@ -21,17 +21,17 @@ class GetPopularMoviesUseCaseTest {
 
     @Test
     fun `WHEN execute THEN get popular movies from repo`() {
-        val slot = slot<MoviesSortOption>()
+        val slot = slot<SortOptionsDomainModel>()
         val movie = MovieDomainModelFactory.make()
         val page = PagingData.from(listOf(movie))
-        coEvery { repository.getMovies(any(), any()) } returns flowOf(page)
+        coEvery { repository.getPagedMovies(any(), any()) } returns flowOf(page)
 
         runBlocking {
             useCase.execute(PagedUseCase.Args())
         }
 
-        coVerify { repository.getMovies(capture(slot), any()) }
+        coVerify { repository.getPagedMovies(capture(slot), any()) }
         assertTrue(slot.isCaptured)
-        assertEquals(MoviesSortOption.Popularity, slot.captured)
+        assertEquals(SortOptionsDomainModel.Popularity, slot.captured)
     }
 }

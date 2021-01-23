@@ -12,4 +12,8 @@ abstract class PagedUseCase<Model : DomainModel> {
     protected abstract suspend operator fun invoke(args: Args): Flow<PagingData<Model>>
 
     data class Args(val forceRefresh: Boolean = false) : UseCaseArgs
+
+    companion object {
+        const val FIRST_PAGE_DOMAIN = 0
+    }
 }

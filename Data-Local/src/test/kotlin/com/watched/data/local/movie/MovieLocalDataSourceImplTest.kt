@@ -68,7 +68,7 @@ class MovieLocalDataSourceImplTest {
         coEvery { movieDao.getPagedMovies(any(), any()) } returns movieList
         val page = 1
         val pageSize = 10
-        runBlocking { localData.getMovies(page, pageSize) }
+        runBlocking { localData.getMovies(page, pageSize,) }
 
         val offset = localData.getOffset(page, pageSize)
 
@@ -82,7 +82,7 @@ class MovieLocalDataSourceImplTest {
         val page = 1
         val pageSize = 10
 
-        runBlocking { localData.getMovies(page, pageSize) }
+        runBlocking { localData.getMovies(page, pageSize,) }
 
         verify(exactly = 3) { mapper.mapToDataModel(any()) }
     }

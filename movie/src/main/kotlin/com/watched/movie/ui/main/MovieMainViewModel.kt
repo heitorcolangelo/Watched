@@ -6,14 +6,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.watched.domain.common.providers.DispatcherProvider
 import com.watched.movie.domain.GetLatestMovieUseCase
+import com.watched.movie.domain.GetTopXPopularMoviesUseCase
 import com.watched.movie.mapper.LatestMovieDomainUiMapper
 import com.watched.movie.model.LatestMovieUiModel
+import javax.inject.Inject
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class MovieMainViewModel @Inject constructor(
-    private val latestMovieUseCase: GetLatestMovieUseCase,
+    private val topXPopularMoviesUseCase: GetTopXPopularMoviesUseCase,
     private val latestMovieMapper: LatestMovieDomainUiMapper,
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
@@ -35,8 +36,8 @@ class MovieMainViewModel @Inject constructor(
         viewModelScope.launch(
             dispatcherProvider.io() + latestMovieExceptionHandler
         ) {
-            val latestMovie = latestMovieUseCase.execute(GetLatestMovieUseCase.Args())
-            val uiModel = latestMovieMapper.mapToUiModel(latestMovie)
+            val topXMovie = topXPopularMoviesUseCase.execute()
+            val uiModel = latestMovieMapper.mapToUiModel(topXMovie.movie)
             _latestMovie.postValue(uiModel)
         }
     }
