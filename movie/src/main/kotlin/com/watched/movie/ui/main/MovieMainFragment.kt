@@ -8,23 +8,28 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.watched.movie.R
 import com.watched.movie.databinding.FragmentMovieMainBinding
-import com.watched.movie.databinding.ItemMovieLatestBinding
+import com.watched.movie.databinding.ItemMovieTopXBinding
 import com.watched.movie.di.inject
-import com.watched.movie.model.LatestMovieUiModel
+import com.watched.movie.model.TopXMovieUiModel
 import com.watched.presentation.common.list.BaseAdapter
 import com.watched.presentation.common.viewbinding.viewBinding
 import javax.inject.Inject
 
-class MovieMainFragment :
-    Fragment(R.layout.fragment_movie_main),
-    BaseAdapter.Binder<ItemMovieLatestBinding, LatestMovieUiModel> {
+class MovieMainFragment : Fragment(R.layout.fragment_movie_main) {
 
     @Inject
     lateinit var viewModel: MovieMainViewModel
 
     private val binding: FragmentMovieMainBinding by viewBinding()
-    private val latestAdapter = BaseAdapter(ItemMovieLatestBinding::inflate, this)
-    private val adapter = ConcatAdapter(latestAdapter)
+    private val topXMovieItemBinder =
+        object : BaseAdapter.Binder<ItemMovieTopXBinding, TopXMovieUiModel> {
+            override fun bindListItem(binding: ItemMovieTopXBinding, model: TopXMovieUiModel) {
+                binding.ivPoster.setImageURI(model.posterPath)
+                binding.tvTopX.text = getString(R.string.top_x_today, model.position)
+            }
+        }
+    private val topXMovieAdapter = BaseAdapter(ItemMovieTopXBinding::inflate, topXMovieItemBinder)
+    private val adapter = ConcatAdapter(topXMovieAdapter)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,14 +43,10 @@ class MovieMainFragment :
 
         inject()
 
-        viewModel.latestMovie.observe(this, ::onLatestMovie)
+        viewModel.topXMovie.observe(this, ::onTopXMovie)
     }
 
-    override fun bindListItem(binding: ItemMovieLatestBinding, model: LatestMovieUiModel) {
-        binding.ivPoster.setImageURI(model.posterPath)
-    }
-
-    private fun onLatestMovie(movie: LatestMovieUiModel) {
-        latestAdapter.submitList(listOf(movie))
+    private fun onTopXMovie(movie: TopXMovieUiModel) {
+        topXMovieAdapter.submitList(listOf(movie))
     }
 }

@@ -1,9 +1,9 @@
 <resources>
 
     <style name="TextAppearance.ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <item name="android:fontFamily">@font/open_sans_semi_bold</item>
+        <item name="fontFamily">@font/open_sans_semi_bold</item>
         <item name="android:textSize">@dimen/text_size_h2</item>
-        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimarySurface</item>
     </style>
 
     <style name="TextAppearance.ToolbarTitle.CollapsingToolbar.Expanded" parent="@style/TextAppearance.ToolbarTitle">
@@ -11,11 +11,17 @@
     </style>
 
     <style name="TextAppearance.Body.Normal" parent="@style/TextAppearance.MaterialComponents.Body2">
-        <item name="android:fontFamily">@font/open_sans</item>
+        <item name="fontFamily">@font/open_sans</item>
+    </style>
+
+    <style name="TextAppearance.Body.Title" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="TextAppearance.Body.Subtitle" parent="@style/TextAppearance.MaterialComponents.Subtitle2">
-        <item name="android:fontFamily">@font/open_sans_semi_bold</item>
+        <item name="fontFamily">@font/open_sans_semi_bold</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
     </style>
 
     <style name="AppTheme.Widget.CollapsingToolbar">
