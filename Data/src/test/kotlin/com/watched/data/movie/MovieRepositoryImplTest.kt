@@ -18,7 +18,7 @@ class MovieRepositoryImplTest {
         mockk(relaxed = true)
     private val movieMapper: MovieDataDomainMapper = mockk(relaxed = true)
     private val dataStore: MovieDataStore = mockk(relaxed = true)
-    private val sortOptionsMapper: SortOptionsDataDomainMapper  = mockk(relaxed = true)
+    private val sortOptionsMapper: SortOptionsDataDomainMapper = mockk(relaxed = true)
 
     private val repo = MovieRepositoryImpl(pageMapper, movieMapper, sortOptionsMapper, dataStore, mockk())
     private val movieId = "movieId"
