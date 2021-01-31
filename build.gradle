@@ -27,7 +27,7 @@ buildscript {
             'coroutines'   : '1.4.1',
             'dagger'       : '2.29.1',
             'fresco'       : '2.3.0',
-            'gradle'       : '4.1.1',
+            'gradle'       : '4.1.2',
             'flexbox'      : '2.0.1',
             'junit'        : '4.13.1',
             'kotlin'       : '1.4.21',
@@ -57,9 +57,9 @@ allprojects {
     }
 
     project.ext {
-        compileSdk = 29
-        minSdk = 21
-        targetSdk = 29
+        compileSdk = 30
+        minSdk = 23
+        targetSdk = 30
 
         appVersionCode = 1
         appVersionName = "0.1"

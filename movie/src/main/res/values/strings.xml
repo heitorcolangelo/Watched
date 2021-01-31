@@ -6,4 +6,5 @@
     <string name="message_loading_content_error">There was an error loading your content.</string>
     <string name="action_try_again">Try again</string>
     <string name="action_dismiss">Dismiss</string>
+    <string name="top_x_today">Top %d today</string>
 </resources>

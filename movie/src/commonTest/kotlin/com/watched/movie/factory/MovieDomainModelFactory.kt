@@ -8,7 +8,7 @@ import com.watched.domain.movie.model.MovieImageDomainModel
 object MovieDomainModelFactory : MockFactory<MovieDomainModel> {
     override fun make(): MovieDomainModel {
         return MovieDomainModel(
-            movieId = randomId(),
+            id = randomId(),
             title = randomString(),
             overview = randomString(),
             backdrop = MovieImageDomainModel(randomString()),

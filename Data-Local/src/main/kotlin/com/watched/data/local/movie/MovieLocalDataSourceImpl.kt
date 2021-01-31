@@ -3,8 +3,10 @@ package com.watched.data.local.movie
 import com.watched.data.local.common.LocalDataSourceImpl
 import com.watched.data.local.config.dao.ConfigDao
 import com.watched.data.local.movie.dao.MovieDao
+import com.watched.data.local.movie.entity.MovieEntity
 import com.watched.data.local.movie.mapper.MovieEntityDataMapper
 import com.watched.data.movie.model.MovieDataModel
+import com.watched.data.movie.model.SortOptionsDataModel
 import com.watched.data.movie.source.MovieLocalDataSource
 import javax.inject.Inject
 
@@ -13,6 +15,9 @@ class MovieLocalDataSourceImpl @Inject constructor(
     private val mapper: MovieEntityDataMapper,
     configDao: ConfigDao
 ) : LocalDataSourceImpl(configDao), MovieLocalDataSource {
+    override val firstPage: Int
+        get() = 0
+
     override suspend fun isDataCached(): Boolean {
         return movieDao.getMovies().isNotEmpty()
     }
@@ -22,9 +27,14 @@ class MovieLocalDataSourceImpl @Inject constructor(
         movieDao.saveMovies(movieEntities)
     }
 
-    override suspend fun getMovies(page: Int, pageSize: Int): List<MovieDataModel> {
-        val offset = getOffset(page, pageSize)
-        val movies = movieDao.getPagedMovies(pageSize, offset)
+    override suspend fun getMovies(
+        page: Int,
+        pageSize: Int,
+        sortOption: SortOptionsDataModel
+    ): List<MovieDataModel> {
+        val pageToRequest = firstPage + page
+        val offset = getOffset(pageToRequest, pageSize)
+        val movies = movieDao.getPagedMovies(pageSize, offset).sort(sortOption)
         return movies.map(mapper::mapToDataModel)
     }
 
@@ -42,5 +52,14 @@ class MovieLocalDataSourceImpl @Inject constructor(
     override suspend fun clear() {
         super.clear()
         movieDao.clearMovies()
+    }
+
+    private fun List<MovieEntity>.sort(sortOption: SortOptionsDataModel): List<MovieEntity> {
+        return sortedBy {
+            when (sortOption) {
+                SortOptionsDataModel.Popularity -> it.popularity
+                SortOptionsDataModel.TopRated -> it.voteAverage
+            }
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.watched.data.local.factory.MovieEntityFactory
 import com.watched.data.local.movie.dao.MovieDao
 import com.watched.data.local.movie.mapper.MovieEntityDataMapper
 import com.watched.data.movie.model.MovieDataModel
+import com.watched.data.movie.model.SortOptionsDataModel
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -68,7 +69,7 @@ class MovieLocalDataSourceImplTest {
         coEvery { movieDao.getPagedMovies(any(), any()) } returns movieList
         val page = 1
         val pageSize = 10
-        runBlocking { localData.getMovies(page, pageSize) }
+        runBlocking { localData.getMovies(page, pageSize, SortOptionsDataModel.Popularity) }
 
         val offset = localData.getOffset(page, pageSize)
 
@@ -82,7 +83,7 @@ class MovieLocalDataSourceImplTest {
         val page = 1
         val pageSize = 10
 
-        runBlocking { localData.getMovies(page, pageSize) }
+        runBlocking { localData.getMovies(page, pageSize, SortOptionsDataModel.Popularity) }
 
         verify(exactly = 3) { mapper.mapToDataModel(any()) }
     }

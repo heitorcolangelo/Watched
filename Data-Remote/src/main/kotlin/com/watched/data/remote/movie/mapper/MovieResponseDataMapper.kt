@@ -11,7 +11,7 @@ class MovieResponseDataMapper @Inject constructor() :
     override fun mapToDataModel(response: MovieResponseModel): MovieDataModel {
         return with(response) {
             MovieDataModel(
-                movieId = id.toString(),
+                id = id.toString(),
                 title = title.orEmpty(),
                 overview = overview.orEmpty(),
                 backdropPath = backdropPath.orEmpty(),

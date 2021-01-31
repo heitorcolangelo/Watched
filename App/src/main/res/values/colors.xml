@@ -16,4 +16,15 @@
 
     <color name="black_800">#121212</color>
     <color name="black_900">#000000</color>
+
+
+    <!-- Evaluate a change to this color pallet
+    background color = #3a1744
+    accent color = #ff8f10
+    bottom nav color = #1a1a1a
+    search field color = #d5bddc
+    icon color = #ffffff
+
+    https://www.uplabs.com/posts/movie-app-design-part-3
+   -->
 </resources>

@@ -6,12 +6,12 @@ import com.watched.data.movie.di.MovieDataModule
 import com.watched.data.remote.movie.di.MovieRemoteDataModule
 import com.watched.domain.common.providers.DispatcherProvider
 import com.watched.domain.movie.model.MovieDomainModel
-import com.watched.movie.domain.GetLatestMovieUseCase
 import com.watched.movie.domain.GetMovieUseCase
 import com.watched.movie.domain.GetPopularMoviesUseCase
-import com.watched.movie.mapper.LatestMovieDomainUiMapper
+import com.watched.movie.domain.GetTopXPopularMoviesUseCase
 import com.watched.movie.mapper.MovieDetailsDomainUiMapper
 import com.watched.movie.mapper.MovieItemDomainUiMapper
+import com.watched.movie.mapper.TopXMovieDomainUiMapper
 import com.watched.movie.model.MovieDetailsUiModel
 import com.watched.movie.model.MovieItemUiModel
 import com.watched.movie.ui.detail.MovieDetailsFragment
@@ -94,8 +94,8 @@ abstract class MovieFeatureModule : ApplicationModule() {
         @Provides
         fun provideMovieMainViewModel(
             fragment: MovieMainFragment,
-            mapper: LatestMovieDomainUiMapper,
-            useCase: GetLatestMovieUseCase,
+            mapper: TopXMovieDomainUiMapper,
+            useCase: GetTopXPopularMoviesUseCase,
             dispatcherProvider: DispatcherProvider
         ): MovieMainViewModel {
             return ViewModelFactory.make(fragment) {

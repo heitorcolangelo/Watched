@@ -3,7 +3,7 @@ package com.watched.data.movie.model
 import com.watched.data.common.model.DataModel
 
 data class MovieDataModel(
-    private val movieId: String,
+    val id: String,
     val title: String,
     val overview: String,
     val backdropPath: String,
@@ -11,4 +11,4 @@ data class MovieDataModel(
     val voteAverage: Float,
     val popularity: Float,
     val releaseDate: String
-) : DataModel(movieId)
+) : DataModel

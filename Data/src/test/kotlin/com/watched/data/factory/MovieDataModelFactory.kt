@@ -6,7 +6,7 @@ import com.watched.data.movie.model.MovieDataModel
 object MovieDataModelFactory : MockFactory<MovieDataModel> {
     override fun make(): MovieDataModel {
         return MovieDataModel(
-            movieId = randomId(),
+            id = randomId(),
             title = randomString(),
             overview = randomString(),
             backdropPath = randomString(),

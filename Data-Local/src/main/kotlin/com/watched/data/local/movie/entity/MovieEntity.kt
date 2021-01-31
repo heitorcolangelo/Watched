@@ -6,7 +6,7 @@ import com.watched.data.local.common.entity.BaseEntity
 
 @Entity(tableName = MovieEntity.TABLE_NAME)
 data class MovieEntity(
-    @PrimaryKey override val id: String,
+    @PrimaryKey val id: String,
     val title: String,
     val overview: String,
     val backdropPath: String,
@@ -14,7 +14,7 @@ data class MovieEntity(
     val voteAverage: Float,
     val popularity: Float,
     val releaseDate: String
-) : BaseEntity(id) {
+) : BaseEntity {
     companion object {
         const val TABLE_NAME = "movie"
     }

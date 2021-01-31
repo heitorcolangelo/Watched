@@ -1,5 +1,6 @@
 package com.watched.data.remote.movie
 
+import com.watched.data.movie.model.SortOptionsDataModel
 import com.watched.data.remote.common.model.PageResponseModel
 import com.watched.data.remote.factory.MovieResponseModelFactory
 import com.watched.data.remote.movie.api.MovieApiService
@@ -19,32 +20,33 @@ class MovieRemoteDataSourceImplTest {
     private val remoteData = MovieRemoteDataSourceImpl(pageMapper, movieMapper, api)
 
     @Test
-    fun `WHEN get movies THEN get Popular movies`() {
-        coEvery { api.getPopular() } returns mockk(relaxed = true)
-
-        runBlocking { remoteData.getMovies(1) }
-
-        coVerify { api.getPopular() }
-    }
-
-    @Test
-    fun `WHEN get movies page THEN get Popular movies page`() {
+    fun `WHEN sortOptions is Popularity THEN call api getPopular`() {
         val page = 2
         coEvery { api.getPopular(any()) } returns mockk(relaxed = true)
 
-        runBlocking { remoteData.getMovies(page) }
+        runBlocking { remoteData.getMovies(page, SortOptionsDataModel.Popularity) }
+
+        coVerify { api.getPopular(any()) }
+    }
+
+    @Test(expected = UnsupportedOperationException::class)
+    fun `WHEN sortOptions is TopRated THEN throw exception`() {
+        val page = 2
+        coEvery { api.getPopular(any()) } returns mockk(relaxed = true)
+
+        runBlocking { remoteData.getMovies(page, SortOptionsDataModel.TopRated) }
 
         coVerify { api.getPopular(any()) }
     }
 
     @Test
     fun `WHEN api return movies THEN map to data model`() {
-        val moviePageResponse = mockk<PageResponseModel<MovieResponseModel>>(relaxed = true)
-        coEvery { api.getPopular() } returns moviePageResponse
+        val response = PageResponseModel<MovieResponseModel>(emptyList())
+        coEvery { api.getPopular(any()) } returns response
 
-        runBlocking { remoteData.getMovies(1) }
+        runBlocking { remoteData.getMovies(1, SortOptionsDataModel.Popularity) }
 
-        coVerify { pageMapper.mapToPageDataModel(moviePageResponse) }
+        coVerify { pageMapper.mapToPageDataModel(response) }
     }
 
     @Test
