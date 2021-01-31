@@ -9,29 +9,24 @@
         android:id="@+id/iv_poster"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/ll_content"
+        app:layout_constraintBottom_toTopOf="@id/tv_top_x"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:id="@+id/ll_content"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/colorSurface"
+    <TextView
+        android:id="@+id/tv_top_x"
+        style="@style/TextAppearance.Body.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="?attr/actionBarSize"
+        android:drawablePadding="@dimen/margin_.5x"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="@dimen/margin_.5x"
+        android:textColor="?attr/colorOnBackground"
+        app:drawableStartCompat="@drawable/ic_throphy"
+        app:drawableTint="?attr/colorOnBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_poster">
-
-        <TextView
-            android:id="@+id/tv_top_x"
-            style="@style/TextAppearance.Body.Title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Top 8 today" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/iv_poster"
+        tools:text="Top 8 today" />
 </androidx.constraintlayout.widget.ConstraintLayout>
