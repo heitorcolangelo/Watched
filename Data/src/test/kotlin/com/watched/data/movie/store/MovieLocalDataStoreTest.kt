@@ -43,11 +43,4 @@ class MovieLocalDataStoreTest {
 
         coVerify { dataSource.getMovie(movieId) }
     }
-
-    @Test
-    fun `WHEN getLatestMovie THEN get from data source`() {
-        runBlocking { dataStore.getMovie(movieId) }
-
-        coVerify { dataSource.getMovie(movieId) }
-    }
 }

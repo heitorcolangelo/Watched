@@ -20,10 +20,6 @@ class MovieLocalDataStore @Inject constructor(
         return PageDataModel(page = page, pageSize = MovieDataStore.PAGE_SIZE, items = movies)
     }
 
-    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel? {
-        return dataSource.getLatestMovie()
-    }
-
     override suspend fun saveMovies(movies: List<MovieDataModel>) {
         dataSource.saveMovies(movies)
         dataSource.setLastCacheTime(System.currentTimeMillis())

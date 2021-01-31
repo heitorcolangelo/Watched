@@ -24,22 +24,12 @@ class MovieRepositoryImplTest {
     private val movieId = "movieId"
 
     @Test
-    fun `WHEN get latest movie THEN get from data store`() {
+    fun `WHEN get movie THEN get from data store`() {
         coEvery { dataStore.getMovie(movieId) } returns mockk(relaxed = true)
 
         runBlocking { repo.getMovie(movieId) }
 
         coVerify { dataStore.getMovie(movieId) }
-    }
-
-    @Test
-    fun `WHEN data store returns latest movie THEN map to domain model`() {
-        val movie = MovieDataModelFactory.make()
-        coEvery { dataStore.getLatestMovie() } returns movie
-
-        runBlocking { repo.getLatestMovie() }
-
-        coVerify { movieMapper.mapToDomainModel(movie) }
     }
 
     @Test

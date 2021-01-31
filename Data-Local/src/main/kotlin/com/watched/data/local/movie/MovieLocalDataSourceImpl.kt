@@ -15,8 +15,8 @@ class MovieLocalDataSourceImpl @Inject constructor(
     private val mapper: MovieEntityDataMapper,
     configDao: ConfigDao
 ) : LocalDataSourceImpl(configDao), MovieLocalDataSource {
-    override val firstPage: Int
-        get() = 0
+
+    override val firstPage: Int = FIRST_PAGE
 
     override suspend fun isDataCached(): Boolean {
         return movieDao.getMovies().isNotEmpty()
@@ -32,7 +32,7 @@ class MovieLocalDataSourceImpl @Inject constructor(
         pageSize: Int,
         sortOption: SortOptionsDataModel
     ): List<MovieDataModel> {
-        val pageToRequest = firstPage + page
+        val pageToRequest = pageToRequest(page)
         val offset = getOffset(pageToRequest, pageSize)
         val movies = movieDao.getPagedMovies(pageSize, offset).sort(sortOption)
         return movies.map(mapper::mapToDataModel)
@@ -41,12 +41,6 @@ class MovieLocalDataSourceImpl @Inject constructor(
     override suspend fun getMovie(movieId: String): MovieDataModel {
         val movie = movieDao.getMovie(movieId)
         return mapper.mapToDataModel(movie)
-    }
-
-    override suspend fun getLatestMovie(): MovieDataModel? {
-        return movieDao.getMovies().minByOrNull { it.releaseDate }?.let {
-            mapper.mapToDataModel(it)
-        }
     }
 
     override suspend fun clear() {
@@ -61,5 +55,9 @@ class MovieLocalDataSourceImpl @Inject constructor(
                 SortOptionsDataModel.TopRated -> it.voteAverage
             }
         }
+    }
+
+    companion object {
+        const val FIRST_PAGE = 0
     }
 }

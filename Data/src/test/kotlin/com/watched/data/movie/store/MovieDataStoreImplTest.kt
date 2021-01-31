@@ -49,33 +49,4 @@ class MovieDataStoreImplTest {
 
         coVerify { localDataStore.saveMovies(any()) }
     }
-
-    @Test
-    fun `WHEN forceRefresh is true THEN get latest movie from remote data store`() {
-        val forceRefresh = true
-        coEvery { remoteDataStore.getLatestMovie(any()) } returns mockk(relaxed = true)
-
-        runBlocking { dataStore.getLatestMovie(forceRefresh) }
-
-        coVerify { remoteDataStore.getLatestMovie() }
-    }
-
-    @Test
-    fun `WHEN local data is valid THEN get latest movie from local data store`() {
-        coEvery { localDataStore.isDataValid() } returns true
-
-        runBlocking { dataStore.getLatestMovie(false) }
-
-        coVerify { localDataStore.getLatestMovie() }
-    }
-
-    @Test
-    fun `WHEN local data is NOT valid THEN get latest movie from remote data store`() {
-        coEvery { localDataStore.isDataValid() } returns false
-        coEvery { remoteDataStore.getLatestMovie(any()) } returns mockk(relaxed = true)
-
-        runBlocking { dataStore.getLatestMovie(false) }
-
-        coVerify { remoteDataStore.getLatestMovie() }
-    }
 }

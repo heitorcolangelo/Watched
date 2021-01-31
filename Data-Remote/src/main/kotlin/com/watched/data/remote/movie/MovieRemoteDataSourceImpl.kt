@@ -17,11 +17,13 @@ class MovieRemoteDataSourceImpl @Inject constructor(
     private val api: MovieApiService
 ) : MovieRemoteDataSource {
 
+    override val firstPage: Int = PageResponseModel.FIRST_PAGE
+
     override suspend fun getMovies(
         page: Int,
         sortOption: SortOptionsDataModel
     ): PageDataModel<MovieDataModel> {
-        val pageNumber = toRequestModelPage(page)
+        val pageNumber = pageToRequest(page)
         val moviePage: PageResponseModel<MovieResponseModel> = when (sortOption) {
             SortOptionsDataModel.Popularity -> api.getPopular(pageNumber)
             SortOptionsDataModel.TopRated -> {
@@ -33,16 +35,5 @@ class MovieRemoteDataSourceImpl @Inject constructor(
 
     override suspend fun getMovie(movieId: String): MovieDataModel {
         return movieMapper.mapToDataModel(api.getMovie(movieId))
-    }
-
-    override suspend fun getLatestMovie(): MovieDataModel? {
-        return api.getLatestMovie()?.let { movieMapper.mapToDataModel(it) }
-    }
-
-    /**
-     * The api pagination starts with 1.
-     */
-    private fun toRequestModelPage(page: Int): Int {
-        return page + PageResponseModel.FIRST_PAGE
     }
 }

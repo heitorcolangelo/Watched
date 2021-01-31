@@ -12,9 +12,9 @@ import com.watched.data.movie.store.MovieDataStore
 import com.watched.domain.movie.model.MovieDomainModel
 import com.watched.domain.movie.model.SortOptionsDomainModel
 import com.watched.domain.movie.repository.MovieRepository
+import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val pageMapper: PageDataDomainMapper<MovieDataModel, MovieDomainModel>,
@@ -43,13 +43,6 @@ class MovieRepositoryImpl @Inject constructor(
             sortOption = sortOptionsMapper.mapToDataModel(sortOption),
             forceRefresh = forceRefresh
         ).items.map(movieMapper::mapToDomainModel)
-    }
-
-    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDomainModel? {
-        val latestMovie = dataStore.getLatestMovie(forceRefresh)
-        return latestMovie?.let {
-            movieMapper.mapToDomainModel(it)
-        }
     }
 
     override suspend fun getMovie(movieId: String): MovieDomainModel {

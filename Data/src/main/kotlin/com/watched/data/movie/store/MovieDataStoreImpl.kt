@@ -23,15 +23,6 @@ class MovieDataStoreImpl @Inject constructor(
         return localDataStore.getMoviePage(page, sortOption)
     }
 
-    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel? {
-        if (forceRefresh || !localDataStore.isDataValid()) {
-            remoteDataStore.getLatestMovie()?.let {
-                saveMovies(listOf(it))
-            }
-        }
-        return localDataStore.getLatestMovie()
-    }
-
     override suspend fun saveMovies(movies: List<MovieDataModel>) {
         return localDataStore.saveMovies(movies)
     }
