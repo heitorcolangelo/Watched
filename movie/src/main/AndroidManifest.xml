@@ -13,7 +13,7 @@
     </dist:module>
 
     <application
-        android:name="com.watched.presentation.MoviesApplication"
+        android:name="com.watched.presentation.WatchedApplication"
         android:allowBackup="true"
         tools:ignore="AllowBackup,MissingApplicationIcon" />
 </manifest>

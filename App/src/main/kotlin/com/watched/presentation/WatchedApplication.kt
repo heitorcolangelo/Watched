@@ -12,10 +12,10 @@ import com.watched.presentation.di.DaggerApplicationComponent
 import timber.log.Timber
 import timber.log.Timber.DebugTree
 
-class MoviesApplication : Application() {
+class WatchedApplication : Application() {
     companion object {
         fun applicationComponent(context: Context): ApplicationComponent {
-            return (context.applicationContext as MoviesApplication).applicationComponent
+            return (context.applicationContext as WatchedApplication).applicationComponent
         }
     }
 
@@ -33,5 +33,5 @@ class MoviesApplication : Application() {
     }
 }
 
-fun Fragment.applicationComponent() = MoviesApplication.applicationComponent(requireContext())
-fun BaseActivity.applicationComponent() = MoviesApplication.applicationComponent(this)
+fun Fragment.applicationComponent() = WatchedApplication.applicationComponent(requireContext())
+fun BaseActivity.applicationComponent() = WatchedApplication.applicationComponent(this)
