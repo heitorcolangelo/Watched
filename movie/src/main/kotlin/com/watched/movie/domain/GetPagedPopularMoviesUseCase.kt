@@ -8,7 +8,7 @@ import com.watched.domain.movie.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetPopularMoviesUseCase @Inject constructor(
+class GetPagedPopularMoviesUseCase @Inject constructor(
     private val repository: MovieRepository
 ) : PagedUseCase<MovieDomainModel>() {
     override suspend fun invoke(args: Args): Flow<PagingData<MovieDomainModel>> {

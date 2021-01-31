@@ -17,7 +17,7 @@ import org.junit.Test
 
 class GetPopularMoviesUseCaseTest {
     private val repository: MovieRepository = mockk(relaxed = true)
-    private val useCase = GetPopularMoviesUseCase(repository)
+    private val useCase = GetPagedPopularMoviesUseCase(repository)
 
     @Test
     fun `WHEN execute THEN get popular movies from repo`() {

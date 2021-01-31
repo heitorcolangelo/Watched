@@ -9,7 +9,7 @@ import androidx.paging.cachedIn
 import com.watched.domain.common.providers.DispatcherProvider
 import com.watched.domain.common.usecase.PagedUseCase
 import com.watched.domain.movie.model.MovieDomainModel
-import com.watched.movie.domain.GetPopularMoviesUseCase
+import com.watched.movie.domain.GetPagedPopularMoviesUseCase
 import com.watched.movie.model.MovieItemUiModel
 import com.watched.presentation.common.mapper.PageDomainUiMapper
 import com.watched.presentation.common.navigation.Navigation
@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 
 class MovieListViewModel(
     private val mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel>,
-    private val useCase: GetPopularMoviesUseCase,
+    private val useCase: GetPagedPopularMoviesUseCase,
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
     private val _navigation = SingleLiveEvent<Navigation>()

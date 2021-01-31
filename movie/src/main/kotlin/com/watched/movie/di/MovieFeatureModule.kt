@@ -7,7 +7,7 @@ import com.watched.data.remote.movie.di.MovieRemoteDataModule
 import com.watched.domain.common.providers.DispatcherProvider
 import com.watched.domain.movie.model.MovieDomainModel
 import com.watched.movie.domain.GetMovieUseCase
-import com.watched.movie.domain.GetPopularMoviesUseCase
+import com.watched.movie.domain.GetPagedPopularMoviesUseCase
 import com.watched.movie.domain.GetTopXPopularMoviesUseCase
 import com.watched.movie.mapper.MovieDetailsDomainUiMapper
 import com.watched.movie.mapper.MovieItemDomainUiMapper
@@ -63,7 +63,7 @@ abstract class MovieFeatureModule : ApplicationModule() {
         fun provideMovieListViewModel(
             fragment: MovieListFragment,
             mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel>,
-            useCase: GetPopularMoviesUseCase,
+            useCase: GetPagedPopularMoviesUseCase,
             dispatcherProvider: DispatcherProvider
         ): MovieListViewModel {
             return ViewModelFactory.make(fragment) {
