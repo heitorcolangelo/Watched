@@ -45,13 +45,6 @@ class MovieRepositoryImpl @Inject constructor(
         ).items.map(movieMapper::mapToDomainModel)
     }
 
-    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDomainModel? {
-        val latestMovie = dataStore.getLatestMovie(forceRefresh)
-        return latestMovie?.let {
-            movieMapper.mapToDomainModel(it)
-        }
-    }
-
     override suspend fun getMovie(movieId: String): MovieDomainModel {
         val movie = dataStore.getMovie(movieId)
         return movieMapper.mapToDomainModel(movie)

@@ -19,10 +19,6 @@ class MovieRemoteDataStore @Inject constructor(
         return dataSource.getMovies(page, sortOption)
     }
 
-    override suspend fun getLatestMovie(forceRefresh: Boolean): MovieDataModel? {
-        return dataSource.getLatestMovie()
-    }
-
     override suspend fun saveMovies(movies: List<MovieDataModel>) {
         throw UnsupportedOperationException("Save is not supported by remote data source.")
     }

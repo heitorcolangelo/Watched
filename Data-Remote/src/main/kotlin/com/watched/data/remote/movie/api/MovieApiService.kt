@@ -17,7 +17,4 @@ interface MovieApiService {
 
     @GET("{movieId}")
     suspend fun getMovie(@Path("movieId") movieId: String): MovieResponseModel
-
-    @GET("latest")
-    suspend fun getLatestMovie(): MovieResponseModel?
 }

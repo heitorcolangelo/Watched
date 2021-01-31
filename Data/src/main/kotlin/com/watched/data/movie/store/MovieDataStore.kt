@@ -12,7 +12,6 @@ interface MovieDataStore : DataStore {
         forceRefresh: Boolean = false
     ): PageDataModel<MovieDataModel>
 
-    suspend fun getLatestMovie(forceRefresh: Boolean = false): MovieDataModel?
     suspend fun saveMovies(movies: List<MovieDataModel>)
     suspend fun getMovie(movieId: String): MovieDataModel
 
