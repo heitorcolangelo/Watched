@@ -39,28 +39,31 @@ class HorizontalItemDecoration(
                 return
             }
 
-            when (position) {
-                0 -> { // First
-                    val edgeWidth = edgeDivider?.intrinsicWidth ?: 0
-                    val width = divider?.intrinsicWidth ?: 0
-                    outRect.set(edgeWidth, 0, width, 0)
-                }
-                adapter.itemCount - 1 -> { // Last
-                    val edgeWidth = edgeDivider?.intrinsicWidth ?: 0
-                    val width = divider?.intrinsicWidth ?: 0
-                    outRect.set(width, 0, edgeWidth, 0)
-                }
-                else -> {
-                    val width = divider?.intrinsicWidth ?: 0
-                    outRect.set(width, 0, width, 0)
-                }
+            setRectCoordinatesForPosition(position, outRect, adapter)
+        }
+    }
+
+    private fun setRectCoordinatesForPosition(
+        position: Int,
+        outRect: Rect,
+        adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>
+    ) {
+        val edgeWidth = edgeDivider?.intrinsicWidth ?: 0
+        val width = divider?.intrinsicWidth ?: 0
+        when (position) {
+            0 -> { // First
+                outRect.set(edgeWidth, 0, width, 0)
+            }
+            adapter.itemCount - 1 -> { // Last
+                outRect.set(width, 0, edgeWidth, 0)
+            }
+            else -> {
+                outRect.set(width, 0, width, 0)
             }
         }
     }
 
-    private fun Context.getDrawableSafely(
-        @DrawableRes drawableId: Int
-    ): Drawable? {
+    private fun Context.getDrawableSafely(@DrawableRes drawableId: Int): Drawable? {
         return try {
             ResourcesCompat.getDrawable(resources, drawableId, theme)
         } catch (exception: Resources.NotFoundException) {
