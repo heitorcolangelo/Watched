@@ -12,9 +12,9 @@ import com.watched.movie.mapper.MovieItemDomainUiMapper
 import com.watched.movie.mapper.TopXMovieDomainUiMapper
 import com.watched.movie.model.MovieSectionItemUiModel
 import com.watched.movie.model.TopXMovieUiModel
-import javax.inject.Inject
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 class MovieMainViewModel @Inject constructor(
     private val topXPopularMoviesUseCase: GetTopXPopularMoviesUseCase,
