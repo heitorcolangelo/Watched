@@ -14,8 +14,11 @@ dependencies {
 
     api "org.jetbrains.kotlinx:kotlinx-coroutines-test:$versions.coroutines"
 
-    //JUnit
+    // JUnit
     implementation "junit:junit:$versions.junit"
+
+    // Mockk
+    implementation "io.mockk:mockk:$versions.mockk"
 }
 
 java {

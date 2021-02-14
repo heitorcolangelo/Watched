@@ -2,9 +2,10 @@ package com.watched.movie.model
 
 import androidx.annotation.StringRes
 import com.watched.presentation.common.model.ItemUiModel
+import com.watched.presentation.common.model.ListUiModel
 
 data class MovieSectionItemUiModel(
-    override val id: String = ItemUiModel.NO_ID,
+    override val id: String,
     @StringRes val title: Int,
-    val items: List<MovieItemUiModel>
+    val list: ListUiModel<MovieItemUiModel>
 ) : ItemUiModel

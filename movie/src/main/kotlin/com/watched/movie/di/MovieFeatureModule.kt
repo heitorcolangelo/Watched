@@ -9,9 +9,10 @@ import com.watched.domain.movie.model.MovieDomainModel
 import com.watched.movie.domain.GetMovieUseCase
 import com.watched.movie.domain.GetPagedPopularMoviesUseCase
 import com.watched.movie.domain.GetPopularMoviesUseCase
-import com.watched.movie.domain.GetTopXPopularMoviesUseCase
+import com.watched.movie.domain.GetTopXMovieUseCase
 import com.watched.movie.mapper.MovieDetailsDomainUiMapper
 import com.watched.movie.mapper.MovieItemDomainUiMapper
+import com.watched.movie.mapper.PopularMoviesSectionDomainUiMapper
 import com.watched.movie.mapper.TopXMovieDomainUiMapper
 import com.watched.movie.model.MovieDetailsUiModel
 import com.watched.movie.model.MovieItemUiModel
@@ -22,6 +23,8 @@ import com.watched.movie.ui.list.MovieListViewModel
 import com.watched.movie.ui.main.MovieMainFragment
 import com.watched.movie.ui.main.MovieMainViewModel
 import com.watched.presentation.common.mapper.DomainUiMapper
+import com.watched.presentation.common.mapper.ListDomainUiMapper
+import com.watched.presentation.common.mapper.ListDomainUiMapperImpl
 import com.watched.presentation.common.mapper.PageDomainUiMapper
 import com.watched.presentation.common.mapper.PageDomainUiMapperImpl
 import com.watched.presentation.common.viewmodel.ViewModelFactory
@@ -29,8 +32,8 @@ import com.watched.presentation.di.ApplicationModule
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import org.threeten.bp.ZoneId
 import java.util.Locale
+import org.threeten.bp.ZoneId
 
 @Module(
     includes = [
@@ -53,6 +56,23 @@ abstract class MovieFeatureModule : ApplicationModule() {
     abstract fun bindMovieDetailsDomainUiMapper(mapper: MovieDetailsDomainUiMapper): DomainUiMapper<MovieDomainModel, MovieDetailsUiModel>
 
     companion object {
+        @Provides
+        fun providePopularMoviesSectionDomainUiMapper(
+            movieListMapper: ListDomainUiMapper<MovieDomainModel, MovieItemUiModel>
+        ): PopularMoviesSectionDomainUiMapper {
+            return object :PopularMoviesSectionDomainUiMapper {
+                override val movieListMapper: ListDomainUiMapper<MovieDomainModel, MovieItemUiModel>
+                    get() = movieListMapper
+            }
+        }
+
+        @Provides
+        fun provideMovieListDomainUiMapper(
+            mapper: DomainUiMapper<MovieDomainModel, MovieItemUiModel>
+        ): ListDomainUiMapper<MovieDomainModel, MovieItemUiModel> {
+            return ListDomainUiMapperImpl(mapper)
+        }
+
         @Provides
         fun provideMoviePageDomainUiMapper(
             mapper: MovieItemDomainUiMapper
@@ -96,9 +116,9 @@ abstract class MovieFeatureModule : ApplicationModule() {
         fun provideMovieMainViewModel(
             fragment: MovieMainFragment,
             mapper: TopXMovieDomainUiMapper,
-            useCase: GetTopXPopularMoviesUseCase,
+            useCase: GetTopXMovieUseCase,
             popularUseCase: GetPopularMoviesUseCase,
-            movieItemMapper: MovieItemDomainUiMapper,
+            movieItemMapper: PopularMoviesSectionDomainUiMapper,
             dispatcherProvider: DispatcherProvider
         ): MovieMainViewModel {
             return ViewModelFactory.make(fragment) {

@@ -7,7 +7,7 @@ import com.watched.domain.movie.repository.MovieRepository
 import javax.inject.Inject
 import kotlin.random.Random
 
-class GetTopXPopularMoviesUseCase @Inject constructor(
+class GetTopXMovieUseCase @Inject constructor(
     private val repository: MovieRepository
 ) : NoArgUseCase<TopXMovieDomainModel>() {
     override suspend fun invoke(): TopXMovieDomainModel {

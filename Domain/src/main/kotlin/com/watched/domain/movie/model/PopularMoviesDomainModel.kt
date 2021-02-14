@@ -1,7 +1,8 @@
 package com.watched.domain.movie.model
 
-import com.watched.domain.common.model.DomainModel
+import com.watched.domain.common.model.ListDomainModel
 
 data class PopularMoviesDomainModel(
-    val movies: List<MovieDomainModel>
-) : DomainModel
+    override val id: String,
+    override val items: List<MovieDomainModel>
+) : ListDomainModel<MovieDomainModel>

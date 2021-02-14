@@ -24,7 +24,7 @@ class MovieSectionItemBinder :
             rvList.addItemDecoration(HorizontalItemDecoration(context))
             rvList.adapter = adapter
 
-            adapter.submitList(model.items)
+            adapter.submitList(model.list.items)
         }
     }
 

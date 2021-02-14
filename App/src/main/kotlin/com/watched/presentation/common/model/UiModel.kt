@@ -14,8 +14,8 @@ interface ItemUiModel : UiModel {
     fun areContentsTheSame(other: ItemUiModel): Boolean {
         return this == other
     }
+}
 
-    companion object {
-        const val NO_ID = ""
-    }
+interface ListUiModel<Model : UiModel> : UiModel {
+    val items: List<Model>
 }

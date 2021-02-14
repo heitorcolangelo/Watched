@@ -12,11 +12,13 @@ class GetPopularMoviesUseCase @Inject constructor(
 ) : UseCase<PopularMoviesDomainModel, GetPopularMoviesUseCase.Args>() {
 
     override suspend fun invoke(args: Args): PopularMoviesDomainModel {
+        val popularMovies = repository.getMovies(
+            sortOption = SortOptionsDomainModel.Popularity,
+            forceRefresh = args.forceRefresh
+        )
         return PopularMoviesDomainModel(
-            repository.getMovies(
-                sortOption = SortOptionsDomainModel.Popularity,
-                forceRefresh = args.forceRefresh
-            )
+            id = popularMovies.toString(),
+            items = popularMovies
         )
     }
 
