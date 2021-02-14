@@ -1,4 +1,6 @@
-package com.watched.presentation.common.model
+package com.watched.movie.model
+
+import com.watched.presentation.common.model.UiModel
 
 class MovieImageUiModel(
     private val baseUrl: String,

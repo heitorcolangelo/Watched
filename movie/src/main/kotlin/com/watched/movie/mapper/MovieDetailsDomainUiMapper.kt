@@ -2,10 +2,9 @@ package com.watched.movie.mapper
 
 import com.watched.domain.movie.model.MovieDomainModel
 import com.watched.movie.model.MovieDetailsUiModel
+import com.watched.movie.model.MovieImageUiModel
 import com.watched.presentation.common.mapper.DomainUiMapper
 import com.watched.presentation.common.mapper.MonthAndYearDateDomainUiMapper
-import com.watched.presentation.common.mapper.MovieImageDomainUiMapper
-import com.watched.presentation.common.model.MovieImageUiModel
 import javax.inject.Inject
 
 class MovieDetailsDomainUiMapper @Inject constructor(
