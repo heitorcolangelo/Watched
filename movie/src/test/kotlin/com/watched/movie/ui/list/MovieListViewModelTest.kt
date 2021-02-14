@@ -2,7 +2,7 @@ package com.watched.movie.ui.list
 
 import androidx.paging.PagingData
 import com.watched.domain.movie.model.MovieDomainModel
-import com.watched.movie.domain.GetPopularMoviesUseCase
+import com.watched.movie.domain.GetPagedPopularMoviesUseCase
 import com.watched.movie.factory.MovieDomainModelFactory
 import com.watched.movie.factory.MovieItemUiModelFactory
 import com.watched.movie.model.MovieItemUiModel
@@ -25,7 +25,7 @@ class MovieListViewModelTest : ViewModelTest() {
 
     private val mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel> =
         mockk(relaxed = true)
-    private val useCase: GetPopularMoviesUseCase = mockk(relaxed = true)
+    private val useCase: GetPagedPopularMoviesUseCase = mockk(relaxed = true)
     private lateinit var viewModel: MovieListViewModel
 
     @Before

@@ -2,8 +2,8 @@ package com.watched.movie.factory
 
 import com.watched.common.test.MockFactory
 import com.watched.movie.model.MovieDetailsUiModel
+import com.watched.movie.model.MovieImageUiModel
 import com.watched.presentation.common.model.FormattedDateUiModel
-import com.watched.presentation.common.model.MovieImageUiModel
 
 object MovieDetailsUiModelFactory : MockFactory<MovieDetailsUiModel> {
     override fun make(): MovieDetailsUiModel {

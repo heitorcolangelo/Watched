@@ -15,3 +15,7 @@ interface ItemUiModel : UiModel {
         return this == other
     }
 }
+
+interface ListUiModel<Model : UiModel> : UiModel {
+    val items: List<Model>
+}

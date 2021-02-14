@@ -1,8 +1,9 @@
-package com.watched.presentation.common.mapper
+package com.watched.movie.mapper
 
 import com.watched.data.remote.common.BuildConfiguration
 import com.watched.domain.movie.model.MovieImageDomainModel
-import com.watched.presentation.common.model.MovieImageUiModel
+import com.watched.movie.model.MovieImageUiModel
+import com.watched.presentation.common.mapper.DomainUiMapper
 import javax.inject.Inject
 
 class MovieImageDomainUiMapper @Inject constructor(

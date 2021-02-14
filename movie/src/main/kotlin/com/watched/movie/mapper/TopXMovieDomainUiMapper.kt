@@ -3,7 +3,6 @@ package com.watched.movie.mapper
 import com.watched.domain.movie.model.TopXMovieDomainModel
 import com.watched.movie.model.TopXMovieUiModel
 import com.watched.presentation.common.mapper.DomainUiMapper
-import com.watched.presentation.common.mapper.MovieImageDomainUiMapper
 import javax.inject.Inject
 
 class TopXMovieDomainUiMapper @Inject constructor(

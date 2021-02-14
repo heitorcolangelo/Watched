@@ -7,10 +7,12 @@ import com.watched.data.remote.movie.di.MovieRemoteDataModule
 import com.watched.domain.common.providers.DispatcherProvider
 import com.watched.domain.movie.model.MovieDomainModel
 import com.watched.movie.domain.GetMovieUseCase
+import com.watched.movie.domain.GetPagedPopularMoviesUseCase
 import com.watched.movie.domain.GetPopularMoviesUseCase
-import com.watched.movie.domain.GetTopXPopularMoviesUseCase
+import com.watched.movie.domain.GetTopXMovieUseCase
 import com.watched.movie.mapper.MovieDetailsDomainUiMapper
 import com.watched.movie.mapper.MovieItemDomainUiMapper
+import com.watched.movie.mapper.PopularMoviesSectionDomainUiMapper
 import com.watched.movie.mapper.TopXMovieDomainUiMapper
 import com.watched.movie.model.MovieDetailsUiModel
 import com.watched.movie.model.MovieItemUiModel
@@ -21,6 +23,8 @@ import com.watched.movie.ui.list.MovieListViewModel
 import com.watched.movie.ui.main.MovieMainFragment
 import com.watched.movie.ui.main.MovieMainViewModel
 import com.watched.presentation.common.mapper.DomainUiMapper
+import com.watched.presentation.common.mapper.ListDomainUiMapper
+import com.watched.presentation.common.mapper.ListDomainUiMapperImpl
 import com.watched.presentation.common.mapper.PageDomainUiMapper
 import com.watched.presentation.common.mapper.PageDomainUiMapperImpl
 import com.watched.presentation.common.viewmodel.ViewModelFactory
@@ -53,6 +57,23 @@ abstract class MovieFeatureModule : ApplicationModule() {
 
     companion object {
         @Provides
+        fun providePopularMoviesSectionDomainUiMapper(
+            movieListMapper: ListDomainUiMapper<MovieDomainModel, MovieItemUiModel>
+        ): PopularMoviesSectionDomainUiMapper {
+            return object : PopularMoviesSectionDomainUiMapper {
+                override val movieListMapper: ListDomainUiMapper<MovieDomainModel, MovieItemUiModel>
+                    get() = movieListMapper
+            }
+        }
+
+        @Provides
+        fun provideMovieListDomainUiMapper(
+            mapper: DomainUiMapper<MovieDomainModel, MovieItemUiModel>
+        ): ListDomainUiMapper<MovieDomainModel, MovieItemUiModel> {
+            return ListDomainUiMapperImpl(mapper)
+        }
+
+        @Provides
         fun provideMoviePageDomainUiMapper(
             mapper: MovieItemDomainUiMapper
         ): PageDomainUiMapper<MovieDomainModel, MovieItemUiModel> {
@@ -63,7 +84,7 @@ abstract class MovieFeatureModule : ApplicationModule() {
         fun provideMovieListViewModel(
             fragment: MovieListFragment,
             mapper: PageDomainUiMapper<MovieDomainModel, MovieItemUiModel>,
-            useCase: GetPopularMoviesUseCase,
+            useCase: GetPagedPopularMoviesUseCase,
             dispatcherProvider: DispatcherProvider
         ): MovieListViewModel {
             return ViewModelFactory.make(fragment) {
@@ -95,13 +116,17 @@ abstract class MovieFeatureModule : ApplicationModule() {
         fun provideMovieMainViewModel(
             fragment: MovieMainFragment,
             mapper: TopXMovieDomainUiMapper,
-            useCase: GetTopXPopularMoviesUseCase,
+            useCase: GetTopXMovieUseCase,
+            popularUseCase: GetPopularMoviesUseCase,
+            movieItemMapper: PopularMoviesSectionDomainUiMapper,
             dispatcherProvider: DispatcherProvider
         ): MovieMainViewModel {
             return ViewModelFactory.make(fragment) {
                 MovieMainViewModel(
                     useCase,
                     mapper,
+                    popularUseCase,
+                    movieItemMapper,
                     dispatcherProvider
                 )
             }
