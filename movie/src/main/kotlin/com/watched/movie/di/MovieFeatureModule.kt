@@ -32,8 +32,8 @@ import com.watched.presentation.di.ApplicationModule
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import java.util.Locale
 import org.threeten.bp.ZoneId
+import java.util.Locale
 
 @Module(
     includes = [
