@@ -24,11 +24,11 @@ class MovieMainFragment : Fragment(R.layout.fragment_movie_main) {
 
     private val binding: FragmentMovieMainBinding by viewBinding()
     private val topXAdapter = BaseAdapter(ItemMovieTopXBinding::inflate, MovieTopXItemBinder())
-    private val popularAdapter = BaseAdapter(
+    private val sectionsAdapter = BaseAdapter(
         ItemTitleAndListBinding::inflate,
         MovieSectionItemBinder()
     )
-    private val mainAdapter = ConcatAdapter(topXAdapter, popularAdapter)
+    private val mainAdapter = ConcatAdapter(topXAdapter, sectionsAdapter)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -43,14 +43,14 @@ class MovieMainFragment : Fragment(R.layout.fragment_movie_main) {
         inject()
 
         viewModel.topXMovie.observe(this, ::onTopXMovie)
-        viewModel.popularMovies.observe(this, ::onPopularMovies)
+        viewModel.sectionMovies.observe(this, ::onSectionMovies)
     }
 
     private fun onTopXMovie(movie: TopXMovieUiModel) {
         topXAdapter.submitList(listOf(movie))
     }
 
-    private fun onPopularMovies(popular: MovieSectionItemUiModel) {
-        popularAdapter.submitList(listOf(popular))
+    private fun onSectionMovies(sections: List<MovieSectionItemUiModel?>) {
+        sectionsAdapter.submitList(sections)
     }
 }

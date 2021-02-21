@@ -1,12 +1,14 @@
 package com.watched.movie.ui.main
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.watched.domain.common.providers.DispatcherProvider
-import com.watched.domain.movie.model.PopularMoviesDomainModel
-import com.watched.movie.domain.GetPopularMoviesUseCase
+import com.watched.domain.movie.model.MovieListDomainModel
+import com.watched.domain.movie.model.SortOptionsDomainModel
+import com.watched.movie.domain.GetSortedMoviesUseCase
 import com.watched.movie.domain.GetTopXMovieUseCase
 import com.watched.movie.mapper.MovieSectionDomainUiMapper
 import com.watched.movie.mapper.TopXMovieDomainUiMapper
@@ -20,7 +22,7 @@ import kotlin.coroutines.CoroutineContext
 class MovieMainViewModel @Inject constructor(
     private val topXMovieUseCase: GetTopXMovieUseCase,
     private val topXMovieMapper: TopXMovieDomainUiMapper,
-    private val popularMoviesUseCase: GetPopularMoviesUseCase,
+    private val sortedMoviesUseCase: GetSortedMoviesUseCase,
     private val movieSectionMapper: MovieSectionDomainUiMapper,
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
@@ -28,11 +30,21 @@ class MovieMainViewModel @Inject constructor(
     val topXMovie: LiveData<TopXMovieUiModel> = _topXMovie
 
     private val _popularMovies = MutableLiveData<MovieSectionItemUiModel>()
-    val popularMovies: LiveData<MovieSectionItemUiModel> = _popularMovies
+    private val _topRatedMovies = MutableLiveData<MovieSectionItemUiModel>()
+
+    val sectionMovies = MediatorLiveData<List<MovieSectionItemUiModel?>>()
 
     init {
+        sectionMovies.addSource(_popularMovies) {
+            sectionMovies.postValue(listOf(it, _topRatedMovies.value))
+        }
+        sectionMovies.addSource(_topRatedMovies) {
+            sectionMovies.postValue(listOf(_popularMovies.value, it))
+        }
+
         getTopXMovie()
         getPopularMovies()
+        getTopRatedMovies()
     }
 
     private fun getTopXMovie() {
@@ -49,10 +61,23 @@ class MovieMainViewModel @Inject constructor(
         viewModelScope.launch(
             dispatcherProvider.io() + PopularMoviesExceptionHandler()
         ) {
-            val args = GetPopularMoviesUseCase.Args(forceRefresh)
-            val popularMovies: PopularMoviesDomainModel = popularMoviesUseCase.execute(args)
-            val popularMoviesSection: MovieSectionItemUiModel = movieSectionMapper.mapToUiModel(popularMovies)
+            val args = GetSortedMoviesUseCase.Args(forceRefresh, SortOptionsDomainModel.Popularity)
+            val popularMovies: MovieListDomainModel = sortedMoviesUseCase.execute(args)
+            val popularMoviesSection: MovieSectionItemUiModel =
+                movieSectionMapper.mapToUiModel(popularMovies)
             _popularMovies.postValue(popularMoviesSection)
+        }
+    }
+
+    private fun getTopRatedMovies(forceRefresh: Boolean = false) {
+        viewModelScope.launch(
+            dispatcherProvider.io() + TopRatedMoviesExceptionHandler()
+        ) {
+            val args = GetSortedMoviesUseCase.Args(forceRefresh, SortOptionsDomainModel.TopRated)
+            val topRatedMovies: MovieListDomainModel = sortedMoviesUseCase.execute(args)
+            val topRatedSection: MovieSectionItemUiModel =
+                movieSectionMapper.mapToUiModel(topRatedMovies)
+            _topRatedMovies.postValue(topRatedSection)
         }
     }
 
@@ -63,6 +88,12 @@ class MovieMainViewModel @Inject constructor(
     }
 
     class PopularMoviesExceptionHandler : ExceptionHandler {
+        override fun handleException(context: CoroutineContext, exception: Throwable) {
+            println("GetPopularMoviesUseCase throws $exception.")
+        }
+    }
+
+    class TopRatedMoviesExceptionHandler : ExceptionHandler {
         override fun handleException(context: CoroutineContext, exception: Throwable) {
             println("GetPopularMoviesUseCase throws $exception.")
         }
