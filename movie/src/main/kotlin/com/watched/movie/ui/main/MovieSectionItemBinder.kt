@@ -11,8 +11,6 @@ import com.watched.presentation.common.list.HorizontalItemDecoration
 class MovieSectionItemBinder :
     BaseAdapter.Binder<ItemTitleAndListBinding, MovieSectionItemUiModel> {
 
-    private val adapter = BaseAdapter(ItemMovieBinding::inflate, MovieItemBinder())
-
     override fun bindListItem(binding: ItemTitleAndListBinding, model: MovieSectionItemUiModel) {
         with(binding) {
             tvTitle.setText(model.title)
@@ -22,6 +20,7 @@ class MovieSectionItemBinder :
             layoutManager.orientation = LinearLayoutManager.HORIZONTAL
             rvList.layoutManager = layoutManager
             rvList.addItemDecoration(HorizontalItemDecoration(context))
+            val adapter = BaseAdapter(ItemMovieBinding::inflate, MovieItemBinder())
             rvList.adapter = adapter
 
             adapter.submitList(model.list.items)

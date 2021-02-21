@@ -1,9 +1,10 @@
 package com.watched.movie.ui.main
 
 import com.watched.common.test.relaxedMockk
-import com.watched.domain.movie.model.PopularMoviesDomainModel
+import com.watched.domain.movie.model.MovieListDomainModel
+import com.watched.domain.movie.model.SortOptionsDomainModel
 import com.watched.domain.movie.model.TopXMovieDomainModel
-import com.watched.movie.domain.GetPopularMoviesUseCase
+import com.watched.movie.domain.GetSortedMoviesUseCase
 import com.watched.movie.domain.GetTopXMovieUseCase
 import com.watched.movie.mapper.MovieSectionDomainUiMapper
 import com.watched.movie.mapper.TopXMovieDomainUiMapper
@@ -11,9 +12,12 @@ import com.watched.test.android.viewmodel.TestDispatcherProvider
 import com.watched.test.android.viewmodel.ViewModelTest
 import io.mockk.coEvery
 import io.mockk.coVerify
+import io.mockk.coVerifySequence
 import io.mockk.every
 import io.mockk.mockk
+import io.mockk.slot
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -22,13 +26,13 @@ class MovieMainViewModelTest : ViewModelTest() {
 
     private val topXMovieUseCase: GetTopXMovieUseCase = mockk()
     private val topXMovieMapper: TopXMovieDomainUiMapper = mockk()
-    private val popularMoviesUseCase: GetPopularMoviesUseCase = mockk()
+    private val sortedMoviesUseCase: GetSortedMoviesUseCase = mockk()
     private val movieSectionMapper: MovieSectionDomainUiMapper = mockk()
     private lateinit var viewModel: MovieMainViewModel
 
     @Before
     fun setUp() {
-        coEvery { popularMoviesUseCase.execute(any()) } returns relaxedMockk()
+        coEvery { sortedMoviesUseCase.execute(any()) } returns relaxedMockk()
         coEvery { topXMovieUseCase.execute() } returns relaxedMockk()
         every { topXMovieMapper.mapToUiModel(any()) } returns relaxedMockk()
         every { movieSectionMapper.mapToUiModel(any()) } returns relaxedMockk()
@@ -38,7 +42,7 @@ class MovieMainViewModelTest : ViewModelTest() {
     fun `WHEN init THEN get popular movies`() {
         initViewModel()
 
-        coVerify { popularMoviesUseCase.execute(any()) }
+        coVerify { sortedMoviesUseCase.execute(any()) }
     }
 
     @Test
@@ -49,7 +53,7 @@ class MovieMainViewModelTest : ViewModelTest() {
     }
 
     @Test
-    fun `WHEN GetTopMovieXUseCase returns THEN map to ui model`() {
+    fun `WHEN GetTopMovieXUseCase returns THEN map to UiModel`() {
         val topXMovie = relaxedMockk<TopXMovieDomainModel>()
         coEvery { topXMovieUseCase.execute() } returns topXMovie
 
@@ -59,20 +63,85 @@ class MovieMainViewModelTest : ViewModelTest() {
     }
 
     @Test
-    fun `WHEN GetPopularMoviesUseCase returns THEN map to ui model`() {
-        val popularMovies = relaxedMockk<PopularMoviesDomainModel>()
-        coEvery { popularMoviesUseCase.execute(any()) } returns popularMovies
+    fun `WHEN init viewModel THEN get movies by popularity`() {
+        val args = GetSortedMoviesUseCase.Args(
+            forceRefresh = false,
+            sortedOptions = SortOptionsDomainModel.Popularity
+        )
+        coEvery { sortedMoviesUseCase.execute(any()) } returns relaxedMockk()
 
         initViewModel()
 
-        coVerify { movieSectionMapper.mapToUiModel(any()) }
+        val argsSlot = slot<GetSortedMoviesUseCase.Args>()
+        coVerifySequence {
+            sortedMoviesUseCase.execute(capture(argsSlot))
+            sortedMoviesUseCase.execute(any())
+        }
+        assertEquals(args.sortedOptions, argsSlot.captured.sortedOptions)
+    }
+
+    @Test
+    fun `WHEN init viewModel THEN get movies by top rated`() {
+        val args = GetSortedMoviesUseCase.Args(
+            forceRefresh = false,
+            sortedOptions = SortOptionsDomainModel.TopRated
+        )
+        coEvery { sortedMoviesUseCase.execute(any()) } returns relaxedMockk()
+
+        initViewModel()
+
+        val slot = slot<GetSortedMoviesUseCase.Args>()
+        coVerify { sortedMoviesUseCase.execute(capture(slot)) }
+        assertEquals(SortOptionsDomainModel.TopRated, args.sortedOptions)
+    }
+
+    @Test
+    fun `WHEN popular movies returns THEN map to UiModel`() {
+        val popularMovies = relaxedMockk<MovieListDomainModel>()
+        val args = GetSortedMoviesUseCase.Args(
+            forceRefresh = false,
+            sortedOptions = SortOptionsDomainModel.Popularity
+        )
+        conditionalReturn(args, popularMovies)
+
+        initViewModel()
+
+        coVerify { movieSectionMapper.mapToUiModel(popularMovies) }
+    }
+
+    @Test
+    fun `WHEN top rated movies returns THEN map to UiModel`() {
+        val topRatedMovies = relaxedMockk<MovieListDomainModel>()
+        val args = GetSortedMoviesUseCase.Args(
+            forceRefresh = false,
+            sortedOptions = SortOptionsDomainModel.TopRated
+        )
+        conditionalReturn(args, topRatedMovies)
+
+        initViewModel()
+
+        coVerify { movieSectionMapper.mapToUiModel(topRatedMovies) }
+    }
+
+    private fun conditionalReturn(
+        expectedArgs: GetSortedMoviesUseCase.Args,
+        expectedReturn: MovieListDomainModel
+    ) {
+        val argSlot = slot<GetSortedMoviesUseCase.Args>()
+        coEvery { sortedMoviesUseCase.execute(capture(argSlot)) } answers {
+            if (argSlot.captured.sortedOptions == expectedArgs.sortedOptions) {
+                expectedReturn
+            } else {
+                relaxedMockk()
+            }
+        }
     }
 
     private fun initViewModel() {
         viewModel = MovieMainViewModel(
             topXMovieUseCase,
             topXMovieMapper,
-            popularMoviesUseCase,
+            sortedMoviesUseCase,
             movieSectionMapper,
             TestDispatcherProvider
         )

@@ -8,11 +8,11 @@ import com.watched.domain.common.providers.DispatcherProvider
 import com.watched.domain.movie.model.MovieDomainModel
 import com.watched.movie.domain.GetMovieUseCase
 import com.watched.movie.domain.GetPagedPopularMoviesUseCase
-import com.watched.movie.domain.GetPopularMoviesUseCase
+import com.watched.movie.domain.GetSortedMoviesUseCase
 import com.watched.movie.domain.GetTopXMovieUseCase
 import com.watched.movie.mapper.MovieDetailsDomainUiMapper
 import com.watched.movie.mapper.MovieItemDomainUiMapper
-import com.watched.movie.mapper.PopularMoviesSectionDomainUiMapper
+import com.watched.movie.mapper.MovieSectionDomainUiMapper
 import com.watched.movie.mapper.TopXMovieDomainUiMapper
 import com.watched.movie.model.MovieDetailsUiModel
 import com.watched.movie.model.MovieItemUiModel
@@ -32,8 +32,8 @@ import com.watched.presentation.di.ApplicationModule
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
-import org.threeten.bp.ZoneId
 import java.util.Locale
+import org.threeten.bp.ZoneId
 
 @Module(
     includes = [
@@ -56,16 +56,6 @@ abstract class MovieFeatureModule : ApplicationModule() {
     abstract fun bindMovieDetailsDomainUiMapper(mapper: MovieDetailsDomainUiMapper): DomainUiMapper<MovieDomainModel, MovieDetailsUiModel>
 
     companion object {
-        @Provides
-        fun providePopularMoviesSectionDomainUiMapper(
-            movieListMapper: ListDomainUiMapper<MovieDomainModel, MovieItemUiModel>
-        ): PopularMoviesSectionDomainUiMapper {
-            return object : PopularMoviesSectionDomainUiMapper {
-                override val movieListMapper: ListDomainUiMapper<MovieDomainModel, MovieItemUiModel>
-                    get() = movieListMapper
-            }
-        }
-
         @Provides
         fun provideMovieListDomainUiMapper(
             mapper: DomainUiMapper<MovieDomainModel, MovieItemUiModel>
@@ -117,16 +107,16 @@ abstract class MovieFeatureModule : ApplicationModule() {
             fragment: MovieMainFragment,
             mapper: TopXMovieDomainUiMapper,
             useCase: GetTopXMovieUseCase,
-            popularUseCase: GetPopularMoviesUseCase,
-            movieItemMapper: PopularMoviesSectionDomainUiMapper,
+            sortedUseCase: GetSortedMoviesUseCase,
+            movieSectionMapper: MovieSectionDomainUiMapper,
             dispatcherProvider: DispatcherProvider
         ): MovieMainViewModel {
             return ViewModelFactory.make(fragment) {
                 MovieMainViewModel(
                     useCase,
                     mapper,
-                    popularUseCase,
-                    movieItemMapper,
+                    sortedUseCase,
+                    movieSectionMapper,
                     dispatcherProvider
                 )
             }
