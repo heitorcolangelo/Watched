@@ -89,7 +89,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion '1.0.0-beta01'
+        kotlinCompilerExtensionVersion ax_versions.compose
     }
 
     dynamicFeatures = [":movie"]
@@ -104,15 +104,17 @@ dependencies {
 
     // AndroidX
     api "androidx.appcompat:appcompat:$ax_versions.foundation_appcompat"
-    implementation "androidx.compose.runtime:runtime:$ax_versions.compose"
-    implementation "androidx.compose.ui:ui:$ax_versions.compose"
-    implementation "androidx.compose.foundation:foundation-layout:$ax_versions.compose"
-    implementation "androidx.compose.material:material:$ax_versions.compose"
-    implementation "androidx.compose.material:material-icons-extended:$ax_versions.compose"
-    implementation "androidx.compose.foundation:foundation:$ax_versions.compose"
-    implementation "androidx.compose.animation:animation:$ax_versions.compose"
-    implementation "androidx.compose.ui:ui-tooling:$ax_versions.compose"
-    implementation "androidx.compose.runtime:runtime-livedata:$ax_versions.compose"
+
+    api "androidx.compose.animation:animation:$ax_versions.compose"
+    api "androidx.compose.foundation:foundation:$ax_versions.compose"
+    api "androidx.compose.foundation:foundation-layout:$ax_versions.compose"
+    api "androidx.compose.material:material:$ax_versions.compose"
+    api "androidx.compose.material:material-icons-extended:$ax_versions.compose"
+    api "androidx.compose.runtime:runtime:$ax_versions.compose"
+    api "androidx.compose.runtime:runtime-livedata:$ax_versions.compose"
+    api "androidx.compose.ui:ui:$ax_versions.compose"
+    api "androidx.compose.ui:ui-tooling:$ax_versions.compose"
+
     api "androidx.constraintlayout:constraintlayout:$ax_versions.ui_constraintlayout"
     api "androidx.core:core-ktx:$ax_versions.foundation_ktx_core"
     api "androidx.fragment:fragment-ktx:$ax_versions.foundation_ktx_fragment"
