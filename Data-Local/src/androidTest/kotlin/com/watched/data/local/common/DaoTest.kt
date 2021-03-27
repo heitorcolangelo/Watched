@@ -3,7 +3,7 @@ package com.watched.data.local.common
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.watched.data.local.common.db.MoviesDatabase
+import com.watched.data.local.common.db.WatchedDatabase
 import org.junit.After
 import org.junit.Rule
 
@@ -15,7 +15,7 @@ abstract class DaoTest {
 
     protected val database = Room.inMemoryDatabaseBuilder(
         ApplicationProvider.getApplicationContext(),
-        MoviesDatabase::class.java
+        WatchedDatabase::class.java
     )
         .allowMainThreadQueries()
         .build()

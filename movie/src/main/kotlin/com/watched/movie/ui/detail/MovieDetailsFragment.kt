@@ -8,7 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.watched.movie.R
 import com.watched.movie.databinding.FragmentMovieDetailsBinding
 import com.watched.movie.di.inject
-import com.watched.movie.model.MovieDetailsUiModel
+import com.watched.movie.ui.model.MovieDetailsUiModel
 import com.watched.presentation.common.viewbinding.viewBinding
 import javax.inject.Inject
 

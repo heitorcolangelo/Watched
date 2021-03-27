@@ -1,6 +1,6 @@
 package com.watched.domain.common.model
 
-interface ListDomainModel<Domain : DomainModel> : DomainModel {
-    val id: String
+data class ListDomainModel<Domain: DomainModel>(
+    val id: String,
     val items: List<Domain>
-}
+): DomainModel

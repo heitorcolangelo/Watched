@@ -123,15 +123,14 @@ dependencies {
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$ax_versions.foundation_ktx_lifecycle"
     api "androidx.recyclerview:recyclerview:$ax_versions.ui_recyclerview"
 
+    api "dev.chrisbanes.accompanist:accompanist-coil:$versions.coil"
+
     // Dagger
     api "com.google.dagger:dagger:$versions.dagger"
     api "com.google.dagger:dagger-android:$versions.dagger"
     api "com.google.dagger:dagger-android-support:$versions.dagger"
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
-
-    // FlexBox
-    api "com.google.android:flexbox:$versions.flexbox"
 
     // Fresco
     api "com.facebook.fresco:fresco:$versions.fresco"

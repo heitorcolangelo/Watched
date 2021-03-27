@@ -2,6 +2,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 
     ext.ax_versions = [
@@ -25,11 +26,11 @@ buildscript {
             'ui_swiperefreshlayout'    : '1.1.0'
     ]
     ext.versions = [
+            'coil'         : '0.6.0',
             'coroutines'   : '1.4.1',
             'dagger'       : '2.29.1',
             'fresco'       : '2.3.0',
-            'gradle'       : '7.0.0-alpha08',
-            'flexbox'      : '2.0.1',
+            'gradle'       : '7.0.0-alpha10',
             'junit'        : '4.13.1',
             'kotlin'       : '1.4.30',
             'kotlinLogging': '1.12.0',
@@ -55,6 +56,7 @@ allprojects {
     repositories {
         google()
         jcenter()
+        mavenCentral()
     }
 
     project.ext {

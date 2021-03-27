@@ -5,10 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.watched.domain.common.providers.DispatcherProvider
-import com.watched.domain.movie.model.MovieDomainModel
-import com.watched.movie.domain.GetMovieUseCase
-import com.watched.movie.mapper.MovieDetailsDomainUiMapper
-import com.watched.movie.model.MovieDetailsUiModel
+import com.watched.movie.domain.model.MovieDomainModel
+import com.watched.movie.domain.usecase.GetMovieUseCase
+import com.watched.movie.ui.mapper.MovieDetailsDomainUiMapper
+import com.watched.movie.ui.model.MovieDetailsUiModel
 import kotlinx.coroutines.launch
 
 class MovieDetailsViewModel(

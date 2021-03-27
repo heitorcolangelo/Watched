@@ -39,13 +39,22 @@ android {
 
     kotlinOptions {
         jvmTarget = "1.8"
+        useIR = true
     }
 
-    buildFeatures.viewBinding = true
+    buildFeatures {
+        viewBinding true
+        compose true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    composeOptions {
+        kotlinCompilerVersion ax_versions.compose
+        kotlinCompilerExtensionVersion ax_versions.compose
     }
 
 }

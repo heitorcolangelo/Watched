@@ -6,40 +6,45 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.watched.domain.common.providers.DispatcherProvider
-import com.watched.domain.movie.model.MovieListDomainModel
-import com.watched.domain.movie.model.SortOptionsDomainModel
-import com.watched.movie.domain.GetSortedMoviesUseCase
-import com.watched.movie.domain.GetTopXMovieUseCase
-import com.watched.movie.mapper.MovieSectionDomainUiMapper
-import com.watched.movie.mapper.TopXMovieDomainUiMapper
-import com.watched.movie.model.MovieSectionItemUiModel
-import com.watched.movie.model.TopXMovieUiModel
+import com.watched.domain.media.SortedMediaDomainModel
+import com.watched.domain.common.model.SortOptionsDomainModel
+import com.watched.movie.domain.usecase.GetSortedMoviesUseCase
+import com.watched.movie.domain.usecase.GetTopXMovieUseCase
+import com.watched.presentation.media.mapper.MediaSectionDomainUiMapper
+import com.watched.movie.ui.mapper.MovieTopXDomainUiMapper
 import com.watched.presentation.common.handler.ExceptionHandler
+import com.watched.presentation.media.model.MediaSectionItemUiModel
+import com.watched.presentation.media.model.MediaTopXUiModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class MovieMainViewModel @Inject constructor(
     private val topXMovieUseCase: GetTopXMovieUseCase,
-    private val topXMovieMapper: TopXMovieDomainUiMapper,
+    private val topXMovieMapper: MovieTopXDomainUiMapper,
     private val sortedMoviesUseCase: GetSortedMoviesUseCase,
-    private val movieSectionMapper: MovieSectionDomainUiMapper,
+    private val movieSectionMapper: MediaSectionDomainUiMapper,
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
-    private val _topXMovie = MutableLiveData<TopXMovieUiModel>()
-    val topXMovie: LiveData<TopXMovieUiModel> = _topXMovie
 
-    private val _popularMovies = MutableLiveData<MovieSectionItemUiModel>()
-    private val _topRatedMovies = MutableLiveData<MovieSectionItemUiModel>()
+    private val _topXMovie = MutableLiveData<MediaTopXUiModel>()
+    val topXMovie: LiveData<MediaTopXUiModel> = _topXMovie
 
-    val sectionMovies = MediatorLiveData<List<MovieSectionItemUiModel?>>()
+    private val _popularMovies = MutableLiveData<MediaSectionItemUiModel>()
+    private val _topRatedMovies = MutableLiveData<MediaSectionItemUiModel>()
+
+    val sectionMovies = MediatorLiveData<List<MediaSectionItemUiModel>>()
 
     init {
         sectionMovies.addSource(_popularMovies) {
-            sectionMovies.postValue(listOf(it, _topRatedMovies.value))
+            _topRatedMovies.value?.let { topRatedItems ->
+                sectionMovies.postValue(listOf(it, topRatedItems))
+            }
         }
         sectionMovies.addSource(_topRatedMovies) {
-            sectionMovies.postValue(listOf(_popularMovies.value, it))
+            _popularMovies.value?.let { popularItems ->
+                sectionMovies.postValue(listOf(popularItems, it))
+            }
         }
 
         getTopXMovie()
@@ -62,8 +67,8 @@ class MovieMainViewModel @Inject constructor(
             dispatcherProvider.io() + PopularMoviesExceptionHandler()
         ) {
             val args = GetSortedMoviesUseCase.Args(forceRefresh, SortOptionsDomainModel.Popularity)
-            val popularMovies: MovieListDomainModel = sortedMoviesUseCase.execute(args)
-            val popularMoviesSection: MovieSectionItemUiModel =
+            val popularMovies: SortedMediaDomainModel = sortedMoviesUseCase.execute(args)
+            val popularMoviesSection: MediaSectionItemUiModel =
                 movieSectionMapper.mapToUiModel(popularMovies)
             _popularMovies.postValue(popularMoviesSection)
         }
@@ -74,8 +79,8 @@ class MovieMainViewModel @Inject constructor(
             dispatcherProvider.io() + TopRatedMoviesExceptionHandler()
         ) {
             val args = GetSortedMoviesUseCase.Args(forceRefresh, SortOptionsDomainModel.TopRated)
-            val topRatedMovies: MovieListDomainModel = sortedMoviesUseCase.execute(args)
-            val topRatedSection: MovieSectionItemUiModel =
+            val topRatedMovies: SortedMediaDomainModel = sortedMoviesUseCase.execute(args)
+            val topRatedSection: MediaSectionItemUiModel =
                 movieSectionMapper.mapToUiModel(topRatedMovies)
             _topRatedMovies.postValue(topRatedSection)
         }
