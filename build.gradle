@@ -30,7 +30,7 @@ buildscript {
             'coroutines'   : '1.4.1',
             'dagger'       : '2.29.1',
             'fresco'       : '2.3.0',
-            'gradle'       : '7.0.0-alpha10',
+            'gradle'       : '7.0.0-alpha12',
             'junit'        : '4.13.1',
             'kotlin'       : '1.4.30',
             'kotlinLogging': '1.12.0',
