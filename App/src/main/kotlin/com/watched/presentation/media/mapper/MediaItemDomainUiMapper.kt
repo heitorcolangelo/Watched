@@ -17,5 +17,4 @@ class MediaItemDomainUiMapper @Inject constructor(
             )
         }
     }
-
 }

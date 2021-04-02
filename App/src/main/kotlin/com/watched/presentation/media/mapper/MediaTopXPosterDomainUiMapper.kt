@@ -15,5 +15,4 @@ class MediaTopXPosterDomainUiMapper @Inject constructor(
             imageUiModel = movieImageDomainUiMapper.mapToUiModel(domainModel)
         )
     }
-
 }

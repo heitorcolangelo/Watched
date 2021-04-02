@@ -1,9 +1,7 @@
 package com.watched.presentation.common.mapper
 
 import com.watched.domain.common.model.DomainModel
-import com.watched.domain.common.model.ListDomainModel
 import com.watched.presentation.common.model.ItemUiModel
-import com.watched.presentation.common.model.ListUiModel
 import javax.inject.Inject
 
 interface ListDomainUiMapper<Domain : DomainModel, Ui : ItemUiModel> {

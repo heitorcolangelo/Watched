@@ -13,5 +13,4 @@ class MediaImageDomainUiMapper @Inject constructor(
     override fun mapToUiModel(domainModel: MediaImageDomainModel): MediaImageUiModel {
         return MediaImageUiModel(buildConfig.imageBaseUrl(), domainModel.path)
     }
-
 }

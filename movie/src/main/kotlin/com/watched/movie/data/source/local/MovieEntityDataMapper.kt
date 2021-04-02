@@ -22,5 +22,4 @@ class MovieEntityDataMapper @Inject constructor() : EntityDataMapper<MovieEntity
             )
         }
     }
-
 }

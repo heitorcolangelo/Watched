@@ -1,8 +1,8 @@
 package com.watched.movie.data.store
 
 import com.watched.data.common.model.PageDataModel
-import com.watched.data.common.store.RemoteDataStore
 import com.watched.data.common.model.SortOptionsDataModel
+import com.watched.data.common.store.RemoteDataStore
 import com.watched.movie.data.model.MovieDataModel
 import com.watched.movie.data.source.MovieRemoteDataSource
 import javax.inject.Inject

@@ -24,5 +24,4 @@ class MovieDetailsDomainUiMapper @Inject constructor(
             )
         }
     }
-
 }

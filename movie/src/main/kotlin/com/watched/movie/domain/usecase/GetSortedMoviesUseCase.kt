@@ -3,9 +3,9 @@ package com.watched.movie.domain.usecase
 import com.watched.domain.common.model.SortOptionsDomainModel
 import com.watched.domain.common.usecase.UseCase
 import com.watched.domain.common.usecase.UseCaseArgs
+import com.watched.domain.media.SortedMediaDomainModel
 import com.watched.movie.domain.MovieRepository
 import com.watched.movie.domain.model.MovieDomainModel
-import com.watched.domain.media.SortedMediaDomainModel
 import javax.inject.Inject
 
 class GetSortedMoviesUseCase @Inject constructor(

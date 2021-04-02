@@ -1,13 +1,13 @@
 package com.watched.movie.ui.main
 
 import com.watched.common.test.relaxedMockk
-import com.watched.domain.media.SortedMediaDomainModel
 import com.watched.domain.common.model.SortOptionsDomainModel
+import com.watched.domain.media.SortedMediaDomainModel
 import com.watched.movie.domain.model.MovieTopXDomainModel
 import com.watched.movie.domain.usecase.GetSortedMoviesUseCase
 import com.watched.movie.domain.usecase.GetTopXMovieUseCase
-import com.watched.presentation.media.mapper.MediaSectionDomainUiMapper
 import com.watched.movie.ui.mapper.MovieTopXDomainUiMapper
+import com.watched.presentation.media.mapper.MediaSectionDomainUiMapper
 import com.watched.test.android.viewmodel.TestDispatcherProvider
 import com.watched.test.android.viewmodel.ViewModelTest
 import io.mockk.coEvery

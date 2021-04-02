@@ -1,10 +1,10 @@
 package com.watched.movie.data.source.local
 
+import com.watched.data.common.model.SortOptionsDataModel
 import com.watched.data.local.common.LocalDataSourceImpl
 import com.watched.data.local.config.dao.ConfigDao
 import com.watched.data.local.movie.dao.MovieDao
 import com.watched.data.local.movie.entity.MovieEntity
-import com.watched.data.common.model.SortOptionsDataModel
 import com.watched.movie.data.model.MovieDataModel
 import com.watched.movie.data.source.MovieLocalDataSource
 import javax.inject.Inject

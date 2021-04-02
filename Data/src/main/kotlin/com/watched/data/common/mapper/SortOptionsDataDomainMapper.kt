@@ -19,5 +19,4 @@ class SortOptionsDataDomainMapper @Inject constructor() : DataDomainMapper<SortO
             SortOptionsDomainModel.TopRated -> SortOptionsDataModel.TopRated
         }
     }
-
 }

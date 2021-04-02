@@ -29,5 +29,4 @@ class MediaSectionDomainUiMapper @Inject constructor(
             else -> R.string.no_sort_option_media
         }
     }
-
 }

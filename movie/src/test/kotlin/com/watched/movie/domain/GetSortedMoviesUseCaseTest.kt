@@ -2,8 +2,8 @@ package com.watched.movie.domain
 
 import com.watched.common.test.relaxedMockk
 import com.watched.domain.common.model.SortOptionsDomainModel
-import com.watched.movie.domain.usecase.GetSortedMoviesUseCase
 import com.watched.movie.data.factory.MovieDomainModelFactory
+import com.watched.movie.domain.usecase.GetSortedMoviesUseCase
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
