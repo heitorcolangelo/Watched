@@ -2,14 +2,10 @@ package com.watched.movie.data.source.local
 
 import com.watched.data.common.model.SortOptionsDataModel
 import com.watched.data.local.config.dao.ConfigDao
-import com.watched.data.local.factory.MovieEntityFactory
 import com.watched.data.local.movie.dao.MovieDao
+import com.watched.movie.data.factory.MovieEntityFactory
 import com.watched.movie.data.model.MovieDataModel
-import io.mockk.coEvery
-import io.mockk.coVerify
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue

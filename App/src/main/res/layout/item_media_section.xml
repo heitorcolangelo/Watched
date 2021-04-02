@@ -15,13 +15,13 @@
         android:paddingStart="@dimen/margin_1x"
         android:paddingEnd="@dimen/margin_1x"
         android:textColor="?attr/colorOnBackground"
-        tools:text="@string/popular_movies" />
+        tools:text="@string/popular_media" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_.5x"
-        tools:listitem="@layout/item_movie" />
+        tools:listitem="@layout/item_media" />
 
 </LinearLayout>

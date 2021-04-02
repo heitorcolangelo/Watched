@@ -12,5 +12,5 @@ data class MovieDetailsUiModel(
     val voteAverage: Float,
     val backdrop: MediaImageUiModel
 ) : UiModel {
-    val backdropPath: String get() = backdrop.getUrl(MediaImageUiModel.Size.MEDIUM)
+    val backdropPath: String get() = backdrop.path(MediaImageUiModel.Size.MEDIUM)
 }

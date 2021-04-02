@@ -13,5 +13,5 @@ data class MediaTopXPosterUiModel(
     override val id: String,
     private val imageUiModel: MediaImageUiModel
 ) : UiModel {
-    val path: String get() = imageUiModel.getUrl(MediaImageUiModel.Size.MEDIUM)
+    val path: String get() = imageUiModel.path(MediaImageUiModel.Size.MEDIUM)
 }

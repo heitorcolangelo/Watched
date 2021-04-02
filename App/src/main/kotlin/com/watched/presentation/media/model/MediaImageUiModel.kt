@@ -14,5 +14,5 @@ class MediaImageUiModel(
         LARGE("w500")
     }
 
-    fun getUrl(size: Size) = baseUrl + size.value + imagePath
+    fun path(size: Size = Size.SMALL) = baseUrl + size.value + imagePath
 }

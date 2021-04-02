@@ -1,12 +1,12 @@
-package com.watched.data.remote.factory
+package com.watched.movie.data.factory
 
 import com.watched.common.test.MockFactory
-import com.watched.data.remote.movie.model.MovieResponseModel
+import com.watched.data.local.movie.entity.MovieEntity
 
-object MovieResponseModelFactory : MockFactory<MovieResponseModel> {
-    override fun make(): MovieResponseModel {
-        return MovieResponseModel(
-            id = randomLong(),
+object MovieEntityFactory : MockFactory<MovieEntity> {
+    override fun make(): MovieEntity {
+        return MovieEntity(
+            id = randomId(),
             title = randomString(),
             overview = randomString(),
             backdropPath = randomString(),

@@ -2,9 +2,9 @@ package com.watched.movie.data.source.remote
 
 import com.watched.data.common.model.SortOptionsDataModel
 import com.watched.data.remote.common.model.PageResponseModel
-import com.watched.data.remote.factory.MovieResponseModelFactory
 import com.watched.data.remote.movie.api.MovieApiService
 import com.watched.data.remote.movie.model.MovieResponseModel
+import com.watched.movie.data.factory.MovieResponseModelFactory
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk

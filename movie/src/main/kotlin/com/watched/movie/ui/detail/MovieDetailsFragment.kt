@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import coil.load
 import com.watched.movie.R
 import com.watched.movie.databinding.FragmentMovieDetailsBinding
 import com.watched.movie.di.inject
@@ -34,7 +35,9 @@ class MovieDetailsFragment : Fragment(R.layout.fragment_movie_details) {
 
     private fun onMovie(model: MovieDetailsUiModel) = with(binding) {
         collapsingToolbar.title = model.title
-        ivMovieBackdrop.setImageURI(model.backdropPath)
+        ivMovieBackdrop.load(model.backdropPath) {
+            crossfade(true)
+        }
 
         movieDetailsContent.tvOverviewContent.text = model.overview
         movieDetailsContent.tvReleaseDate.text = getString(
