@@ -1,10 +1,10 @@
 package com.watched.movie.ui.detail
 
 import com.watched.domain.common.providers.DispatcherProvider
-import com.watched.movie.domain.GetMovieUseCase
-import com.watched.movie.factory.MovieDetailsUiModelFactory
-import com.watched.movie.factory.MovieDomainModelFactory
-import com.watched.movie.mapper.MovieDetailsDomainUiMapper
+import com.watched.movie.data.factory.MovieDetailsUiModelFactory
+import com.watched.movie.data.factory.MovieDomainModelFactory
+import com.watched.movie.domain.usecase.GetMovieUseCase
+import com.watched.movie.ui.mapper.MovieDetailsDomainUiMapper
 import com.watched.test.android.viewmodel.TestDispatcherProvider
 import com.watched.test.android.viewmodel.ViewModelTest
 import io.mockk.coEvery

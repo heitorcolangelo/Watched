@@ -41,7 +41,9 @@ android {
         jvmTarget = "1.8"
     }
 
-    buildFeatures.viewBinding = true
+    buildFeatures {
+        viewBinding true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -62,5 +64,4 @@ dependencies {
 
     androidTestImplementation project(path: ':App', configuration: 'appAndroidTestDependencies')
     testImplementation project(path: ':App', configuration: 'appTestDependencies')
-
 }

@@ -83,7 +83,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    buildFeatures.viewBinding = true
+    buildFeatures {
+        viewBinding true
+    }
 
     dynamicFeatures = [":movie"]
 
@@ -105,18 +107,15 @@ dependencies {
     api "androidx.lifecycle:lifecycle-viewmodel-ktx:$ax_versions.foundation_ktx_lifecycle"
     api "androidx.recyclerview:recyclerview:$ax_versions.ui_recyclerview"
 
+    // Coil
+    api "io.coil-kt:coil:$versions.coil"
+
     // Dagger
     api "com.google.dagger:dagger:$versions.dagger"
     api "com.google.dagger:dagger-android:$versions.dagger"
     api "com.google.dagger:dagger-android-support:$versions.dagger"
     kapt "com.google.dagger:dagger-compiler:$versions.dagger"
     kapt "com.google.dagger:dagger-android-processor:$versions.dagger"
-
-    // FlexBox
-    api "com.google.android:flexbox:$versions.flexbox"
-
-    // Fresco
-    api "com.facebook.fresco:fresco:$versions.fresco"
 
     // Kotlin
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin"
@@ -135,7 +134,6 @@ dependencies {
     // Paging
     api "androidx.paging:paging-runtime-ktx:$ax_versions.arch_paging"
     api "androidx.paging:paging-rxjava2-ktx:$ax_versions.arch_paging"
-
 
     // ThreeTen ABP
     api "com.jakewharton.threetenabp:threetenabp:$versions.threetenabp"

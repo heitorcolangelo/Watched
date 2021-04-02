@@ -21,7 +21,7 @@
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:toolbarId="@id/toolbar">
 
-            <com.facebook.drawee.view.SimpleDraweeView
+            <ImageView
                 android:id="@+id/iv_movie_backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="224dp"

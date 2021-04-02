@@ -2,12 +2,4 @@
     <string name="movie_list_title">Movies</string>
     <string name="movie_details_overview">Overview</string>
     <string name="movie_details_release_date">Release date: %1$s</string>
-
-    <string name="message_loading_content_error">There was an error loading your content.</string>
-    <string name="action_try_again">Try again</string>
-    <string name="action_dismiss">Dismiss</string>
-    <string name="top_x_today">Top %d today</string>
-    <string name="popular_movies">Popular at Watched</string>
-    <string name="top_rated_movies">Top rated at Watched</string>
-    <string name="no_sort_option_movies">Also at Watched</string>
 </resources>

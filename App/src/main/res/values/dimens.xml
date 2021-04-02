@@ -8,4 +8,7 @@
     <dimen name="text_size_h1">24sp</dimen>
     <dimen name="text_size_h2">20sp</dimen>
     <dimen name="text_size_h3">18sp</dimen>
+
+    <dimen name="item_poster_width">120dp</dimen>
+    <dimen name="item_poster_height">186dp</dimen>
 </resources>

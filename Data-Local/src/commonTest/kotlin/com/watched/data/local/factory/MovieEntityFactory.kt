@@ -3,7 +3,7 @@ package com.watched.data.local.factory
 import com.watched.common.test.MockFactory
 import com.watched.data.local.movie.entity.MovieEntity
 
-object MovieEntityFactory : MockFactory<MovieEntity> {
+internal object MovieEntityFactory : MockFactory<MovieEntity> {
     override fun make(): MovieEntity {
         return MovieEntity(
             id = randomId(),

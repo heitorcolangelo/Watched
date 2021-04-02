@@ -7,30 +7,6 @@
     tools:ignore="UnusedNavigation">
 
     <fragment
-        android:id="@+id/movieListFragment"
-        android:name="com.watched.movie.ui.list.MovieListFragment"
-        android:label="MovieListFragment"
-        app:moduleName="movie"
-        tools:layout="@layout/fragment_movie_list">
-        <action
-            android:id="@+id/toMovieDetails"
-            app:destination="@id/movieDetailsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right">
-            <argument
-                android:name="movieId"
-                app:argType="string"
-                app:nullable="false" />
-        </action>
-
-        <action
-            android:id="@+id/toMovieMain"
-            app:destination="@id/movieMainFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/movieDetailsFragment"
         android:name="com.watched.movie.ui.detail.MovieDetailsFragment"
         android:label="MovieDetailsFragment"
@@ -41,7 +17,6 @@
             app:argType="string"
             app:nullable="false" />
     </fragment>
-
 
     <fragment
         android:id="@+id/movieMainFragment"

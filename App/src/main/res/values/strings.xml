@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">Movies</string>
+    <string name="app_name">Watched</string>
     <string name="title_movie">Movie</string>
+
+    <string name="message_loading_content_error">There was an error loading your content.</string>
+    <string name="action_try_again">Try again</string>
+    <string name="action_dismiss">Dismiss</string>
+    <string name="top_x_today">Top %d today</string>
+    <string name="popular_media">Popular at Watched</string>
+    <string name="top_rated_media">Top rated at Watched</string>
+    <string name="no_sort_option_media">Also at Watched</string>
 </resources>

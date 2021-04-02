@@ -1,6 +1,6 @@
 package com.watched.movie.domain
 
-import com.watched.domain.movie.repository.MovieRepository
+import com.watched.movie.domain.usecase.GetMovieUseCase
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking

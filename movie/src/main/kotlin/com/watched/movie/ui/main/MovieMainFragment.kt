@@ -6,15 +6,17 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.watched.databinding.ItemMediaSectionBinding
+import com.watched.databinding.ItemMediaTopXBinding
 import com.watched.movie.R
 import com.watched.movie.databinding.FragmentMovieMainBinding
-import com.watched.movie.databinding.ItemMovieTopXBinding
-import com.watched.movie.databinding.ItemTitleAndListBinding
 import com.watched.movie.di.inject
-import com.watched.movie.model.MovieSectionItemUiModel
-import com.watched.movie.model.TopXMovieUiModel
 import com.watched.presentation.common.list.BaseAdapter
 import com.watched.presentation.common.viewbinding.viewBinding
+import com.watched.presentation.media.MediaSectionItemBinder
+import com.watched.presentation.media.MediaTopXItemBinder
+import com.watched.presentation.media.model.MediaSectionItemUiModel
+import com.watched.presentation.media.model.MediaTopXUiModel
 import javax.inject.Inject
 
 class MovieMainFragment : Fragment(R.layout.fragment_movie_main) {
@@ -23,10 +25,10 @@ class MovieMainFragment : Fragment(R.layout.fragment_movie_main) {
     lateinit var viewModel: MovieMainViewModel
 
     private val binding: FragmentMovieMainBinding by viewBinding()
-    private val topXAdapter = BaseAdapter(ItemMovieTopXBinding::inflate, MovieTopXItemBinder())
+    private val topXAdapter = BaseAdapter(ItemMediaTopXBinding::inflate, MediaTopXItemBinder())
     private val sectionsAdapter = BaseAdapter(
-        ItemTitleAndListBinding::inflate,
-        MovieSectionItemBinder()
+        ItemMediaSectionBinding::inflate,
+        MediaSectionItemBinder()
     )
     private val mainAdapter = ConcatAdapter(topXAdapter, sectionsAdapter)
 
@@ -46,11 +48,11 @@ class MovieMainFragment : Fragment(R.layout.fragment_movie_main) {
         viewModel.sectionMovies.observe(this, ::onSectionMovies)
     }
 
-    private fun onTopXMovie(movie: TopXMovieUiModel) {
+    private fun onTopXMovie(movie: MediaTopXUiModel) {
         topXAdapter.submitList(listOf(movie))
     }
 
-    private fun onSectionMovies(sections: List<MovieSectionItemUiModel?>) {
+    private fun onSectionMovies(sections: List<MediaSectionItemUiModel?>) {
         sectionsAdapter.submitList(sections)
     }
 }
