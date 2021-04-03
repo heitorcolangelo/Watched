@@ -1,7 +1,6 @@
 package com.watched.presentation.media.ui
 
 import coil.load
-import coil.size.Scale
 import com.watched.R
 import com.watched.databinding.ItemMediaTopXBinding
 import com.watched.presentation.common.list.BaseAdapter
