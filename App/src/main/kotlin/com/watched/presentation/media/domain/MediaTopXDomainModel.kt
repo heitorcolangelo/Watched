@@ -1,4 +1,4 @@
-package com.watched.movie.domain.model
+package com.watched.presentation.media.domain
 
 import com.watched.domain.common.model.DomainModel
 
