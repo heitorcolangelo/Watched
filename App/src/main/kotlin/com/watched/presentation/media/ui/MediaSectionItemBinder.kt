@@ -1,4 +1,4 @@
-package com.watched.presentation.media
+package com.watched.presentation.media.ui
 
 import coil.load
 import coil.transform.RoundedCornersTransformation
@@ -7,8 +7,8 @@ import com.watched.databinding.ItemMediaSectionBinding
 import com.watched.presentation.common.list.BaseAdapter
 import com.watched.presentation.common.list.HorizontalItemDecoration
 import com.watched.presentation.common.list.HorizontalLinearLayoutManager
-import com.watched.presentation.media.model.MediaItemUiModel
-import com.watched.presentation.media.model.MediaSectionItemUiModel
+import com.watched.presentation.media.ui.model.MediaItemUiModel
+import com.watched.presentation.media.ui.model.MediaSectionItemUiModel
 
 class MediaSectionItemBinder :
     BaseAdapter.Binder<ItemMediaSectionBinding, MediaSectionItemUiModel> {
@@ -18,13 +18,11 @@ class MediaSectionItemBinder :
             tvTitle.setText(model.title)
 
             val context = root.context
-            val adapter = BaseAdapter(ItemMediaBinding::inflate, MovieItemBinder())
-
             rvList.layoutManager = HorizontalLinearLayoutManager(context)
             rvList.addItemDecoration(HorizontalItemDecoration(context))
-            rvList.adapter = adapter
-
-            adapter.submitList(model.list)
+            rvList.adapter = BaseAdapter(ItemMediaBinding::inflate, MovieItemBinder()).also {
+                it.submitList(model.list)
+            }
         }
     }
 

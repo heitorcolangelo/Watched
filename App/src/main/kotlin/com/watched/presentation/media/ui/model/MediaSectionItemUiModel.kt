@@ -1,4 +1,4 @@
-package com.watched.presentation.media.model
+package com.watched.presentation.media.ui.model
 
 import androidx.annotation.StringRes
 import com.watched.presentation.common.model.ItemUiModel

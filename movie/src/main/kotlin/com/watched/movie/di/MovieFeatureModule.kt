@@ -14,7 +14,6 @@ import com.watched.movie.ui.detail.MovieDetailsViewModel
 import com.watched.movie.ui.main.MovieMainFragment
 import com.watched.movie.ui.main.MovieMainViewModel
 import com.watched.movie.ui.mapper.MovieDetailsDomainUiMapper
-import com.watched.movie.ui.mapper.MovieTopXDomainUiMapper
 import com.watched.presentation.common.mapper.ListDomainUiMapper
 import com.watched.presentation.common.mapper.ListDomainUiMapperImpl
 import com.watched.presentation.common.mapper.PageDomainUiMapper
@@ -23,7 +22,8 @@ import com.watched.presentation.common.viewmodel.ViewModelFactory
 import com.watched.presentation.di.ApplicationModule
 import com.watched.presentation.media.mapper.MediaItemDomainUiMapper
 import com.watched.presentation.media.mapper.MediaSectionDomainUiMapper
-import com.watched.presentation.media.model.MediaItemUiModel
+import com.watched.presentation.media.mapper.MediaTopXDomainUiMapper
+import com.watched.presentation.media.ui.model.MediaItemUiModel
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -76,7 +76,7 @@ abstract class MovieFeatureModule : ApplicationModule() {
         @Provides
         fun provideMovieMainViewModel(
             fragment: MovieMainFragment,
-            mapper: MovieTopXDomainUiMapper,
+            mapper: MediaTopXDomainUiMapper,
             useCase: GetTopXMovieUseCase,
             sortedUseCase: GetSortedMoviesUseCase,
             movieSectionMapper: MediaSectionDomainUiMapper,

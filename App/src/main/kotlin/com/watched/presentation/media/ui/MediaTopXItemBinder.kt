@@ -1,10 +1,11 @@
-package com.watched.presentation.media
+package com.watched.presentation.media.ui
 
 import coil.load
+import coil.size.Scale
 import com.watched.R
 import com.watched.databinding.ItemMediaTopXBinding
 import com.watched.presentation.common.list.BaseAdapter
-import com.watched.presentation.media.model.MediaTopXUiModel
+import com.watched.presentation.media.ui.model.MediaTopXUiModel
 
 class MediaTopXItemBinder : BaseAdapter.Binder<ItemMediaTopXBinding, MediaTopXUiModel> {
     override fun bindListItem(binding: ItemMediaTopXBinding, model: MediaTopXUiModel) {

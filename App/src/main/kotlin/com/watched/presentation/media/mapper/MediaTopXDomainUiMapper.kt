@@ -1,20 +1,19 @@
 package com.watched.presentation.media.mapper
 
-import com.watched.movie.domain.model.MovieTopXDomainModel
 import com.watched.presentation.common.mapper.DomainUiMapper
-import com.watched.presentation.media.mapper.MediaTopXPosterDomainUiMapper
+import com.watched.presentation.media.domain.MediaTopXDomainModel
 import com.watched.presentation.media.ui.model.MediaTopXUiModel
 import javax.inject.Inject
 
-class MovieTopXDomainUiMapper @Inject constructor(
+class MediaTopXDomainUiMapper @Inject constructor(
     private val posterMapper: MediaTopXPosterDomainUiMapper
-) : DomainUiMapper<MovieTopXDomainModel, MediaTopXUiModel> {
+) : DomainUiMapper<MediaTopXDomainModel, MediaTopXUiModel> {
 
-    override fun mapToUiModel(domainModel: MovieTopXDomainModel): MediaTopXUiModel {
+    override fun mapToUiModel(domainModel: MediaTopXDomainModel): MediaTopXUiModel {
         return with(domainModel) {
             MediaTopXUiModel(
-                id = movie.id,
-                poster = posterMapper.mapToUiModel(movie.poster),
+                id = media.id,
+                poster = posterMapper.mapToUiModel(media.poster),
                 position = position
             )
         }

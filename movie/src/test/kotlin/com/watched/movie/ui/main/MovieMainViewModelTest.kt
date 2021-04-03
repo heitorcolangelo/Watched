@@ -3,11 +3,11 @@ package com.watched.movie.ui.main
 import com.watched.common.test.relaxedMockk
 import com.watched.domain.common.model.SortOptionsDomainModel
 import com.watched.domain.media.SortedMediaDomainModel
-import com.watched.movie.domain.model.MovieTopXDomainModel
 import com.watched.movie.domain.usecase.GetSortedMoviesUseCase
 import com.watched.movie.domain.usecase.GetTopXMovieUseCase
-import com.watched.movie.ui.mapper.MovieTopXDomainUiMapper
+import com.watched.presentation.media.domain.MediaTopXDomainModel
 import com.watched.presentation.media.mapper.MediaSectionDomainUiMapper
+import com.watched.presentation.media.mapper.MediaTopXDomainUiMapper
 import com.watched.test.android.viewmodel.TestDispatcherProvider
 import com.watched.test.android.viewmodel.ViewModelTest
 import io.mockk.coEvery
@@ -25,7 +25,7 @@ import org.junit.Test
 class MovieMainViewModelTest : ViewModelTest() {
 
     private val topXMovieUseCase: GetTopXMovieUseCase = mockk()
-    private val topXMovieMapper: MovieTopXDomainUiMapper = mockk()
+    private val topXMovieMapper: MediaTopXDomainUiMapper = mockk()
     private val sortedMoviesUseCase: GetSortedMoviesUseCase = mockk()
     private val movieSectionMapper: MediaSectionDomainUiMapper = mockk()
     private lateinit var viewModel: MovieMainViewModel
@@ -54,7 +54,7 @@ class MovieMainViewModelTest : ViewModelTest() {
 
     @Test
     fun `WHEN GetTopMovieXUseCase returns THEN map to UiModel`() {
-        val topXMovie = relaxedMockk<MovieTopXDomainModel>()
+        val topXMovie = relaxedMockk<MediaTopXDomainModel>()
         coEvery { topXMovieUseCase.execute() } returns topXMovie
 
         initViewModel()

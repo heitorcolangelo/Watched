@@ -10,18 +10,18 @@ import com.watched.domain.common.providers.DispatcherProvider
 import com.watched.domain.media.SortedMediaDomainModel
 import com.watched.movie.domain.usecase.GetSortedMoviesUseCase
 import com.watched.movie.domain.usecase.GetTopXMovieUseCase
-import com.watched.movie.ui.mapper.MovieTopXDomainUiMapper
 import com.watched.presentation.common.handler.ExceptionHandler
 import com.watched.presentation.media.mapper.MediaSectionDomainUiMapper
-import com.watched.presentation.media.model.MediaSectionItemUiModel
-import com.watched.presentation.media.model.MediaTopXUiModel
+import com.watched.presentation.media.mapper.MediaTopXDomainUiMapper
+import com.watched.presentation.media.ui.model.MediaSectionItemUiModel
+import com.watched.presentation.media.ui.model.MediaTopXUiModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
 class MovieMainViewModel @Inject constructor(
     private val topXMovieUseCase: GetTopXMovieUseCase,
-    private val topXMovieMapper: MovieTopXDomainUiMapper,
+    private val topXMovieMapper: MediaTopXDomainUiMapper,
     private val sortedMoviesUseCase: GetSortedMoviesUseCase,
     private val movieSectionMapper: MediaSectionDomainUiMapper,
     private val dispatcherProvider: DispatcherProvider

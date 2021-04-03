@@ -6,8 +6,8 @@ import com.watched.domain.media.MediaDomainModel
 import com.watched.domain.media.SortedMediaDomainModel
 import com.watched.presentation.common.mapper.DomainUiMapper
 import com.watched.presentation.common.mapper.ListDomainUiMapper
-import com.watched.presentation.media.model.MediaItemUiModel
-import com.watched.presentation.media.model.MediaSectionItemUiModel
+import com.watched.presentation.media.ui.model.MediaItemUiModel
+import com.watched.presentation.media.ui.model.MediaSectionItemUiModel
 import javax.inject.Inject
 
 class MediaSectionDomainUiMapper @Inject constructor(

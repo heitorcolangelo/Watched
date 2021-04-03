@@ -13,10 +13,10 @@ import com.watched.movie.databinding.FragmentMovieMainBinding
 import com.watched.movie.di.inject
 import com.watched.presentation.common.list.BaseAdapter
 import com.watched.presentation.common.viewbinding.viewBinding
-import com.watched.presentation.media.MediaSectionItemBinder
-import com.watched.presentation.media.MediaTopXItemBinder
-import com.watched.presentation.media.model.MediaSectionItemUiModel
-import com.watched.presentation.media.model.MediaTopXUiModel
+import com.watched.presentation.media.ui.MediaSectionItemBinder
+import com.watched.presentation.media.ui.MediaTopXItemBinder
+import com.watched.presentation.media.ui.model.MediaSectionItemUiModel
+import com.watched.presentation.media.ui.model.MediaTopXUiModel
 import javax.inject.Inject
 
 class MovieMainFragment : Fragment(R.layout.fragment_movie_main) {
