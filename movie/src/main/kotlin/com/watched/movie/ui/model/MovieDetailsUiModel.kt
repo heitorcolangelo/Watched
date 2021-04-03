@@ -2,7 +2,7 @@ package com.watched.movie.ui.model
 
 import com.watched.presentation.common.model.FormattedDateUiModel
 import com.watched.presentation.common.model.UiModel
-import com.watched.presentation.media.model.MediaImageUiModel
+import com.watched.presentation.media.ui.model.MediaImageUiModel
 
 data class MovieDetailsUiModel(
     override val id: String,

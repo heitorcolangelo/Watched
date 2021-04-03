@@ -2,7 +2,7 @@ package com.watched.presentation.media.mapper
 
 import com.watched.domain.media.MediaDomainModel
 import com.watched.presentation.common.mapper.DomainUiMapper
-import com.watched.presentation.media.model.MediaItemUiModel
+import com.watched.presentation.media.ui.model.MediaItemUiModel
 import javax.inject.Inject
 
 class MediaItemDomainUiMapper @Inject constructor(

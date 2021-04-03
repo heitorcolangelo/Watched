@@ -3,7 +3,7 @@ package com.watched.presentation.media.mapper
 import com.watched.data.remote.common.BuildConfiguration
 import com.watched.domain.media.MediaImageDomainModel
 import com.watched.presentation.common.mapper.DomainUiMapper
-import com.watched.presentation.media.model.MediaImageUiModel
+import com.watched.presentation.media.ui.model.MediaImageUiModel
 import javax.inject.Inject
 
 class MediaImageDomainUiMapper @Inject constructor(
